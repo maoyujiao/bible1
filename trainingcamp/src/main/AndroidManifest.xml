@@ -1,0 +1,86 @@
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+          xmlns:tools="http://schemas.android.com/tools"
+          package="com.iyuba.trainingcamp">
+
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE"/>
+    <uses-permission android:name="android.permission.ACCESS_WIFI_STATE"/>
+    <uses-permission android:name="android.permission.VIBRATE"/>
+
+    <application>
+
+        <!--android:icon="@drawable/icon"-->
+        <!--android:label="@string/app_name"-->
+        <!--tools:replace="android:theme"-->
+        <activity
+            android:name="com.iyuba.trainingcamp.activity.GoldActivity"
+            android:screenOrientation="portrait">
+        </activity>
+        <activity
+            android:name="com.iyuba.trainingcamp.activity.GoldNewActivity"
+            android:screenOrientation="portrait">
+        </activity>
+        <activity
+            android:name="com.iyuba.trainingcamp.activity.WordSlideActivity"
+            android:screenOrientation="portrait">
+        </activity>
+        <activity
+            android:name="com.iyuba.trainingcamp.activity.WordListActvity"
+            android:screenOrientation="portrait">
+        </activity>
+        <activity
+            android:name="com.iyuba.trainingcamp.activity.WordTestActivity"
+            android:screenOrientation="portrait">
+        </activity>
+        <activity
+            android:name="com.iyuba.trainingcamp.activity.BuyIndicatorActivity"
+            android:screenOrientation="portrait">
+        </activity>
+        <activity
+            android:name="com.iyuba.trainingcamp.activity.SentenceResultActivity"
+            android:screenOrientation="portrait">
+        </activity>
+        <activity
+            android:name="com.iyuba.trainingcamp.activity.WordLearnActivity"
+            android:screenOrientation="portrait">
+        </activity>
+        <activity
+            android:name="com.iyuba.trainingcamp.activity.LearnResultActivity"
+            android:screenOrientation="portrait">
+        </activity>
+        <activity
+            android:name="com.iyuba.trainingcamp.activity.SentencListActivity"
+            android:screenOrientation="portrait">
+        </activity>
+        <activity
+            android:name="com.iyuba.trainingcamp.activity.SentenceTestActivity"
+            android:screenOrientation="portrait">
+        </activity>
+        <activity
+            android:name="com.iyuba.trainingcamp.activity.ExamActivity"
+            android:screenOrientation="portrait">
+        </activity>
+        <activity
+            android:name="com.iyuba.trainingcamp.activity.ExamResultActivity"
+            android:screenOrientation="portrait">
+        </activity>
+        <activity
+            android:name="com.iyuba.trainingcamp.activity.TestTestTest"
+            android:screenOrientation="portrait">
+        </activity>
+        <activity
+            android:name="com.iyuba.trainingcamp.activity.ScoreActivity"
+            android:screenOrientation="portrait">
+        </activity>
+        <activity
+            android:name="com.iyuba.trainingcamp.activity.GoldShareActivity"
+            android:screenOrientation="portrait"/>
+        <activity
+            android:name="com.iyuba.trainingcamp.activity.SentenceDetailActivity"
+            android:screenOrientation="portrait">
+        </activity>
+        <activity
+            android:name="com.iyuba.trainingcamp.activity.WordHistoryActivity"
+            android:screenOrientation="portrait">
+        </activity>
+    </application>
+</manifest>
