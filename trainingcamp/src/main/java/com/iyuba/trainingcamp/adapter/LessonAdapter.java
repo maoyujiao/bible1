@@ -30,6 +30,7 @@ import com.iyuba.trainingcamp.widget.GlideRoundTransform;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import java.util.Random;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -65,12 +66,15 @@ public class LessonAdapter extends PagerAdapter {
 
         View view = LayoutInflater.from(mContext).inflate(R.layout.trainingcamp_learn_card,container,false);
         final RelativeLayout relativeLayout = view.findViewById(R.id.rr);
+        final TextView lesson_number  = view.findViewById(R.id.lesson_number);
+
         final TextView title  = view.findViewById(R.id.lesson_title);
-        final TextView number  = view.findViewById(R.id.lesson_number);
+        final TextView number  = view.findViewById(R.id.numbers);
         TextView study_sign = view.findViewById(R.id.study_sign);
+        lesson_number.setText(String.valueOf(position+1));
         if (GoldApp.getApp(mContext).LessonType.contains("cet")){
             Glide.with(mContext).load(R.drawable.trainingcamp_pager_placeholder)
-                    .transform(new GlideRoundTransform(mContext, 10))
+                    .transform(new GlideRoundTransform(mContext, 6))
                     .into(new ViewTarget<View, GlideDrawable>(relativeLayout) {
                         @Override
                         public void onResourceReady(GlideDrawable resource,
@@ -79,7 +83,7 @@ public class LessonAdapter extends PagerAdapter {
                         }
                     });
 
-            number.setText("Lesson"+(position+1)+"");
+            number.setVisibility(View.GONE);
             SpannableStringBuilder style = new SpannableStringBuilder(number.getText().toString());
             String s =number.getText().toString();
             style.setSpan(new RelativeSizeSpan(2.5f), 0, s.length(), Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
@@ -96,11 +100,13 @@ public class LessonAdapter extends PagerAdapter {
                         if (bean == null){
                             return;
                         }
+                        number.setVisibility(View.VISIBLE);
+
                         title.setText(bean.getData().get(0).getTitle_cn());
-                        number.setText(bean.getData().get(0).getTitle());
+                        number.setText(bean.getData().get(0).getReadCount()+"次阅览");
                         Glide.with(mContext).load(bean.getData().get(0).getPic())
                                 .placeholder(R.drawable.trainingcamp_pager_placeholder)
-                                .transform(new GlideRoundTransform(mContext, 10))
+                                .transform(new GlideRoundTransform(mContext, 6))
                                 .into(new ViewTarget<View, GlideDrawable>(relativeLayout) {
                                     @Override
                                     public void onResourceReady(GlideDrawable resource,
@@ -126,11 +132,13 @@ public class LessonAdapter extends PagerAdapter {
                         if (bean == null){
                             return;
                         }
+                        number.setVisibility(View.VISIBLE);
+
                         title.setText(bean.getData().get(0).getTitle_cn());
-                        number.setText(bean.getData().get(0).getTitle());
+                        number.setText(bean.getData().get(0).getReadCount()+"次阅览");
                         Glide.with(mContext).load(bean.getData().get(0).getPic())
                                 .placeholder(R.drawable.trainingcamp_pager_placeholder)
-                                .transform(new GlideRoundTransform(mContext, 10))
+                                .transform(new GlideRoundTransform(mContext, 6))
                                 .into(new ViewTarget<View, GlideDrawable>(relativeLayout) {
                                     @Override
                                     public void onResourceReady(GlideDrawable resource,
