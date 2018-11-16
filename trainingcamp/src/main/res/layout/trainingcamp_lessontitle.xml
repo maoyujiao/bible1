@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="#fff"
+    android:paddingLeft="@dimen/x10"
+    android:paddingRight="@dimen/x10">
+
+
+    <TextView
+        android:layout_marginBottom="@dimen/x18"
+        android:textColor="#000"
+        android:textStyle="bold"
+        android:textSize="@dimen/x16"
+        android:id="@+id/lesson_title"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginRight="@dimen/x33"
+        android:lines="1"
+        android:text="	Failed to start monitoring 810EBMF4EYKQ"/>
+
+    <ImageView
+        android:layout_alignBottom="@id/lesson_title"
+        android:id="@+id/lock"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/trainingcamp_lock"
+        android:layout_alignParentRight="true"
+        android:layout_marginRight="@dimen/x12"/>
+</RelativeLayout>

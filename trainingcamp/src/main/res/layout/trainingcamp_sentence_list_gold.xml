@@ -1,0 +1,190 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                xmlns:tools="http://schemas.android.com/tools"
+                android:id="@+id/rr_root"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@color/trainingcamp_white_pure">
+
+
+    <LinearLayout
+        android:id="@+id/ll"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@+id/nullview"
+        android:layout_marginBottom="@dimen/x258"
+        android:orientation="vertical"
+        android:visibility="invisible"/>
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/x42"
+            android:background="?attr/baseTheme">
+
+            <ImageView
+                android:id="@+id/back"
+                android:layout_width="@dimen/x30"
+                android:layout_height="match_parent"
+                android:layout_centerVertical="true"
+                android:scaleType="center"
+                android:src="@drawable/trainingcamp_back"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_centerInParent="true"
+                android:layout_gravity="center"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:text="训练营"
+                android:textColor="#fff"
+                android:textSize="@dimen/x16"/>
+            <TextView
+                android:id="@+id/textbtn"
+                android:text="历史闯关"
+                android:visibility="gone"
+                tools:visibility="visible"
+                android:layout_height="wrap_content"
+                android:textSize="@dimen/x14"
+                android:textColor="@color/trainingcamp_white"
+                android:layout_width="wrap_content"
+                android:layout_alignParentRight="true"
+                android:layout_marginRight="@dimen/x5"
+                android:layout_centerVertical="true"/>
+
+        </RelativeLayout>
+
+        <com.iyuba.trainingcamp.widget.WheelView
+            android:id="@+id/wheelView"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_marginTop="@dimen/x10"
+            android:layout_weight="1"/>
+
+        <TextView
+            android:id="@+id/start"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/x35"
+            android:layout_gravity="center"
+            android:layout_marginBottom="@dimen/x19"
+            android:layout_marginLeft="30dp"
+            android:layout_marginRight="30dp"
+            android:background="@drawable/trainingcamp_study_selector"
+            android:gravity="center"
+            android:text="开始闯关"
+            android:textColor="#fff"
+            android:textSize="17dp"/>
+
+
+    </LinearLayout>
+
+    <TextView
+        android:id="@+id/nullview"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/x118"/>
+
+    <LinearLayout
+        android:id="@+id/llcontent"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:gravity="center_horizontal"
+        android:layout_below="@+id/nullview"
+        android:orientation="vertical"
+        android:visibility="invisible"
+        tools:visibility="visible">
+
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/x160"
+            android:background="@drawable/trainingcamp_oval_bg"
+            android:gravity="center_vertical"
+            android:paddingBottom="@dimen/x12"
+            android:paddingTop="@dimen/x12">
+
+            <TextView
+                android:id="@+id/en"
+                android:paddingLeft="@dimen/x18"
+                android:paddingRight="@dimen/x18"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textColor="@color/trainingcamp_white_pure"
+                android:gravity="center_horizontal"
+                android:textSize="@dimen/x14"
+                tools:text="hahahahhahahahhahahhahahaha"/>
+
+
+            <TextView
+                android:id="@+id/cn"
+                android:paddingLeft="@dimen/x18"
+                android:paddingRight="@dimen/x18"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/en"
+                android:layout_marginBottom="@dimen/x10"
+                android:layout_marginTop="@dimen/x5"
+                android:gravity="center"
+                android:textColor="@color/trainingcamp_white_pure"
+                android:textSize="@dimen/x12"
+
+                android:text="哈哈哈哈哈哈哈哈"/>
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:id="@+id/rr"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="@dimen/x25"
+            android:layout_marginTop="@dimen/x15"
+            android:visibility="visible">
+
+            <ImageView
+                android:id="@+id/follow"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerHorizontal="true"
+                android:src="@drawable/trainingcamp_icon_follow0"/>
+
+            <ImageView
+                android:id="@+id/play"
+                android:layout_width="@dimen/x36"
+                android:layout_height="@dimen/x36"
+                android:layout_alignParentLeft="true"
+                android:layout_centerVertical="true"
+                android:layout_marginLeft="@dimen/x66"
+                android:src="@drawable/trainingcamp_icon_play"/>
+
+            <TextView
+                android:id="@+id/score"
+                android:layout_width="@dimen/x36"
+                android:layout_height="@dimen/x36"
+                android:layout_alignParentRight="true"
+                android:layout_centerVertical="true"
+                android:layout_marginRight="@dimen/x66"
+                android:background="@drawable/trainingcamp_icon_score"
+                android:gravity="center"
+                android:visibility="invisible"/>
+
+            <TextView
+                android:id="@+id/img_score"
+                android:layout_width="@dimen/x36"
+                android:layout_height="@dimen/x36"
+                android:layout_alignParentRight="true"
+                android:layout_centerVertical="true"
+                android:layout_marginRight="@dimen/x66"
+                android:background="@drawable/trainingcamp_score_default"
+                android:gravity="center"
+                android:textColor="@color/trainingcamp_white_pure"
+                android:textSize="@dimen/x15"/>
+        </RelativeLayout>
+
+    </LinearLayout>
+
+
+</RelativeLayout>

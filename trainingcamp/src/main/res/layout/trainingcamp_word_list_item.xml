@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                android:id="@+id/rr"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/trainingcamp_blank_select">
+
+    <TextView
+        android:id="@+id/word"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="15dp"
+        android:layout_marginRight="15dp"
+        android:layout_marginTop="@dimen/x8"
+        android:lines="1"
+        android:text="Android"
+        android:textColor="#FF333333"
+        android:textSize="17dp"/>
+
+    <TextView
+        android:id="@+id/content"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/word"
+        android:layout_marginBottom="@dimen/x8"
+        android:layout_marginLeft="15dp"
+        android:layout_marginRight="15dp"
+        android:layout_marginTop="@dimen/x10"
+        android:lines="1"
+        android:text="AndroidAndroidAndroidAndroid"
+        android:textColor="#FF999999"
+        android:textSize="12dp"/>
+
+    <LinearLayout
+        android:id="@+id/expand"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/content"
+        android:orientation="vertical"
+        android:visibility="gone">
+
+        <TextView
+            android:id="@+id/word_content"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:text="haha"/>
+
+        <TextView
+            android:id="@+id/pro"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:text="ahha"/>
+
+        <ImageView
+            android:layout_width="15dp"
+            android:layout_height="15dp"
+            android:layout_gravity="center_horizontal"
+            android:src="@mipmap/fayin"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="中文释义"/>
+
+        <TextView
+            android:id="@+id/cn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="中文释义"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="引申"/>
+
+        <TextView
+            android:id="@+id/phrase"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="引申"/>
+    </LinearLayout>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="0.5dp"
+        android:layout_below="@id/expand"
+        android:background="#28979797"></View>
+
+    <ImageView
+        android:id="@+id/result"
+        android:layout_width="54dp"
+        android:layout_height="50dp"
+        android:layout_alignParentRight="true"
+        android:layout_centerVertical="true"
+        android:scaleType="fitXY"
+        android:src="@drawable/trainingcamp_icon_true"/>
+</RelativeLayout>

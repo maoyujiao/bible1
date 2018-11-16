@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent" android:layout_height="match_parent"
+    android:orientation="vertical">
+    <include layout="@layout/trainingcamp_title_layout"/>
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/recyclerView"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:layout_marginBottom="@dimen/x5">
+
+    </android.support.v7.widget.RecyclerView>
+    <!--<TextView-->
+        <!--android:id="@+id/start"-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="50dp"-->
+        <!--android:layout_alignParentBottom="true"-->
+        <!--android:layout_marginBottom="@dimen/x10"-->
+        <!--android:gravity="center"-->
+        <!--android:text="开始闯关"-->
+        <!--android:textSize="18sp"-->
+        <!--android:textColor="@color/white_pure"-->
+        <!--android:background="?attr/baseTheme"-->
+        <!--android:layout_marginLeft="@dimen/x36"-->
+        <!--android:layout_marginRight="@dimen/x36"/>-->
+</LinearLayout>

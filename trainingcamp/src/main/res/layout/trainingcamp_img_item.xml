@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <ImageView
+                android:adjustViewBounds="true"
+                android:layout_gravity="center_horizontal"
+                android:id="@+id/img"
+                android:src="@drawable/trainingcamp_adss"
+                android:layout_height="wrap_content"
+                android:layout_width="match_parent"
+                android:scaleType="centerCrop"/>
+
+            <TextView
+                android:id="@+id/buy"
+                android:layout_width="match_parent"
+                android:layout_height="55dp"
+                android:layout_gravity="center"
+                android:layout_marginBottom="20dp"
+                android:layout_marginLeft="@dimen/x60"
+                android:layout_marginRight="@dimen/x60"
+                android:background="?attr/baseTheme"
+                android:gravity="center"
+                android:paddingBottom="5dp"
+                android:paddingTop="5dp"
+                android:text="立即购买"
+                android:textSize="18dp"
+                android:textColor="#fff" />
+
+            <TextView
+                android:id="@+id/have_a_try"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginBottom="20dp"
+                android:background="#fff"
+                android:gravity="center"
+                android:paddingBottom="5dp"
+                android:paddingTop="5dp"
+                android:text="积分体验"
+                android:textColor="?attr/baseTheme" />
+        </LinearLayout>
+    </ScrollView>
+
+</LinearLayout>

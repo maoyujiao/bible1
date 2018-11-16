@@ -1,0 +1,111 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:context=".activity.TestTestTest">
+
+    <include
+        android:id="@+id/title"
+        layout="@layout/trainingcamp_title_layout"/>
+
+    <LinearLayout
+        android:id="@+id/ll"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/title"
+        android:layout_marginLeft="@dimen/x10"
+        android:layout_marginRight="@dimen/x10"
+        android:layout_marginTop="@dimen/x22"
+        android:background="@drawable/trainingcamp_oval_bg"
+        android:gravity="center"
+        android:orientation="vertical">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="@dimen/x12"
+            android:layout_marginTop="@dimen/x28"
+            android:text="恭喜您已完成今日任务"
+            android:textColor="@color/trainingcamp_white_pure"
+            android:textSize="@dimen/x16"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="@dimen/x28"
+            android:layout_marginTop="@dimen/x12"
+            android:text="Congratulations on Completing Today's Tasks!"
+            android:textColor="@color/trainingcamp_white_pure"
+            android:textSize="@dimen/x12"/>
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/ll1"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/ll"
+        android:layout_marginTop="@dimen/x22"
+        android:background="@drawable/trainingcamp_oval_test_bg"
+        android:layout_marginLeft="@dimen/x10"
+        android:layout_marginRight="@dimen/x10"
+        android:gravity="center"
+        android:paddingBottom="@dimen/x10"
+        android:paddingTop="@dimen/x10">
+
+        <com.iyuba.trainingcamp.widget.ScoreCircleView
+            android:layout_marginTop="@dimen/x2"
+            android:layout_marginBottom="@dimen/x2"
+            android:id="@+id/circle"
+            android:layout_width="@dimen/x221"
+            android:layout_height="@dimen/x121"/>
+    </LinearLayout>
+
+    <TextView
+        android:id="@+id/skill"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="@dimen/x100"
+        android:layout_below="@id/ll1"
+        android:layout_marginTop="@dimen/x10"
+        android:text="英语水平"
+        android:textColor="@color/trainingcamp_gray_333"
+        android:textSize="@dimen/x12"/>
+
+    <TextView
+        android:id="@+id/score_skill"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/skill"
+        android:layout_marginTop="@dimen/x12"
+        android:text="123.8"
+        android:layout_alignLeft="@id/skill"
+        android:textColor="@color/trainingcamp_gray_333"
+        android:textSize="@dimen/x18"/>
+
+    <ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="@dimen/x12"
+        android:src="@drawable/trainingcamp_icon_up"
+        android:layout_alignTop="@id/score_skill"
+        android:layout_toRightOf="@id/score_skill"/>
+
+    <TextView
+        android:id="@+id/close"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_marginBottom="@dimen/x28"
+        android:layout_marginLeft="@dimen/x28"
+        android:layout_marginRight="@dimen/x28"
+        android:background="@drawable/trainingcamp_study_selector"
+        android:gravity="center"
+        android:paddingBottom="@dimen/x8"
+        android:paddingTop="@dimen/x8"
+        android:text="关闭"
+        android:textColor="@color/trainingcamp_white_pure"
+        android:textSize="@dimen/x15"/>
+
+</RelativeLayout>

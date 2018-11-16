@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+    <TextView
+        android:id="@+id/sentnence_read"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/x12"
+        android:layout_marginLeft="@dimen/x22"
+        android:layout_marginRight="@dimen/x44"
+        android:textSize="@dimen/x14"
+        android:textColor="#333333"
+        android:text="He declined to make projections about the earnings for the next quarter."/>
+
+    <TextView
+        android:id="@+id/sentnence_cn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginRight="@dimen/x44"
+        android:layout_marginLeft="@dimen/x22"
+        android:layout_below="@id/sentnence_read"
+        android:layout_marginTop="@dimen/x6"
+        android:textSize="@dimen/x12"
+        android:textColor="#999999"
+        android:text="He declined to make projections about the earnings for the next quarter."/>
+
+    <TextView
+        android:id="@+id/score"
+        android:gravity="center"
+        android:textColor="@color/trainingcamp_white_pure"
+        android:textSize="@dimen/x15"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentRight="true"
+        android:layout_centerVertical="true"
+        android:layout_marginRight="@dimen/x30"
+        android:background="@drawable/trainingcamp_icon_80_100"/>
+
+    <TextView
+        android:visibility="gone"
+        android:id="@+id/detail"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentRight="true"
+        android:layout_marginRight="@dimen/x8"
+        android:layout_centerVertical="true"
+        android:textSize="@dimen/x20"
+        android:textColor="#000"
+        android:text=">"/>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1px"
+        android:layout_below="@id/sentnence_cn"
+        android:layout_marginTop="@dimen/x8"
+        android:background="#2c979797"/>
+
+    <!--<ImageView-->
+    <!--android:id="@+id/test_read"-->
+    <!--android:layout_below="@id/sen_pronounce"-->
+    <!--android:src="@mipmap/fayin"-->
+    <!--android:layout_width="wrap_content"-->
+    <!--android:layout_height="wrap_content" />-->
+
+</RelativeLayout>
