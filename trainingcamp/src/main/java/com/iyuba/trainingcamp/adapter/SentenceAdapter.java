@@ -45,7 +45,12 @@ public class SentenceAdapter extends RecyclerView.Adapter<SentenceAdapter.ViewHo
 
         holder.SentenceView.setText(sentences.get(position).en);
         holder.SentenceCn.setText(sentences.get(position).cn);
-        float points = Float.parseFloat(sentences.get(position).score);
+        float points  = 0f;
+        if (sentences.get(position).score == null){
+            points  = 0f;
+        }else {
+            points  = Float.parseFloat(sentences.get(position).score);
+        }
         if (points > 79) {
             holder.score.setBackgroundResource(R.drawable.trainingcamp_icon_80_100);
         } else if (points > 59) {
