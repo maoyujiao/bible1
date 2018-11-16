@@ -59,7 +59,6 @@ import okhttp3.Call;
  */
 public class GoldShareActivity extends BaseActivity {
     // Content View Elements
-
     public static GoldShareActivity activity;
     private ImageView mBackground;
     private TextView mClose;

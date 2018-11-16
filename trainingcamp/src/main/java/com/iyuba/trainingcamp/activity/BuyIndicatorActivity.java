@@ -171,18 +171,4 @@ public class BuyIndicatorActivity extends BaseActivity {
         return key;
     }
 
-//    private void showPayDialog(){
-//        AlertDialog.Builder builder = new AlertDialog.Builder(context);
-//        View dialogVIew = LayoutInflater.from(context).inflate(R.layout.trainingcamp_payorder,null);
-//
-//        builder.setView(dialogVIew);
-//        builder.setPositiveButton("确认支付", new DialogInterface.OnClickListener() {
-//            @Override
-//            public void onClick(DialogInterface dialog, int which) {
-//
-//            }
-//        });
-//        builder.setNegativeButton("取消",null);
-//    }
-
 }
