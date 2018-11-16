@@ -66,7 +66,6 @@ public class WordTestActivity extends BaseActivity implements View.OnClickListen
     private List<AbilityQuestion.TestListBean> list;
     private AbilityQuestion.TestListBean bean;
     private List<LearningContent> mLearningContents;
-    private List<LearningContent> mToLearnContents = new ArrayList<>();  //测试错误的列表,需要在结果列表里面显示
     private int right = 0;
     private String picPrefix;
 
@@ -321,11 +320,9 @@ public class WordTestActivity extends BaseActivity implements View.OnClickListen
             getPronounce();
         } else if (i == R.id.next_button) {
             if (et.getText().toString().equals(bean.getQuestion())) {
-                mLearningContents.get(currentWord).checkPassed = true;
-                list.get(currentWord).setResult("1");
+                setReult(true);
             } else {
-                mLearningContents.get(currentWord).checkPassed = false;
-                list.get(currentWord).setResult("0");
+               setReult(false);
             }
             currentWord++;
             if (currentWord == list.size()) {
@@ -336,16 +333,24 @@ public class WordTestActivity extends BaseActivity implements View.OnClickListen
         }
     }
 
+    private void setReult(Boolean isPassed) {
+        if (isPassed){
+            mLearningContents.get(currentWord).checkPassed = true;
+            right++ ;
+            list.get(currentWord).setResult("1");
+        }else {
+            mLearningContents.get(currentWord).checkPassed = false;
+            list.get(currentWord).setResult("0");
+        }
+
+    }
+
     private void compareRight(TextView view) {
         setClickable(false);
         if (answer.equals(getRight())) {
-            mLearningContents.get(currentWord).checkPassed = true;
-            bean.setResult("1");
-            right++;
+            setReult(true);
         } else {
-            mLearningContents.get(currentWord).checkPassed = false;
-            bean.setResult("0");
-            mToLearnContents.add(mLearningContents.get(currentWord));
+            setReult(false);
         }
         bean.setUserAnswer(answer);
 
@@ -367,13 +372,9 @@ public class WordTestActivity extends BaseActivity implements View.OnClickListen
     private void compareRight(ImageView view) {
         setClickable(false);
         if (answer.equals(getRight())) {
-            bean.setResult("1");
-            mLearningContents.get(currentWord).checkPassed = true;
-            right++;
+            setReult(true);
         } else {
-            bean.setResult("0");
-            mLearningContents.get(currentWord).checkPassed = false;
-            mToLearnContents.add(mLearningContents.get(currentWord));
+            setReult(false);
         }
         list.get(currentWord).setUserAnswer(answer);
         currentWord++;
