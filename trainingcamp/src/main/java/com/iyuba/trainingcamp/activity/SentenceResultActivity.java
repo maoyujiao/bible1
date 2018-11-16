@@ -2,11 +2,13 @@ package com.iyuba.trainingcamp.activity;
 
 
 import android.content.Context;
+import android.graphics.Typeface;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.iyuba.trainingcamp.R;
@@ -44,10 +46,15 @@ public class SentenceResultActivity extends BaseActivity {
 
     private android.support.v7.widget.RecyclerView mRecyclerView;
     private TextView mStart;
+    private TextView mScore;
+    private LinearLayout ll;
 
     private void bindViews() {
         mRecyclerView = findViewById(R.id.recyclerView);
         mStart = findViewById(R.id.start);
+        mScore = findViewById(R.id.score);
+        Typeface tf = Typeface.createFromAsset(getAssets(), "font/DINMedium_0.ttf");
+        mScore.setTypeface(tf);
         findViewById(R.id.back).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -68,10 +75,16 @@ public class SentenceResultActivity extends BaseActivity {
         RecyclerView.LayoutManager Lmanager = new LinearLayoutManager(context);
         mRecyclerView.setLayoutManager(Lmanager);
         if (list == null) {
-
+            ll.setVisibility(View.GONE);
         } else {
             mRecyclerView.setAdapter(new SentenceAdapter(context, list));
-
+            ll.setVisibility(View.VISIBLE);
+            int score = 0 ;
+            for (LearningContent content :list){
+                score += Integer.parseInt(content.score);
+            }
+            score/=list.size();
+            mScore.setText(String.valueOf(score));
         }
     }
 }
