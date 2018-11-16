@@ -53,6 +53,7 @@ public class SentenceResultActivity extends BaseActivity {
         mRecyclerView = findViewById(R.id.recyclerView);
         mStart = findViewById(R.id.start);
         mScore = findViewById(R.id.score);
+        ll = findViewById(R.id.ll);
         Typeface tf = Typeface.createFromAsset(getAssets(), "font/DINMedium_0.ttf");
         mScore.setTypeface(tf);
         findViewById(R.id.back).setOnClickListener(new View.OnClickListener() {
