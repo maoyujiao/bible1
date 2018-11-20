@@ -7,6 +7,7 @@ import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 import android.os.Environment;
 import android.util.Log;
+import android.util.TimeUtils;
 
 import com.iyuba.trainingcamp.app.GoldApp;
 import com.iyuba.trainingcamp.bean.BBCInfoBean;
@@ -208,20 +209,20 @@ public class DailyWordDBHelper extends SQLiteOpenHelper {
         return histories;
     }
 
-    public static String getOldDate(int distanceDay, String day) {
-        SimpleDateFormat dft = new SimpleDateFormat("yyyy-MM-dd");
-        Date beginDate = new Date(Long.parseLong(com.iyuba.trainingcamp.utils.TimeUtils.formatDateToMills(day)));
-        Calendar date = Calendar.getInstance();
-        date.setTime(beginDate);
-        date.set(Calendar.DATE, date.get(Calendar.DATE) + distanceDay);
-        Date endDate = null;
-        try {
-            endDate = dft.parse(dft.format(date.getTime()));
-        } catch (ParseException e) {
-            e.printStackTrace();
-        }
-        return dft.format(endDate);
-    }
+//    public static String getOldDate(int distanceDay, String day) {
+//        SimpleDateFormat dft = new SimpleDateFormat("yyyy-MM-dd");
+//        Date beginDate = new Date(Long.parseLong(com.iyuba.trainingcamp.utils.TimeUtils.formatDateToMills(day)));
+//        Calendar date = Calendar.getInstance();
+//        date.setTime(beginDate);
+//        date.set(Calendar.DATE, date.get(Calendar.DATE) + distanceDay);
+//        Date endDate = null;
+//        try {
+//            endDate = dft.parse(dft.format(date.getTime()));
+//        } catch (ParseException e) {
+//            e.printStackTrace();
+//        }
+//        return dft.format(endDate);
+//    }
 
     //添加新的lessonid到数据库中
     public boolean writeDataToSchedule(String userid, String lessonid, String date ) {
@@ -230,7 +231,7 @@ public class DailyWordDBHelper extends SQLiteOpenHelper {
         String sql = "select * from " + TB_SCHEDULE + " where lessonid = ? and userid = ?";
         String insertsql = "insert into " + TB_SCHEDULE + "(userid,lessonid,day,step,word_score,sentence_score,exam_score) " +
                 "values (?,?,?,?,?,?,?)";
-        String day = "";
+        long day = 0L;
         long time = 0l;
         //获取最后一次的时间
         Cursor cursor1 = getWritableDatabase().rawQuery(sql1, new String[]{userid});
@@ -242,14 +243,15 @@ public class DailyWordDBHelper extends SQLiteOpenHelper {
                     time = Long.parseLong(s);
                 }
             }
-            day = com.iyuba.trainingcamp.utils.TimeUtils.getFormateDate(time);
+            day =time;
         } else {
             //空的说明没有数据库没有数据
-            day = com.iyuba.trainingcamp.utils.TimeUtils.getFormateDate(time);
+            String s = com.iyuba.trainingcamp.utils.TimeUtils.getCurTime();
+            day = Long.parseLong(com.iyuba.trainingcamp.utils.TimeUtils.formatDateToMills(s));
+//            day = com.iyuba.trainingcamp.utils.TimeUtils.getFormateDate(Long.valueOf(day));
         }
-        while (selectDataByDate(day, GoldApp.getApp(mContext).userId) != null) {
-            i++;
-            day = getOldDate(i, day);
+        while (selectDataByDate(com.iyuba.trainingcamp.utils.TimeUtils.getFormateDate(day), GoldApp.getApp(mContext).userId) != null) {
+            day += 24*3600*1000;
         }
         Cursor cursor;
         cursor = getWritableDatabase().rawQuery(sql, new String[]{lessonid, userid});
@@ -257,14 +259,14 @@ public class DailyWordDBHelper extends SQLiteOpenHelper {
             Log.d("diao", "writeDataToSchedule: >0");
             return false;
         } else {
-            getWritableDatabase().execSQL(insertsql, new String[]{userid, lessonid, day, "1", "0", "0", "0"});
+            getWritableDatabase().execSQL(insertsql, new String[]{userid, lessonid, com.iyuba.trainingcamp.utils.TimeUtils.getFormateDate(day), "1", "0", "0", "0"});
             Log.d("diao", "writeDataToSchedule: !>0"+ "values"+ userid + ": "+lessonid+"; "+
                     date);
             return true;
         }
     }
 
-    public boolean writeDownloadDataToSchedule(String userid, String lessonid, String date ) {
+    public boolean writeDownloadDataToSchedule(String userid, String lessonid, String date ,int flg) {
         int i = 0;
         String sql1 = "select * from " + TB_SCHEDULE + " where userid = ?";
         String sql = "select * from " + TB_SCHEDULE + " where lessonid = ? and userid = ?";
@@ -277,7 +279,7 @@ public class DailyWordDBHelper extends SQLiteOpenHelper {
             Log.d("diao", "writeDataToSchedule: >0");
             return false;
         } else {
-            getWritableDatabase().execSQL(insertsql, new String[]{userid, lessonid, date, "1", "0", "0", "0"});
+            getWritableDatabase().execSQL(insertsql, new String[]{userid, lessonid, com.iyuba.trainingcamp.utils.TimeUtils.getCurTime(), flg+"", "0", "0", "0"});
             Log.d("diao", "writeDataToSchedule: !>0"+ "values"+ userid + ": "+lessonid+"; "+
                 date);
             return true;
@@ -356,7 +358,6 @@ public class DailyWordDBHelper extends SQLiteOpenHelper {
             record.setExam_score(cursor.getString(6));
             record.setStep(cursor.getString(3));
             getWritableDatabase().close();
-
             return record;
         } else {
             Log.d("diao", "selectDataByDate: nulll");

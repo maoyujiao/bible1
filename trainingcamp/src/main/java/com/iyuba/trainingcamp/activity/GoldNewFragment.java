@@ -24,6 +24,7 @@ import android.widget.TextView;
 
 import com.example.xlhratingbar_lib.XLHRatingBar;
 import com.iyuba.trainingcamp.R;
+import com.iyuba.trainingcamp.R2;
 import com.iyuba.trainingcamp.adapter.LessonAdapter;
 import com.iyuba.trainingcamp.app.GoldApp;
 import com.iyuba.trainingcamp.bean.AbilityQuestion;
@@ -36,6 +37,7 @@ import com.iyuba.trainingcamp.db.DailyWordDBHelper;
 import com.iyuba.trainingcamp.db.dbclass.GoldDateRecord;
 import com.iyuba.trainingcamp.event.FinishGetIDEvent;
 import com.iyuba.trainingcamp.event.LessonSelectEvent;
+import com.iyuba.trainingcamp.event.PlayBackEvent;
 import com.iyuba.trainingcamp.event.StarMicroEvent;
 import com.iyuba.trainingcamp.http.VipRequestFactory;
 import com.iyuba.trainingcamp.utils.ACache;
@@ -54,14 +56,15 @@ import org.greenrobot.eventbus.EventBus;
 import org.greenrobot.eventbus.Subscribe;
 
 import java.io.Serializable;
-import java.text.DateFormat;
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
 
+import butterknife.BindView;
+import butterknife.ButterKnife;
+import butterknife.OnClick;
+import butterknife.Unbinder;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -71,39 +74,81 @@ import retrofit2.Response;
  */
 public class GoldNewFragment extends Fragment {
 
-    private static final int DAY_MILLIS= 1000*60*60*24;
+    private static final int DAY_MILLIS = 1000 * 60 * 60 * 24;
+    @BindView(R2.id.back)
+    ImageView mBack;
+    @BindView(R2.id.show_more)
+    ImageView mShowMore;
+    @BindView(R2.id.microclass)
+    Button mMicroclass;
+    @BindView(R2.id.introduce)
+    Button mIntroduce;
+    @BindView(R2.id.ll)
+    LinearLayout mLl;
+    @BindView(R2.id.img_warmup)
+    ImageView warmup;
+    @BindView(R2.id.ratingBarwarmup)
+    XLHRatingBar mRatingBarwarmup;
+    @BindView(R2.id.warm_up)
+    LinearLayout ll_warmup;
+    @BindView(R2.id.img_words)
+    ImageView word;
+    @BindView(R2.id.ratingBarword)
+    XLHRatingBar mRatingBarword;
+    @BindView(R2.id.word)
+    LinearLayout ll_words;
+    @BindView(R2.id.img_sentence)
+    ImageView sentence;
+    @BindView(R2.id.ratingBarSentence)
+    XLHRatingBar mRatingBarSentence;
+    @BindView(R2.id.sentence)
+    LinearLayout ll_sentence;
+    @BindView(R2.id.img_exam)
+    ImageView exam;
+    @BindView(R2.id.ratingBarExam)
+    XLHRatingBar mRatingBarExam;
+    @BindView(R2.id.exam)
+    LinearLayout ll_exam;
+
     private int index;
+    private Context mContext;
+
+    @BindView(R2.id.viewpager)
     ViewPager mViewPager;
-    LessonAdapter mAdapter;
-    List<LessonIdBean.LessonListBean> mBeans = new ArrayList<>();
-    static Context mContext;
-    private TextView lesson;
-    private ImageView showMore;
-    SubClassWindow window = new SubClassWindow();
-    private XLHRatingBar mRatingBarWord,mRatingBarSentence,mRatingBarExam;
-    private Button microClass, introduce;
-    KProgressHUD progrssDialog;
-    ImageView warmup, word, sentence, exam;
-    ImageView warmup_go, word_go, sentence_go, exam_go;
-    LinearLayout ll_warmup, ll_words, ll_sentence, ll_exam;
-    DailyWordDBHelper mHelper;
-    LinearLayout ll_default ;
+
+
+
+
+    @BindView(R2.id.ll_default)
+    LinearLayout ll_default;
+    @BindView(R2.id.score)
     TextView txt_score;
+    @BindView(R2.id.lesson)
+    TextView lesson;
+
+
     String s;
+    LessonAdapter mAdapter;
+
     private int lessonId;
     List<AbilityQuestion.TestListBean> list;
-
+    DailyWordDBHelper mHelper;
+    KProgressHUD progrssDialog;
+    private Unbinder unbinder;
     String sign;
-    boolean isCet =false;
+    boolean isCet = false;
     private String userid;
-
+    List<LessonIdBean.LessonListBean> mBeans = new ArrayList<>();
+    SubClassWindow window = new SubClassWindow();
 
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.trainingcamp_gold_new, container, false);
+        unbinder = ButterKnife.bind(this, view);
+        mContext = getContext();
         mHelper = new DailyWordDBHelper(mContext);
-        if (GoldApp.getApp(mContext).getLessonType().contains("cet")){
+        if (GoldApp.getApp(mContext).getLessonType().contains("cet")) {
             isCet = true;
         }
         userid = GoldApp.getApp(mContext).userId;
@@ -115,96 +160,76 @@ public class GoldNewFragment extends Fragment {
                 .setCancellable(false)
                 .setAnimationSpeed(2)
                 .setDimAmount(0.5f);
-        lesson = view.findViewById(R.id.lesson);
-        view.findViewById(R.id.back).setVisibility(View.GONE);
-        mRatingBarWord = view. findViewById(R.id.ratingBarword);
-        mRatingBarSentence = view. findViewById(R.id.ratingBarSentence);
-        mRatingBarExam = view. findViewById(R.id.ratingBarExam);
-        ll_exam = view.findViewById(R.id.exam);
-        ll_sentence = view.findViewById(R.id.sentence);
-        ll_words = view.findViewById(R.id.word);
-        ll_warmup = view.findViewById(R.id.warm_up);
-        showMore = view.findViewById(R.id.show_more);
-        microClass = view.findViewById(R.id.microclass);
-        introduce = view.findViewById(R.id.introduce);
-        warmup = view.findViewById(R.id.img_warmup);
-        word = view.findViewById(R.id.img_words);
-        sentence = view.findViewById(R.id.img_sentence);
-        exam = view.findViewById(R.id.img_exam);
-        warmup_go = view.findViewById(R.id.img_warmup_go);
-//        word_go = view.findViewById(R.id.img_words_go);
-//        sentence_go = view.findViewById(R.id.img_sentence_go);
-//        exam_go = view.findViewById(R.id.img_exam_go);
-        mViewPager = view.findViewById(R.id.viewpager);
-        txt_score = view.findViewById(R.id.score);
-        ll_default = view.findViewById(R.id.ll_default);
+        mBack.setVisibility(View.GONE);
+
+
         Typeface tf = Typeface.createFromAsset(mContext.getAssets(), "font/DINMedium_0.ttf");
         txt_score.setTypeface(tf);
         lesson.setTypeface(tf);
-        initClickEvent();
+        setViewsVisible();
         getLessonIdList();
         setScore(0);
-        ToastUtil.showLongToast(mContext,"点击右上角的图标可以显示往期课程哦~~");
+        ToastUtil.showLongToast(mContext, "点击右上角的图标可以显示往期课程哦~~");
         return view;
     }
 
-    private void initClickEvent() {
-        if (isCet){
+
+    @OnClick(R2.id.introduce)
+    public void showIntroduce() {
+        Intent intent = new Intent(mContext, BuyIndicatorActivity.class);
+        intent.putExtra("flag", false);
+        startActivity(intent);
+    }
+
+    @OnClick(R2.id.microclass)
+    public void showMicroClass() {
+        EventBus.getDefault().post(new StarMicroEvent(GoldApp.getApp(mContext).productId));
+    }
+
+    @OnClick(R2.id.show_more)
+    public void showMore() {
+        window.createSubClassWindow(mContext, mBeans);
+        window.show();
+    }
+
+    @OnClick(R2.id.warm_up)
+    public void GoWarmUp() {
+        sign = MD5.getMD5ofStr(GoldApp.getApp(mContext).getLessonType() + "W" + TimeUtils.getCurTime());
+        getTodayData(sign, "W");
+    }
+
+    @OnClick(R2.id.word)
+    public void GoWor() {
+        sign = MD5.getMD5ofStr(GoldApp.getApp(mContext).getLessonType() + "W" + TimeUtils.getCurTime());
+        getTodayData(sign, "W");
+    }
+
+    @OnClick(R2.id.sentence)
+    public void GoSentence() {
+        sign = MD5.getMD5ofStr(GoldApp.getApp(mContext).getLessonType() + "S" + TimeUtils.getCurTime());
+        getTodayData(sign, "S");
+    }
+
+    @OnClick(R2.id.exam)
+    public void GoExam() {
+        sign = MD5.getMD5ofStr(GoldApp.getApp(mContext).getLessonType() + "L" + TimeUtils.getCurTime());
+        getTodayData(sign, "L");
+    }
+
+    private void setViewsVisible() {
+        if (isCet) {
             ll_warmup.setVisibility(View.GONE);
         }
-        microClass.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                EventBus.getDefault().post(new StarMicroEvent(GoldApp.getApp(mContext).productId));
-            }
-        });
-        introduce.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(mContext, BuyIndicatorActivity.class);
-                intent.putExtra("flag", false);
-                startActivity(intent);
-            }
-        });
-        ll_warmup.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                sign = MD5.getMD5ofStr(GoldApp.getApp(mContext).getLessonType() + "W" + TimeUtils.getCurTime());
-                getTodayData(sign, "W");
-            }
-        });
-        ll_words.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                sign = MD5.getMD5ofStr(GoldApp.getApp(mContext).getLessonType() + "W" + TimeUtils.getCurTime());
-                getTodayData(sign, "W");
-            }
-        });
-        ll_sentence.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                sign = MD5.getMD5ofStr(GoldApp.getApp(mContext).getLessonType() + "S" + TimeUtils.getCurTime());
-
-                getTodayData(sign, "S");
-            }
-        });
-        ll_exam.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-
-                sign = MD5.getMD5ofStr(GoldApp.getApp(mContext).getLessonType() + "L" + TimeUtils.getCurTime());
-                getTodayData(sign, "L");
-            }
-        });
     }
 
     @Override
     public void onViewCreated(@NonNull final View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-
         EventBus.getDefault().register(this);
+        initViewPager();
+    }
 
-
+    private void initViewPager() {
         mViewPager.setOnPageChangeListener(new ViewPager.OnPageChangeListener() {
             @Override
             public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
@@ -221,28 +246,19 @@ public class GoldNewFragment extends Fragment {
 
             }
         });
-
-        showMore.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                window.createSubClassWindow(mContext, mBeans);
-                window.show(v);
-            }
-        });
-
     }
 
     private void initPagerItem() {
         int i1 = 0;
-        GoldDateRecord record = mHelper.selectDataByDate(TimeUtils.getCurTime(),GoldApp.getApp(mContext).userId);
-        for (int i = 0 ;i < mBeans.size() ; i++){
-            Log.d("diao",mBeans.get(i).getLessonid());
-            if (record!= null){
-                if (mBeans.get(i).getLessonid().equals(record.getLessonid())){
-                    i1 = i /3;
+        GoldDateRecord record = mHelper.selectDataByDate(TimeUtils.getCurTime(), GoldApp.getApp(mContext).userId);
+        for (int i = 0; i < mBeans.size(); i++) {
+            Log.d("diao", mBeans.get(i).getLessonid());
+            if (record != null) {
+                if (mBeans.get(i).getLessonid().equals(record.getLessonid())) {
+                    i1 = i / 3;
                 }
-            }else {
-                i1 = 0 ;
+            } else {
+                i1 = 0;
             }
         }
         mViewPager.setCurrentItem(i1);
@@ -262,23 +278,20 @@ public class GoldNewFragment extends Fragment {
         SpannableStringBuilder style = new SpannableStringBuilder(txt_score.getText().toString());
         style.setSpan(new RelativeSizeSpan(1.5f), 5, txt_score.getText().toString().length(), Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
         style.setSpan(new ForegroundColorSpan(getResources().getColor(R.color.trainingcamp_blue_score)), 5, txt_score.getText().toString().length(), Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
-
         txt_score.setText(style);
     }
 
 
-    public static GoldNewFragment newInstance(Context context) {
+    public static GoldNewFragment newInstance() {
         GoldNewFragment fragment = new GoldNewFragment();
-        mContext = context;
         return fragment;
     }
 
     private void getLessonIdList() {
-
         progrssDialog.show();
         LogUtils.d("getLessonIdList: ");
         String sign = MD5.getMD5ofStr(GoldApp.getApp(mContext).getLessonType() + GoldApp.getApp(mContext).getUserId() + DateUtils.getToday());
-        retrofit2.Call<LessonIdBean> call = VipRequestFactory.getTestQuestionApi().getLessonIdApi("20005", GoldApp.getApp(mContext).getLessonType(), sign, "json", GoldApp.getApp(mContext).getUserId());
+        Call<LessonIdBean> call = VipRequestFactory.getTestQuestionApi().getLessonIdApi("20005", GoldApp.getApp(mContext).getLessonType(), sign, "json", GoldApp.getApp(mContext).getUserId());
         call.enqueue(new Callback<LessonIdBean>() {
             @Override
             public void onResponse(Call<LessonIdBean> call, Response<LessonIdBean> res) {
@@ -290,13 +303,12 @@ public class GoldNewFragment extends Fragment {
                         mBeans = res.body().getLessonList();
                         SortBeans();
                         requestProgress();
-//                        EventBus.getDefault().post(new FinishGetIDEvent());
                     }
                 }
             }
 
             @Override
-            public void onFailure(retrofit2.Call<LessonIdBean> call, Throwable t) {
+            public void onFailure(Call<LessonIdBean> call, Throwable t) {
                 ((Activity) mContext).runOnUiThread(new Runnable() {
                     @Override
                     public void run() {
@@ -309,7 +321,6 @@ public class GoldNewFragment extends Fragment {
     }
 
     private void WriteBeans() {
-
         for (int i = 0; i < mBeans.size(); i += 3) {
             if (mHelper.writeDataToSchedule(GoldApp.getApp(mContext).getUserId(), mBeans.get(i).getLessonid(), TimeUtils.getFormateDate(Long.parseLong(s)))) {
                 s = Long.parseLong(s) + 1000 * 60 * 60 * 24 + "";
@@ -317,7 +328,6 @@ public class GoldNewFragment extends Fragment {
         }
         SP.put(mContext, "enter_gold", true);
     }
-
 
 
     private void requestVoaInfo() {
@@ -332,14 +342,14 @@ public class GoldNewFragment extends Fragment {
         }
         s = String.valueOf(buffer);
 
-        if (!GoldApp.getApp(mContext).LessonType.contains("bbc")){
-            retrofit2.Call<VoaInfoBean> call =
+        if (!GoldApp.getApp(mContext).LessonType.contains("bbc")) {
+            Call<VoaInfoBean> call =
                     VipRequestFactory.getVoaInfoApi().getVoaInfo(String.valueOf(s));
             call.enqueue(new Callback<VoaInfoBean>() {
                 @Override
                 public void onResponse(Call<VoaInfoBean> call, Response<VoaInfoBean> response) {
-                    if (response.body() == null){
-                        ToastUtil.showToast(mContext,"数据加载失败");
+                    if (response.body() == null) {
+                        ToastUtil.showToast(mContext, "数据加载失败");
                         return;
                     }
                     Log.d("diao", "onResponse: " + response.body().toString());
@@ -351,14 +361,14 @@ public class GoldNewFragment extends Fragment {
                 public void onFailure(Call<VoaInfoBean> call, Throwable t) {
                 }
             });
-        }else {
-            retrofit2.Call<BBCInfoBean> call =
+        } else {
+            Call<BBCInfoBean> call =
                     VipRequestFactory.getVoaInfoApi().getBBCInfo(String.valueOf(s));
             call.enqueue(new Callback<BBCInfoBean>() {
                 @Override
                 public void onResponse(Call<BBCInfoBean> call, Response<BBCInfoBean> response) {
-                    if (null == response.body()){
-                        ToastUtil.showToast(mContext,"数据加载失败");
+                    if (null == response.body()) {
+                        ToastUtil.showToast(mContext, "数据加载失败");
                         return;
                     }
                     Log.d("diao", "onResponse: " + response.body().toString());
@@ -371,21 +381,19 @@ public class GoldNewFragment extends Fragment {
                 }
             });
         }
-
-
     }
 
 
     @Override
     public void onResume() {
         super.onResume();
-        if (mBeans.size()>0){
+        if (mBeans.size() > 0) {
             setPagerContent(index);
             mAdapter.notifyDataSetChanged();
         }
     }
 
-    private void setPagerContent(int position){
+    private void setPagerContent(int position) {
         index = position;
         initLesson();
         lessonId = Integer.parseInt(mBeans.get(position * 3).getLessonid());
@@ -394,10 +402,10 @@ public class GoldNewFragment extends Fragment {
         GoldDateRecord records = mHelper.selectDataById(GoldApp.getApp(mContext).userId, String.valueOf(lessonId));
         if (records != null) {
             if (records.getStep() == "1") {
-                if (isCet){
+                if (isCet) {
 //                    setClickStatus(2);
                     setClickStatus(4);
-                }else {
+                } else {
 //                    setClickStatus(1);
                     setClickStatus(4);
                 }
@@ -409,12 +417,12 @@ public class GoldNewFragment extends Fragment {
         } else {
             setClickStatus(4);
         }
-        int scoresum = Integer.parseInt(records.getWord_score())+
-                Integer.parseInt(records.getSentence_score())+
+        int scoresum = Integer.parseInt(records.getWord_score()) +
+                Integer.parseInt(records.getSentence_score()) +
                 Integer.parseInt(records.getExam_score());
 
-        setRatingBarContent(records.getWord_score(),records.getSentence_score(),records.getExam_score());
-        setScore(scoresum/3);
+        setRatingBarContent(records.getWord_score(), records.getSentence_score(), records.getExam_score());
+        setScore(scoresum / 3);
 //        正式发版前添加
 //        DateFormat format = new SimpleDateFormat("yyyy-MM-dd");
 //        try {
@@ -426,13 +434,13 @@ public class GoldNewFragment extends Fragment {
 //        }
     }
 
-    private void setRatingBarContent(String wordScore,String sentenceScore , String ExamScore) {
+    private void setRatingBarContent(String wordScore, String sentenceScore, String ExamScore) {
         int word = Integer.parseInt(wordScore);
         int sentence = Integer.parseInt(sentenceScore);
         int exam = Integer.parseInt(ExamScore);
-        mRatingBarWord.setCountSelected(word/20);
-        mRatingBarSentence.setCountSelected(sentence/20);
-        mRatingBarExam.setCountSelected(exam/20);
+        mRatingBarword.setCountSelected(word / 20);
+        mRatingBarSentence.setCountSelected(sentence / 20);
+        mRatingBarExam.setCountSelected(exam / 20);
     }
 
     public void setClickStatus(int i) {
@@ -444,10 +452,6 @@ public class GoldNewFragment extends Fragment {
                 sentence.setImageDrawable(getResources().getDrawable(R.drawable.trainingcamp_sentence_notyet));
                 exam.setImageDrawable(getResources().getDrawable(R.drawable.trainingcamp_exam_notyet));
 
-                warmup_go.setImageDrawable(getResources().getDrawable(R.drawable.trainingcamp_icon_go_new));
-//                word_go.setImageDrawable(getResources().getDrawable(R.drawable.trainingcamp_lock));
-//                sentence_go.setImageDrawable(getResources().getDrawable(R.drawable.trainingcamp_lock));
-//                exam_go.setImageDrawable(getResources().getDrawable(R.drawable.trainingcamp_lock));
 
                 break;
             case 2:
@@ -456,10 +460,6 @@ public class GoldNewFragment extends Fragment {
                 sentence.setImageDrawable(getResources().getDrawable(R.drawable.trainingcamp_sentence_notyet));
                 exam.setImageDrawable(getResources().getDrawable(R.drawable.trainingcamp_exam_notyet));
 
-                warmup_go.setImageDrawable(getResources().getDrawable(R.drawable.trainingcamp_icon_go_new));
-//                word_go.setImageDrawable(getResources().getDrawable(R.drawable.trainingcamp_icon_go_new));
-//                sentence_go.setImageDrawable(getResources().getDrawable(R.drawable.trainingcamp_lock));
-//                exam_go.setImageDrawable(getResources().getDrawable(R.drawable.trainingcamp_lock));
                 break;
             case 3:
                 warmup.setImageDrawable(getResources().getDrawable(R.drawable.trainingcamp_icon_warmup));
@@ -467,10 +467,6 @@ public class GoldNewFragment extends Fragment {
                 sentence.setImageDrawable(getResources().getDrawable(R.drawable.trainingcamp_icon_sentence));
                 exam.setImageDrawable(getResources().getDrawable(R.drawable.trainingcamp_exam_notyet));
 
-                warmup_go.setImageDrawable(getResources().getDrawable(R.drawable.trainingcamp_icon_go_new));
-//                word_go.setImageDrawable(getResources().getDrawable(R.drawable.trainingcamp_icon_go_new));
-//                sentence_go.setImageDrawable(getResources().getDrawable(R.drawable.trainingcamp_icon_go_new));
-//                exam_go.setImageDrawable(getResources().getDrawable(R.drawable.trainingcamp_lock));
                 break;
             case 4:
                 warmup.setImageDrawable(getResources().getDrawable(R.drawable.trainingcamp_icon_warmup));
@@ -478,10 +474,6 @@ public class GoldNewFragment extends Fragment {
                 sentence.setImageDrawable(getResources().getDrawable(R.drawable.trainingcamp_icon_sentence));
                 exam.setImageDrawable(getResources().getDrawable(R.drawable.trainingcamp_icon_exam));
 
-                warmup_go.setImageDrawable(getResources().getDrawable(R.drawable.trainingcamp_icon_go_new));
-//                word_go.setImageDrawable(getResources().getDrawable(R.drawable.trainingcamp_icon_go_new));
-//                sentence_go.setImageDrawable(getResources().getDrawable(R.drawable.trainingcamp_icon_go_new));
-//                exam_go.setImageDrawable(getResources().getDrawable(R.drawable.trainingcamp_icon_go_new));
                 break;
             default:
                 break;
@@ -490,10 +482,10 @@ public class GoldNewFragment extends Fragment {
     }
 
     private void setClickable(int i) {
-        ll_warmup.setClickable((i - 1) >= 0 ? true : false);
-        ll_words.setClickable((i - 2) >= 0 ? true : false);
-        ll_sentence.setClickable((i - 3) >= 0 ? true : false);
-        ll_exam.setClickable((i - 4) >= 0 ? true : false);
+        ll_warmup.setClickable((i - 1) >= 0);
+        ll_words.setClickable((i - 2) >= 0);
+        ll_sentence.setClickable((i - 3) >= 0);
+        ll_exam.setClickable((i - 4) >= 0);
     }
 
     @Subscribe
@@ -513,7 +505,7 @@ public class GoldNewFragment extends Fragment {
         requestVoaInfo();
     }
 
-    private void SortBeans(){
+    private void SortBeans() {
         Collections.sort(mBeans, new Comparator<LessonIdBean.LessonListBean>() {
             @Override
             public int compare(LessonIdBean.LessonListBean o1, LessonIdBean.LessonListBean o2) {
@@ -527,15 +519,15 @@ public class GoldNewFragment extends Fragment {
     }
 
     private void requestProgress() {
-        sign = MD5.getMD5ofStr("80005class"+userid);
-        Call<StudyProgress> progressCall = VipRequestFactory.getTestQuestionApi().getProgressApi("80005",GoldApp.getApp(mContext).productId,
-                sign,"json",userid);
+        sign = MD5.getMD5ofStr("80005class" + userid);
+        Call<StudyProgress> progressCall = VipRequestFactory.getTestQuestionApi().getProgressApi("80005", GoldApp.getApp(mContext).productId,
+                sign, "json", userid);
         progressCall.enqueue(new Callback<StudyProgress>() {
             @Override
             public void onResponse(Call<StudyProgress> call, Response<StudyProgress> response) {
-                if (response.body().getResult() == 0){
+                if (response.body().getResult() == 0) {
                     WriteBeans();
-                }else{
+                } else {
                     StudyProgress progress = response.body();
                     Collections.sort(progress.getData(), new Comparator<StudyProgress.DataBean>() {
                         @Override
@@ -550,7 +542,6 @@ public class GoldNewFragment extends Fragment {
                     writeDataToDB(response.body());
                     WriteBeans();
                 }
-//                EventBus.getDefault().post(new );
                 EventBus.getDefault().post(new FinishGetIDEvent());
             }
 
@@ -563,18 +554,18 @@ public class GoldNewFragment extends Fragment {
     }
 
     private void writeDataToDB(StudyProgress progress) {
-        for(StudyProgress.DataBean bean : progress.getData())
-        mHelper.writeDownloadDataToSchedule(userid,bean.getTitleid()+"",TimeUtils.getFormateDate((long) (bean.getPlanday()*DAY_MILLIS)));
+        for (StudyProgress.DataBean bean : progress.getData())
+            mHelper.writeDownloadDataToSchedule(userid, bean.getTitleid() + "", TimeUtils.getFormateDate((long) (bean.getPlanday() * DAY_MILLIS)), bean.getFlg());
     }
 
     //将获取的lessonId 上传,避免由于卸载或者更换手机导致的数据清除或异常 , 注意已经上传的数据不要再重传
     private void uploadStudyResult(List<LessonIdBean.LessonListBean> beans) {
-        for(int i = 0 ; i<beans.size() ; i++){
+        for (int i = 0; i < beans.size(); i++) {
             Call<SimpleResultBean> call = VipRequestFactory.getTestQuestionApi().
                     uploadStudyProgress("80004", GoldApp.getApp(mContext).productId + "",
                             MD5.getMD5ofStr("80004class" + GoldApp.getApp(mContext).getUserId() + ""),
                             "json", GoldApp.getApp(mContext).getUserId(), beans.get(i).getLessonid() + "",
-                            "0", System.currentTimeMillis()/DAY_MILLIS+i+"",   "0", String.valueOf(System.currentTimeMillis()/DAY_MILLIS));
+                            "0", System.currentTimeMillis() / DAY_MILLIS + i + "", "0", String.valueOf(System.currentTimeMillis() / DAY_MILLIS));
 
             call.enqueue(new Callback<SimpleResultBean>() {
                 @Override
@@ -597,16 +588,17 @@ public class GoldNewFragment extends Fragment {
     public void onDestroyView() {
         super.onDestroyView();
         EventBus.getDefault().unregister(this);
+        unbinder.unbind();
     }
 
     public void getTodayData(String sign, final String cat) {
         progrssDialog.show();
 
-        retrofit2.Call<AbilityQuestion> call = VipRequestFactory.getTestQuestionApi().testQuestionApi("20000", GoldApp.getApp(mContext).getLessonType(), cat, sign, "json", 3,
+        Call<AbilityQuestion> call = VipRequestFactory.getTestQuestionApi().testQuestionApi("20000", GoldApp.getApp(mContext).getLessonType(), cat, sign, "json", 3,
                 GoldApp.getApp(mContext).getUserId(), lessonId);
         call.enqueue(new Callback<AbilityQuestion>() {
             @Override
-            public void onResponse(retrofit2.Call<AbilityQuestion> call, Response<AbilityQuestion> res) {
+            public void onResponse(Call<AbilityQuestion> call, Response<AbilityQuestion> res) {
                 if (res.body() != null) {
                     if (res.body() != null && res.body().getTestList() != null && res.body().getTestList().size() > 0) {
                         Logger.json(res.toString());
@@ -632,7 +624,7 @@ public class GoldNewFragment extends Fragment {
             }
 
             @Override
-            public void onFailure(retrofit2.Call<AbilityQuestion> call, Throwable t) {
+            public void onFailure(Call<AbilityQuestion> call, Throwable t) {
                 ((Activity) mContext).runOnUiThread(new Runnable() {
                     @Override
                     public void run() {
@@ -650,8 +642,28 @@ public class GoldNewFragment extends Fragment {
         intent.setFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP);
         intent.putExtra(ParaConstants.QUESTION_LIST_LABEL, (Serializable) list);
         intent.putExtra("lessonid", lessonId + "");
-
         startActivity(intent);
     }
 
+
+    @Subscribe
+    public void onPlayBackEvent(PlayBackEvent event) {
+        mRatingBarwarmup.setCountSelected(event.getPlayPercent() / 20);
+    }
+
+//
+//    @OnClick(R2.id.show_more)
+//    public void show_more(){
+//
+//    }
+//
+//    @OnClick(R2.id.microclass)
+//    public void microClass(){
+//
+//    }
+//
+//    @OnClick(R2.id.introduce)
+//    public void introduce(){
+//
+//    }
 }

@@ -43,9 +43,6 @@ public class SubClassWindow {
         this.context = context;
         // 用于PopupWindow的View
         View contentView= LayoutInflater.from(context).inflate(R.layout.trainingcamp_subclass, null);
-        // 创建PopupWindow对象，其中：
-        // 第一个参数是用于PopupWindow中的View，第二个参数是PopupWindow的宽度，
-        // 第三个参数是PopupWindow的高度，第四个参数指定PopupWindow能否获得焦点
 
         recyclerView = contentView.findViewById(R.id.recyclerView);
         mAdapter = new LessonTitleAdapter(list , window);
@@ -53,7 +50,7 @@ public class SubClassWindow {
         manager.setOrientation(LinearLayoutManager.VERTICAL);
         recyclerView.setLayoutManager(manager);
         recyclerView.setAdapter(mAdapter);
-         window=new PopupWindow(contentView, ViewGroup.LayoutParams.MATCH_PARENT, getScreenHeight(context)*586/732, true);
+         window=new PopupWindow(contentView, ViewGroup.LayoutParams.MATCH_PARENT, getScreenHeight(context)*566/732, true);
         // 设置PopupWindow的背景
         window.setBackgroundDrawable(new ColorDrawable(Color.WHITE));
         // 设置PopupWindow是否能响应外部点击事件
@@ -67,19 +64,12 @@ public class SubClassWindow {
                 setBackgroundAlpha(1f,context);
             }
         });
-        // 显示PopupWindow，其中：
-        // 第一个参数是PopupWindow的锚点，第二和第三个参数分别是PopupWindow相对锚点的x、y偏移
-//        window.showAsDropDown(anchor, 0, 0);
-        // 或者也可以调用此方法显示PopupWindow，其中：
-        // 第一个参数是PopupWindow的父View，第二个参数是PopupWindow相对父View的位置，
-        // 第三和第四个参数分别是PopupWindow相对父View的x、y偏移
-        // window.showAtLocation(parent, gravity, x, y);
 
     }
 
 
 
-    public  void show(View view){
+    public  void show(){
         window.setAnimationStyle(R.style.anim_photo_select);
         setBackgroundAlpha(0.5f,context);
 //        int windowPos[] = calculatePopWindowPos(view, ((Activity)context).getWindow().getDecorView());

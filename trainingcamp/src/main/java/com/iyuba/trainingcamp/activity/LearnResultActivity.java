@@ -43,10 +43,10 @@ public class LearnResultActivity extends BaseActivity  {
 
     private void bindViews() {
 
-        mTip_cn = (TextView) findViewById(R.id.tip_cn);
-        mTip_en = (TextView) findViewById(R.id.tip_en);
-        mLearn_result_list = (android.support.v7.widget.RecyclerView) findViewById(R.id.learn_result_list);
-        mGo_test = (TextView) findViewById(R.id.go_test);
+        mTip_cn = findViewById(R.id.tip_cn);
+        mTip_en = findViewById(R.id.tip_en);
+        mLearn_result_list = findViewById(R.id.learn_result_list);
+        mGo_test = findViewById(R.id.go_test);
         mGo_test.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

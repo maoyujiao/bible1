@@ -78,27 +78,32 @@
         android:id="@+id/et"
         android:layout_width="@dimen/x200"
         android:layout_height="wrap_content"
+        android:paddingTop="3dp"
+        android:paddingBottom="3dp"
+        android:paddingLeft="5dp"
+        android:paddingRight="5dp"
         android:singleLine="true"
+        android:textSize="@dimen/x16"
         tools:text="heiheidsfasdifsadjfjskdlfjsal;kdfjalsfjldsjflkadsfjk;ads"
         android:layout_below="@id/ll"
         android:layout_centerHorizontal="true"
         android:digits="-abcdefghijklmnopqrstuvwxyzABCDEFGHEJKLMNOPQRSTUVWXYZ"
         android:maxLength="20"
+        android:hint="请输入听到的单词"
         android:textCursorDrawable="@null"
         android:background="@drawable/trainingcamp_study_selector"
-        android:layout_marginTop="@dimen/x18"/>
+        android:layout_marginTop="@dimen/x58"/>
 
     <Button
         android:id="@+id/next_button"
-        android:layout_width="wrap_content"
+        android:layout_width="@dimen/x88"
         android:layout_height="wrap_content"
         android:text="下一题"
         android:background="@drawable/trainingcamp_study_selector"
-        android:layout_toRightOf="@id/et"
+        android:layout_centerHorizontal="true"
         android:layout_alignParentBottom="true"
         android:visibility="gone"
-        android:layout_marginBottom="@dimen/x28"
-        android:layout_marginRight="@dimen/x22"/>
+        android:layout_marginBottom="@dimen/x58"/>
 
 
     <LinearLayout

@@ -117,15 +117,15 @@ public class WordHistoryAdapter extends RecyclerView.Adapter<WordHistoryAdapter.
 
         public ViewHolder(View view) {
             super(view);
-            WordEN = (TextView) view.findViewById(R.id.word);
-            WordCN = (TextView) view.findViewById(R.id.content);
-            rr = (RelativeLayout) view.findViewById(R.id.rr);
+            WordEN = view.findViewById(R.id.word);
+            WordCN = view.findViewById(R.id.content);
+            rr = view.findViewById(R.id.rr);
             ll = view.findViewById(R.id.expand);
             mResult = view.findViewById(R.id.result);
-            mWord_content = (TextView) view.findViewById(R.id.word_content);
-            mPro = (TextView) view.findViewById(R.id.pro);
-            mCn = (TextView) view.findViewById(R.id.cn);
-            mPhrase = (TextView) view.findViewById(R.id.phrase);
+            mWord_content = view.findViewById(R.id.word_content);
+            mPro = view.findViewById(R.id.pro);
+            mCn = view.findViewById(R.id.cn);
+            mPhrase = view.findViewById(R.id.phrase);
         }
     }
 

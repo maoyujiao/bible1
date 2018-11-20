@@ -20,6 +20,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.iyuba.trainingcamp.R;
+import com.iyuba.trainingcamp.R2;
 import com.iyuba.trainingcamp.app.GoldApp;
 import com.iyuba.trainingcamp.bean.AbilityQuestion;
 import com.iyuba.trainingcamp.bean.LearningContent;
@@ -38,6 +39,9 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
+import butterknife.BindView;
+import butterknife.ButterKnife;
+
 
 /**
  * @author yq QQ:1032006226
@@ -46,10 +50,14 @@ public class SentenceTestActivity extends BaseActivity implements View.OnClickLi
 
     SpannableStringBuilder style ;
     DailyWordDBHelper mHelper;
-    private TextView mEn;
-    private TextView mCn;
-    private TextView next ;
-    private ImageView mFollow;
+    @BindView(R2.id.en)
+    TextView mEn;
+    @BindView(R2.id.cn)
+    TextView mCn;
+    @BindView(R2.id.next)
+    TextView next ;
+    @BindView(R2.id.follow)
+    ImageView mFollow;
     private AnimationDrawable animationDrawable;
     List<Integer> indexList = new ArrayList<>();
 
@@ -73,11 +81,7 @@ public class SentenceTestActivity extends BaseActivity implements View.OnClickLi
                     indexList = (List<Integer>) msg.obj ;
 
 
-                    if (msg.arg1>60){
-                        mLearningContents.get(position).checkPassed = true;
-                    }else {
-                        mLearningContents.get(position).checkPassed = false;
-                    }
+                    mLearningContents.get(position).checkPassed = msg.arg1 > 60;
                     next.setVisibility(View.VISIBLE);
                     if (position == list.size()-1){
                         next.setText("完成");
@@ -117,6 +121,9 @@ public class SentenceTestActivity extends BaseActivity implements View.OnClickLi
         style = new SpannableStringBuilder(unColoredString);
         for (int i : indexList){
             Log.d("diao",i+"");
+            if (i>=strings.length){
+                break;
+            }
             int beginPosition = unColoredString.indexOf(strings[i]);
             style.setSpan(new ForegroundColorSpan(Color.RED), beginPosition, beginPosition+strings[i].length(), Spannable.SPAN_EXCLUSIVE_EXCLUSIVE );
         }
@@ -136,12 +143,9 @@ public class SentenceTestActivity extends BaseActivity implements View.OnClickLi
     private TextView testIndex;
 
     private void bindViews() {
+        ButterKnife.bind(this);
         mContext = this;
         testIndex = findViewById(R.id.position);
-        mEn = findViewById(R.id.en);
-        mCn = findViewById(R.id.cn);
-        mFollow = findViewById(R.id.follow);
-        next = (TextView)this.findViewById(R.id.next);
         findViewById(R.id.back).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

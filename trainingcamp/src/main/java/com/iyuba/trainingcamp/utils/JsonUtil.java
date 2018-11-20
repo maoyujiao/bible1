@@ -69,7 +69,7 @@ public class JsonUtil {
         for (int i = 0; i < tResults.size(); i++) {
             JSONObject itemObject = new JSONObject();
 
-            itemObject.put("score", tResults.get(i).getScore());
+            itemObject.put("Score", tResults.get(i).getScore());
             itemObject.put("lessontype", tResults.get(i).getType());
             itemObject.put("category", tResults.get(i).getCategory());
             itemObject.put("testCnt", tResults.get(i).getTestCount());

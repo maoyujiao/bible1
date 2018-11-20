@@ -24,8 +24,11 @@ import com.iyuba.trainingcamp.bean.LessonIdBean;
 import com.iyuba.trainingcamp.bean.VoaInfoBean;
 import com.iyuba.trainingcamp.db.DailyWordDBHelper;
 import com.iyuba.trainingcamp.db.dbclass.GoldDateRecord;
+import com.iyuba.trainingcamp.event.PlayLessonEvent;
 import com.iyuba.trainingcamp.http.VipRequestFactory;
 import com.iyuba.trainingcamp.widget.GlideRoundTransform;
+
+import org.greenrobot.eventbus.EventBus;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -64,7 +67,7 @@ public class LessonAdapter extends PagerAdapter {
     @Override
     public Object instantiateItem(@NonNull ViewGroup container, final int position) {
 
-        View view = LayoutInflater.from(mContext).inflate(R.layout.trainingcamp_learn_card,container,false);
+        final View view = LayoutInflater.from(mContext).inflate(R.layout.trainingcamp_learn_card,container,false);
         final RelativeLayout relativeLayout = view.findViewById(R.id.rr);
         final TextView lesson_number  = view.findViewById(R.id.lesson_number);
 
@@ -96,10 +99,19 @@ public class LessonAdapter extends PagerAdapter {
                 call.enqueue(new Callback<VoaInfoBean>() {
                     @Override
                     public void onResponse(Call<VoaInfoBean> call, Response<VoaInfoBean> response) {
-                        VoaInfoBean bean = response.body();
+                        final VoaInfoBean bean = response.body();
                         if (bean == null){
                             return;
                         }
+
+                        view.setOnClickListener(new View.OnClickListener() {
+                            @Override
+                            public void onClick(View v) {
+                                if(!GoldApp.getApp(mContext).LessonType.contains("cet")){
+                                    EventBus.getDefault().post(new PlayLessonEvent(Integer.parseInt(bean.getData().get(0).getVoaId())));
+                                }
+                            }
+                        });
                         number.setVisibility(View.VISIBLE);
 
                         title.setText(bean.getData().get(0).getTitle_cn());
@@ -128,12 +140,19 @@ public class LessonAdapter extends PagerAdapter {
                 call.enqueue(new Callback<BBCInfoBean>() {
                     @Override
                     public void onResponse(Call<BBCInfoBean> call, Response<BBCInfoBean> response) {
-                        BBCInfoBean bean = response.body();
+                        final BBCInfoBean bean = response.body();
                         if (bean == null){
                             return;
                         }
                         number.setVisibility(View.VISIBLE);
-
+                        view.setOnClickListener(new View.OnClickListener() {
+                            @Override
+                            public void onClick(View v) {
+                                if(!GoldApp.getApp(mContext).LessonType.contains("cet")){
+                                    EventBus.getDefault().post(new PlayLessonEvent(bean.getData().get(0).getBbcId()));
+                                }
+                            }
+                        });
                         title.setText(bean.getData().get(0).getTitle_cn());
                         number.setText(bean.getData().get(0).getReadCount()+"次阅览");
                         Glide.with(mContext).load(bean.getData().get(0).getPic())
@@ -166,7 +185,7 @@ public class LessonAdapter extends PagerAdapter {
 
         }
         GoldDateRecord record = mHelper.selectDataById(GoldApp.getApp(mContext).userId,mLessonListBeans.get(position*3).getLessonid());
-        if (record.getStep().equals("3")){
+        if (record.getStep().equals("4")){
             study_sign.setBackgroundResource(R.drawable.trainingcamp_icon_finished_new);
             study_sign.setText("已学习");
             study_sign.setTextColor(mContext.getResources().getColor(R.color.trainingcamp_white));
@@ -181,12 +200,11 @@ public class LessonAdapter extends PagerAdapter {
         }
 
         container.addView(view);
+
+
         return view;
     }
 
-    private void getTitleUrl(){
-
-    }
 
     @Override
     public void destroyItem(@NonNull ViewGroup container, int position, @NonNull Object object) {

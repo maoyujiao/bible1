@@ -88,6 +88,7 @@
 
     <TextView
         android:id="@+id/question"
+        android:textColor="?attr/baseTheme"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginRight="@dimen/x18"

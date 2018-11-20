@@ -58,8 +58,7 @@ public class TimeUtils {
 
     private static boolean isLeapYear(String substring) {
         int year = Integer.parseInt(substring);
-        if(year%4==0&&year%100!=0||year%400==0) {return true;}
-        return false ;
+        return year % 4 == 0 && year % 100 != 0 || year % 400 == 0;
     }
 
     public static String formatTime(int time) {

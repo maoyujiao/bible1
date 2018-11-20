@@ -7,6 +7,7 @@ import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.text.TextUtils;
 import android.view.View;
 import android.widget.LinearLayout;
 import android.widget.TextView;
@@ -20,6 +21,8 @@ import com.iyuba.trainingcamp.bean.LearningContent;
 import com.iyuba.trainingcamp.http.VipRequestFactory;
 import com.iyuba.trainingcamp.utils.MD5;
 import com.iyuba.trainingcamp.utils.ParaConstants;
+
+import org.w3c.dom.Text;
 
 import java.util.List;
 
@@ -44,7 +47,7 @@ public class SentenceResultActivity extends BaseActivity {
 
     Context context;
 
-    private android.support.v7.widget.RecyclerView mRecyclerView;
+    private RecyclerView mRecyclerView;
     private TextView mStart;
     private TextView mScore;
     private LinearLayout ll;
@@ -79,13 +82,18 @@ public class SentenceResultActivity extends BaseActivity {
             ll.setVisibility(View.GONE);
         } else {
             mRecyclerView.setAdapter(new SentenceAdapter(context, list));
-            ll.setVisibility(View.VISIBLE);
             int score = 0 ;
             for (LearningContent content :list){
-                score += Integer.parseInt(content.score);
+                if (TextUtils.isEmpty(content.score)){
+//                    ll.setVisibility(View.GONE);
+                }else {
+                    score += Integer.parseInt(content.score);
+                }
             }
             score/=list.size();
             mScore.setText(String.valueOf(score));
+            ll.setVisibility(View.GONE);
+
         }
     }
 }

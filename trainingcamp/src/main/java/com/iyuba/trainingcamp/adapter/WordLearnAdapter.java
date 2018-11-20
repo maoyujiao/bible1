@@ -33,7 +33,7 @@ public class WordLearnAdapter extends RecyclerView.Adapter<WordLearnAdapter.View
     /** ITEM_TYPE 单词item
      *  BLANK_TYPE 空的item
      */
-    public static enum ITEM_TYPE {
+    public enum ITEM_TYPE {
         ITEM_TYPE,
         BLANK_TYPE
     }
@@ -144,14 +144,14 @@ public class WordLearnAdapter extends RecyclerView.Adapter<WordLearnAdapter.View
 
         public ViewHolder(View view) {
             super(view);
-            WordEN = (TextView) view.findViewById(R.id.word);
-            WordCN = (TextView) view.findViewById(R.id.content);
-            rr = (RelativeLayout) view.findViewById(R.id.rr);
+            WordEN = view.findViewById(R.id.word);
+            WordCN = view.findViewById(R.id.content);
+            rr = view.findViewById(R.id.rr);
             ll = view.findViewById(R.id.expand);
-            mWord_content = (TextView) view.findViewById(R.id.word_content);
-            mPro = (TextView) view.findViewById(R.id.pro);
-            mCn = (TextView) view.findViewById(R.id.cn);
-            mPhrase = (TextView) view.findViewById(R.id.phrase);
+            mWord_content = view.findViewById(R.id.word_content);
+            mPro = view.findViewById(R.id.pro);
+            mCn = view.findViewById(R.id.cn);
+            mPhrase = view.findViewById(R.id.phrase);
         }
     }
 

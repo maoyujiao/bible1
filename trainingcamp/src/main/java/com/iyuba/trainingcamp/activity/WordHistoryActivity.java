@@ -9,17 +9,20 @@ import android.support.v7.widget.RecyclerView;
 import android.text.TextUtils;
 import android.util.Log;
 import android.view.View;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.iyuba.trainingcamp.R;
+import com.iyuba.trainingcamp.R2;
 import com.iyuba.trainingcamp.adapter.WordHistoryAdapter;
 import com.iyuba.trainingcamp.app.GoldApp;
 import com.iyuba.trainingcamp.db.DailyWordDBHelper;
 import com.iyuba.trainingcamp.db.dbclass.GoldDateRecord;
-import com.iyuba.trainingcamp.db.dbclass.GoldDateRecordHelper;
 
-import java.util.List;
+import butterknife.BindView;
+import butterknife.ButterKnife;
+import butterknife.OnClick;
 
 /**
  * @author yq QQ:1032006226
@@ -31,51 +34,54 @@ import java.util.List;
  * @chang time
  * @class describe
  */
-public class WordHistoryActivity extends BaseActivity{
+public class WordHistoryActivity extends BaseActivity {
 
-    RecyclerView recyclerView ;
-    private  String  lessonId ;
-    private GoldDateRecord mRecords ;
-    Context mContext ;
+    @BindView(R2.id.score)
+    TextView mScore;
+    @BindView(R2.id.ll)
+    LinearLayout mLinearLayout;
+    @BindView(R2.id.recyclerView)
+    RecyclerView recyclerView;
+    private String lessonId;
+    private GoldDateRecord mRecords;
+    Context mContext;
 
-    private TextView mScore;
-    private LinearLayout mLinearLayout;
-    DailyWordDBHelper mHelper ;
-    WordHistoryAdapter adapter ;
+    DailyWordDBHelper mHelper;
+    WordHistoryAdapter adapter;
+
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.trainingcamp_word_history);
-        mContext = this ;
+        ButterKnife.bind(this);
+        mContext = this;
         mHelper = new DailyWordDBHelper(this);
-        recyclerView = findViewById(R.id.recyclerView);
-        mLinearLayout = findViewById(R.id.ll);
-        mScore = findViewById(R.id.score);
         lessonId = getIntent().getStringExtra("lessonid");
-        Log.d("diao", "onCreate: "+lessonId);
+        Log.d("diao", "onCreate: " + lessonId);
         Typeface tf = Typeface.createFromAsset(getAssets(), "font/DINMedium_0.ttf");
         mScore.setTypeface(tf);
-        mRecords =  mHelper.selectDataById(GoldApp.getApp(mContext).userId,lessonId);
+        mRecords = mHelper.selectDataById(GoldApp.getApp(mContext).userId, lessonId);
 
-        if (mRecords !=null ){
+        if (mRecords != null) {
             mLinearLayout.setVisibility(View.VISIBLE);
             recyclerView.setLayoutManager(new LinearLayoutManager(mContext));
-            adapter = new WordHistoryAdapter(mContext,mHelper.getWordHistory(lessonId));
-            mScore.setText(mHelper.selectDataById(GoldApp.getApp(mContext).userId,lessonId).getWord_score());
-            if(TextUtils.isEmpty(mHelper.selectDataById(GoldApp.getApp(mContext).userId,lessonId).getWord_score())){
+            adapter = new WordHistoryAdapter(mContext, mHelper.getWordHistory(lessonId));
+            mScore.setText(mHelper.selectDataById(GoldApp.getApp(mContext).userId, lessonId).getWord_score());
+            if (TextUtils.isEmpty(mHelper.selectDataById(GoldApp.getApp(mContext).userId, lessonId).getWord_score())) {
                 mLinearLayout.setVisibility(View.GONE);
             }
             recyclerView.setAdapter(adapter);
-        }else {
+        } else {
             mLinearLayout.setVisibility(View.GONE);
 
         }
 
-        findViewById(R.id.back).setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                finish();
-            }
-        });
     }
+
+    @OnClick(R2.id.back)
+    public void onMBackClicked() {
+        finish();
+    }
+
+
 }

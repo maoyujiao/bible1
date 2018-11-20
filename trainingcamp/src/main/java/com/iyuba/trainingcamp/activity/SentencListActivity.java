@@ -139,36 +139,38 @@ public class SentencListActivity extends BaseActivity implements View.OnClickLis
             play.setImageResource(R.drawable.trainingcamp_icon_play);
             return;
         } else if (mPlayState == PLAYER_STATE_PAUSE) {
-            if (playIndex == index){
-                mPlayState = PLAYER_STATE_PLAY;
-                play.setImageResource(R.drawable.trainingcamp_icon_pause);
-                player.start();
-            }else {
-                playIndex = index;
-                play.setImageResource(R.drawable.trainingcamp_icon_play);
-                player.reset();
-                try {
-                    player.setDataSource(url);
-                } catch (IOException e) {
-                    e.printStackTrace();
+            if (player != null) {
+                if (playIndex == index) {
+                    mPlayState = PLAYER_STATE_PLAY;
+                    play.setImageResource(R.drawable.trainingcamp_icon_pause);
+                    player.start();
+                } else {
+                    playIndex = index;
+                    play.setImageResource(R.drawable.trainingcamp_icon_play);
+                    player.reset();
+                    try {
+                        player.setDataSource(url);
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    }
+                    player.prepareAsync();
+                    player.setOnPreparedListener(new MediaPlayer.OnPreparedListener() {
+                        @Override
+                        public void onPrepared(MediaPlayer mp) {
+                            mp.start();
+                            play.setImageResource(R.drawable.trainingcamp_icon_pause);
+                            mPlayState = PLAYER_STATE_PLAY;
+                        }
+                    });
+                    player.setOnCompletionListener(new MediaPlayer.OnCompletionListener() {
+                        @Override
+                        public void onCompletion(MediaPlayer mp) {
+                            mp.stop();
+                            play.setImageResource(R.drawable.trainingcamp_icon_play);
+                            mPlayState = PLAYER_STATE_STOP;
+                        }
+                    });
                 }
-                player.prepareAsync();
-                player.setOnPreparedListener(new MediaPlayer.OnPreparedListener() {
-                    @Override
-                    public void onPrepared(MediaPlayer mp) {
-                        mp.start();
-                        play.setImageResource(R.drawable.trainingcamp_icon_pause);
-                        mPlayState = PLAYER_STATE_PLAY;
-                    }
-                });
-                player.setOnCompletionListener(new MediaPlayer.OnCompletionListener() {
-                    @Override
-                    public void onCompletion(MediaPlayer mp) {
-                        mp.stop();
-                        play.setImageResource(R.drawable.trainingcamp_icon_play);
-                        mPlayState = PLAYER_STATE_STOP;
-                    }
-                });
             }
 
         } else if (mPlayState == PLAYER_STATE_STOP) {
@@ -207,7 +209,7 @@ public class SentencListActivity extends BaseActivity implements View.OnClickLis
         if (manager!=null){
             manager.cancelEvaluate(true);
             handler.removeCallbacksAndMessages(null);
-            manager.destroy();
+            IseManager.destroy();
         }
 
         if (player != null) {

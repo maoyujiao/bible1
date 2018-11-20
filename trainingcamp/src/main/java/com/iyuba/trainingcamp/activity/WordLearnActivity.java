@@ -15,6 +15,7 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.iyuba.trainingcamp.R;
+import com.iyuba.trainingcamp.R2;
 import com.iyuba.trainingcamp.bean.AbilityQuestion;
 import com.iyuba.trainingcamp.bean.LearningContent;
 import com.iyuba.trainingcamp.http.HttpUrls;
@@ -24,6 +25,9 @@ import java.io.IOException;
 import java.io.Serializable;
 import java.util.List;
 
+import butterknife.BindView;
+import butterknife.ButterKnife;
+import butterknife.OnClick;
 import tyrantgit.explosionfield.ExplosionField;
 
 /**
@@ -35,7 +39,8 @@ public class WordLearnActivity extends BaseActivity {
     private Context mContext;
     private MediaPlayer player;
 
-    private TextView mWord;
+    @BindView(R2.id.word)
+    TextView mWord;
     private ImageView mProImg;
     private TextView mPro;
     private TextView mCn;
@@ -51,6 +56,7 @@ public class WordLearnActivity extends BaseActivity {
     private int curPosition;
 
     private void bindViews() {
+        ButterKnife.bind(this);
         mWord = findViewById(R.id.word);
         mProImg = findViewById(R.id.pro_img);
         mPro = findViewById(R.id.pro);
@@ -69,7 +75,6 @@ public class WordLearnActivity extends BaseActivity {
             }
         });
     }
-
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -120,34 +125,47 @@ public class WordLearnActivity extends BaseActivity {
                     finish();
                     return;
                 }
-                handler.postDelayed(
-                        new Runnable() {
-                            @Override
-                            public void run() {
-                                curPosition++;
-                                measureItems();
-                                mExplosionField.explode(ll_bottom);
-                                mExplosionField.explode(ll_top);
-                                mPro.postDelayed(
-                                        new Runnable() {
-                                            @Override
-                                            public void run() {
-                                                refreshUI();
-                                            }
-                                        }
-                                        , 500);
-                            }
-                        }, 0);
+                handler.postDelayed(mRunnable, 0);
                 disableNext();
             }
         });
-        mProImg.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                getPronounce();
-            }
-        });
+
     }
+
+    Runnable mRunnable  = new Runnable() {
+        @Override
+        public void run() {
+            curPosition++;
+            measureItems();
+            mExplosionField.explode(ll_bottom);
+            mExplosionField.explode(ll_top);
+            mPro.postDelayed(
+                    new Runnable() {
+                        @Override
+                        public void run() {
+                            refreshUI();
+                        }
+                    }, 500);
+        }
+    };
+
+//    Runnable newRunnable = new Runnable() {
+//        @Override
+//        public void run() {
+//            curPosition++;
+//            mExplosionField.explode(ll_top);
+//            mExplosionField.explode(ll_bottom);
+//            mPro.postDelayed(
+//                    new Runnable() {
+//                        @Override
+//                        public void run() {
+//                            refreshUI();
+//                        }
+//                    }, 500);
+//        }
+//    }
+
+
 
     private void measureItems() {
         ll_bottom.measure(0, 0);
@@ -183,22 +201,7 @@ public class WordLearnActivity extends BaseActivity {
         if (curPosition < mWords.size() - 1) {
             showNext();
             nextQue.setText("NEXT");
-            handler.postDelayed(
-                    new Runnable() {
-                        @Override
-                        public void run() {
-                            curPosition++;
-                            mExplosionField.explode(ll_top);
-                            mExplosionField.explode(ll_bottom);
-                            mPro.postDelayed(
-                                    new Runnable() {
-                                        @Override
-                                        public void run() {
-                                            refreshUI();
-                                        }
-                                    }, 500);
-                        }
-                    }, 2000);
+            handler.postDelayed(mRunnable, 2000);
         } else {
             showNext();
             nextQue.setText("FINISHED");
@@ -210,10 +213,8 @@ public class WordLearnActivity extends BaseActivity {
         ll_bottom.setAlpha(1f);
         ll_top.setScaleX(1f);
         ll_bottom.setScaleX(1f);
-
         ll_top.setScaleY(1f);
         ll_bottom.setScaleY(1f);
-
         setWordsNullView();
         showTranslation();
         disableNext();
@@ -232,6 +233,8 @@ public class WordLearnActivity extends BaseActivity {
         }
     }
 
+
+    @OnClick(R2.id.pro_img)
     public void getPronounce() {
         if (player.isPlaying()) {
             return;
@@ -289,7 +292,7 @@ public class WordLearnActivity extends BaseActivity {
     }
 
     private void vibrate() {
-        Vibrator vibrator = (Vibrator) this.getSystemService(this.VIBRATOR_SERVICE);
+        Vibrator vibrator = (Vibrator) this.getSystemService(VIBRATOR_SERVICE);
         vibrator.vibrate(300);
     }
 

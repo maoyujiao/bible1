@@ -2,7 +2,6 @@ package com.iyuba.trainingcamp.activity;
 
 import android.content.Context;
 import android.os.Bundle;
-import android.os.Environment;
 import android.os.Handler;
 import android.os.Message;
 import android.support.annotation.Nullable;
@@ -10,10 +9,11 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.View;
+import android.widget.ImageView;
 
 import com.iyuba.trainingcamp.R;
+import com.iyuba.trainingcamp.R2;
 import com.iyuba.trainingcamp.adapter.ExamQuestionAdapter;
-import com.iyuba.trainingcamp.app.GoldApp;
 import com.iyuba.trainingcamp.bean.AbilityQuestion;
 import com.iyuba.trainingcamp.http.DownloadUtil;
 import com.iyuba.trainingcamp.http.HttpUrls;
@@ -22,6 +22,10 @@ import com.iyuba.trainingcamp.utils.ParaConstants;
 
 import java.io.File;
 import java.util.List;
+
+import butterknife.BindView;
+import butterknife.ButterKnife;
+import butterknife.OnClick;
 
 /**
  * @author yq QQ:1032006226
@@ -34,11 +38,12 @@ import java.util.List;
  * @class describe
  */
 public class ExamResultActivity extends BaseActivity {
-    RecyclerView recyclerView;
     ExamQuestionAdapter mAdapter;
     List<AbilityQuestion.TestListBean> list;
     int index = 0;
     Context mContext;
+    @BindView(R2.id.recyclerView)
+    RecyclerView recyclerView;
     private Handler mHandler = new Handler() {
         @Override
         public void handleMessage(Message msg) {
@@ -62,22 +67,16 @@ public class ExamResultActivity extends BaseActivity {
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.trainingcamp_exam_result);
-        findViewById(R.id.back).setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                finish();
-            }
-        });
+        ButterKnife.bind(this);
         mContext = this;
-        recyclerView = findViewById(R.id.recyclerView);
         list = (List<AbilityQuestion.TestListBean>) getIntent().getSerializableExtra(ParaConstants.QUESTION_LIST_LABEL);
-        for (int i = 0 ; i < list.size() ; i++){
-            File file = new File(FilePath.getTxtPath()+ list.get(i).Explains);
-            if (!file.exists()){
+        for (int i = 0; i < list.size(); i++) {
+            File file = new File(FilePath.getTxtPath() + list.get(i).Explains);
+            if (!file.exists()) {
                 downloadAttach();
                 break;
             }
-            if (i == list.size() - 1){
+            if (i == list.size() - 1) {
                 mHandler.sendEmptyMessage(100);
                 return;
             }
@@ -114,5 +113,10 @@ public class ExamResultActivity extends BaseActivity {
 
                     }
                 });
+    }
+
+    @OnClick(R2.id.back)
+    public void onViewClicked() {
+        finish();
     }
 }

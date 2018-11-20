@@ -5,20 +5,15 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Bitmap;
-import android.graphics.Color;
 import android.os.Bundle;
-import android.os.Environment;
 import android.support.annotation.Nullable;
 import android.support.v4.graphics.drawable.RoundedBitmapDrawable;
 import android.support.v4.graphics.drawable.RoundedBitmapDrawableFactory;
-import android.text.Spannable;
-import android.text.SpannableString;
-import android.text.SpannableStringBuilder;
-import android.text.style.ForegroundColorSpan;
 import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -26,12 +21,14 @@ import com.bumptech.glide.Glide;
 import com.bumptech.glide.request.target.BitmapImageViewTarget;
 import com.google.gson.Gson;
 import com.iyuba.trainingcamp.R;
+import com.iyuba.trainingcamp.R2;
 import com.iyuba.trainingcamp.app.GoldApp;
 import com.iyuba.trainingcamp.bean.SignBean;
 import com.iyuba.trainingcamp.event.ShareEvent;
 import com.iyuba.trainingcamp.http.Http;
 import com.iyuba.trainingcamp.http.HttpCallback;
 import com.iyuba.trainingcamp.utils.FilePath;
+import com.iyuba.trainingcamp.utils.TimeUtils;
 import com.umeng.analytics.MobclickAgent;
 
 import org.apache.commons.codec.binary.Base64;
@@ -45,14 +42,19 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.Random;
-//
-//import cn.sharesdk.framework.Platform;
-//import cn.sharesdk.framework.PlatformActionListener;
+
+import butterknife.BindView;
+import butterknife.ButterKnife;
+import butterknife.OnClick;
 import cn.sharesdk.framework.Platform;
 import cn.sharesdk.framework.PlatformActionListener;
 import cn.sharesdk.onekeyshare.OnekeyShare;
 import cn.sharesdk.wechat.moments.WechatMoments;
 import okhttp3.Call;
+
+//
+//import cn.sharesdk.framework.Platform;
+//import cn.sharesdk.framework.PlatformActionListener;
 
 /**
  * @author yq QQ:1032006226
@@ -60,14 +62,24 @@ import okhttp3.Call;
 public class GoldShareActivity extends BaseActivity {
     // Content View Elements
     public static GoldShareActivity activity;
-    private ImageView mBackground;
-    private TextView mClose;
-    private ImageView mUser_pic;
-    private TextView mShare_txt;
-    private TextView mIntroduce;
-    private ImageView mQr_app;
-    private TextView mShare_btn;
-    private LinearLayout shareLL;
+    @BindView(R2.id.background)
+    ImageView mBackground;
+    @BindView(R2.id.close)
+    TextView mClose;
+    @BindView(R2.id.user_pic)
+    ImageView mUser_pic;
+    @BindView(R2.id.share_txt)
+    TextView mShare_txt;
+    @BindView(R2.id.introduce)
+    TextView mIntroduce;
+    @BindView(R2.id.qr_app)
+    ImageView mQr_app;
+    @BindView(R2.id.share_ll)
+    LinearLayout shareLL;
+    @BindView(R2.id.share_btn)
+    TextView mShare_btn;
+    @BindView(R2.id.root)
+    RelativeLayout mRoot;
 
     Context context;
     Random mRandom;
@@ -77,25 +89,13 @@ public class GoldShareActivity extends BaseActivity {
     // End Of Content View Elements
 
     private void bindViews() {
-
-        mBackground = findViewById(R.id.background);
-        mClose = findViewById(R.id.close);
-        mUser_pic = findViewById(R.id.user_pic);
-        mShare_txt = findViewById(R.id.share_txt);
-        mIntroduce = findViewById(R.id.introduce);
-        mQr_app = findViewById(R.id.qr_app);
-        shareLL = findViewById(R.id.share_ll);
-        mShare_btn = findViewById(R.id.share_btn);
-
-        mBackground.setOnClickListener(mOnClickListener);
-        mShare_btn.setOnClickListener(mOnClickListener);
-        mClose.setOnClickListener(mOnClickListener);
     }
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.trainingcamp_gold_share);
+        ButterKnife.bind(this);
         bindViews();
         activity = this;
         String userid = GoldApp.getApp(context).userId;
@@ -119,8 +119,8 @@ public class GoldShareActivity extends BaseActivity {
                 .placeholder(R.drawable.trainingcamp_place).into(mBackground);
         mIntroduce.setText("长按识别图中二维码\n下载爱语吧应用,学英语练听力\n天天学习,每日红包");
         shareLL.setVisibility(View.INVISIBLE);
-        mShare_txt.setText(GoldApp.getApp(context).getUserName() +"\t\t\t"+
-                com.iyuba.trainingcamp.utils.TimeUtils.getCurTime() + "\n完成今日第"
+        mShare_txt.setText(GoldApp.getApp(context).getUserName() + "\t\t\t" +
+                TimeUtils.getCurTime() + "\n完成今日第"
                 + level + "关, 得分 " + score + " 分 ");
 //        SpannableStringBuilder style = new SpannableStringBuilder(mShare_txt.getText().toString());
 //        int length = GoldApp.getApp(context).getUserName().length();
@@ -129,21 +129,6 @@ public class GoldShareActivity extends BaseActivity {
 
     }
 
-
-    View.OnClickListener mOnClickListener = new View.OnClickListener() {
-        @Override
-        public void onClick(View v) {
-            if (v.getId() == R.id.close) {
-                showCloseAlert();
-            } else if (v.getId() == R.id.share_btn) {
-                mShare_btn.setVisibility(View.INVISIBLE);
-                shareLL.setVisibility(View.VISIBLE);
-                writeBitmapToFile();
-                EventBus.getDefault().post(new ShareEvent(FilePath.getSharePicPath() + "share.png"));
-//                showShareOnMoment(context, GoldApp.getApp(context).userId, GoldApp.getApp(context).appId);
-            }
-        }
-    };
 
     public void showShareOnMoment(Context context, final String userID, final String AppId) {
 
@@ -177,12 +162,10 @@ public class GoldShareActivity extends BaseActivity {
     }
 
     public void writeBitmapToFile() {
-        View view = findViewById(R.id.root);
 
-        view.setDrawingCacheEnabled(true);
-        view.buildDrawingCache();
-        Bitmap bitmap = view.getDrawingCache();
-
+        mRoot.setDrawingCacheEnabled(true);
+        mRoot.buildDrawingCache();
+        Bitmap bitmap = mRoot.getDrawingCache();
         if (bitmap == null) {
             return;
         }
@@ -295,5 +278,19 @@ public class GoldShareActivity extends BaseActivity {
         intent.putExtra("level", level);
         intent.putExtra("score", score);
         context.startActivity(intent);
+    }
+
+    @OnClick(R2.id.close)
+    public void onMCloseClicked() {
+        showCloseAlert();
+
+    }
+
+    @OnClick(R2.id.share_btn)
+    public void onMShareBtnClicked() {
+        mShare_btn.setVisibility(View.INVISIBLE);
+        shareLL.setVisibility(View.VISIBLE);
+        writeBitmapToFile();
+        EventBus.getDefault().post(new ShareEvent(FilePath.getSharePicPath() + "share.png"));
     }
 }

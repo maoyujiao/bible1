@@ -100,7 +100,7 @@
             android:layout_marginRight="@dimen/x43"
             android:layout_weight="1"
             android:background="@drawable/trainingcamp_icon_go_empty_new"
-            android:text="微课入门"
+            android:text="发音宝典"
             android:textColor="#000"/>
 
         <Button
@@ -119,8 +119,8 @@
         android:layout_width="match_parent"
         android:layout_height="@dimen/x150"
         android:layout_below="@id/ll"
-        android:layout_marginLeft="@dimen/x10"
-        android:layout_marginRight="@dimen/x10"
+        android:layout_marginLeft="@dimen/x15"
+        android:layout_marginRight="@dimen/x15"
         android:background="#fff"
         android:clipChildren="false">
 
@@ -146,7 +146,8 @@
                 android:id="@+id/warm_up"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginBottom="@dimen/x5">
+                android:layout_marginBottom="@dimen/x5"
+                android:gravity="center_vertical">
 
                 <ImageView
                     android:id="@+id/img_warmup"
@@ -160,7 +161,6 @@
                     android:layout_marginLeft="@dimen/x6"
                     android:layout_weight="1"
                     android:orientation="vertical">
-
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
@@ -175,16 +175,18 @@
                         android:gravity="center_vertical"
                         android:text="WarmUp"/>
                 </LinearLayout>
-
-
-                <ImageView
-                    android:id="@+id/img_warmup_go"
+                <com.example.xlhratingbar_lib.XLHRatingBar
+                    xmlns:xlhRatingBar="http://schemas.android.com/apk/res-auto"
+                    android:id="@+id/ratingBarwarmup"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_gravity="center_vertical"
-                    android:background="@drawable/trainingcamp_lock_bg"
-                    android:scaleType="centerInside"
-                    android:src="@drawable/trainingcamp_icon_go_new"/>
+                    xlhRatingBar:canEdit="false"
+                    xlhRatingBar:countSelected="1"
+                    xlhRatingBar:differentSize="false"
+                    xlhRatingBar:dividerWidth="3dp"
+                    xlhRatingBar:starCount="5"
+                    xlhRatingBar:stateResId="@drawable/selector_star_appraise"
+                    xlhRatingBar:widthAndHeight="13dp"/>
             </LinearLayout>
 
             <LinearLayout
@@ -196,7 +198,6 @@
 
                 <ImageView
                     android:id="@+id/img_words"
-
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:src="@drawable/trainingcamp_icon_words"/>
@@ -220,7 +221,7 @@
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
                         android:gravity="center_vertical"
-                        android:text="WarmUp"/>
+                        android:text="Words"/>
                 </LinearLayout>
 
                 <com.example.xlhratingbar_lib.XLHRatingBar
@@ -240,7 +241,6 @@
             <LinearLayout
                 android:id="@+id/sentence"
                 android:layout_width="match_parent"
-
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="@dimen/x5"
                 android:gravity="center_vertical">
@@ -270,7 +270,7 @@
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
                         android:gravity="center_vertical"
-                        android:text="WarmUp"/>
+                        android:text="Sentences"/>
                 </LinearLayout>
 
                 <com.example.xlhratingbar_lib.XLHRatingBar
@@ -319,7 +319,7 @@
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
                         android:gravity="center_vertical"
-                        android:text="WarmUp"/>
+                        android:text="Exam"/>
                 </LinearLayout>
 
                 <com.example.xlhratingbar_lib.XLHRatingBar

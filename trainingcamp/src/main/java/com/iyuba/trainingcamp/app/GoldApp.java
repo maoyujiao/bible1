@@ -56,9 +56,7 @@ public class GoldApp
         SP.put(mContext, "productid", productid);
 
         Constants.TYPE = LessonType;
-//        CrashHandler handler = CrashHandler.getInstance();
-//        handler.init(mContext.getApplicationContext());
-//        Thread.setDefaultUncaughtExceptionHandler(handler);
+
     }
 
     public Context getmContext() {

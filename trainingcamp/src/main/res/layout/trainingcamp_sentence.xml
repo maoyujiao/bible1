@@ -35,7 +35,7 @@
         android:layout_height="wrap_content"
         android:layout_alignParentRight="true"
         android:layout_centerVertical="true"
-        android:layout_marginRight="@dimen/x30"
+        android:layout_marginRight="@dimen/x20"
         android:background="@drawable/trainingcamp_icon_80_100"/>
 
     <TextView

@@ -25,6 +25,7 @@ import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
 import com.iyuba.trainingcamp.R;
+import com.iyuba.trainingcamp.R2;
 import com.iyuba.trainingcamp.app.GoldApp;
 import com.iyuba.trainingcamp.bean.AbilityQuestion;
 import com.iyuba.trainingcamp.bean.LearningContent;
@@ -43,21 +44,32 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
+import butterknife.BindView;
+import butterknife.ButterKnife;
+import butterknife.OnClick;
+
 /**
  * @author yq QQ:1032006226
  */
 public class WordTestActivity extends BaseActivity implements View.OnClickListener, TextWatcher {
 
-    private TextView mWord, mWordPronounce;
-    private ImageView mPro;
+    @BindView(R2.id.word)
+    TextView mWord;
+    @BindView(R2.id.word_pronounce)
+    TextView mWordPronounce;
+    @BindView(R2.id.pro)
+    ImageView mPro;
+
+    @BindView(R2.id.et)
+    EditText et;
     private DailyWordDBHelper mHelper;
 
     private TextView mAnswerA_root, mAnswerB_root, mAnswerC_root, mAnswerD_root;
     private ImageView imgA, imgB, imgC, imgD;
 
     private LinearLayout imgLL1, imgLL2;
-    private TextView testIndex;
-    private EditText et;
+    @BindView(R2.id.position)
+    TextView testIndex;
 
     private String lessonid;
     private String answer = "";
@@ -75,11 +87,13 @@ public class WordTestActivity extends BaseActivity implements View.OnClickListen
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        setContentView(R.layout.trainingcamp_word_test);
+
+        ButterKnife.bind(this);
         lessonid = getIntent().getStringExtra("lessonid");
         userid = GoldApp.getApp(this).userId;
         player = new MediaPlayer();
         mHelper = new DailyWordDBHelper(this);
-        setContentView(R.layout.trainingcamp_word_test);
         picPrefix = "http://static2.iyuba.com/" + GoldApp.getApp(this).getLessonType() + "/images/";
         getIntents();
         bindViews();
@@ -201,6 +215,7 @@ public class WordTestActivity extends BaseActivity implements View.OnClickListen
         }
 
 
+
     }
 
     @Override
@@ -236,11 +251,7 @@ public class WordTestActivity extends BaseActivity implements View.OnClickListen
 
 
     private void bindViews() {
-        et = findViewById(R.id.et);
         next_ques = findViewById(R.id.next_button);
-        testIndex = findViewById(R.id.position);
-        mWord = findViewById(R.id.word);
-        mWordPronounce = findViewById(R.id.word_pronounce);
         mAnswerA_root = findViewById(R.id.answerA_root);
         mAnswerB_root = findViewById(R.id.answerB_root);
         mAnswerC_root = findViewById(R.id.answerC_root);
@@ -249,7 +260,6 @@ public class WordTestActivity extends BaseActivity implements View.OnClickListen
         imgB = findViewById(R.id.image2);
         imgC = findViewById(R.id.image3);
         imgD = findViewById(R.id.image4);
-        mPro = findViewById(R.id.pro);
         imgLL1 = findViewById(R.id.ll_pic1);
         imgLL2 = findViewById(R.id.ll_pic2);
         mAnswerA_root.setOnClickListener(this);
@@ -284,6 +294,7 @@ public class WordTestActivity extends BaseActivity implements View.OnClickListen
             }
         });
     }
+
 
     @Override
     public void onClick(View v) {
@@ -469,7 +480,6 @@ public class WordTestActivity extends BaseActivity implements View.OnClickListen
         intent.putExtra(ParaConstants.LEARNINGS_LABEL, (Serializable) mLearningContents);
         intent.putExtra(ParaConstants.QUESTION_LIST_LABEL, (Serializable) list);
         intent.putExtra("lessonid", id);
-
         mContext.startActivity(intent);
     }
 

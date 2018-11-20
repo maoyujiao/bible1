@@ -12,5 +12,5 @@ package com.iyuba.trainingcamp.utils;
  */
 
 public interface GetResponse {
-    public abstract String getResultByName(String name);
+    String getResultByName(String name);
 }

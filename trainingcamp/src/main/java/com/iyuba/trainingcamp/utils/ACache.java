@@ -781,9 +781,7 @@ public class ACache {
                 }
                 long saveTime = Long.valueOf(saveTimeStr);
                 long deleteAfter = Long.valueOf(strs[1]);
-                if (System.currentTimeMillis() > saveTime + deleteAfter * 1000) {
-                    return true;
-                }
+                return System.currentTimeMillis() > saveTime + deleteAfter * 1000;
             }
             return false;
         }

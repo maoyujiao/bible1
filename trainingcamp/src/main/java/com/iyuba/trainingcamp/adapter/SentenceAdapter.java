@@ -62,7 +62,7 @@ public class SentenceAdapter extends RecyclerView.Adapter<SentenceAdapter.ViewHo
         }
         Typeface tf = Typeface.createFromAsset(mContext.getAssets(),"font/DINMedium_0.ttf");
         holder.score.setTypeface(tf);
-        holder.score.setText(String.valueOf(points));
+        holder.score.setText(String.valueOf((int)points));
         holder.SentenceView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

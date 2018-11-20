@@ -99,11 +99,7 @@ public class GoldActivity extends BaseActivity {
         today = DateUtils.getToday();
         //判断第二天是否有课程
         GoldDateRecord record = mHelper.selectDataByDate(formatDate(System.currentTimeMillis() + 1000 * 24 * 60 * 60),userId);
-        if (record == null) {
-            hasNext = false;
-        } else {
-            hasNext = true;
-        }
+        hasNext = record != null;
 
         //第一次进入或者第二天没有课程
         if (!(Boolean) SP.get(context, "enter_gold", false) || !hasNext) {
@@ -430,11 +426,7 @@ public class GoldActivity extends BaseActivity {
             GoldDateRecord record = mHelper.selectDataByDate(item.date,userId);
             if (record == null) {
                 item.studySign = false;
-            } else if (record.getStep().equals("3")) {
-                item.studySign = true;
-            } else {
-                item.studySign = false;
-            }
+            } else item.studySign = record.getStep().equals("3");
 
             if (Integer.parseInt(item.date.substring(8)) <= dateMax) {
                 dailyItemList.add(item);

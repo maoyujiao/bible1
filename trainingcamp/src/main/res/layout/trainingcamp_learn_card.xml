@@ -9,8 +9,8 @@
     <RelativeLayout
         android:id="@+id/rr"
         android:layout_width="match_parent"
-        android:layout_marginLeft="@dimen/x3"
-        android:layout_marginRight="@dimen/x3"
+        android:layout_marginLeft="@dimen/x8"
+        android:layout_marginRight="@dimen/x8"
         android:layout_height="@dimen/x160"
         android:layout_alignParentStart="true"
         android:layout_alignParentTop="true"
@@ -20,10 +20,10 @@
         <TextView
             android:id="@+id/lesson_title"
             android:layout_width="match_parent"
+            android:layout_marginRight="@dimen/x50"
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/x8"
             android:layout_marginLeft="@dimen/x8"
-            android:lines="1"
             android:textColor="@color/trainingcamp_white"
             android:textSize="@dimen/x14"
             tools:text="学习交际礼仪"/>
@@ -45,7 +45,7 @@
             android:layout_marginLeft="@dimen/x8"
             android:textStyle="bold"
             android:textColor="@color/trainingcamp_white"
-            android:textSize="@dimen/x14"/>
+            android:textSize="@dimen/x20"/>
 
         <TextView
             android:id="@+id/tv_lesson"

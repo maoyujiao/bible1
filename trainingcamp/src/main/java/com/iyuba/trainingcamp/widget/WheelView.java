@@ -9,7 +9,6 @@ import android.graphics.Color;
 import android.graphics.ColorFilter;
 import android.graphics.Paint;
 import android.graphics.drawable.Drawable;
-import android.os.Build;
 import android.util.AttributeSet;
 import android.util.Log;
 import android.util.TypedValue;
@@ -88,20 +87,18 @@ public class WheelView extends ScrollView {
         items.addAll(list);
 
         // 前面和后面补全
-        for (int i = 0; i < offset; i++) {
-            LearningContent content = new LearningContent();
-            content.en = "开启学习之旅";
-            content.cn = "Start a journey of Learning";
-            items.add(0, content);
-            LearningContent contentEnd = new LearningContent();
-            contentEnd.en = "";
-            contentEnd.cn = "";
-            items.add(contentEnd);
-            LearningContent contentEndEnd = new LearningContent();
-            contentEndEnd.en = "";
-            contentEndEnd.cn = "";
-            items.add(contentEndEnd);
-        }
+        LearningContent content = new LearningContent();
+        content.en = "开启学习之旅";
+        content.cn = "Start a journey of Learning";
+        items.add(0, content);
+        LearningContent contentEnd = new LearningContent();
+        contentEnd.en = "";
+        contentEnd.cn = "";
+        items.add(contentEnd);
+        LearningContent contentEndEnd = new LearningContent();
+        contentEndEnd.en = "";
+        contentEndEnd.cn = "";
+        items.add(contentEndEnd);
         if (type == WheelView.TYPE_SENTENCE && getHeight() > itemHeight * (list.size() - 1)) {
             items.remove(items.get(items.size() - 1));
         }
@@ -160,7 +157,6 @@ public class WheelView extends ScrollView {
         this.context = context;
         Log.d(TAG, "parent: " + this.getParent());
         this.setVerticalScrollBarEnabled(false);
-
         views = new LinearLayout(context);
         views.setOrientation(LinearLayout.VERTICAL);
         this.addView(views);
@@ -168,7 +164,6 @@ public class WheelView extends ScrollView {
         scrollerTask = new Runnable() {
 
             public void run() {
-
 
                 int newY = getScrollY();
                 if (initialY - newY == 0) { // stopped
@@ -183,7 +178,8 @@ public class WheelView extends ScrollView {
                             WheelView.this.post(new Runnable() {
                                 @Override
                                 public void run() {
-                                    WheelView.this.smoothScrollTo(0, initialY - remainder + itemHeight);
+                                    smoothScrollTo(0, initialY - remainder + itemHeight);
+//                                    setSeletion(divided);
                                     selectedIndex = divided + offset + 1;
                                     if (selectedIndex <= items.size()) {
                                         onSeletedCallBack();
@@ -194,7 +190,8 @@ public class WheelView extends ScrollView {
                             WheelView.this.post(new Runnable() {
                                 @Override
                                 public void run() {
-                                    WheelView.this.smoothScrollTo(0, initialY - remainder);
+//                                    setSeletion(divided);
+                                    smoothScrollTo(0, initialY - remainder);
                                     selectedIndex = divided + offset;
                                     if (selectedIndex <= items.size()) {
                                         onSeletedCallBack();
@@ -351,16 +348,16 @@ public class WheelView extends ScrollView {
                         linearLayout.setLayoutParams(new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, LLHi));
                         LinearLayout.LayoutParams lp = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, LLHi - itemHeight);
                         linearLayout.findViewById(R.id.stuff).setLayoutParams(lp);
-                        ((TextView) views.getChildAt(selectedIndex).findViewById(R.id.cn)).setVisibility(View.VISIBLE);
-                        ((TextView) views.getChildAt(selectedIndex).findViewById(R.id.en)).setVisibility(View.VISIBLE);
+                        views.getChildAt(selectedIndex).findViewById(R.id.cn).setVisibility(View.VISIBLE);
+                        views.getChildAt(selectedIndex).findViewById(R.id.en).setVisibility(View.VISIBLE);
                         ((TextView) linearLayout.findViewById(R.id.en)).setTextColor(Color.WHITE);
                         ((TextView) linearLayout.findViewById(R.id.cn)).setTextColor(Color.WHITE);
                         break;
                     case TYPE_SENTENCE:
 
                         linearLayout.setLayoutParams(new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, LLHi));
-                        ((TextView) views.getChildAt(selectedIndex).findViewById(R.id.cn)).setVisibility(View.VISIBLE);
-                        ((TextView) views.getChildAt(selectedIndex).findViewById(R.id.en)).setVisibility(View.VISIBLE);
+                        views.getChildAt(selectedIndex).findViewById(R.id.cn).setVisibility(View.VISIBLE);
+                        views.getChildAt(selectedIndex).findViewById(R.id.en).setVisibility(View.VISIBLE);
                         ((TextView) linearLayout.findViewById(R.id.en)).setTextColor(Color.WHITE);
                         ((TextView) linearLayout.findViewById(R.id.cn)).setTextColor(Color.WHITE);
                         Log.d(TAG, "refreshItemView: " + "position" + position);
@@ -378,8 +375,8 @@ public class WheelView extends ScrollView {
                         linearLayout.setLayoutParams(new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, itemHeight));
                         linearLayout.findViewById(R.id.stuff).setLayoutParams(new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, 0));
                         linearLayout.setOrientation(LinearLayout.VERTICAL);
-                        ((TextView) views.getChildAt(selectedIndex).findViewById(R.id.cn)).setVisibility(View.VISIBLE);
-                        ((TextView) views.getChildAt(selectedIndex).findViewById(R.id.en)).setVisibility(View.VISIBLE);
+                        views.getChildAt(selectedIndex).findViewById(R.id.cn).setVisibility(View.VISIBLE);
+                        views.getChildAt(selectedIndex).findViewById(R.id.en).setVisibility(View.VISIBLE);
                         ((TextView) linearLayout.findViewById(R.id.en)).setTextColor(getResources().getColor(R.color.trainingcamp_gray_333));
                         ((TextView) linearLayout.findViewById(R.id.cn)).setTextColor(getResources().getColor(R.color.trainingcamp_gray_999));
                         ((TextView) linearLayout.findViewById(R.id.cn)).setText("");
@@ -394,8 +391,8 @@ public class WheelView extends ScrollView {
                     case TYPE_SENTENCE:
                         linearLayout.setLayoutParams(new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT));
                         linearLayout.setOrientation(LinearLayout.VERTICAL);
-                        ((TextView) views.getChildAt(selectedIndex).findViewById(R.id.cn)).setVisibility(View.VISIBLE);
-                        ((TextView) views.getChildAt(selectedIndex).findViewById(R.id.en)).setVisibility(View.VISIBLE);
+                        views.getChildAt(selectedIndex).findViewById(R.id.cn).setVisibility(View.VISIBLE);
+                        views.getChildAt(selectedIndex).findViewById(R.id.en).setVisibility(View.VISIBLE);
                         ((TextView) linearLayout.findViewById(R.id.en)).setTextColor(getResources().getColor(R.color.trainingcamp_gray_333));
                         ((TextView) linearLayout.findViewById(R.id.cn)).setTextColor(getResources().getColor(R.color.trainingcamp_gray_999));
                         ((TextView) linearLayout.findViewById(R.id.cn)).setText("");

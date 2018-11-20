@@ -1,7 +1,6 @@
 package com.iyuba.trainingcamp.activity;
 
 import android.annotation.SuppressLint;
-import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
@@ -9,58 +8,81 @@ import android.content.res.TypedArray;
 import android.graphics.Color;
 import android.media.MediaPlayer;
 import android.os.Bundle;
-import android.os.Environment;
 import android.os.Handler;
 import android.os.Message;
+import android.support.annotation.CallSuper;
 import android.support.annotation.Nullable;
+import android.text.TextUtils;
 import android.util.Log;
 import android.view.View;
 import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.RelativeLayout;
 import android.widget.SeekBar;
 import android.widget.TextView;
 
 import com.iyuba.trainingcamp.R;
+import com.iyuba.trainingcamp.R2;
+import com.iyuba.trainingcamp.R2;
 import com.iyuba.trainingcamp.app.GoldApp;
 import com.iyuba.trainingcamp.bean.AbilityQuestion;
 import com.iyuba.trainingcamp.bean.TestResultBean;
 import com.iyuba.trainingcamp.db.DailyWordDBHelper;
 import com.iyuba.trainingcamp.db.dbclass.GoldDateRecord;
-import com.iyuba.trainingcamp.db.dbclass.GoldDateRecordHelper;
 import com.iyuba.trainingcamp.http.DownloadUtil;
 import com.iyuba.trainingcamp.http.HttpUrls;
 import com.iyuba.trainingcamp.utils.ACache;
-import com.iyuba.trainingcamp.utils.DateUtils;
 import com.iyuba.trainingcamp.utils.FilePath;
 import com.iyuba.trainingcamp.utils.ParaConstants;
 import com.iyuba.trainingcamp.utils.TimeUtils;
 
 import java.io.File;
 import java.io.IOException;
-import java.util.ArrayList;
 import java.util.List;
-import java.util.Random;
+
+import butterknife.BindView;
+import butterknife.ButterKnife;
+import butterknife.OnClick;
+
 
 /**
  * @author yq QQ:1032006226
  */
-public class ExamActivity extends BaseActivity implements View.OnClickListener {
+public class ExamActivity extends BaseActivity {
+
+    @BindView(R2.id.position)
+    TextView testIndex;
+    @BindView(R2.id.play)
+    ImageView play;
+    @BindView(R2.id.curren_pos)
+    TextView curPosition;
+    @BindView(R2.id.sb_player_seek_bar)
+    SeekBar mSeekBar;
+    @BindView(R2.id.duration)
+    TextView tvDuration;
+    @BindView(R2.id.question)
+    TextView questionText;
+    @BindView(R2.id.user_edit)
+    EditText userEdit;
+    @BindView(R2.id.user_edit_next)
+    Button mUserEditNxt;
+    @BindView(R2.id.answerA_root)
+    TextView mAnswerARoot;
+    @BindView(R2.id.answerB_root)
+    TextView mAnswerBRoot;
+    @BindView(R2.id.answerC_root)
+    TextView mAnswerCRoot;
+    @BindView(R2.id.answerD_root)
+    TextView mAnswerDRoot;
     private String answer = "";
-    private TextView testIndex;
-    private ImageView play;
-    private TextView mAnswerA_root;
-    private TextView mAnswerB_root;
-    private TextView mAnswerC_root;
-    private TextView mAnswerD_root;
-    private Button mUserEditNxt;
+
     Context mContext;
     String lessonid;
     DailyWordDBHelper mHelper;
     List<AbilityQuestion.TestListBean> list;
-    List<AbilityQuestion.TestListBean> wrongList = new ArrayList<>();
-    EditText userEdit ;
+
 
     public static final int PLAYING = 0;
     public static final int PAUSE = 1;
@@ -70,35 +92,15 @@ public class ExamActivity extends BaseActivity implements View.OnClickListener {
     AbilityQuestion.TestListBean bean;
     private MediaPlayer player;
     int position;
-    private TextView curPosition, tvDuration;
-    private SeekBar mSeekBar;
     private int duration;
     private int right;
-    private TextView questionText;
 
     private void bindViews() {
+        ButterKnife.bind(this);
         getWindow().addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
-        testIndex = findViewById(R.id.position);
-        play = findViewById(R.id.play);
-        mAnswerA_root = findViewById(R.id.answerA_root);
-        mAnswerB_root = findViewById(R.id.answerB_root);
-        mAnswerC_root = findViewById(R.id.answerC_root);
-        mAnswerD_root = findViewById(R.id.answerD_root);
-        questionText = findViewById(R.id.question);
-        curPosition = findViewById(R.id.curren_pos);
-        tvDuration = findViewById(R.id.duration);
-        userEdit = findViewById(R.id.user_edit);
-        mUserEditNxt = findViewById(R.id.user_edit_next);
+
         curPosition.setText("00:00");
         tvDuration.setText("00:00");
-        mSeekBar = findViewById(R.id.sb_player_seek_bar);
-        mAnswerA_root.setOnClickListener(this);
-        mAnswerB_root.setOnClickListener(this);
-        mAnswerC_root.setOnClickListener(this);
-        mAnswerD_root.setOnClickListener(this);
-        mUserEditNxt.setOnClickListener(this);
-        findViewById(R.id.back).setOnClickListener(this);
-        play.setOnClickListener(this);
         mContext = this;
         player = new MediaPlayer();
         mSeekBar.setMax(1000);
@@ -129,7 +131,7 @@ public class ExamActivity extends BaseActivity implements View.OnClickListener {
             super.handleMessage(msg);
             sendEmptyMessageDelayed(10, 1000);
             curPosition.setText(TimeUtils.formatTime(player.getCurrentPosition()));
-            if (player!= null){
+            if (player != null) {
                 mSeekBar.setProgress(player.getCurrentPosition() * 1000 / duration);
             }
         }
@@ -140,9 +142,10 @@ public class ExamActivity extends BaseActivity implements View.OnClickListener {
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.trainingcamp_exam_activity);
+        ButterKnife.bind(this);
         bindViews();
         mHelper = new DailyWordDBHelper(this);
-        lessonid  =  getIntent().getStringExtra("lessonid");
+        lessonid = getIntent().getStringExtra("lessonid");
 
         list = (List<AbilityQuestion.TestListBean>) getIntent().getSerializableExtra(ParaConstants.QUESTION_LIST_LABEL);
         for (int i = 0; i < list.size(); i++) {
@@ -176,98 +179,80 @@ public class ExamActivity extends BaseActivity implements View.OnClickListener {
         @SuppressLint("ResourceAsColor")
         int col = a.getColor(0, R.color.trainingcamp_theme_color); //icoid 指的是所需要的drwable在Mytheme的实际index        // 回收
         a.recycle();
-        mAnswerD_root.setTextColor(col);
-        mAnswerC_root.setTextColor(col);
-        mAnswerB_root.setTextColor(col);
-        mAnswerA_root.setTextColor(col);
+        mAnswerDRoot.setTextColor(col);
+        mAnswerCRoot.setTextColor(col);
+        mAnswerBRoot.setTextColor(col);
+        mAnswerARoot.setTextColor(col);
         userEdit.setVisibility(View.GONE);
-        mAnswerA_root.setText("A. " + bean.getAnswer1());
-        mAnswerB_root.setText("B. " + bean.getAnswer2());
-        mAnswerC_root.setText("C. " + bean.getAnswer3());
-        mAnswerD_root.setText("D. " + bean.getAnswer4());
-        mAnswerA_root.setBackgroundResource(R.drawable.trainingcamp_rect_exam);
-        mAnswerB_root.setBackgroundResource(R.drawable.trainingcamp_rect_exam);
-        mAnswerC_root.setBackgroundResource(R.drawable.trainingcamp_rect_exam);
-        mAnswerD_root.setBackgroundResource(R.drawable.trainingcamp_rect_exam);
+        mAnswerARoot.setText("A. " + bean.getAnswer1());
+        mAnswerBRoot.setText("B. " + bean.getAnswer2());
+        mAnswerCRoot.setText("C. " + bean.getAnswer3());
+        mAnswerDRoot.setText("D. " + bean.getAnswer4());
+        mAnswerARoot.setBackgroundResource(R.drawable.trainingcamp_rect_exam);
+        mAnswerBRoot.setBackgroundResource(R.drawable.trainingcamp_rect_exam);
+        mAnswerCRoot.setBackgroundResource(R.drawable.trainingcamp_rect_exam);
+        mAnswerDRoot.setBackgroundResource(R.drawable.trainingcamp_rect_exam);
         setClickable(true);
         questionText.setVisibility(View.VISIBLE);
         mUserEditNxt.setVisibility(View.GONE);
         userEdit.setVisibility(View.GONE);
 
         questionText.setText(bean.getQuestion());
-        if (bean.getTestType() == 8) { //单词拼写
+        if (bean.getTestType() == 8 || bean.getTestType() == 2) { //单词拼写
             questionText.setVisibility(View.VISIBLE);
             questionText.setText(bean.getQuestion());
-            questionText.append("请在下方填写正确的单词");
+            questionText.append("\n请在下方填写正确的单词");
             setMultipuleVisible(View.GONE);
             userEdit.setVisibility(View.VISIBLE);
             mUserEditNxt.setVisibility(View.VISIBLE);
         }
         if (bean.getTestType() == 7 || bean.getAnswer3() == null) {
-            mAnswerC_root.setVisibility(View.INVISIBLE);
-            mAnswerD_root.setVisibility(View.INVISIBLE);
+            mAnswerCRoot.setVisibility(View.INVISIBLE);
+            mAnswerDRoot.setVisibility(View.INVISIBLE);
+        }
+        if (TextUtils.isEmpty(bean.getAnswer4())) {
+            mAnswerDRoot.setVisibility(View.INVISIBLE);
         }
     }
 
     private void setMultipuleVisible(int i) {
-        mAnswerA_root.setVisibility(i);
-        mAnswerB_root.setVisibility(i);
-        mAnswerC_root.setVisibility(i);
-        mAnswerD_root.setVisibility(i);
+        mAnswerARoot.setVisibility(i);
+        mAnswerBRoot.setVisibility(i);
+        mAnswerCRoot.setVisibility(i);
+        mAnswerDRoot.setVisibility(i);
     }
+
 
     private void setClickable(Boolean clickable) {
-        mAnswerD_root.setClickable(clickable);
-        mAnswerC_root.setClickable(clickable);
-        mAnswerB_root.setClickable(clickable);
-        mAnswerA_root.setClickable(clickable);
+        mAnswerDRoot.setClickable(clickable);
+        mAnswerCRoot.setClickable(clickable);
+        mAnswerBRoot.setClickable(clickable);
+        mAnswerARoot.setClickable(clickable);
     }
 
-    @Override
-    public void onClick(View v) {
-        int i = v.getId();
-        if (i == R.id.answerA_root) {
-            answer = "A";
-            compareRight((TextView) v);
-        } else if (i == R.id.answerB_root) {
-            answer = "B";
-            compareRight((TextView) v);
-
-        } else if (i == R.id.answerC_root) {
-            answer = "C";
-            compareRight((TextView) v);
-
-        } else if (i == R.id.answerD_root) {
-            answer = "D";
-            compareRight((TextView) v);
-
+    public void play() {
+        if (player == null) {
+            player = new MediaPlayer();
         }
-        if (i == R.id.back) {
-            showConfirmDialog(1);
-        } else if (i == R.id.play) {
-            if (player == null){
-                player = new MediaPlayer();
-            }
-            if (player.isPlaying()) {
-                player.pause();
-                play.setImageResource(R.drawable.trainingcamp_play_white);
-                playState = PAUSE;
-                mHandler.removeCallbacksAndMessages(null);
-            } else if (playState == PAUSE) {
+        if (player.isPlaying()) {
+            player.pause();
+            play.setImageResource(R.drawable.trainingcamp_play_white);
+            playState = PAUSE;
+            mHandler.removeCallbacksAndMessages(null);
+        } else if (playState == PAUSE) {
 //                player.seekTo(duration * mSeekBar.getProgress() / 100);
-                play.setImageResource(R.drawable.trainingcamp_pause_white);
-                player.start();
-                playState = PLAYING;
-                mHandler.sendEmptyMessage(100);
-            } else if (playState == STOP) {
-                startAudio();
-                mSeekBar.setProgress(0);
-            }
-        }else if (i == R.id.user_edit_next){
-            position++ ;
-            refreshUI(position);
+            play.setImageResource(R.drawable.trainingcamp_pause_white);
+            player.start();
+            playState = PLAYING;
+            mHandler.sendEmptyMessage(100);
+        } else if (playState == STOP) {
+            startAudio();
+            mSeekBar.setProgress(0);
         }
     }
+
+
+
 
     // 与正确答案比较并进入下一题
     private void compareRight(TextView view) {
@@ -276,16 +261,14 @@ public class ExamActivity extends BaseActivity implements View.OnClickListener {
         if (answer.equals(getRight())) {
             list.get(position).setResult("1");
             right++;
-
         } else {
             list.get(position).setResult("0");
-            wrongList.add(list.get(position));
         }
         refreshColorUI(view);
         position++;
         if (gotoShareActivity()) return;
 
-        if (position!=list.size()){
+        if (position != list.size()) {
             view.postDelayed(new Runnable() {
                 @Override
                 public void run() {
@@ -297,8 +280,6 @@ public class ExamActivity extends BaseActivity implements View.OnClickListener {
 
     }
 
-
-
     private void refreshColorUI(TextView view) {
         view.setBackgroundResource(R.drawable.trainingcamp_rect_exam_press);
         view.setTextColor(Color.WHITE);
@@ -306,19 +287,20 @@ public class ExamActivity extends BaseActivity implements View.OnClickListener {
 
     private boolean gotoShareActivity() {
         if (position == list.size()) {
-            if (right*100/list.size()<=60){
+            if (right * 100 / list.size() <= 60) {
                 showAlert();
                 return false;
-            }else {
+            } else {
                 startScoreActivity();
             }
             return true;
         }
         return false;
     }
+
     private void showAlert() {
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
-        builder.setMessage("您目前的得分为"+right*100/list.size()+",需要达到60分才能进入下一关~~").setNegativeButton("返回", new DialogInterface.OnClickListener() {
+        builder.setMessage("您目前的得分为" + right * 100 / list.size() + ",需要达到60分才能进入下一关~~").setNegativeButton("返回", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
                 dialog.dismiss();
@@ -327,7 +309,7 @@ public class ExamActivity extends BaseActivity implements View.OnClickListener {
         }).setPositiveButton("重新闯关", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
-                right = 0 ;
+                right = 0;
                 position = 0;
                 refreshUI(position);
                 startAudio();
@@ -336,9 +318,10 @@ public class ExamActivity extends BaseActivity implements View.OnClickListener {
         builder.show();
 
     }
+
     // 下载解析的附件
     private void downloadAttach() {
-         for (int i = 0; i < list.size(); i++) {
+        for (int i = 0; i < list.size(); i++) {
             final int temp = i;
             final int[] length = {0};
             DownloadUtil.get(mContext).download(HttpUrls.getAttach(this) + list.get(temp).Explains,
@@ -365,21 +348,19 @@ public class ExamActivity extends BaseActivity implements View.OnClickListener {
     }
 
     private void setExamScore(String s) {
-        GoldDateRecord goldDateRecord = mHelper.selectDataById(GoldApp.getApp(mContext).userId,ACache.get(this).getAsString("id"));
-        if (goldDateRecord == null ){
-            Log.d("diao", "setSentenceScore: null");
-        }else {
-            mHelper.updateUpdateExamScore(GoldApp.getApp(mContext).userId,s, ACache.get(this).getAsString("id"));
+        GoldDateRecord goldDateRecord = mHelper.selectDataById(GoldApp.getApp(mContext).userId, ACache.get(this).getAsString("id"));
+        if (goldDateRecord == null) {
+        } else {
+            mHelper.updateUpdateExamScore(GoldApp.getApp(mContext).userId, s, ACache.get(this).getAsString("id"));
         }
     }
-
-
 
 
     private void startScoreActivity() {
         TestResultBean.getBean().examScore = right * 100 / list.size();
         setExamScore("" + TestResultBean.getBean().examScore);
-        ScoreActivity.start(mContext, lessonid, null,list,2,"" + TestResultBean.getBean().examScore);
+
+        ScoreActivity.start(mContext, lessonid, null, list, 2, "" + TestResultBean.getBean().examScore);
 
     }
 
@@ -402,13 +383,13 @@ public class ExamActivity extends BaseActivity implements View.OnClickListener {
     }
 
     private void startAudio() {
-        if (player == null ){
+        if (player == null) {
             player = new MediaPlayer();
         }
         if (player != null && player.isPlaying()) {
             player.stop();
             player.reset();
-        } else if (player != null && !player.isPlaying()){
+        } else if (player != null && !player.isPlaying()) {
             player.reset();
         } else {
             player = new MediaPlayer();
@@ -463,6 +444,57 @@ public class ExamActivity extends BaseActivity implements View.OnClickListener {
             player = null;
         }
         mHandler = null;
+    }
+
+    @OnClick(R2.id.back)
+    public void back() {
+        showConfirmDialog(1);
+    }
+
+    @OnClick(R2.id.share)
+    public void share() {
+    }
+
+    @OnClick(R2.id.play)
+    public void onPlayClick() {
+        play();
+    }
+
+    @OnClick(R2.id.answerA_root)
+    public void answerA_root() {
+        answer = "A";
+        compareRight((TextView) mAnswerARoot);
+    }
+
+    @OnClick(R2.id.answerB_root)
+    public void answerB_root() {
+        answer = "B";
+        compareRight((TextView) mAnswerBRoot);
+    }
+
+    @OnClick(R2.id.answerC_root)
+    public void answerC_root() {
+        answer = "C";
+        compareRight((TextView) mAnswerCRoot);
+    }
+
+    @OnClick(R2.id.answerD_root)
+    public void answerD_root() {
+        answer = "D";
+        compareRight((TextView) mAnswerDRoot);
+    }
+
+    @OnClick(R2.id.user_edit_next)
+    public void user_edit_next() {
+        list.get(position).setUserAnswer(answer);
+        if (answer.equals(getRight())) {
+            list.get(position).setResult("1");
+            right++;
+        } else {
+            list.get(position).setResult("0");
+        }
+        position++;
+        refreshUI(position);
     }
 
 //    public static void keepScreenLongLight(Activity activity) {

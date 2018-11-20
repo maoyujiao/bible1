@@ -20,7 +20,7 @@ import java.util.Map;
  * @chang time
  * @class describe
  */
-public class GoldDateRecord extends DataSupport {
+public class GoldDateRecord {
 
     public String getUserId() {
         return userId;

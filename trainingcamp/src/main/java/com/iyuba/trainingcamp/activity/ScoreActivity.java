@@ -15,6 +15,7 @@ import android.widget.TextView;
 
 import com.iflytek.cloud.Setting;
 import com.iyuba.trainingcamp.R;
+import com.iyuba.trainingcamp.R2;
 import com.iyuba.trainingcamp.adapter.ExamQuestionAdapter;
 import com.iyuba.trainingcamp.adapter.SentencePlayAdapter;
 import com.iyuba.trainingcamp.adapter.WordListAdapter;
@@ -50,6 +51,9 @@ import java.util.List;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
+import butterknife.BindView;
+import butterknife.ButterKnife;
+import butterknife.OnClick;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -57,17 +61,25 @@ import retrofit2.Response;
 /**
  * @author yq QQ:1032006226
  */
-public class ScoreActivity extends BaseActivity implements View.OnClickListener {
+public class ScoreActivity extends BaseActivity {
 
 
     private List<TestRecord> mTestRecords = new ArrayList<>();
 
-    private TextView mDetail;
-    private TextView mTodo;
-    private android.support.v7.widget.RecyclerView mRecyclerView;
-    private TextView mNext;
-    private TextView mRepeat;
-    private TextView mScore;
+
+    @BindView(R2.id.todo)
+    TextView mTodo;
+    @BindView(R2.id.recyclerView)
+    android.support.v7.widget.RecyclerView mRecyclerView;
+    @BindView(R2.id.next)
+    TextView mNext;
+    @BindView(R2.id.repeat)
+    TextView mRepeat;
+    @BindView(R2.id.score)
+    TextView mScore;
+    @BindView(R2.id.share)
+    ImageView share;
+
     private ExecutorService mExecutorService;
     int testType;
     private List<AbilityQuestion.TestListBean> list;
@@ -76,7 +88,6 @@ public class ScoreActivity extends BaseActivity implements View.OnClickListener 
     private List<LearningContent> wrongContents = new ArrayList<>();
 
     String score;
-    private ImageView share;
 
     public static final int WORD = 0;
     public static final int SENTENCE = 1;
@@ -89,24 +100,13 @@ public class ScoreActivity extends BaseActivity implements View.OnClickListener 
     private String sign;
 
     private void bindViews() {
-        share = findViewById(R.id.share);
-        mDetail = findViewById(R.id.detail);
-        mTodo = findViewById(R.id.todo);
-        mRecyclerView = findViewById(R.id.recyclerView);
-        mNext = findViewById(R.id.next);
-        mRepeat = findViewById(R.id.repeat);
-        mScore = findViewById(R.id.score);
 
-        mNext.setOnClickListener(this);
-        mRepeat.setOnClickListener(this);
-        mDetail.setOnClickListener(this);
+        ButterKnife.bind(this);
         share.setVisibility(View.VISIBLE);
-        share.setOnClickListener(this);
-        findViewById(R.id.back).setOnClickListener(this);
         Typeface tf = Typeface.createFromAsset(getAssets(), "font/DINMedium_0.ttf");
         mScore.setTypeface(tf);
         mHelper = new DailyWordDBHelper(this);
-        lessonId = ACache.get(this).getAsString("lessonid");
+        lessonId = ACache.get(this).getAsString("id");
         progrssDialog = KProgressHUD.create(mContext)
                 .setStyle(KProgressHUD.Style.SPIN_INDETERMINATE)
                 .setLabel("请稍等")
@@ -122,6 +122,70 @@ public class ScoreActivity extends BaseActivity implements View.OnClickListener 
             UploadUtils.uploadTestRecordToNet(mContext, mTestRecords, mRecordWithTypes, GoldApp.getApp(mContext).userId, 1, "测评", 1);
         }
     };
+
+    @OnClick(R2.id.detail)
+    public void showDetail(){
+        if (testType == WORD) {
+            Intent intent = new Intent(this, LearnResultActivity.class);
+            intent.putExtra("show", false);
+            intent.putExtra(ParaConstants.LEARNINGS_LABEL, (Serializable) mLearningContents);
+            startActivity(intent);
+        } else if (testType == SENTENCE) {
+            Intent intent = new Intent(this, SentenceResultActivity.class);
+            intent.putExtra(ParaConstants.LEARNINGS_LABEL, (Serializable) mLearningContents);
+            startActivity(intent);
+        } else if (testType == EXAM) {
+            Intent intent = new Intent(this, ExamResultActivity.class);
+            intent.putExtra(ParaConstants.QUESTION_LIST_LABEL, (Serializable) list);
+            startActivity(intent);
+        }
+    }
+
+    @OnClick(R2.id.share)
+    public void showShare(){
+        showShareInterface();
+    }
+
+    @OnClick(R2.id.back)
+    public void back(){
+        showShareInterface();
+    }
+
+    @OnClick(R2.id.repeat)
+    public void repeat(){
+        if (testType == 0) {
+            WordTestActivity.start(mContext, mLearningContents, list, lessonId + "");
+            finish();
+        } else if (testType == 1) {
+            SentenceTestActivity.start(mContext, mLearningContents, list);
+            finish();
+        } else if (testType == 2) {
+            Intent intent = new Intent(this, ExamActivity.class);
+            intent.putExtra(ParaConstants.QUESTION_LIST_LABEL, (Serializable) list);
+            startActivity(intent);
+            finish();
+        }
+    }
+
+    @OnClick(R2.id.next)
+    public void next(){
+        if (testType == WORD) {
+            sign = MD5.getMD5ofStr(GoldApp.getApp(mContext).getLessonType() + "S" + TimeUtils.getCurTime());
+            getTodayData(sign, "S");
+        } else if (testType == SENTENCE) {
+            sign = MD5.getMD5ofStr(GoldApp.getApp(mContext).getLessonType() + "S" + TimeUtils.getCurTime());
+            getTodayData(sign, "L");
+        } else if (testType == EXAM) {
+            Intent intent = new Intent(this, TestTestTest.class);
+            List<Integer> list = new ArrayList<>();
+            list.add(TestResultBean.getBean().wordScore);
+            list.add(TestResultBean.getBean().sentenceScore);
+            list.add(TestResultBean.getBean().examScore);
+            intent.putExtra(ParaConstants.STUDY_TYPE_LABEL, 2);
+            startActivity(intent);
+        }
+        finish();
+    }
 
     public static void start(Context context, String lessonid, List<LearningContent> mLearningContents, List<AbilityQuestion.TestListBean> list, int type, String score) {
         Intent intent = new Intent(context, ScoreActivity.class);
@@ -142,13 +206,12 @@ public class ScoreActivity extends BaseActivity implements View.OnClickListener 
         setContentView(R.layout.trainingcamp_score_activity);
         mExecutorService = Executors.newSingleThreadExecutor();
         mContext = this;
-        bindViews();
         lessonId = getIntent().getStringExtra("lessonid");
         testType = getIntent().getIntExtra(ParaConstants.STUDY_TYPE_LABEL, 0);
         score = getIntent().getStringExtra("score");
 
         String level = testType + 1 + "";
-        GoldShareActivity.start(mContext, level, score);
+//        GoldShareActivity.start(mContext, level, score);
         if (testType == WORD) {
             refreshTodayRecord(1);
 
@@ -158,8 +221,6 @@ public class ScoreActivity extends BaseActivity implements View.OnClickListener 
             mScore.setText((100 - wrongContents.size() * 100 / mLearningContents.size()) + "分");
             buildTestRecords(WORD);
             getRecordWithTypeList("W");
-            mExecutorService.execute(mRunnable);
-            uploadStudyResult();
 
         } else if (testType == SENTENCE) {
             mScore.setText(getIntent().getStringExtra("score") + "分");
@@ -169,43 +230,20 @@ public class ScoreActivity extends BaseActivity implements View.OnClickListener 
             getToLearnContents(mLearningContents);
             buildTestRecords(SENTENCE);
             getRecordWithTypeList("S");
-
 //            buildRecordsWithTypes("口语评测", getIntent().getStringExtra("score"));
-            mExecutorService.execute(mRunnable);
-            uploadStudyResult();
-
         } else {
             list = (List<AbilityQuestion.TestListBean>) getIntent().getSerializableExtra(ParaConstants.QUESTION_LIST_LABEL);
             getToLearn(list);
             mScore.setText(getIntent().getStringExtra("score") + "分");
+            refreshTodayRecord(3);
             buildTestRecords(EXAM);
             getRecordWithTypeList("L");
-
 //            buildRecordsWithTypes("听力真题", (100 - wrongList.size() * 100 / list.size()) + "");
-            mExecutorService.execute(mRunnable);
-            uploadStudyResult();
         }
+        mExecutorService.execute(mRunnable);
+        uploadStudyResult();
         setUI(testType);
     }
-//
-//    private void buildRecordsWithTypes(String tag, String score) {
-//        switch(testType){
-//            case WORD :
-//                tag = "W";
-//                for (AbilityQuestion.TestListBean bean:list){
-//
-//                }
-//                break;
-//            case SENTENCE:
-//                tag = "S";
-//                break;
-//            case EXAM:
-//                tag = "L";
-//                break;
-//        }
-//        RecordWithType type = new RecordWithType("0", score, tag, list.size() + "");
-//        mRecordWithTypes.add(type);
-//    }
 
     private void refreshTodayRecord(int type) {
         Log.d("diao", "refreshTodayRecord: " + ACache.get(this).getAsString("id"));
@@ -269,22 +307,12 @@ public class ScoreActivity extends BaseActivity implements View.OnClickListener 
         });
     }
 
-//    private String getLessonId() {
-//        GoldDateRecord record  = mHelper.selectDataByDate(TimeUtils.getCurTime(),);
-//        if (record == null){
-//            return "";
-//        }
-//        else {
-//            return record.getLessonid();
-//        }
-//    }
 
     // 获取1970-1-1到今天的日期数字
     private String generateDayes() {
         String s = "";
         GoldDateRecord record = mHelper.selectDataById(GoldApp.getApp(mContext).userId,lessonId);
         s = TimeUtils.formatDateToMills(record.getDate());
-
         long days = Long.parseLong(s) / 1000 / 60 / 60 / 24;
         return days + "";
     }
@@ -316,9 +344,7 @@ public class ScoreActivity extends BaseActivity implements View.OnClickListener 
             record.TestId = list.get(i).getTestId();
             record.TestMode = cat;
             record.TestTime = getCurrentTime();
-
             record.UserAnswer = list.get(i).getUserAnswer();
-
             record.appId = GoldApp.getApp(mContext).getLessonType();
             record.Id = list.get(i).getId() + "";
             record.TestNumber = i;
@@ -392,7 +418,6 @@ public class ScoreActivity extends BaseActivity implements View.OnClickListener 
                     @Override
                     public void onScrolled(RecyclerView recyclerView, int dx, int dy) {
                         super.onScrolled(recyclerView, dx, dy);
-
                         if (isSlideToBottom(recyclerView)) {
                             mNext.setVisibility(View.VISIBLE);
                             mRepeat.setVisibility(View.VISIBLE);
@@ -406,60 +431,6 @@ public class ScoreActivity extends BaseActivity implements View.OnClickListener 
 
     }
 
-    @Override
-    public void onClick(View v) {
-
-        if (v.getId() == R.id.next) {
-            if (testType == WORD) {
-                sign = MD5.getMD5ofStr(GoldApp.getApp(mContext).getLessonType() + "S" + TimeUtils.getCurTime());
-                getTodayData(sign, "S");
-            } else if (testType == SENTENCE) {
-                sign = MD5.getMD5ofStr(GoldApp.getApp(mContext).getLessonType() + "S" + TimeUtils.getCurTime());
-                getTodayData(sign, "L");
-            } else if (testType == EXAM) {
-                Intent intent = new Intent(this, TestTestTest.class);
-                List<Integer> list = new ArrayList<>();
-                list.add(TestResultBean.getBean().wordScore);
-                list.add(TestResultBean.getBean().sentenceScore);
-                list.add(TestResultBean.getBean().examScore);
-                intent.putExtra(ParaConstants.STUDY_TYPE_LABEL, 2);
-                startActivity(intent);
-            }
-            finish();
-        } else if (v.getId() == R.id.back) {
-            finish();
-        } else if (v.getId() == R.id.repeat) {
-            if (testType == 0) {
-                WordTestActivity.start(mContext, mLearningContents, list, lessonId + "");
-                finish();
-            } else if (testType == 1) {
-                SentenceTestActivity.start(mContext, mLearningContents, list);
-                finish();
-            } else if (testType == 2) {
-                Intent intent = new Intent(this, ExamActivity.class);
-                intent.putExtra(ParaConstants.QUESTION_LIST_LABEL, (Serializable) list);
-                startActivity(intent);
-                finish();
-            }
-        } else if (v.getId() == R.id.detail) {
-            if (testType == WORD) {
-                Intent intent = new Intent(this, LearnResultActivity.class);
-                intent.putExtra("show", false);
-                intent.putExtra(ParaConstants.LEARNINGS_LABEL, (Serializable) mLearningContents);
-                startActivity(intent);
-            } else if (testType == SENTENCE) {
-                Intent intent = new Intent(this, SentenceResultActivity.class);
-                intent.putExtra(ParaConstants.LEARNINGS_LABEL, (Serializable) mLearningContents);
-                startActivity(intent);
-            } else if (testType == EXAM) {
-                Intent intent = new Intent(this, ExamResultActivity.class);
-                intent.putExtra(ParaConstants.QUESTION_LIST_LABEL, (Serializable) list);
-                startActivity(intent);
-            }
-        } else if (v.getId() == R.id.share) {
-            showShareInterface();
-        }
-    }
 
     private void showShareInterface() {
         Intent intent = new Intent(mContext, GoldShareActivity.class);
@@ -478,10 +449,8 @@ public class ScoreActivity extends BaseActivity implements View.OnClickListener 
 
         if (recyclerView == null) return false;
 
-        if (recyclerView.computeVerticalScrollExtent() + recyclerView.computeVerticalScrollOffset()
-                >= recyclerView.computeVerticalScrollRange())
-            return true;
-        return false;
+        return recyclerView.computeVerticalScrollExtent() + recyclerView.computeVerticalScrollOffset()
+                >= recyclerView.computeVerticalScrollRange();
     }
 
 
