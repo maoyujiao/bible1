@@ -66,8 +66,7 @@ public class LessonTitleAdapter extends RecyclerView.Adapter<LessonTitleAdapter.
             holder.lessonTitle.setText("Lesson"+(position+1));
 
         }else {
-            holder.lessonTitle.setText(mHelper.getVoaInfo(list.get(position*3).getLessonid()).getTitle_cn());
-
+            holder.lessonTitle.setText("Lesson"+(position+1)+":"+mHelper.getVoaInfo(list.get(position*3).getLessonid()).getTitle_cn());
         }
         String date = mHelper.selectDataById(GoldApp.getApp(mContext).getUserId(),
                 list.get(position*3).getLessonid()).getDate();
@@ -80,7 +79,7 @@ public class LessonTitleAdapter extends RecyclerView.Adapter<LessonTitleAdapter.
             }else {
                 holder.lessonTitle.setTextColor(mContext.getResources().getColor(android.R.color.darker_gray));
                 holder.lock.setVisibility(View.VISIBLE);
-            }
+             }
         } catch (ParseException e) {
             e.printStackTrace();
         }
