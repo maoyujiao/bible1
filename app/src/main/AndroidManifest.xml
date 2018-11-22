@@ -1,0 +1,834 @@
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+          xmlns:tools="http://schemas.android.com/tools"
+          package="com.iyuba.CET4bible">
+
+    <supports-screens
+        android:anyDensity="true"
+        android:largeScreens="true"
+        android:normalScreens="true"
+        android:resizeable="true"
+        android:smallScreens="true"/>
+
+    <uses-permission android:name="android.permission.RECORD_AUDIO"/>
+    <uses-permission android:name="android.permission.INTERNET"/>
+    <uses-permission android:name="android.permission.READ_PHONE_STATE"/>
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION"/>
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION"/>
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>
+    <uses-permission android:name="android.permission.MOUNT_UNMOUNT_FILESYSTEMS"/>
+    <uses-permission android:name="android.permission.CHANGE_NETWORK_STATE"/>
+    <uses-permission android:name="android.permission.CHANGE_WIFI_STATE"/>
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE"/>
+    <uses-permission android:name="android.permission.ACCESS_WIFI_STATE"/>
+    <uses-permission android:name="android.permission.GET_TASKS"/>
+    <uses-permission android:name="android.permission.WRITE_SETTINGS"/>
+    <uses-permission android:name="android.permission.VIBRATE"/>
+    <uses-permission android:name="android.permission.READ_LOGS"/>
+    <uses-permission android:name="android.permission.DISABLE_KEYGUARD"/>
+    <!--<uses-permission android:name="android.permission.BAIDU_LOCATION_SERVICE" />-->
+    <uses-permission android:name="android.permission.ACCESS_GPS"/>
+    <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED"/>
+    <uses-permission android:name="android.permission.SYSTEM_ALERT_WINDOW"/>
+    <uses-permission android:name="android.permission.RECEIVE_SMS"/>
+    <uses-permission android:name="android.permission.READ_SMS"/>
+    <uses-permission android:name="android.permission.WRITE_SMS"/>
+    <uses-permission android:name="android.permission.WAKE_LOCK"/>
+    <uses-permission android:name="android.permission.REORDER_TASKS"/>
+    <uses-permission android:name="com.android.launcher.permission.INSTALL_SHORTCUT"/>
+    <uses-permission android:name="com.android.launcher.permission.UNINSTALL_SHORTCUT"/>
+    <uses-feature android:glEsVersion="0x00020000" android:required="true" />
+
+    <!-- 微课下载需要的权限 -->
+
+    <permission
+        android:name="com.iyuba.core.${PERMISSION_TYPE}.permission.ACCESS_DOWNLOAD_MANAGER"
+        android:description="@string/permdesc_downloadManager"
+        android:label="@string/permlab_downloadManager"
+        android:protectionLevel="normal"/>
+
+    <!-- Allows advanced access to the Download Manager -->
+    <permission
+        android:name="com.iyuba.core.${PERMISSION_TYPE}.permission.ACCESS_DOWNLOAD_MANAGER_ADVANCED"
+        android:description="@string/permdesc_downloadManagerAdvanced"
+        android:label="@string/permlab_downloadManagerAdvanced"
+        android:protectionLevel="normal"/>
+
+    <!-- Allows to send broadcasts on download completion -->
+    <permission
+        android:name="com.iyuba.core.${PERMISSION_TYPE}.permission.SEND_DOWNLOAD_COMPLETED_INTENTS"
+        android:description="@string/permdesc_downloadCompletedIntent"
+        android:label="@string/permlab_downloadCompletedIntent"
+        android:protectionLevel="normal"/>
+
+    <uses-permission android:name="com.iyuba.core.${PERMISSION_TYPE}.permission.ACCESS_DOWNLOAD_MANAGER"/>
+    <uses-permission android:name="com.iyuba.core.${PERMISSION_TYPE}.permission.ACCESS_DOWNLOAD_MANAGER_ADVANCED"/>
+    <uses-permission android:name="com.iyuba.core.${PERMISSION_TYPE}.permission.SEND_DOWNLOAD_COMPLETED_INTENTS"/>
+    <uses-permission android:name="android.permission.DOWNLOAD_WITHOUT_NOTIFICATION"/>
+
+    <application
+        android:name="com.iyuba.core.activity.CrashApplication"
+        android:icon="@drawable/icon"
+        android:label="@string/app_name"
+        android:theme="@style/ThemeDefault"
+        tools:replace="android:theme,android:name">
+
+        <!--android:theme="@style/Theme.AppCompat.Light.NoActionBar"-->
+        <activity
+            android:name="com.iyuba.CET4bible.activity.Welcome"
+            android:configChanges="keyboardHidden|locale"
+            android:screenOrientation="portrait"
+            android:theme="@style/Theme.AppLauncher">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN"/>
+
+                <category android:name="android.intent.category.LAUNCHER"/>
+            </intent-filter>
+        </activity>
+
+        <service
+            android:name="com.iyuba.core.service.Background"
+            android:enabled="true"/>
+        <!-- =============  淼泽广告  ========== -->
+        <activity
+            android:name="com.miaoze.sdk.AppActivity"
+            android:configChanges="keyboard|keyboardHidden|orientation"
+            android:screenOrientation="portrait"/>
+
+        <!-- =============  嗒萌广告  ========== -->
+        <provider
+            android:name="android.support.v4.content.FileProvider"
+            android:authorities="${applicationId}.addam.apkdn.fileprovider"
+            android:exported="false"
+            android:grantUriPermissions="true">
+            <meta-data
+                android:name="android.support.FILE_PROVIDER_PATHS"
+                android:resource="@xml/file_paths"/>
+        </provider>
+        <!--插屏广告-->
+        <activity
+            android:name="com.addam.library.external.InterstitialActivity"
+            android:theme="@android:style/Theme.Holo.Dialog.NoActionBar"/>
+        <!--开屏广告-->
+        <activity
+            android:name="com.addam.library.external.InterstitialFullActivity"
+            android:theme="@android:style/Theme.Holo.NoActionBar"/>
+        <!--广告页面-->
+        <activity
+            android:name="com.addam.library.external.AdInfoActivity"
+            android:theme="@android:style/Theme.Holo.NoActionBar"/>
+        <!-- =============  嗒萌广告  ========== -->
+
+        <!--能力图谱-->
+        <activity
+            android:name="com.iyuba.abilitytest.activity.AbilityMapActivity"
+            android:configChanges="keyboardHidden|orientation|locale"
+            android:label="能力图谱界面--入口界面"
+            android:screenOrientation="portrait"
+            android:theme="@style/Theme.AppCompat.Light.NoActionBar"/>
+        <activity
+            android:name="com.iyuba.abilitytest.activity.AbilityMapSubActivity"
+            android:configChanges="keyboardHidden|orientation|locale"
+            android:label="单项能力图谱及获取数据界面"
+            android:screenOrientation="portrait"
+            android:theme="@style/Theme.AppCompat.Light.NoActionBar"/>
+        <activity
+            android:name="com.iyuba.abilitytest.activity.AbilityTestResultActivity"
+            android:configChanges="keyboardHidden|orientation|locale"
+            android:label="测试结束展示结果"
+            android:screenOrientation="portrait"
+            android:theme="@style/Theme.AppCompat.Light.NoActionBar"/>
+
+
+        <activity
+            android:name="com.iyuba.abilitytest.activity.GrammarAbilityTestActivity"
+            android:configChanges="keyboardHidden|orientation|locale"
+            android:label="语法测试界面"
+            android:screenOrientation="portrait"/>
+        <activity
+            android:name="com.iyuba.abilitytest.activity.ListenAbilityTestActivity"
+            android:configChanges="keyboardHidden|orientation|locale"
+            android:label="听力测试界面"
+            android:launchMode="singleTask"
+            android:screenOrientation="portrait"/>
+
+        <activity
+            android:name="com.iyuba.abilitytest.activity.ReadAbilityTestActivity"
+            android:configChanges="keyboardHidden|orientation|locale"
+            android:label="阅读测试界面"
+            android:launchMode="singleTask"
+            android:screenOrientation="portrait"/>
+
+        <activity
+            android:name="com.iyuba.abilitytest.activity.SpeakAbilityTestActivity"
+            android:configChanges="keyboardHidden|orientation|locale"
+            android:label="口语测试界面"
+            android:launchMode="singleTask"
+            android:screenOrientation="portrait"
+            android:theme="@style/Theme.AppCompat.Light.NoActionBar"/>
+        <activity
+            android:name="com.iyuba.abilitytest.activity.WordAbilityTestActivity"
+            android:configChanges="keyboardHidden|orientation|locale"
+            android:label="单词评测"
+            android:launchMode="singleTask"
+            android:screenOrientation="portrait"/>
+
+        <activity
+            android:name="com.iyuba.abilitytest.activity.WriteAbilityTestActivity"
+            android:configChanges="keyboardHidden|orientation|locale"
+            android:label="写作测试界面"
+            android:launchMode="singleTask"
+            android:screenOrientation="portrait"/>
+        <activity
+            android:name="com.iyuba.abilitytest.activity.WebActivity"
+            android:configChanges="keyboardHidden|orientation|locale"
+            android:screenOrientation="portrait"
+            android:theme="@style/Theme.AppCompat.Light.NoActionBar"/>
+
+        <activity
+            android:name="com.iyuba.CET4bible.goldvip.BuyGoldVipActivity"
+            android:screenOrientation="portrait"/>
+        <activity
+            android:name="com.iyuba.CET4bible.goldvip.PayOrderActivity"
+            android:screenOrientation="portrait"/>
+        <activity
+            android:name="com.iyuba.core.me.pay.PayOrderActivity"
+            android:screenOrientation="portrait">
+            <intent-filter>
+                <action android:name="com.iyuba.startpay"/>
+                <category android:name="android.intent.category.DEFAULT"/>
+            </intent-filter>
+        </activity>
+        <activity
+            android:name="com.iyuba.CET4bible.goldvip.GoldDesActivity"
+            android:screenOrientation="portrait">
+            <intent-filter>
+                <action android:name="com.iyuba.CET4bible.goldvip.GoldDesActivity"/>
+                <category android:name="android.intent.category.DEFAULT"/>
+            </intent-filter>
+        </activity>
+
+
+        <activity
+            android:name="com.alipay.sdk.app.H5PayActivity"
+            android:configChanges="orientation|keyboardHidden|navigation"
+            android:exported="false"
+            android:screenOrientation="behind"/>
+        <activity
+            android:name="com.alipay.sdk.auth.AuthActivity"
+            android:configChanges="orientation|keyboardHidden|navigation"
+            android:exported="false"
+            android:screenOrientation="behind"/>
+        <activity
+            android:name="com.iyuba.CET4bible.wxapi.WXPayEntryActivity"
+            android:exported="true"
+            android:launchMode="singleTop"/>
+        <!--android:theme="@android:style/Theme.NoDisplay"-->
+        <activity
+            android:name="com.iyuba.core.teacher.activity.CommunityActivity"
+            android:configChanges="keyboardHidden|orientation|locale"
+            android:screenOrientation="portrait"/>
+
+        <activity
+            android:name="com.iyuba.CET4bible.activity.MainActivity"
+            android:configChanges="keyboardHidden|orientation|locale"
+            android:screenOrientation="portrait"/>
+        <activity
+            android:name="com.iyuba.CET4bible.activity.BlogActivity"
+            android:configChanges="keyboardHidden|orientation|locale"
+            android:screenOrientation="portrait"/>
+        <activity
+            android:name="com.iyuba.CET4bible.activity.About"
+            android:configChanges="keyboardHidden|orientation|locale"
+            android:screenOrientation="portrait"/>
+        <activity
+            android:name="com.iyuba.CET4bible.activity.Feedback"
+            android:configChanges="keyboardHidden|orientation|locale"
+            android:screenOrientation="portrait"/>
+        <activity
+            android:name="com.iyuba.CET4bible.activity.HelpUse"
+            android:configChanges="keyboardHidden|orientation|locale"
+            android:screenOrientation="portrait"/>
+        <activity
+            android:name="com.iyuba.CET4bible.listening.SectionA"
+            android:configChanges="keyboardHidden|orientation|locale"
+            android:screenOrientation="portrait"/>
+        <activity
+            android:name="com.iyuba.CET4bible.listening.ListenSubmit"
+            android:configChanges="keyboardHidden|orientation|locale"
+            android:screenOrientation="portrait"/>
+        <activity
+            android:name="com.iyuba.CET4bible.listening.SectionC"
+            android:configChanges="keyboardHidden|orientation|locale"
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="stateAlwaysHidden|adjustPan"/>
+        <activity
+            android:name="com.iyuba.CET4bible.listening.TestListActivity"
+            android:configChanges="keyboardHidden|orientation|locale"
+            android:screenOrientation="portrait"/>
+        <activity
+            android:name="com.iyuba.CET4bible.vocabulary.Cet4WordList"
+            android:configChanges="keyboardHidden|orientation|locale"
+            android:screenOrientation="portrait"/>
+        <activity
+            android:name="com.iyuba.CET4bible.vocabulary.Cet4WordContent"
+            android:configChanges="keyboardHidden|orientation|locale"
+            android:screenOrientation="portrait"/>
+        <activity
+            android:name="com.iyuba.CET4bible.vocabulary.Cet4WordRoot"
+            android:configChanges="keyboardHidden|orientation|locale"
+            android:screenOrientation="portrait"/>
+        <activity
+            android:name="com.iyuba.CET4bible.vocabulary.WordSortSet"
+            android:configChanges="keyboardHidden|orientation|locale"
+            android:screenOrientation="portrait"/>
+        <activity
+            android:name="com.iyuba.CET4bible.write.WriteListActivity"
+            android:configChanges="keyboardHidden|orientation|locale"
+            android:screenOrientation="portrait"/>
+        <activity
+            android:name="com.iyuba.CET4bible.write.WriteActivity"
+            android:configChanges="keyboardHidden|orientation|locale"
+            android:screenOrientation="portrait"/>
+        <activity
+            android:name="com.iyuba.CET4bible.activity.Remain"
+            android:configChanges="keyboardHidden|orientation|locale"
+            android:screenOrientation="portrait"/>
+        <activity
+            android:name="com.iyuba.CET4bible.widget.SleepDialog"
+            android:configChanges="keyboardHidden|orientation|locale"
+            android:screenOrientation="portrait"
+            android:theme="@style/MyDialogStyle"/>
+        <activity
+            android:name="com.iyuba.core.activity.me.WriteState"
+            android:configChanges="keyboardHidden|orientation|locale"
+            android:screenOrientation="portrait"/>
+        <activity
+            android:name="com.iyuba.core.activity.me.EditUserInfoActivity"
+            android:configChanges="keyboardHidden|orientation|locale"
+            android:screenOrientation="portrait"/>
+        <activity
+            android:name="com.iyuba.core.activity.me.UserDetailInfo"
+            android:configChanges="keyboardHidden|orientation|locale"
+            android:screenOrientation="portrait"/>
+        <activity
+            android:name="com.iyuba.core.activity.PlaySet"
+            android:configChanges="keyboardHidden|orientation|locale"
+            android:screenOrientation="portrait"/>
+        <activity
+            android:name="com.iyuba.core.activity.PasteFile"
+            android:configChanges="keyboardHidden|orientation|locale"
+            android:screenOrientation="portrait"/>
+        <activity
+            android:name="com.iyuba.core.activity.Web"
+            android:configChanges="keyboardHidden|orientation|locale"
+            android:screenOrientation="portrait"/>
+        <activity
+            android:name="com.iyuba.core.widget.ContextMenu"
+            android:configChanges="keyboardHidden|orientation|locale"
+            android:screenOrientation="portrait"
+            android:theme="@style/MyDialogStyle"/>
+        <activity
+            android:name="com.iyuba.core.me.pay.BuyIyubiActivity"
+            android:configChanges="keyboardHidden|orientation|locale"
+            android:screenOrientation="portrait"/>
+        <activity
+            android:name="com.iyuba.core.me.pay.IyubiPayOrderActivity"
+            android:configChanges="keyboardHidden|orientation|locale"
+            android:screenOrientation="portrait"/>
+        <activity
+            android:name="com.iyuba.core.activity.Login"
+            android:configChanges="keyboardHidden|orientation|locale"
+            android:screenOrientation="portrait"/>
+        <activity
+            android:name="com.iyuba.core.activity.RegistActivity"
+            android:configChanges="keyboardHidden|orientation|locale"
+            android:screenOrientation="portrait"/>
+        <activity
+            android:name="com.iyuba.core.activity.me.UpLoadImage"
+            android:configChanges="keyboardHidden|orientation|locale"
+            android:screenOrientation="portrait"/>
+        <activity
+            android:name="com.iyuba.core.activity.RegistByPhoneActivity"
+            android:configChanges="keyboardHidden|orientation|locale"
+            android:screenOrientation="portrait"/>
+        <activity
+            android:name="com.iyuba.core.activity.RegistSubmitActivity"
+            android:configChanges="keyboardHidden|orientation|locale"
+            android:screenOrientation="portrait"/>
+        <activity
+            android:name="com.iyuba.core.activity.me.Chatting"
+            android:configChanges="keyboardHidden|orientation|locale"
+            android:screenOrientation="portrait"/>
+        <activity
+            android:name="com.iyuba.CET4bible.activity.ReadingTest"
+            android:configChanges="keyboardHidden|orientation|locale"
+            android:screenOrientation="portrait"/>
+        <activity
+            android:name="com.iyuba.CET4bible.activity.InfoActivity"
+            android:configChanges="keyboardHidden|orientation|locale"
+            android:screenOrientation="portrait"/>
+        <activity
+            android:name="com.iyuba.CET4bible.activity.TestType"
+            android:configChanges="keyboardHidden|orientation|locale"
+            android:screenOrientation="portrait"/>
+        <activity
+            android:name="com.iyuba.CET4bible.activity.SetActivity"
+            android:configChanges="keyboardHidden|orientation|locale"
+            android:screenOrientation="portrait"/>
+        <activity
+            android:name="com.iyuba.core.teacher.activity.QuesDetailActivity"
+            android:configChanges="keyboardHidden|orientation|locale"
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="adjustPan"/>
+        <activity
+            android:name="com.iyuba.core.teacher.activity.SelectQuestionType"
+            android:configChanges="keyboardHidden|orientation|locale"
+            android:screenOrientation="portrait"/>
+        <activity
+            android:name="com.iyuba.core.teacher.activity.QuezActivity"
+            android:configChanges="keyboardHidden|orientation|locale"
+            android:screenOrientation="portrait"/>
+        <activity
+            android:name="com.iyuba.core.teacher.activity.ShowLargePicActivity"
+            android:configChanges="keyboardHidden|orientation|locale"
+            android:screenOrientation="portrait"/>
+
+        <!-- 发现 -->
+        <activity
+            android:name="com.iyuba.core.discover.activity.DiscoverForAt"
+            android:configChanges="keyboardHidden|orientation|locale"
+            android:screenOrientation="portrait"/>
+        <activity
+            android:name="com.iyuba.core.discover.activity.BlogCommentsActivity"
+            android:configChanges="keyboardHidden|orientation|locale"
+            android:screenOrientation="portrait"/>
+        <activity
+            android:name="com.iyuba.core.discover.activity.FriendCircFreshListActivity"
+            android:configChanges="keyboardHidden|orientation|locale"
+            android:screenOrientation="portrait"/>
+        <activity
+            android:name="com.iyuba.core.discover.activity.PublishMood"
+            android:configChanges="keyboardHidden|orientation|locale"
+            android:screenOrientation="portrait"/>
+        <activity
+            android:name="com.iyuba.core.discover.activity.THSActivity"
+            android:configChanges="keyboardHidden|orientation|locale"
+            android:screenOrientation="portrait"/>
+        <activity
+            android:name="com.iyuba.core.discover.activity.Saying"
+            android:configChanges="keyboardHidden|orientation|locale"
+            android:screenOrientation="portrait"/>
+        <activity
+            android:name="com.iyuba.core.discover.activity.WordContent"
+            android:configChanges="keyboardHidden|orientation|locale"
+            android:screenOrientation="portrait"/>
+        <activity
+            android:name="com.iyuba.core.discover.activity.SearchFriend"
+            android:configChanges="keyboardHidden|orientation|locale"
+            android:screenOrientation="portrait"/>
+        <activity
+            android:name="com.iyuba.core.discover.activity.WordCollection"
+            android:configChanges="keyboardHidden|orientation|locale"
+            android:screenOrientation="portrait"/>
+        <activity
+            android:name="com.iyuba.core.discover.activity.FindFriendListActivity"
+            android:configChanges="keyboardHidden|orientation|locale"
+            android:screenOrientation="portrait"/>
+        <activity
+            android:name="com.iyuba.core.discover.activity.SearchWord"
+            android:configChanges="keyboardHidden|orientation|locale"
+            android:screenOrientation="portrait"/>
+        <activity
+            android:name="com.iyuba.core.teacher.activity.FindTeacherActivity"
+            android:configChanges="keyboardHidden|orientation|locale"
+            android:screenOrientation="portrait"/>
+        <activity
+            android:name="com.iyuba.core.teacher.activity.TeacherBaseInfo"
+            android:configChanges="keyboardHidden|orientation|locale"
+            android:screenOrientation="portrait"/>
+        <activity
+            android:name="com.iyuba.core.teacher.activity.TeacherQuesListActivity"
+            android:configChanges="keyboardHidden|orientation|locale"
+            android:screenOrientation="portrait"/>
+        <activity
+            android:name="com.iyuba.core.me.activity.MeForAt"
+            android:configChanges="keyboardHidden|orientation|locale"
+            android:screenOrientation="portrait"/>
+        <activity
+            android:name="com.iyuba.core.me.activity.WriteState"
+            android:configChanges="keyboardHidden|orientation|locale"
+            android:screenOrientation="portrait"/>
+        <activity
+            android:name="com.iyuba.core.me.activity.EditUserInfoActivity"
+            android:configChanges="keyboardHidden|orientation|locale"
+            android:screenOrientation="portrait"/>
+        <activity
+            android:name="com.iyuba.core.me.activity.UserDetailInfo"
+            android:configChanges="keyboardHidden|orientation|locale"
+            android:screenOrientation="portrait"/>
+        <activity
+            android:name="com.iyuba.core.me.activity.ReplyDoing"
+            android:configChanges="keyboardHidden|orientation|locale"
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="adjustPan"/>
+        <activity
+            android:name="com.iyuba.core.me.activity.FansCenter"
+            android:configChanges="keyboardHidden|orientation|locale"
+            android:screenOrientation="portrait"/>
+        <activity
+            android:name="com.iyuba.core.me.activity.NoticeCenter"
+            android:configChanges="keyboardHidden|orientation|locale"
+            android:screenOrientation="portrait"/>
+        <activity
+            android:name="com.iyuba.core.me.activity.AttentionCenter"
+            android:configChanges="keyboardHidden|orientation|locale"
+            android:screenOrientation="portrait"/>
+        <activity
+            android:name="com.iyuba.core.me.activity.BuyVip"
+            android:configChanges="keyboardHidden|orientation|locale"
+            android:screenOrientation="portrait"/>
+        <activity
+            android:name="com.iyuba.core.me.activity.VipCenter"
+            android:configChanges="keyboardHidden|orientation|locale"
+            android:screenOrientation="portrait">
+            <intent-filter>
+                <action android:name="${applicationId}.vip_center"/>
+                <category android:name="android.intent.category.DEFAULT"/>
+            </intent-filter>
+        </activity>
+        <activity
+            android:name="com.iyuba.core.me.activity.UpLoadImage"
+            android:configChanges="keyboardHidden|orientation|locale"
+            android:screenOrientation="portrait"/>
+        <activity
+            android:name="com.iyuba.core.me.activity.PersonalHome"
+            android:configChanges="keyboardHidden|orientation|locale"
+            android:launchMode="singleTask"
+            android:screenOrientation="portrait"/>
+        <activity
+            android:name="com.iyuba.core.me.activity.MessageCenter"
+            android:configChanges="keyboardHidden|orientation|locale"
+            android:screenOrientation="portrait"/>
+        <activity
+            android:name="com.iyuba.core.me.activity.Chatting"
+            android:configChanges="keyboardHidden|orientation|locale"
+            android:screenOrientation="portrait"/>
+        <activity
+            android:name="com.iyuba.core.teacher.activity.TheQuesListActivity"
+            android:configChanges="keyboardHidden|orientation|locale"
+            android:screenOrientation="portrait"/>
+        <activity
+            android:name="com.iyuba.core.teacher.activity.QuestionNotice"
+            android:configChanges="keyboardHidden|orientation|locale"
+            android:screenOrientation="portrait"/>
+        <activity
+            android:name="com.google.ads.AdActivity"
+            android:configChanges="keyboard|keyboardHidden|orientation|screenLayout|uiMode|screenSize|smallestScreenSize"/>
+        <activity
+            android:name="com.iyuba.abilitytest.activity.ShowAnalysisActivity"
+            android:configChanges="keyboardHidden|orientation|locale"
+            android:screenOrientation="portrait"
+            android:theme="@style/Theme.AppCompat.Light.NoActionBar"/>
+
+        <activity
+            android:name="com.iyuba.core.me.activity.StudyRankingActivity"
+            android:configChanges="keyboardHidden|orientation|locale"
+            android:screenOrientation="portrait"/>
+
+        <activity
+            android:name="com.iyuba.core.me.activity.InfoFullFillActivity"
+            android:configChanges="keyboardHidden|orientation"/>
+        <activity
+            android:name="com.iyuba.core.me.activity.IntelLearningActivity"
+            android:configChanges="keyboardHidden|orientation"/>
+        <activity
+            android:name="com.iyuba.core.me.activity.LevelPickActivity"
+            android:configChanges="keyboardHidden|orientation"/>
+        <activity
+            android:name="com.iyuba.core.me.activity.LearnResultActivity"
+            android:configChanges="keyboardHidden|orientation"/>
+        <activity
+            android:name="com.iyuba.core.me.activity.ResultDetailActivity"
+            android:configChanges="keyboardHidden|orientation"/>
+        <activity
+            android:name="com.iyuba.core.me.activity.TestResultActivity"
+            android:configChanges="keyboardHidden|orientation"/>
+        <activity
+            android:name="com.iyuba.core.me.activity.TestDetailActivity"
+            android:configChanges="keyboardHidden|orientation"/>
+        <activity
+            android:name="com.iyuba.core.me.activity.WordResultActivity"
+            android:configChanges="keyboardHidden|orientation"/>
+        <activity
+            android:name="com.iyuba.core.me.activity.WordDetailActivity"
+            android:configChanges="keyboardHidden|orientation"/>
+
+        <!-- 微课下载 -->
+
+        <activity android:name="com.iyuba.core.downloadprovider.ui.DownloadList"/>
+        <provider
+            android:name="com.iyuba.core.downloadprovider.DownloadProvider"
+            android:authorities="com.iyuba.core.downloadprovider.${PERMISSION_TYPE}"/>
+
+        <service android:name="com.iyuba.core.downloadprovider.DownloadService"/>
+
+        <receiver
+            android:name="com.iyuba.core.downloadprovider.DownloadReceiver"
+            android:exported="false">
+            <intent-filter>
+                <action android:name="android.intent.action.BOOT_COMPLETED"/>
+                <action android:name="android.net.conn.CONNECTIVITY_CHANGE"/>
+            </intent-filter>
+        </receiver>
+
+        <!-- shareSdk -->
+        <activity
+            android:name="com.mob.tools.MobUIShell"
+            android:configChanges="keyboardHidden|orientation|screenSize"
+            android:theme="@android:style/Theme.Translucent.NoTitleBar"
+            android:windowSoftInputMode="stateHidden|adjustResize">
+            <!-- 调用新浪原生SDK，需要注册的回调activity -->
+            <intent-filter>
+                <action android:name="com.sina.weibo.sdk.action.ACTION_SDK_REQ_ACTIVITY"/>
+                <category android:name="android.intent.category.DEFAULT"/>
+            </intent-filter>
+        </activity>
+        <!-- 微信分享回调 -->
+        <activity
+            android:name="com.iyuba.CET4bible.wxapi.WXEntryActivity"
+            android:configChanges="keyboardHidden|orientation|screenSize"
+            android:exported="true"
+            android:screenOrientation="portrait"
+            android:theme="@android:style/Theme.Translucent.NoTitleBar"/>
+        <activity
+            android:name="cn.sharesdk.sina.weibo.SinaActivity"
+            android:theme="@android:style/Theme.Translucent.NoTitleBar">
+            <intent-filter>
+                <action android:name="com.sina.weibo.sdk.action.ACTION_SDK_REQ_ACTIVITY"/>
+
+                <category android:name="android.intent.category.DEFAULT"/>
+            </intent-filter>
+        </activity>
+        <!-- YouDaoNativeBrowser用于应用详情页，为必选配置 -->
+        <!-- YouDaoBrowser用于所有的native广告，为必选配置 -->
+        <activity
+            android:name="com.youdao.sdk.common.YouDaoBrowser"
+            android:configChanges="keyboardHidden|orientation|screenSize"
+            android:launchMode="singleTask"
+            tools:replace="android:configChanges"/>
+        <activity
+            android:name="com.youdao.sdk.extra.common.YouDaoBrowser"
+            android:configChanges="keyboardHidden|orientation|screenSize"
+            android:launchMode="singleTask"
+            tools:replace="android:configChanges"/>
+        <!-- YouDaoInterstitialActivity用于开屏和插屏广告，若不使用开屏和插屏广告，可不配置此Activity， -->
+        <activity
+            android:name="com.youdao.sdk.nativeads.YouDaoInterstitialActivity"
+            android:configChanges="keyboardHidden|orientation|screenSize"
+            android:launchMode="singleTask"
+            android:theme="@android:style/Theme.Translucent"
+            tools:replace="android:configChanges"/>
+
+        <!-- 信息流视频广告Activity配置，若不使用信息流视频，可不配置这个Activity -->
+        <activity
+            android:name="com.youdao.sdk.listvideo.YouDaoListVideoActivity"
+            android:configChanges="keyboardHidden|orientation"
+            android:screenOrientation="portrait"/>
+
+        <!-- 应用下载服务，用于应用下载，为必选配置 -->
+        <service
+            android:name="com.youdao.sdk.common.YouDaoAppService"
+            android:enabled="true"/>
+
+        <!-- 应用安装广播接收器，用于应用下载，为必选配置 -->
+        <receiver
+            android:name="com.youdao.sdk.common.YouDaoTrackerReceiver"
+            android:enabled="true"
+            android:exported="true">
+            <intent-filter>
+                <action android:name="android.intent.action.PACKAGE_ADDED"/>
+                <action android:name="android.intent.action.PACKAGE_REMOVED"/>
+
+                <data android:scheme="package"/>
+            </intent-filter>
+            <intent-filter>
+                <action android:name="android.net.conn.CONNECTIVITY_CHANGE"/>
+            </intent-filter>
+        </receiver>
+
+        <!-- QQ客户端回调 -->
+        <activity
+            android:name="cn.sharesdk.tencent.qq.ReceiveActivity"
+            android:launchMode="singleTask"
+            android:noHistory="true">
+            <intent-filter>
+                <action android:name="android.intent.action.VIEW"/>
+
+                <category android:name="android.intent.category.DEFAULT"/>
+                <category android:name="android.intent.category.BROWSABLE"/>
+
+                <!--<data android:scheme="tencent100836790" />-->
+                <data android:scheme="@string/tencent_app_id"/>
+            </intent-filter>
+        </activity>
+        <activity
+            android:name=".activity.JpBlogListActivity"
+            android:screenOrientation="portrait"/>
+        <activity
+            android:name=".activity.JpBlogActivity"
+            android:screenOrientation="portrait"/>
+        <activity
+            android:name="com.iyuba.adsdk.extra.common.AdWebBrowser"
+            android:screenOrientation="portrait"/>
+        <activity
+            android:name=".activity.DeleteAudioActivity"
+            android:screenOrientation="portrait"/>
+        <activity
+            android:name=".activity.FavoriteActivity"
+            android:screenOrientation="portrait"/>
+        <activity
+            android:name=".activity.FillInBlankActivity"
+            android:screenOrientation="portrait"/>
+        <activity
+            android:name=".activity.ParagraphMatchingActivity"
+            android:screenOrientation="portrait"/>
+        <activity
+            android:name=".listening.ErrorFeedbackActivity"
+            android:screenOrientation="portrait"/>
+        <activity
+            android:name="com.iyuba.dailybonus.SignActivity"
+            android:screenOrientation="portrait">
+        </activity>
+        <activity
+            android:name="com.iyuba.trainingcamp.activity.GoldActivity"
+            android:screenOrientation="portrait">
+        </activity>
+        <activity
+            android:name="com.iyuba.trainingcamp.activity.WordListActvity"
+            android:screenOrientation="portrait">
+        </activity>
+        <activity
+            android:name="com.iyuba.trainingcamp.activity.WordTestActivity"
+            android:screenOrientation="portrait">
+        </activity>
+        <activity
+            android:name="com.iyuba.trainingcamp.activity.BuyIndicatorActivity"
+            android:screenOrientation="portrait">
+        </activity>
+        <activity
+            android:name="com.iyuba.trainingcamp.activity.SentenceResultActivity"
+            android:screenOrientation="portrait">
+        </activity>
+        <activity
+            android:name="com.iyuba.trainingcamp.activity.WordLearnActivity"
+            android:screenOrientation="portrait">
+        </activity>
+        <activity
+            android:name="com.iyuba.trainingcamp.activity.LearnResultActivity"
+            android:screenOrientation="portrait">
+        </activity>
+        <activity
+            android:name="com.iyuba.trainingcamp.activity.SentencListActivity"
+            android:screenOrientation="portrait">
+        </activity>
+        <activity
+            android:name="com.iyuba.trainingcamp.activity.SentenceTestActivity"
+            android:screenOrientation="portrait">
+        </activity>
+        <activity
+            android:name="com.iyuba.trainingcamp.activity.ExamActivity"
+            android:screenOrientation="portrait">
+        </activity>
+        <activity
+            android:name="com.iyuba.trainingcamp.activity.ExamResultActivity"
+            android:screenOrientation="portrait">
+        </activity>
+        <activity
+            android:name="com.iyuba.trainingcamp.activity.TestTestTest"
+            android:screenOrientation="portrait">
+        </activity>
+        <activity
+            android:name="com.iyuba.trainingcamp.activity.ScoreActivity"
+            android:screenOrientation="portrait">
+        </activity>
+        <activity
+            android:name="com.iyuba.trainingcamp.activity.GoldShareActivity"
+            android:screenOrientation="portrait">
+        </activity>
+
+
+        <!-- Mqtt Service -->
+        <service
+            android:name="tv.lycam.mqtt.MqttService"
+            android:exported="false"/>
+
+        <receiver
+            android:name="com.umeng.message.NotificationProxyBroadcastReceiver"
+            android:exported="false"/>
+        <receiver android:name="com.umeng.message.RegistrationReceiver">
+            <intent-filter>
+                <action android:name="android.net.conn.CONNECTIVITY_CHANGE"/>
+            </intent-filter>
+            <intent-filter>
+                <action android:name="android.intent.action.PACKAGE_REMOVED"/>
+
+                <data android:scheme="package"/>
+            </intent-filter>
+        </receiver>
+        <receiver
+            android:name="com.umeng.message.UmengBroadcastReceiver"
+            tools:ignore="ExportedReceiver">
+            <intent-filter>
+                <action android:name="org.agoo.android.intent.action.RECEIVE"/>
+            </intent-filter>
+            <intent-filter>
+                <action android:name="com.iyuba.CET4bible.intent.action.COMMAND"/>
+            </intent-filter>
+            <intent-filter>
+                <action android:name="org.agoo.android.intent.action.RE_ELECTION_V2"/>
+            </intent-filter>
+        </receiver>
+
+        <service
+            android:name="com.umeng.message.UmengService"
+            android:exported="true"
+            android:process=":umengService_v1"
+            tools:ignore="ExportedService">
+            <intent-filter>
+                <action android:name="com.iyuba.CET4bible.intent.action.START"/>
+            </intent-filter>
+            <intent-filter>
+                <action android:name="com.iyuba.CET4bible.intent.action.COCKROACH"/>
+            </intent-filter>
+            <intent-filter>
+                <action android:name="org.agoo.android.intent.action.PING"/>
+            </intent-filter>
+        </service>
+        <service
+            android:name="org.android.agoo.service.ElectionService"
+            android:exported="true"
+            android:process=":umengService_v1"
+            tools:ignore="ExportedService">
+            <intent-filter>
+                <action android:name="org.agoo.android.intent.action.ELECTION_V2"/>
+            </intent-filter>
+        </service>
+        <service android:name="com.umeng.message.UmengIntentService"/>
+        <service android:name="com.umeng.message.UmengDownloadResourceService"/>
+        <service android:name="com.iyuba.iyubamovies.service.DownLoadService"/>
+
+        <meta-data
+            android:name="UMENG_APPKEY"
+            android:value="${UMENG_APPKEY_VALUE}"/>
+        <meta-data
+            android:name="UMENG_MESSAGE_SECRET"
+            android:value="a1afded27ca5f814fa9325c9a268b48c"/>
+        <meta-data
+            android:name="UMENG_CHANNEL"
+            android:value="iyuba"/>
+        <meta-data
+            android:name="android.max_aspect"
+            android:value="2.1"/>
+    </application>
+
+</manifest>
