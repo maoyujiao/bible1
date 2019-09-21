@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginLeft="30dp"
+    android:layout_marginRight="25dp"
+    android:orientation="horizontal">
+
+    <TextView
+        android:maxLines="1"
+        android:id="@+id/tv_ability_result_name"
+        style="@style/IeltsAbilityAnalysisTypeTextStyle"
+        android:text="一毛是小猫呵呵" />
+
+    <ProgressBar
+        android:id="@+id/pb_ability_result"
+        style="?android:attr/progressBarStyleHorizontal"
+        android:layout_width="0dp"
+        android:layout_height="6dp"
+        android:layout_centerInParent="true"
+        android:layout_marginLeft="8dp"
+        android:layout_marginTop="5dp"
+        android:layout_weight="5"
+        android:max="100"
+        android:progress="90"
+        android:progressDrawable="@drawable/progressbar_color" />
+
+    <TextView
+        android:id="@+id/tv_ability_result_score"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="8dp"
+        android:layout_marginRight="15dp"
+        android:text="90"
+        android:textColor="@color/text_black_color" />
+</LinearLayout>

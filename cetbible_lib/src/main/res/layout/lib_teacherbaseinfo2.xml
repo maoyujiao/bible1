@@ -1,0 +1,512 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/backlayout"
+    android:layout_width="match_parent"
+    android:layout_height="3000dp"
+    android:background="#f8f6f6"
+    android:orientation="vertical"
+
+    >
+
+    <RelativeLayout
+        android:layout_width="fill_parent"
+        android:layout_height="50dp"
+        android:background="@color/colorPrimary">
+
+        <Button
+            android:id="@+id/tbutton_back2"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:layout_alignParentLeft="true"
+            android:layout_centerVertical="true"
+            android:background="@drawable/lib_back_button" />
+
+        <TextView
+            android:id="@+id/title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:text="@string/teacher_info2"
+            android:textColor="#fff"
+            android:textSize="18sp" />
+
+        <TextView
+            android:id="@+id/next2"
+            android:layout_width="wrap_content"
+            android:layout_height="50px"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="8dp"
+            android:layout_marginRight="5dp"
+            android:text="下一步"
+            android:textColor="#fff"
+            android:textSize="15sp" />
+
+    </RelativeLayout>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="0.5dp"
+        android:background="@color/divider_line" />
+
+    <LinearLayout
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:background="#ffffff">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="50dip"
+            android:gravity="center_vertical"
+            android:paddingLeft="2dip"
+            android:text="*"
+            android:textColor="@color/red" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="50dip"
+            android:gravity="center_vertical"
+            android:paddingLeft="1dip"
+            android:text="@string/teacher_info_city"
+            android:textColor="#000000" />
+
+
+        <Spinner
+            android:id="@+id/tcity"
+            style="@style/spinner_style"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:layout_weight="1"
+            android:gravity="center|center_horizontal"
+            android:spinnerMode="dropdown"
+
+            />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="fill_parent"
+            android:gravity="center|center_horizontal"
+            android:text="▼" />
+    </LinearLayout>
+
+    <ImageView
+        android:layout_width="fill_parent"
+        android:layout_height="1dp"
+        android:background="#dcdcdc" />
+
+    <LinearLayout
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:background="#ffffff">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="35dip"
+            android:gravity="center_vertical"
+            android:paddingLeft="2dip"
+            android:text="*"
+            android:textColor="@color/red" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="35dip"
+            android:gravity="center_vertical"
+            android:paddingLeft="1dip"
+            android:text="外语等级"
+            android:textColor="#000000" />
+
+    </LinearLayout>
+
+
+    <ImageView
+        android:layout_width="fill_parent"
+        android:layout_height="1dp"
+        android:background="#dcdcdc" />
+
+    <LinearLayout
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:background="#ffffff">
+
+        <Spinner
+            android:id="@+id/endegree"
+            style="@style/spinner_style"
+            android:layout_width="match_parent"
+            android:layout_height="45dp"
+            android:layout_weight="1"
+            android:gravity="center|center_horizontal"
+            android:spinnerMode="dropdown"
+
+            />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="fill_parent"
+            android:gravity="center|center_horizontal"
+            android:text="▼" />
+
+        <ImageView
+            android:layout_width="1dp"
+            android:layout_height="match_parent"
+            android:background="#dcdcdc" />
+
+        <Spinner
+            android:id="@+id/jpdegree"
+            style="@style/spinner_style"
+            android:layout_width="match_parent"
+            android:layout_height="45dp"
+            android:layout_weight="1"
+            android:gravity="center|center_horizontal"
+            android:spinnerMode="dropdown" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="fill_parent"
+            android:gravity="center|center_horizontal"
+            android:text="▼" />
+    </LinearLayout>
+
+    <ImageView
+        android:layout_width="fill_parent"
+        android:layout_height="1dp"
+        android:background="#dcdcdc" />
+
+    <LinearLayout
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:background="#ffffff">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="50dip"
+            android:gravity="center_vertical"
+            android:paddingLeft="2dip"
+            android:text="*"
+            android:textColor="@color/red" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="50dip"
+            android:gravity="center_vertical"
+            android:paddingLeft="1dip"
+            android:text="@string/teacher_info_goodm"
+            android:textColor="#000000" />
+
+        <TextView
+            android:id="@+id/category1"
+            android:layout_width="0dip"
+            android:layout_height="50dip"
+            android:layout_marginLeft="2dp"
+            android:layout_weight="1"
+            android:gravity="center_vertical"
+            android:text="口语,翻译"
+            android:textSize="14sp" />
+    </LinearLayout>
+
+    <ImageView
+        android:layout_width="fill_parent"
+        android:layout_height="1dp"
+        android:background="#dcdcdc" />
+
+
+    <LinearLayout
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <CheckBox
+            android:id="@+id/c1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:checked="true"
+            android:text="口语" />
+
+        <CheckBox
+            android:id="@+id/c2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:checked="false"
+            android:text="听力" />
+
+        <CheckBox
+            android:id="@+id/c3"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:checked="false"
+            android:text="阅读" />
+
+        <CheckBox
+            android:id="@+id/c4"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:checked="false"
+            android:text="写作" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <CheckBox
+            android:id="@+id/c5"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:checked="true"
+            android:text="翻译" />
+
+        <CheckBox
+            android:id="@+id/c6"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:checked="false"
+            android:text="单词" />
+
+
+        <CheckBox
+            android:id="@+id/c7"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:checked="false"
+            android:text="语法" />
+
+        <CheckBox
+            android:id="@+id/c8"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:checked="false"
+            android:text="其他" />
+
+    </LinearLayout>
+
+
+    <LinearLayout
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:background="#ffffff">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="50dip"
+            android:gravity="center_vertical"
+            android:paddingLeft="2dip"
+            android:text="*"
+            android:textColor="@color/red" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="50dip"
+            android:gravity="center_vertical"
+            android:paddingLeft="1dip"
+            android:text="@string/teacher_info_goodt"
+            android:textColor="#000000" />
+
+        <TextView
+            android:id="@+id/category2"
+            android:layout_width="0dip"
+            android:layout_height="50dip"
+            android:layout_marginLeft="2dp"
+            android:layout_weight="1"
+            android:gravity="center_vertical"
+            android:text="VOA英语,BBC英语"
+            android:textSize="14sp" />
+    </LinearLayout>
+
+
+    <LinearLayout
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <CheckBox
+            android:id="@+id/cb1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:checked="true"
+            android:text="VOA英语"
+            android:textSize="14sp" />
+
+
+        <CheckBox
+            android:id="@+id/cb2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:checked="true"
+            android:text="BBC英语"
+            android:textSize="13sp" />
+
+        <CheckBox
+            android:id="@+id/cb3"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:checked="false"
+            android:text="听歌学英语"
+            android:textSize="14sp" />
+
+    </LinearLayout>
+
+
+    <LinearLayout
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <CheckBox
+            android:id="@+id/cb4"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:checked="false"
+            android:text="英语四级"
+            android:textSize="14sp"
+
+            />
+
+
+        <CheckBox
+            android:id="@+id/cb5"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:checked="false"
+            android:text="英语六级"
+            android:textSize="14sp" />
+
+        <CheckBox
+            android:id="@+id/cb6"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:checked="false"
+            android:text="初中英语"
+            android:textSize="14sp" />
+
+    </LinearLayout>
+
+
+    <LinearLayout
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <CheckBox
+            android:id="@+id/cb7"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:checked="false"
+            android:text="高中英语"
+            android:textSize="14sp" />
+
+
+        <CheckBox
+            android:id="@+id/cb8"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:checked="false"
+            android:text="考研英语"
+            android:textSize="14sp" />
+
+        <CheckBox
+            android:id="@+id/cb9"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:checked="false"
+            android:text="爱语微课"
+            android:textSize="14sp" />
+
+    </LinearLayout>
+
+
+    <LinearLayout
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <CheckBox
+            android:id="@+id/cb10"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:checked="false"
+            android:text="日语一级"
+            android:textSize="14sp" />
+
+
+        <CheckBox
+            android:id="@+id/cb11"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:checked="false"
+            android:text="日语二级"
+            android:textSize="14sp" />
+
+        <CheckBox
+            android:id="@+id/cb12"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:checked="false"
+            android:text="日语三级"
+            android:textSize="14sp" />
+
+    </LinearLayout>
+
+
+    <LinearLayout
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <CheckBox
+            android:id="@+id/cb13"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:checked="false"
+            android:text="托福"
+            android:textSize="14sp" />
+
+
+        <CheckBox
+            android:id="@+id/cb14"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:checked="false"
+            android:text="雅思"
+            android:textSize="14sp" />
+
+        <CheckBox
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:checked="false"
+            android:text="爱语微课"
+            android:textSize="14sp" />
+
+    </LinearLayout>
+
+
+    <ImageView
+        android:layout_width="fill_parent"
+        android:layout_height="1000dp"
+        android:background="#dcdcdc" />
+
+
+</LinearLayout>
+

@@ -1,0 +1,107 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/backlayout"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:background="@color/background_color"
+    android:orientation="vertical">
+
+    <RelativeLayout
+        android:layout_width="fill_parent"
+        android:layout_height="50dip"
+        android:background="?attr/colorPrimary"
+        android:gravity="center_vertical">
+
+        <Button
+            android:id="@+id/button_back"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:layout_alignParentLeft="true"
+            android:layout_centerVertical="true"
+            android:background="@drawable/lib_back_button" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="50dp"
+            android:layout_centerInParent="true"
+            android:gravity="center"
+            android:text="@string/social_search"
+            android:textColor="#fff"
+            android:textAppearance="?android:attr/textAppearanceLargeInverse" />
+    </RelativeLayout>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="0.5dp"
+        android:background="@color/divider_line" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:gravity="center"
+        android:orientation="horizontal"
+        android:paddingTop="8dp">
+
+        <Button
+            android:id="@+id/guess"
+            android:layout_width="60dip"
+            android:layout_height="52dip"
+            android:layout_marginRight="20dip"
+            android:background="@drawable/guess"
+            android:gravity="center" />
+
+        <Button
+            android:id="@+id/near"
+            android:layout_width="60dip"
+            android:layout_height="52dip"
+            android:layout_marginRight="20dip"
+            android:background="@drawable/near"
+            android:gravity="center" />
+
+        <Button
+            android:id="@+id/sameapp"
+            android:layout_width="60dip"
+            android:layout_height="52dip"
+            android:layout_marginRight="20dip"
+            android:background="@drawable/sameapp"
+            android:gravity="center" />
+
+        <Button
+            android:id="@+id/publicaccounts"
+            android:layout_width="60dip"
+            android:layout_height="52dip"
+            android:background="@drawable/publicaccounts"
+            android:gravity="center" />
+    </LinearLayout>
+
+    <ImageView
+        android:layout_width="fill_parent"
+        android:layout_height="1dip"
+        android:layout_marginTop="5dip"
+        android:background="#b1b6b9"></ImageView>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <com.iyuba.core.widget.pulltorefresh.PullToRefreshView
+            android:id="@+id/listview"
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent"
+            android:orientation="vertical">
+
+            <ListView
+                android:id="@+id/friendlist"
+                android:layout_width="fill_parent"
+                android:layout_height="fill_parent"
+                android:cacheColorHint="#00000000"
+                android:divider="#b1b6b9"
+                android:dividerHeight="0.5dip"
+                android:fadingEdge="none"
+                android:fastScrollEnabled="true" />
+        </com.iyuba.core.widget.pulltorefresh.PullToRefreshView>
+    </LinearLayout>
+
+</LinearLayout>

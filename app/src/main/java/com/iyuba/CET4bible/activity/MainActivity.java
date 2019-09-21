@@ -1,14 +1,18 @@
 package com.iyuba.CET4bible.activity;
 
+import android.annotation.SuppressLint;
 import android.app.AlertDialog;
+import android.arch.persistence.room.Transaction;
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.IntentFilter;
+import android.content.pm.PackageManager;
 import android.content.res.Configuration;
 import android.content.res.Resources;
 import android.graphics.drawable.Drawable;
+import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.HandlerThread;
@@ -16,57 +20,62 @@ import android.os.Looper;
 import android.os.Message;
 import android.os.MessageQueue;
 import android.os.Parcelable;
-import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
+import android.support.v4.content.FileProvider;
 import android.text.TextUtils;
 import android.util.DisplayMetrics;
 import android.util.Log;
 import android.view.KeyEvent;
-import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
-import android.view.ViewGroup;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.flurry.android.FlurryAgent;
+import com.blankj.utilcode.util.ToastUtils;
 import com.google.gson.Gson;
-import com.iflytek.cloud.SpeechConstant;
-import com.iflytek.cloud.SpeechUtility;
 import com.iyuba.CET4bible.BuildConfig;
 import com.iyuba.CET4bible.R;
 import com.iyuba.CET4bible.event.MainMicroClassEvent;
 import com.iyuba.CET4bible.fragment.HomeFragment;
 import com.iyuba.CET4bible.fragment.MeFragment;
 import com.iyuba.CET4bible.listener.AppUpdateCallBack;
+import com.iyuba.CET4bible.listening.SectionA;
+import com.iyuba.CET4bible.manager.ListenDataManager;
 import com.iyuba.CET4bible.manager.VersionManager;
 import com.iyuba.CET4bible.protocol.AdRequest;
 import com.iyuba.CET4bible.protocol.AdResponse;
 import com.iyuba.CET4bible.sqlite.ImportDatabase;
+import com.iyuba.CET4bible.sqlite.op.Cet4WordOp;
+import com.iyuba.CET4bible.sqlite.op.NewTypeExplainOp;
+import com.iyuba.CET4bible.sqlite.op.NewTypeSectionAAnswerOp;
+import com.iyuba.CET4bible.sqlite.op.NewTypeSectionBAnswerOp;
+import com.iyuba.CET4bible.sqlite.op.NewTypeSectionCAnswerOp;
+import com.iyuba.CET4bible.sqlite.op.SectionATextOp;
 import com.iyuba.CET4bible.thread.DownLoadAd;
-import com.iyuba.CET4bible.util.AdSplashUtil;
 import com.iyuba.CET4bible.util.exam.ExamDataUtil;
 import com.iyuba.CET4bible.util.exam.ExamListBean;
+import com.iyuba.abilitytest.activity.AbilityTestListActivity;
 import com.iyuba.base.BaseActivity;
+import com.iyuba.base.util.L;
+import com.iyuba.base.util.T;
 import com.iyuba.configation.ConfigManager;
 import com.iyuba.configation.Constant;
-import com.iyuba.configation.ConstantManager;
 import com.iyuba.configation.RuntimeManager;
 import com.iyuba.core.activity.CrashApplication;
+import com.iyuba.core.discover.activity.GoPracticeEvent;
 import com.iyuba.core.listener.ProtocolResponse;
 import com.iyuba.core.listener.ResultIntCallBack;
 import com.iyuba.core.manager.AccountManager;
 import com.iyuba.core.manager.BackgroundManager;
+import com.iyuba.core.manager.SocialDataManager;
+import com.iyuba.core.me.activity.PersonalHome;
 import com.iyuba.core.me.activity.VipCenter;
 import com.iyuba.core.me.pay.PayOrderActivity;
 import com.iyuba.core.protocol.BaseHttpResponse;
 import com.iyuba.core.service.Background;
 import com.iyuba.core.setting.SettingConfig;
 import com.iyuba.core.sqlite.ImportLibDatabase;
-import com.iyuba.core.sqlite.mode.UserInfo;
 import com.iyuba.core.sqlite.op.UserInfoOp;
-import com.iyuba.core.teacher.fragment.TeacherFragment;
 import com.iyuba.core.thread.GitHubImageLoader;
 import com.iyuba.core.util.ExeProtocol;
 import com.iyuba.core.util.LogUtils;
@@ -75,45 +84,39 @@ import com.iyuba.core.widget.ContextMenu;
 import com.iyuba.core.widget.dialog.CustomToast;
 import com.iyuba.headlinelibrary.HeadlineType;
 import com.iyuba.headlinelibrary.IHeadlineManager;
-import com.iyuba.headlinelibrary.data.model.Headline;
-import com.iyuba.headlinelibrary.event.HeadlineCreditChangeEvent;
-import com.iyuba.headlinelibrary.event.HeadlineCreditIncreaseEvent;
-import com.iyuba.headlinelibrary.event.HeadlineSearchItemEvent;
+import com.iyuba.headlinelibrary.ui.circle.SpeakCircleEvent;
 import com.iyuba.headlinelibrary.ui.content.AudioContentActivity;
+import com.iyuba.headlinelibrary.ui.content.AudioContentActivityNew;
 import com.iyuba.headlinelibrary.ui.content.TextContentActivity;
-import com.iyuba.headlinelibrary.ui.content.VideoContentActivity;
-import com.iyuba.headlinelibrary.ui.title.DropdownTitleFragment;
+import com.iyuba.headlinelibrary.ui.content.VideoContentActivityNew;
+import com.iyuba.headlinelibrary.ui.title.DropdownTitleFragmentNew;
 import com.iyuba.headlinelibrary.ui.title.HolderType;
 import com.iyuba.imooclib.ImoocManager;
-import com.iyuba.imooclib.event.ImoocCreditIncreaseEvent;
-import com.iyuba.imooclib.ui.content.ContentActivity;
+import com.iyuba.imooclib.event.ImoocBuyVIPEvent;
 import com.iyuba.imooclib.ui.mobclass.MobClassActivity;
 import com.iyuba.imooclib.ui.mobclass.MobClassFragment;
 import com.iyuba.module.dl.BasicDLPart;
 import com.iyuba.module.dl.DLItemEvent;
 import com.iyuba.module.favor.data.model.BasicFavorPart;
 import com.iyuba.module.favor.event.FavorItemEvent;
-import com.iyuba.module.movies.event.IMovieCreditChangeEvent;
-import com.iyuba.module.movies.event.IMovieCreditIncreaseEvent;
 import com.iyuba.module.movies.event.IMovieGoVipCenterEvent;
 import com.iyuba.module.movies.ui.series.SeriesActivity;
-import com.iyuba.trainingcamp.activity.BuyIndicatorActivity;
+import com.iyuba.module.user.IyuUserManager;
+import com.iyuba.module.user.User;
 import com.iyuba.trainingcamp.activity.GoldNewFragment;
 import com.iyuba.trainingcamp.activity.GoldShareActivity;
-import com.iyuba.trainingcamp.app.GoldApp;
+import com.iyuba.trainingcamp.app.TrainingManager;
 import com.iyuba.trainingcamp.bean.SignBean;
 import com.iyuba.trainingcamp.event.PayEvent;
 import com.iyuba.trainingcamp.event.ShareEvent;
-import com.iyuba.trainingcamp.event.StarMicroEvent;
+import com.iyuba.trainingcamp.event.StartMicroEvent;
 import com.iyuba.trainingcamp.http.Http;
 import com.iyuba.trainingcamp.http.HttpCallback;
-import com.iyuba.trainingcamp.utils.Constants;
 import com.iyuba.trainingcamp.utils.FilePath;
 import com.iyuba.trainingcamp.utils.ToastUtil;
 import com.umeng.analytics.MobclickAgent;
 import com.umeng.message.PushAgent;
 
-import org.apache.commons.codec.binary.Base64;
 import org.greenrobot.eventbus.EventBus;
 import org.greenrobot.eventbus.Subscribe;
 import org.greenrobot.eventbus.ThreadMode;
@@ -121,6 +124,8 @@ import org.greenrobot.eventbus.ThreadMode;
 import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.Base64;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
@@ -132,7 +137,6 @@ import cn.sharesdk.onekeyshare.OnekeyShare;
 import cn.sharesdk.wechat.moments.WechatMoments;
 import okhttp3.Call;
 
-
 /**
  * 类名
  *
@@ -142,19 +146,14 @@ import okhttp3.Call;
 public class MainActivity extends BaseActivity implements OnClickListener,
         AppUpdateCallBack {
 
-    String s = "";
     private static boolean changeByApp;
     GoldNewFragment goldNewFragment;
-    private TextView home, info,/*discover, me,set*/
-            microclass;
+    private TextView home, info, microclass;
     private TextView gold_vip;
     private HomeFragment homeFragment;
-    private TeacherFragment teacherFragment;
     private MeFragment meFragment;
     private MobClassFragment microClassListFragment;
-    private Fragment mainHeadlinesFragment;
-    private DropdownTitleFragment mExtraFragment;
-    private FragmentManager fragmentManager;
+    private DropdownTitleFragmentNew mExtraFragment;
     private Context mContext;
     private String version_code, url;
     private changeLanguageReceiver mLanguageReceiver;
@@ -169,6 +168,7 @@ public class MainActivity extends BaseActivity implements OnClickListener,
     };
     private TextView discover;
     private TextView me;
+    private Cet4WordOp db;
     private Handler handler = new Handler() {
 
         @Override
@@ -200,6 +200,7 @@ public class MainActivity extends BaseActivity implements OnClickListener,
         }
     };
 
+
     @Subscribe
     public void onPayEvent(PayEvent event) {
         if (TouristUtil.isTourist()) {
@@ -213,10 +214,11 @@ public class MainActivity extends BaseActivity implements OnClickListener,
         intent.putExtra("out_trade_no", event.getOut_trade_no());
         intent.putExtra("subject", event.getSubject());
         intent.putExtra("body", event.getBody());
-//        intent.putExtra("price", event.getPrice());
-        intent.putExtra("price", "0.01");
+        intent.putExtra("price", event.getPrice());
+        intent.putExtra("isGold", true);
         mContext.startActivity(intent);
     }
+
 
     @Subscribe
     public void onShareEvent(ShareEvent event) {
@@ -231,84 +233,32 @@ public class MainActivity extends BaseActivity implements OnClickListener,
         setLanguage();
         setContentView(R.layout.main);
         mContext = this;
+        db = new Cet4WordOp(mContext);
+        addEvaluateDatas();
+        if (!ConfigManager.Instance().loadBoolean(ConfigManager.WORD_DB_NEW_LOADED,false )){
+            db.writeToRoomDB(mContext);
+            ConfigManager.Instance().putBoolean(ConfigManager.WORD_DB_NEW_LOADED, true);
+        }
         CrashApplication.getInstance().addActivity(this);
         RuntimeManager.setApplication(getApplication());
         RuntimeManager.setDisplayMetrics(this);
-
-//        EventBus.getDefault().register(this);
-//        ShareSDK.initSDK(mContext, "40ffc22c29e8");
         MobclickAgent.updateOnlineConfig(mContext);
         initViews();
-        initXunFeiYUYin();
         gold_vip = findView(R.id.gold_vip);
-
-        gold_vip.setOnClickListener(new OnClickListener() {
-            @Override
-            public void onClick(View v) {
-
-                int vipStatus = AccountManager.Instace(mContext).getVipStatus();
-                Log.d("vipstatus",vipStatus+"");
-
-                if (vipStatus == Constant.VIP_STATUS) {
-
-                    AlertDialog.Builder builder = new AlertDialog.Builder(mContext);
-                    final String[] itemString = {"voa","bbc","cet4","cet6","ted","csvoa"};
-                    builder.setSingleChoiceItems(itemString, 0, new DialogInterface.OnClickListener() {
-                        @Override
-                        public void onClick(DialogInterface dialog, int which) {
-                            s = itemString[which];
-                            GoldApp.getApp(mContext).init(ConfigManager.Instance().loadString("userId"), ConfigManager.Instance().loadString("userName"), s, Constant.APP_CONSTANT.courseTypeId(), Constant.APPID);
-                            GoldApp.getApp(mContext).initTheme(Constants.ORANGE);
-                            GoldApp.getApp(mContext).setVipStatus(true);
-                            setTabSelection(4);
-                            dialog.dismiss();
-                        }
-                    }).show();
-
-//                    Intent intent = new Intent(mContext, GoldActivity.class);
-//                    Intent intent = new Intent(mContext, GoldNewActivity.class);
-//                    intent.setFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP);
-//                    startActivity(intent);
-                } else {
-                    Intent intent = new Intent(mContext, BuyIndicatorActivity.class);
-                    intent.putExtra("flag", true);
-                    GoldApp.getApp(mContext).init(ConfigManager.Instance().loadString("userId"), ConfigManager.Instance().loadString("userName"), Constant.mListen, Constant.APP_CONSTANT.courseTypeId(), Constant.APPID);
-                    intent.setFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP);
-                    startActivity(intent);
-
-                }
-            }
-        });
-        fragmentManager = this.getSupportFragmentManager();
-        boolean isfirst = ConfigManager.Instance().loadBoolean("firstuse");
-        if (isfirst && ConstantManager.isN123()) {
-            AlertDialog alert = new AlertDialog.Builder(mContext).create();
-//            alert.setTitle(R.string.introduction_this_version);
-//            alert.setMessage("1.全新改版,超强体验.\n2.名师直播,助您顺利通过考试.\n3.全新发现模块.\n4.如有使用软件问题请通过反馈与我们沟通~"
-//                    + "\nQQ：2326344291");
-            alert.setTitle("提示");
-            alert.setMessage("可在设置中切换日语考试等级N1，N2，N3");
-            alert.setIcon(android.R.drawable.ic_dialog_alert);
-            alert.setButton(AlertDialog.BUTTON_POSITIVE, getResources()
-                            .getString(R.string.alert_btn_ok),
-                    new DialogInterface.OnClickListener() {
-                        @Override
-                        public void onClick(DialogInterface dialog, int which) {
-                            ConfigManager.Instance().putBoolean("firstuse", false);
-                            Intent intent = new Intent("presstorefresh");
-                            mContext.sendBroadcast(intent);
-                        }
-                    });
-            alert.show();
+        if (Constant.APP_CONSTANT.isEnglish()) {
+            gold_vip.setVisibility(View.VISIBLE);
+        } else {
+            gold_vip.setVisibility(View.GONE);
         }
+        gold_vip.setOnClickListener(this);
         changeByApp = false;
         initSet();
         bindService();
-        initNight();
         new NeedTimeOp().start();
+        initFragments();
+
         setTabSelection(0);
-
-
+        requestPermission();
         Looper.getMainLooper().myQueue().addIdleHandler(new MessageQueue.IdleHandler() {
             @Override
             public boolean queueIdle() {
@@ -327,10 +277,58 @@ public class MainActivity extends BaseActivity implements OnClickListener,
         });
     }
 
+    private void addEvaluateDatas() {
+        SectionATextOp op = new SectionATextOp(this);
+        op.addEvaluateDatas();
+    }
+
+    private void requestPermission() {
+        if (Build.VERSION.SDK_INT >= 23) {
+            int REQUEST_CODE_CONTACT = 101;
+            String[] permissions = {android.Manifest.permission.WRITE_EXTERNAL_STORAGE, android.Manifest.permission.RECORD_AUDIO};
+
+            //验证是否许可权限
+            for (String str : permissions) {
+                if (this.checkSelfPermission(str) != PackageManager.PERMISSION_GRANTED) {
+                    //申请权限
+                    this.requestPermissions(permissions, REQUEST_CODE_CONTACT);
+                }
+            }
+        }
+    }
+
+    private void setImoocStatus() {
+        ImoocManager.appId = Constant.APPID;
+        User user = new User();
+
+        if (AccountManager.Instace(mContext.getApplicationContext())
+                .checkUserLogin()) {
+            user.vipStatus = ConfigManager.Instance().loadInt("isvip") + "";
+            user.name = AccountManager.Instace(mContext).getUserName();
+            user.uid = Integer.parseInt(ConfigManager.Instance().loadString("userId"));
+            IyuUserManager.getInstance().setCurrentUser(user);
+        } else {
+            user.vipStatus = "0";
+            user.name = "";
+            user.uid = 0;
+            IyuUserManager.getInstance().setCurrentUser(user);
+        }
+    }
+
+    @SuppressLint("MissingSuperCall")
+    @Override
+    protected void onSaveInstanceState(Bundle outState) {
+
+    }
+
     @Override
     protected void onResume() {
         super.onResume();
         MobclickAgent.onResume(this);
+        intTraingCamp();
+        if (microClassListFragment != null && mExtraFragment != null) {
+            microClassListFragment.refreshContent();
+        }
     }
 
     @Override
@@ -355,11 +353,7 @@ public class MainActivity extends BaseActivity implements OnClickListener,
 
     @Override
     public void onBackPressed() {
-//        if (contextMenu.isShown()) {
-//            contextMenu.dismiss();
-//        } else {
         pressAgainExit();
-//        }
     }
 
     @Override
@@ -404,6 +398,31 @@ public class MainActivity extends BaseActivity implements OnClickListener,
         return super.onKeyDown(keyCode, event);
     }
 
+    private void intTraingCamp() {
+        int vipStatus = AccountManager.Instace(mContext).getVipStatus();
+        TrainingManager.appId = Constant.APPID;
+        TrainingManager.productId = Constant.APP_CONSTANT.courseTypeId();
+        if (BuildConfig.isCET4) {
+            TrainingManager.LessonType = "cet4";
+        } else {
+            TrainingManager.LessonType = "cet6";
+        }
+        if (TextUtils.isEmpty(ConfigManager.Instance().loadString("userId")) || TextUtils.isEmpty(ConfigManager.Instance().loadString("userName"))) {
+            TrainingManager.userName = "";
+            TrainingManager.userId = "0";
+        } else {
+            TrainingManager.userName = ConfigManager.Instance().loadString("userName");
+            TrainingManager.userId = ConfigManager.Instance().loadString("userId");
+        }
+        TrainingManager.vipstatus = vipStatus;
+
+        if (vipStatus == com.iyuba.configation.Constant.VIP_STATUS) {
+            TrainingManager.isVip = true;
+        } else {
+            TrainingManager.isVip = false;
+        }
+    }
+
     private void pressAgainExit() {
         if (isExit) {
             exit();
@@ -429,7 +448,6 @@ public class MainActivity extends BaseActivity implements OnClickListener,
     @Override
     public void appUpdateFaild() {
 
-
     }
 
     private void initViews() {
@@ -437,26 +455,11 @@ public class MainActivity extends BaseActivity implements OnClickListener,
         home = findViewById(R.id.home);
         microclass = findViewById(R.id.microclass);
         discover = findViewById(R.id.discover);
-//        ask = (TextView) findViewById(R.id.ask);
         me = findViewById(R.id.me);
-
         home.setOnClickListener(this);
         microclass.setOnClickListener(this);
         discover.setOnClickListener(this);
-
-        if (!BuildConfig.isEnglish || AdSplashUtil.isNoAdTime()) {
-            discover.setText("视频");
-        } else {
-            discover.setText("头条");
-        }
-//        ask.setOnClickListener(this);
         me.setOnClickListener(this);
-    }
-
-    @Override
-    protected void onSaveInstanceState(Bundle outState) {
-        outState.putString("a", "hahha");
-        super.onSaveInstanceState(outState);
     }
 
     @Override
@@ -474,6 +477,9 @@ public class MainActivity extends BaseActivity implements OnClickListener,
             case R.id.me:
                 setTabSelection(2);
                 break;
+            case R.id.gold_vip:
+                setTabSelection(4);
+                break;
             default:
                 break;
         }
@@ -481,173 +487,33 @@ public class MainActivity extends BaseActivity implements OnClickListener,
 
     public void setTabSelection(int index) {
         clearSelection();
-        FragmentTransaction transaction = fragmentManager.beginTransaction();
-        hideFragments(transaction);
+        hideFragments();
+        FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
         switch (index) {
             case 0:
                 setTextDrawable(R.drawable.home_press, home);
                 home.setTextColor(getResources().getColor(R.color.colorPrimary));
-                if (homeFragment == null) {
-                    homeFragment = new HomeFragment();
-                    transaction.replace(R.id.content, homeFragment);
-                } else {
-                    transaction.show(homeFragment);
-                }
+                transaction.show(homeFragment);
                 break;
             case 1:
                 setTextDrawable(R.drawable.microclass_press, microclass);
                 microclass.setTextColor(getResources().getColor(R.color.colorPrimary));
-//                if (microClassListFragment == null) {
-//                    microClassListFragment = new MobClassListFragment(ImoocConstantManager.OWNERID);
-//                    transaction.replace(R.id.content, microClassListFragment);
-//                } else {
-//                    transaction.show(microClassListFragment);
-//                }
-                if (AccountManager.Instace(getApplicationContext())
-                        .checkUserLogin()) {
-
-                    ImoocManager.userId = ConfigManager.Instance().loadString("userId");
-                    ImoocManager.vipStatus = ConfigManager.Instance().loadInt("isvip") + "";
-                } else {
-
-                    ImoocManager.userId = "0";
-                    ImoocManager.vipStatus = "0";
-                }
-                ImoocManager.appId = Constant.APPID;
-//                MobClassActivity.buildIntent(mContext, 21);
-                if (microClassListFragment == null) {
-                    microClassListFragment = MobClassFragment.newInstance(MobClassFragment.buildArguments(Integer.parseInt(Constant.APP_CONSTANT.courseTypeId())));
-                    microClassListFragment.onCreateView(LayoutInflater.from(mContext), (ViewGroup) findView(R.id.dl), null);
-
-//                                    getSupportFragmentManager().beginTransaction().
-//                                            add(com.iyuba.imooclib.R.id.frame_container, MobClassFragment.newInstance(args))
-//                                            .commit();
-                    transaction.add(R.id.content, microClassListFragment);
-                } else {
-                    microClassListFragment = MobClassFragment.newInstance(MobClassFragment.buildArguments(Integer.parseInt(Constant.APP_CONSTANT.courseTypeId())));
-                    microClassListFragment.onCreateView(LayoutInflater.from(mContext), (ViewGroup) findView(R.id.dl), null);
-
-//                                    getSupportFragmentManager().beginTransaction().
-//                                            add(com.iyuba.imooclib.R.id.frame_container, MobClassFragment.newInstance(args))
-//                                            .commit();
-                    transaction.add(R.id.content, microClassListFragment);
-//                    transaction.show(microClassListFragment);
-
-                }
-//                startActivity(new Intent(mContext, MobClassActivity.class));
+                transaction.show(microClassListFragment);
                 break;
             case 2:
                 setTextDrawable(R.drawable.me_press, me);
                 me.setTextColor(getResources().getColor(R.color.colorPrimary));
-                if (meFragment == null) {
-                    meFragment = new MeFragment();
-                    transaction.add(R.id.content, meFragment);
-                } else {
-                    transaction.show(meFragment);
-                }
+                transaction.show(meFragment);
                 break;
             case 3:
                 setTextDrawable(R.drawable.main_headline_checked, discover);
                 discover.setTextColor(getResources().getColor(R.color.colorPrimary));
-//                String uid;
-//                String vipStatus;
-//                if (AccountManager.Instace(mContext).getUserInfo() == null) {
-//                    uid = "0";
-//                    vipStatus = "0";
-//                } else {
-//                    uid = AccountManager.Instace(mContext).userInfo.uid;
-//                    vipStatus = AccountManager.Instace(mContext).userInfo.vipStatus;
-//                }
-//                if (mainHeadlinesFragment == null) {
-//                    String typeStr;
-//
-//                    if (BuildConfig.isEnglish) {
-//                        if (AdSplashUtil.isNoAdTime()) {
-//                            typeStr = HeadlinesConstantManager.buildTypeStr(
-//                                    HeadlinesConstantManager.Type.ALL,
-//                                    HeadlinesConstantManager.Type.SONG,
-//                                    HeadlinesConstantManager.Type.MEIYU,
-//                                    HeadlinesConstantManager.Type.TED
-//                            );
-//                        } else {
-//                            typeStr = HeadlinesConstantManager.buildTypeStr(
-//                                    HeadlinesConstantManager.Type.ALL,
-//                                    HeadlinesConstantManager.Type.NEWS,
-//                                    HeadlinesConstantManager.Type.VOA,
-//                                    HeadlinesConstantManager.Type.CSVOA,
-//                                    HeadlinesConstantManager.Type.SONG,
-//                                    HeadlinesConstantManager.Type.BBC,
-//                                    HeadlinesConstantManager.Type.VOAVIDEO,
-//                                    HeadlinesConstantManager.Type.MEIYU,
-//                                    HeadlinesConstantManager.Type.TED,
-//                                    HeadlinesConstantManager.Type.BBCWORDVIDEO,
-//                                    HeadlinesConstantManager.Type.TOPVIDEOS
-//                            );
-//                        }
-//                    } else {
-//                        typeStr = HeadlinesConstantManager.buildTypeStr(
-//                                HeadlinesConstantManager.Type.JAPANVIDEOS
-//                        );
-//                    }
-//                    mainHeadlinesFragment = DropdownMenuFragment.newInstance(
-//                            uid, vipStatus,
-//                            HeadlinesConstantManager.ALL_CATEGORY,
-//                            HeadlinesConstantManager.BBC_TYPE, true,
-//                            HeadlinesConstantManager.REQUEST_PIECES_MIX, typeStr);
-//                    transaction.replace(R.id.content, mainHeadlinesFragment);
-//                } else {
-//                    transaction.show(mainHeadlinesFragment);
-//                }
-
-
-                IHeadlineManager.appId = Constant.APPID;
-                IHeadlineManager.appName = Constant.AppName;
-                if (null == AccountManager.Instace(mContext).userId) {
-                    IHeadlineManager.userId = 0;
-                    IHeadlineManager.vipStatus = "0";
-                    IHeadlineManager.username = "";
-                } else {
-                    IHeadlineManager.userId = Integer.parseInt(AccountManager.Instace(mContext).userId);
-                    IHeadlineManager.vipStatus = String.valueOf(AccountManager.Instace(mContext).getVipStatus());
-                    IHeadlineManager.username = AccountManager.Instace(mContext).userName;
-                }
-
-
-                String[] types = new String[]{
-                        HeadlineType.ALL,
-                        HeadlineType.VOAVIDEO,
-                        HeadlineType.MEIYU,
-                        HeadlineType.TED,
-                        HeadlineType.BBCWORDVIDEO,
-                        HeadlineType.TOPVIDEOS,
-                        HeadlineType.SONG
-                };
-
-
-                if (mExtraFragment == null) {
-                    Bundle bundle = DropdownTitleFragment.buildArguments(2, 8, HolderType.SMALL, types);
-                    mExtraFragment = DropdownTitleFragment.newInstance(bundle);
-                    mExtraFragment.onCreateView(LayoutInflater.from(mContext), (ViewGroup) findView(R.id.dl), null);
-//                    transaction.replace(R.id.content, mExtraFragment);
-                    transaction.add(R.id.content, mExtraFragment);
-                } else {
-//                    transaction.show(mExtraFragment);
-                    Bundle bundle = DropdownTitleFragment.buildArguments(2, 8, HolderType.SMALL, types);
-                    mExtraFragment = DropdownTitleFragment.newInstance(bundle);
-//                    transaction.replace(R.id.content, mExtraFragment);
-                    mExtraFragment.onCreateView(LayoutInflater.from(mContext), (ViewGroup) findView(R.id.dl), null);
-
-                    transaction.add(R.id.content, mExtraFragment);
-                }
-//                transaction.commit();
+                transaction.show(mExtraFragment);
                 break;
             case 4:
-//                setTextDrawable(R.drawable.me_press, me);
-//                me.setTextColor(getResources().getColor(R.color.colorPrimary));
-//                    Bundle bundle = GoldNewFragment.buildArguments(mContext);
-                goldNewFragment = GoldNewFragment.newInstance();
-                transaction.add(R.id.content, goldNewFragment);
-
+                setTextDrawable(R.drawable.training_icon_pressed, gold_vip);
+                gold_vip.setTextColor(getResources().getColor(R.color.colorPrimary));
+                transaction.show(goldNewFragment);
                 break;
             default:
                 break;
@@ -655,12 +521,44 @@ public class MainActivity extends BaseActivity implements OnClickListener,
         transaction.commit();
     }
 
+    private void initFragments() {
+        IHeadlineManager.appId = Constant.APPID;
+        IHeadlineManager.appName = Constant.AppName;
+        setImoocStatus();
+        ImoocManager.appId = Constant.APPID;
+        initCommonConstants();
+        intTraingCamp();
+
+        FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
+        homeFragment = new HomeFragment();
+        meFragment = new MeFragment();
+        microClassListFragment = MobClassFragment.newInstance
+                (MobClassFragment.buildArguments(Integer.parseInt(Constant.APP_CONSTANT.courseTypeId()), false, getEnglishFilter()));
+
+        String[] types = new String[]{
+
+                HeadlineType.BBC,
+                HeadlineType.VOA,
+                HeadlineType.CSVOA,
+        };
+        Bundle bundle = DropdownTitleFragmentNew.buildArguments(10, HolderType.SMALL, types, false);
+        mExtraFragment = DropdownTitleFragmentNew.newInstance(bundle);
+        goldNewFragment = new GoldNewFragment();
+        transaction.add(R.id.content, microClassListFragment);
+        transaction.add(R.id.content, meFragment);
+        transaction.add(R.id.content, homeFragment);
+        transaction.add(R.id.content, goldNewFragment);
+        transaction.add(R.id.content, mExtraFragment);
+        transaction.commit();
+    }
+
     private void clearSelection() {
         setTextDrawable(R.drawable.home_bg, home);
         setTextDrawable(R.drawable.microclass_bg, microclass);
         setTextDrawable(R.drawable.main_headline_checked_bg, discover);
+        setTextDrawable(R.drawable.training_icon_default, gold_vip);
         setTextDrawable(R.drawable.me_bg, me);
-
+        gold_vip.setTextColor(0xffaeaeae);
         home.setTextColor(0xffaeaeae);
         microclass.setTextColor(0xffaeaeae);
         discover.setTextColor(0xffaeaeae);
@@ -672,7 +570,8 @@ public class MainActivity extends BaseActivity implements OnClickListener,
         text.setCompoundDrawablesWithIntrinsicBounds(null, img, null, null);
     }
 
-    private void hideFragments(FragmentTransaction transaction) {
+    private void hideFragments() {
+        FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
         if (homeFragment != null) {
             transaction.hide(homeFragment);
         }
@@ -682,39 +581,13 @@ public class MainActivity extends BaseActivity implements OnClickListener,
         if (mExtraFragment != null) {
             transaction.hide(mExtraFragment);
         }
-        if (teacherFragment != null) {
-            transaction.hide(teacherFragment);
-        }
         if (meFragment != null) {
             transaction.hide(meFragment);
         }
         if (goldNewFragment != null) {
             transaction.hide(goldNewFragment);
         }
-    }
-
-    private void initNight() {
-//        SimpleDateFormat sdf = new SimpleDateFormat("HH:mm:ss", Locale.CHINA);
-//        String time = sdf.format(new Date());
-//        String night = "23:00:00";
-//        String day = "07:00:00";
-//        String midNight = "24:00:00";
-//        String midNight2 = "00:00:00";
-//        boolean isNight = (time.compareTo(night) > 0)
-//                && (time.compareTo(midNight) < 0);
-//        boolean isNight2 = (time.compareTo(midNight2) > 0)
-//                && (time.compareTo(day) < 0);
-//        if (SettingConfig.Instance().isNight()) {
-//            night();
-//        } else if (isNight || isNight2) {
-//            handler.sendEmptyMessage(1);
-//            night();
-//            SettingConfig.Instance().setNight(true);
-//            changeByApp = true;
-//        } else {
-//            SettingConfig.Instance().setNight(false);
-//            day();
-//        }
+        transaction.commitAllowingStateLoss();
     }
 
     private void AutoLogin() {
@@ -727,34 +600,16 @@ public class MainActivity extends BaseActivity implements OnClickListener,
             } else {
                 TouristUtil.loadUserInfo(mContext);
             }
-
             return;
         }
 
         if (SettingConfig.Instance().isAutoLogin()) { // 自动登录
-
             String[] nameAndPwd = AccountManager.Instace(mContext).getUserNameAndPwd();
             String userName = nameAndPwd[0];
-            String userPwd = nameAndPwd[1];
-
-//            if (NetWorkState.isConnectingToInternet() && NetWorkState.getAPNType() != 1) {
-//                if (userName != null && !userName.equals("")) {
-//                    AccountManager.Instace(mContext).login(userName, userPwd,
-//                            new OperateCallBack() {
-//
-//                                @Override
-//                                public void success(String message) {
-//                                }
-//
-//                                @Override
-//                                public void fail(String message) {
-//                                    AccountManager.Instace(mContext).setLoginState(1);
-//                                }
-//                            });
-//                }
-//            } else
             if (userName != null && !userName.equals("")) {
                 AccountManager.Instace(mContext).setLoginState(1);
+                setImoocStatus();
+
             }
         }
     }
@@ -775,6 +630,20 @@ public class MainActivity extends BaseActivity implements OnClickListener,
             mPushAgent.disable();
         }
         LoadFix();
+    }
+
+    public ArrayList<Integer> getEnglishFilter() {
+        ArrayList<Integer> filter = new ArrayList<>();
+        for (int i = 0; i < 30; i++) {
+            filter.add(i);
+        }
+        filter.remove((Integer) 1);
+        filter.remove((Integer) 5);
+        filter.remove((Integer) 6);
+        filter.add(61);
+        filter.add(91);
+        filter.add(52);
+        return filter;
     }
 
     private void setLanguage() {
@@ -854,15 +723,11 @@ public class MainActivity extends BaseActivity implements OnClickListener,
                             Looper.prepare();
                             ConfigManager.Instance().putString("startuppic_Url", adResponse.startuppic_Url);
                             if (startDate.getTime() <= date.getTime()) {
-                                new DownLoadAd().execute("http://static3.iyuba.com/dev/" + adResponse.adPicUrl,
+                                new DownLoadAd().execute("http://static3.iyuba.cn/dev/" + adResponse.adPicUrl,
                                         "ad");
                             }
                             if (!adResponse.basePicTime.equals("")) {
                                 startDate = df.parse(adResponse.basePicTime);
-                                if (startDate.getTime() <= date.getTime()) {
-//                                    new DownLoadAd().execute(
-//                                            adResponse.basePicUrl, "base");
-                                }
                             }
                             Looper.loop();
                         }
@@ -934,7 +799,7 @@ public class MainActivity extends BaseActivity implements OnClickListener,
                 super.run();
                 unBind();
 //                MobSDK.st.stopSDK(mContext);
-                FlurryAgent.onEndSession(mContext);
+//                FlurryAgent.onEndSession(mContext);
                 ImportDatabase.mdbhelperClose();
                 ImportLibDatabase.mdbhelperClose();
                 CrashApplication.getInstance().exit();
@@ -949,21 +814,12 @@ public class MainActivity extends BaseActivity implements OnClickListener,
         new Handler(thread.getLooper()).postDelayed(task, 1500);// 1.5秒内再点有效
     }
 
-    private void initXunFeiYUYin() {
-        // 将“12345678”替换成您申请的 APPID，申请地址：http://www.xfyun.cn
-        // 请勿在“=”与 appid 之间添加任务空字符或者转义符
-//        SpeechUtility.createUtility(getApplicationContext(), SpeechConstant.APPID + "=57fc4ab0");//5752942e是雅思宝典在讯飞语音的apid
-        SpeechUtility.createUtility(getApplicationContext(), SpeechConstant.APPID + "=528db2fa");//5752942e是雅思宝典在讯飞语音的apid
-
-    }
-
     private class NeedTimeOp extends Thread {
         @Override
         public void run() {
             super.run();
             boolean isfirst = ConfigManager.Instance().loadBoolean("firstuse");
-            if (isfirst) {
-            } else {
+            if (!isfirst) {
                 checkAppUpdate();
             }
             Looper.prepare();
@@ -1008,48 +864,27 @@ public class MainActivity extends BaseActivity implements OnClickListener,
         //收藏页面点击
         BasicFavorPart fPart = fEvent.items.get(fEvent.position);
         goFavorItem(fPart);
-
     }
 
 
     private void goFavorItem(BasicFavorPart part) {
-        String userIdStr = AccountManager.Instace(mContext).userId;
-
-        int userId;
-        boolean isVip;
-
-
-        try {
-            userId = Integer.parseInt(userIdStr);
-        } catch (Exception e) {
-            e.printStackTrace();
-            userId = 0;
-        }
-
-
-        UserInfo userInfo2 = AccountManager.Instace(mContext).getUserInfo();
-
-        try {
-            int vip = Integer.parseInt(userInfo2.vipStatus);
-            isVip = vip > 0;
-        } catch (Exception e) {
-            e.printStackTrace();
-            isVip = false;
-        }
-
 
         switch (part.getType()) {
             case "news":
-
-                startActivity(TextContentActivity.getIntent2Me(mContext, userId, Constant.APPID, part.getId(), part.getTitle(), part.getTitle_cn(), part.getType()
+                startActivity(TextContentActivity.getIntent2Me(mContext, part.getId(), part.getTitle(), part.getTitleCn(), part.getType()
                         , part.getCategoryName(), part.getCreateTime(), part.getPic(), part.getSource()));
                 break;
             case "voa":
             case "csvoa":
             case "bbc":
+                startActivity(AudioContentActivityNew.getIntent2Me(
+                        mContext, part.getCategoryName(), part.getTitle(), part.getTitleCn(),
+                        part.getPic(), part.getType(), part.getId(), part.getSound()));
+                break;
+
             case "song":
-                startActivity(AudioContentActivity.getIntent2Me(mContext, Constant.APPID, userId,
-                        isVip, part.getCategoryName(), part.getTitle(), part.getTitle_cn(),
+                startActivity(AudioContentActivity.getIntent2Me(
+                        mContext, part.getCategoryName(), part.getTitle(), part.getTitleCn(),
                         part.getPic(), part.getType(), part.getId(), part.getSound()));
                 break;
             case "voavideo":
@@ -1058,14 +893,12 @@ public class MainActivity extends BaseActivity implements OnClickListener,
             case "bbcwordvideo":
             case "topvideos":
             case "japanvideos":
-
-                startActivity(VideoContentActivity.getIntent2Me(mContext, Constant.APPID, userId,
-                        part.getCategoryName(), part.getTitle(), part.getTitle_cn(), part.getPic(),
-                        part.getType(), part.getId()));
+                startActivity(VideoContentActivityNew.getIntent2Me(mContext,
+                        part.getCategoryName(), part.getTitle(), part.getTitleCn(), part.getPic(),
+                        part.getType(), part.getId(), part.getSound()));
                 break;
             case "series":
-
-                Intent intent = SeriesActivity.buildIntent(mContext, part.getSeriseId(), part.getId());
+                Intent intent = SeriesActivity.buildIntent(mContext, part.getSeriesId(), part.getId());
                 startActivity(intent);
                 break;
         }
@@ -1075,39 +908,15 @@ public class MainActivity extends BaseActivity implements OnClickListener,
     public void onEvent(DLItemEvent dlEvent) {
         //视频下载后点击
         BasicDLPart dlPart = dlEvent.items.get(dlEvent.position);
-
-
-        String userIdStr = AccountManager.Instace(mContext).userId;
-
-        int userId;
-        boolean isVip;
-
-
-        try {
-            userId = Integer.parseInt(userIdStr);
-        } catch (Exception e) {
-            e.printStackTrace();
-            userId = 0;
-        }
-
-
-        UserInfo userInfo2 = AccountManager.Instace(mContext).getUserInfo();
-
-        try {
-            int vip = Integer.parseInt(userInfo2.vipStatus);
-            isVip = vip > 0;
-        } catch (Exception e) {
-            e.printStackTrace();
-            isVip = false;
-        }
-
         switch (dlPart.getType()) {
             case "voa":
             case "csvoa":
             case "bbc":
+                startActivity(AudioContentActivityNew.getIntent2Me(mContext, dlPart.getCategoryName(), dlPart.getTitle(), dlPart.getTitleCn(),
+                        dlPart.getPic(), dlPart.getType(), dlPart.getId()));
+                break;
             case "song":
-                startActivity(AudioContentActivity.getIntent2Me(mContext, Constant.APPID, userId,
-                        isVip, dlPart.getCategoryName(), dlPart.getTitle(), dlPart.getTitle_cn(),
+                startActivity(AudioContentActivity.getIntent2Me(mContext, dlPart.getCategoryName(), dlPart.getTitle(), dlPart.getTitleCn(),
                         dlPart.getPic(), dlPart.getType(), dlPart.getId()));
                 break;
             case "voavideo":
@@ -1116,58 +925,11 @@ public class MainActivity extends BaseActivity implements OnClickListener,
             case "bbcwordvideo":
             case "topvideos":
             case "japanvideos":
-                startActivity(VideoContentActivity.getIntent2Me(mContext, Constant.APPID, userId,
-                        dlPart.getCategoryName(), dlPart.getTitle(), dlPart.getTitle_cn(),
-                        dlPart.getPic(), dlPart.getType(), dlPart.getId()));
+                startActivity(VideoContentActivityNew.getIntent2Me(mContext,
+                        dlPart.getCategoryName(), dlPart.getTitle(), dlPart.getTitleCn(),
+                        dlPart.getPic(), dlPart.getType(), dlPart.getId(), null));
                 break;
         }
-    }
-
-
-//    **
-//            *学习完成积分增加
-//     *ImoocCreditIncreaseEvent --微课模块
-//     *IMovieCreditIncreaseEvent --美剧模块
-//     *HeadlineCreditIncreaseEvent --搜一搜模块
-//     *
-//             *
-//    @param
-//    event
-//     */
-
-    @Subscribe(threadMode = ThreadMode.MAIN)
-    public void onEvent(ImoocCreditIncreaseEvent event) {
-
-//        getPersonalInfo();
-
-    }
-
-    @Subscribe(threadMode = ThreadMode.MAIN)
-    public void onEvent(IMovieCreditIncreaseEvent event) {
-//        getPersonalInfo();
-    }
-
-    @Subscribe(threadMode = ThreadMode.MAIN)
-    public void onEvent(HeadlineCreditIncreaseEvent event) {
-//        getPersonalInfo();
-    }
-
-    /**
-     * 分享积分增加
-     * IMovieCreditChangeEvent 美剧模块
-     * HeadlineCreditChangeEvent 搜一搜模块
-     *
-     * @param event
-     */
-
-    @Subscribe(threadMode = ThreadMode.MAIN)
-    public void onEvent(IMovieCreditChangeEvent event) {
-//        getPersonalInfo();
-    }
-
-    @Subscribe(threadMode = ThreadMode.MAIN)
-    public void onEvent(HeadlineCreditChangeEvent event) {
-//        getPersonalInfo();
     }
 
     /**
@@ -1175,91 +937,30 @@ public class MainActivity extends BaseActivity implements OnClickListener,
      *
      * @param event
      */
-
     @Subscribe(threadMode = ThreadMode.MAIN)
     public void onEvent(IMovieGoVipCenterEvent event) {
-
         if (AccountManager.Instace(mContext).checkUserLogin()) {
             startActivity(new Intent(mContext, VipCenter.class));
         } else {
-//            CustomDialog.showLoginDialog(context, false, new IOperationFinish() {
-//                @Override
-//                public void finish() {
-//                    startActivity(new Intent(context, VipCenterActivity.class));
-//                }
-//            });
             ToastUtil.showToast(mContext, "请登录");
         }
     }
-
-
-    /**
-     * 搜一搜列表点击
-     *
-     * @param event
-     */
-    @Subscribe(threadMode = ThreadMode.MAIN)
-    public void onEvent(HeadlineSearchItemEvent event) {
-        Headline headline = event.headline;
-
-        try {
-            IHeadlineManager.userId = Integer.parseInt(AccountManager.Instace(mContext).userId);
-        } catch (Exception e) {
-            IHeadlineManager.userId = 0;
-        }
-        IHeadlineManager.appId = Constant.APPID;
-
-        switch (headline.type) {
-            case "news":
-
-                startActivity(TextContentActivity.getIntent2Me(mContext, IHeadlineManager.userId, IHeadlineManager.appId, headline));
-
-                break;
-            case "voa":
-            case "csvoa":
-            case "bbc":
-
-                startActivity(AudioContentActivity.getIntent2Me(mContext, IHeadlineManager.appId, IHeadlineManager.userId, IHeadlineManager.isVip(), headline));
-                break;
-            case "song":
-                startActivity(AudioContentActivity.getIntent2Me(mContext, IHeadlineManager.appId, IHeadlineManager.userId, IHeadlineManager.isVip(), headline));
-                break;
-            case "voavideo":
-            case "meiyu":
-            case "ted":
-                startActivity(VideoContentActivity.getIntent2Me(mContext, IHeadlineManager.appId, IHeadlineManager.userId, headline));
-                break;
-            case "bbcwordvideo":
-            case "topvideos":
-                startActivity(VideoContentActivity.getIntent2Me(mContext, IHeadlineManager.appId, IHeadlineManager.userId, headline));
-                break;
-            case "class": {
-                int packId = Integer.parseInt(headline.id);
-                Intent intent = ContentActivity.buildIntent(mContext, packId);
-                startActivity(intent);
-                break;
-            }
-        }
-    }
-
 
     public void showShareOnMoment(Context context, final String userID, final String AppId) {
 
         OnekeyShare oks = new OnekeyShare();
         //关闭sso授权
         oks.disableSSOWhenAuthorize();
-
         oks.setPlatform(WechatMoments.NAME);
         // titleUrl是标题的网络链接，仅在人人网和QQ空间使用
         oks.setImagePath(FilePath.getSharePicPath() + "share.png");
-
-
         oks.setSilent(true);
 
         oks.setCallback(new PlatformActionListener() {
             @Override
             public void onComplete(Platform platform, int i, HashMap<String, Object> hashMap) {
                 startInterfaceADDScore(userID, AppId);
+                ToastUtils.showShort("分享成功");
             }
 
             @Override
@@ -1287,9 +988,9 @@ public class MainActivity extends BaseActivity implements OnClickListener,
         String dateString = formatter.format(currentTime);
 //        final String time = Base64Coder.encode(dateString);
 
-        final String time = new String(Base64.encodeBase64(dateString.getBytes()));
+        final String time = new String(Base64.getEncoder().encode(dateString.getBytes()));
 
-        String url = "http:api.iyuba.com/credits/updateScore.jsp?srid=82&mobile=1&flag=" + time + "&uid=" + userID
+        String url = "http://api.iyuba.cn/credits/updateScore.jsp?srid=82&mobile=1&flag=" + time + "&uid=" + userID
                 + "&appid=" + appid;
         Http.get(url, new HttpCallback() {
 
@@ -1306,36 +1007,25 @@ public class MainActivity extends BaseActivity implements OnClickListener,
                     runOnUiThread(new Runnable() {
                         @Override
                         public void run() {
-                            if (money != null) {
-                                float moneyThisTime = Float.parseFloat(money);
-                            }
 
 
                             MobclickAgent.onEvent(mContext, "dailybonus");
                             if (money == null) {
                                 float moneyTotal = Float.parseFloat(totalCredit);
                                 Toast.makeText(mContext, "分享成功," + "您已获得" + Integer.parseInt(addCredit) * 0.01 + "元,总计: " + Integer.parseInt(totalCredit) * 0.01 + "元," + "满10元可在\"爱语课吧\"公众号提现", Toast.LENGTH_LONG).show();
-
-
                             } else {
                                 Toast.makeText(mContext, "分享成功，您已获得" + Integer.parseInt(money) * 0.01 + "元，总计: " + Integer.parseInt(totalCredit) * 0.01 + "元", Toast.LENGTH_LONG).show();
-
-
                             }
                         }
                     });
 
-
-                } else
-
-                {
+                } else {
                     runOnUiThread(new Runnable() {
                         @Override
                         public void run() {
                             Toast.makeText(mContext, "您今日已分享", Toast.LENGTH_SHORT).show();
                         }
                     });
-
                 }
             }
 
@@ -1350,19 +1040,115 @@ public class MainActivity extends BaseActivity implements OnClickListener,
     }
 
     @Subscribe
-    public void onEvent(StarMicroEvent event) {
-        if (AccountManager.Instace(getApplicationContext())
-                .checkUserLogin()) {
-            ImoocManager.userId = ConfigManager.Instance().loadString("userId");
-            ImoocManager.vipStatus = ConfigManager.Instance().loadInt("isvip") + "";
-        } else {
-
-            ImoocManager.userId = "0";
-            ImoocManager.vipStatus = "0";
-        }
-        ImoocManager.appId = Constant.APPID;
-        Intent intent = MobClassActivity.buildIntent(mContext, event.getProductid());
+    public void onEvent(StartMicroEvent event) {
+        Intent intent = MobClassActivity.buildIntent(mContext, Integer.parseInt(Constant.APP_CONSTANT.courseTypeId()), true, getEnglishFilter());
         startActivity(intent);
     }
 
+    @Subscribe
+    public void onEvent(ImoocBuyVIPEvent event) {
+        VipCenter.start(this, true);
+    }
+
+    @Subscribe
+    public void onEvent(GoPracticeEvent event) {
+        AbilityTestListActivity.actionStart(mContext, 2);
+    }
+
+    @Subscribe
+    public void onEvent(SpeakCircleEvent event) {
+        switch (event.flag) {
+            case SpeakCircleEvent.ARTICLE_FLAG:
+                startListeningActivity(event.topicId,event.paraId,event.idIndex);
+                break;
+            case SpeakCircleEvent.PERSONAL_FLAG:
+                Intent intent = new Intent();
+                SocialDataManager.Instance().userid = event.userId;
+                intent.setClass(mContext, PersonalHome.class);
+                intent.addFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
+                mContext.startActivity(intent);
+                break;
+            default:
+                break;
+
+        }
+    }
+
+    private void startListeningActivity(String year , String section , String idIndex) {
+        Log.d("diao", year+":"+section+":"+idIndex);
+        int type = Integer.parseInt(section)-1;
+        Log.d("diao", section+"sec");
+        String sec ;
+        if (type == 0){
+            sec = "A";
+        }else if (type ==1){
+            sec = "B";
+        }else if (type ==2){
+            sec = "C";
+        }else {
+            type = 0 ;
+            sec = "A";
+        }
+        List list = getData(type, year);
+        if (list == null || list.size() == 0) {
+            startListeningActivity00(year, type, year,  sec);
+        } else {
+            Intent intent = new Intent(mContext, SectionA.class);
+            intent.putExtra("section", section);
+            intent.putExtra("isNewType", true);
+            intent.putExtra("title", year);
+            mContext.startActivity(intent);
+        }
+    }
+
+
+    private void startListeningActivity00(String year ,final int type, final String test, final String section ) {
+
+        ExamDataUtil.requestExamData(mContext, Constant.APP_CONSTANT.TYPE(), section, year, new ExamDataUtil.DataCallback() {
+            @Override
+            public void onLoadData(boolean success) {
+                if (success) {
+                    getData(type, test);
+                    Intent intent = new Intent(mContext, SectionA.class);
+                    intent.putExtra("section", section);
+                    intent.putExtra("isNewType", true);
+                    mContext.startActivity(intent);
+                } else {
+                    T.showShort(mContext, "题库加载失败");
+                }
+            }
+        });
+    }
+
+    private List getData(int type, String year) {
+        ListenDataManager.Instance().year = year;
+        L.e("adapter === year ==== " + year);
+        switch (type) {
+            case 0:
+                ListenDataManager.Instance().answerList = new NewTypeSectionAAnswerOp(mContext).selectData(year);
+                ListenDataManager.Instance().explainList = new NewTypeExplainOp(mContext).selectData(year);
+                return ListenDataManager.Instance().answerList;
+            case 1:
+                ListenDataManager.Instance().answerList = new NewTypeSectionBAnswerOp(mContext).selectData(year);
+                ListenDataManager.Instance().explainList = new NewTypeExplainOp(mContext).selectData(year);
+                return ListenDataManager.Instance().answerList;
+            case 2:
+                ListenDataManager.Instance().answerList = new NewTypeSectionCAnswerOp(mContext).selectData(year);
+                ListenDataManager.Instance().explainList = new NewTypeExplainOp(mContext).selectData(year);
+                return ListenDataManager.Instance().answerList;
+            default:
+                return null;
+        }
+    }
+
+
+    private void initCommonConstants() {
+        User user = new User();
+        user.vipStatus = AccountManager.Instace(this).getVipStatus() + "";
+        user.uid = (AccountManager.Instace(mContext).userId) == null ? 0 : Integer.parseInt(AccountManager.Instace(mContext).userId);
+        user.name = AccountManager.Instace(mContext).userName;
+        IyuUserManager.getInstance().setCurrentUser(user);
+    }
+
 }
+

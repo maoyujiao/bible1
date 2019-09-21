@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="utf-8"?><!--判断题的答题卡-->
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/ll_ability_judge"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical">
+    <!--判断题目问题-->
+    <TextView
+        android:id="@+id/tv_ability_listen_judge"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="6dp"
+        android:text="True or False"
+        android:textSize="16sp" />
+
+    <!--判断题目问题详情-->
+    <TextView
+        android:id="@+id/tv_ability_listen_judge_ques"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:padding="6dp"
+        android:text="True or False"
+        android:textSize="16sp"
+        android:visibility="gone" />
+    <!--作为判断题目  前三个依次为正确 错误  未知    作为单选题目  依次为ABCDEF-->
+    <RadioGroup
+        android:id="@+id/rg_judge"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="10dp">
+
+        <RadioButton
+            android:id="@+id/rb_option_a_1"
+            style="@style/AbilityTestCheckBoxStyle"
+            android:text="正确" />
+
+        <RadioButton
+            android:id="@+id/rb_option_b_2"
+            style="@style/AbilityTestCheckBoxStyle"
+            android:text="错误" />
+
+        <RadioButton
+            android:id="@+id/rb_option_c_0"
+            style="@style/AbilityTestCheckBoxStyle"
+            android:text="未知" />
+
+        <RadioButton
+            android:id="@+id/rb_option_d"
+            style="@style/AbilityTestCheckBoxStyle"
+            android:text="未使用"
+            android:visibility="gone" />
+
+        <RadioButton
+            android:id="@+id/rb_option_e"
+            style="@style/AbilityTestCheckBoxStyle"
+            android:text="未使用"
+            android:visibility="gone" />
+
+        <RadioButton
+            android:id="@+id/rb_option_f"
+            style="@style/AbilityTestCheckBoxStyle"
+            android:text="未使用"
+            android:visibility="gone" />
+
+    </RadioGroup>
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:visibility="gone">
+
+        <Button
+            android:layout_width="80dp"
+            android:layout_height="40dp"
+            android:layout_margin="10dp"
+            android:background="@drawable/selector_btn_next_bg"
+            android:text="正确"
+            android:textColor="@drawable/selector_btntext_color_word_ability" />
+
+        <Button
+            android:layout_width="80dp"
+            android:layout_height="40dp"
+            android:layout_margin="10dp"
+            android:background="@drawable/selector_btn_next_bg"
+            android:text="错误"
+            android:textColor="@drawable/selector_btntext_color_word_ability" />
+
+        <Button
+            android:layout_width="80dp"
+            android:layout_height="40dp"
+            android:layout_margin="10dp"
+            android:background="@drawable/selector_btn_next_bg"
+            android:text="未知"
+            android:textColor="@drawable/selector_btntext_color_word_ability"
+            android:visibility="gone" />
+    </LinearLayout>
+</LinearLayout>

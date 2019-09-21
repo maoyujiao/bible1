@@ -1,0 +1,133 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <RelativeLayout
+        android:id="@+id/rl_select_ques_type_title"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:background="@color/colorPrimary">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:layout_centerInParent="true"
+            android:text="@string/select_ques_type"
+            android:textColor="@color/base_white"
+            android:textSize="18sp" />
+
+        <TextView
+            android:id="@+id/tv_select_ques_type_close"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:layout_centerVertical="true"
+            android:background="@drawable/lib_back_button"
+            android:gravity="center"
+            android:paddingEnd="16dp"
+            android:paddingStart="16dp"
+            android:textColor="#000"
+            android:textSize="14sp" />
+    </RelativeLayout>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="0.5dp"
+        android:layout_below="@id/rl_select_ques_type_title"
+        android:background="@color/divider_line" />
+
+    <RelativeLayout
+        android:id="@+id/rl_select_ques_type_operation"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:layout_alignParentBottom="true">
+
+        <Button
+            android:id="@+id/btn_clear_select_type"
+            android:layout_width="100dp"
+            android:layout_height="40dp"
+            android:layout_alignParentLeft="true"
+            android:layout_marginLeft="15dp"
+            android:background="@color/selectgray"
+            android:text="清空筛选" />
+
+        <Button
+            android:id="@+id/btn_ok_select_type"
+            android:layout_width="100dp"
+            android:layout_height="40dp"
+            android:layout_alignParentRight="true"
+            android:layout_marginRight="15dp"
+            android:background="@color/zhihublue"
+            android:text="确认"
+            android:textColor="@color/white" />
+    </RelativeLayout>
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_above="@id/rl_select_ques_type_operation"
+        android:layout_below="@id/rl_select_ques_type_title">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <TextView
+                    android:id="@+id/tv_ques_app_type"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="10dp"
+                    android:text="分类"
+                    android:textColor="@color/gray"
+                    android:textSize="16sp" />
+
+                <GridView
+                    android:id="@+id/gv_ques_app_type"
+                    android:layout_width="match_parent"
+                    android:layout_height="240dp"
+                    android:layout_below="@id/tv_ques_app_type"
+                    android:layout_marginStart="4dp"
+                    android:layout_marginEnd="4dp"
+                    android:columnWidth="65dp"
+                    android:horizontalSpacing="10dp"
+                    android:listSelector="@android:color/transparent"
+                    android:numColumns="4"
+                    android:verticalSpacing="5dp" />
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <TextView
+                    android:id="@+id/tv_ques_ability_type"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="10dp"
+                    android:text="考点"
+                    android:textColor="@color/gray"
+                    android:textSize="16sp" />
+
+                <GridView
+                    android:id="@+id/gv_ques_ability_type"
+                    android:layout_width="match_parent"
+                    android:layout_height="140dp"
+                    android:layout_below="@id/tv_ques_ability_type"
+                    android:layout_marginStart="4dp"
+                    android:layout_marginEnd="4dp"
+                    android:columnWidth="65dp"
+                    android:horizontalSpacing="10dp"
+                    android:listSelector="@android:color/transparent"
+                    android:numColumns="4"
+                    android:verticalSpacing="5dp" />
+            </RelativeLayout>
+        </LinearLayout>
+    </ScrollView>
+
+</RelativeLayout>

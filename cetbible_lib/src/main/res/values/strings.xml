@@ -1,0 +1,719 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <!-- about -->
+    <string name="about_praise">给我评价</string>
+    <string name="about_announcer">诚招主持人</string>
+    <string name="about_announcer_alert">听歌学英语节目主持人正在火爆招聘中，如果您的英语发音标准，声音亲和甜美，下一首听歌学英语主持人也许就是你。\n请将个人简历和作品发送至: hr@iyuba.cn</string>
+    <string name="about_update">版本更新</string>
+    <string name="about_communicate">如有问题，可与商务热线 4008881905或官方邮箱admin@iyuba.cn联系</string>
+    <string name="about_title">关于</string>
+    <string name="about_update_alert_1">当前有新版本更新：</string>
+    <string name="about_update_alert_2">,是否要更新？</string>
+    <string name="about_market_error">您当前未安装应用市场，无法使用该功能。</string>
+
+    <!-- 设置界面相关字符资源 -->
+    <string name="setting_title">设置</string>
+    <string name="setting_language">语言设置</string>
+    <string name="setting_clear">清除缓存</string>
+    <string name="setting_applanguage">界面语言</string>
+    <string name="setting_base">功能设置</string>
+    <string name="setting_base_download">高速下载-VIP用户10倍于普通用户</string>
+    <string name="setting_base_push">允许应用给您推送消息</string>
+    <string name="setting_sleep">提示：点击窗口外部关闭窗口！</string>
+    <string name="setting_clear_pic">清理图片缓存</string>
+    <string name="setting_clear_video">清理音频缓存</string>
+    <string name="setting_about">关于</string>
+    <string name="setting_recommend">推荐给朋友们</string>
+    <string name="setting_about_info">关于爱语吧</string>
+    <string name="setting_save_path_info">设置文件保存路径</string>
+    <string name="setting_about_feedback">意见反馈</string>
+    <string name="setting_help_use">使用帮助</string>
+    <string name="setting_loginout_success">退出成功！</string>
+    <string name="setting_sleep_mod">睡眠模式</string>
+    <string name="setting_sleep_state_off">关</string>
+    <string name="setting_sleep_slecttime">请选择时间</string>
+    <string name="setting_sleep_explain">例如设置"01:23"则代表1个小时23分钟之后关闭程序。</string>
+    <string name="setting_deleting">后台自动删除中……</string>
+    <string name="setting_alert">一旦删除，已收藏的本地音频无法再离线收听。\n确定要继续么?</string>
+    <string name="setting_logout_alert">登录状态可以享受更多爱语吧服务\n您确定要退出吗？</string>
+    <string name="setting_share1">我正在使用</string>
+    <string name="setting_share2">android版，感觉不错，你也来试试吧</string>
+    <string name="setting_share_ways">选择分享方式</string>
+    <string name="setting_vip_download">您可以在登录爱语吧账号后，购买VIP，享受高速通道30倍速率下载。下载速度最高可达1M/s。</string>
+
+    <!-- CollectActivity -->
+
+    <!-- RecentlyActivity -->
+
+    <!-- CommentFragment -->
+
+    <!-- ReadActivity -->
+
+    <string name="choose_pay_method">选择支付方式</string>
+    <string name="pay_confirm">确认</string>
+
+
+    <!--<string name="app_name">英语四级宝典</string>-->
+    <!--<string name="home_text">首页</string>-->
+    <!--<string name="info_text">资讯</string>-->
+    <!--<string name="set_text">设置</string>-->
+    <!--<string name="microclass_text">微课</string>-->
+    <!--<string name="word_text">核心词汇</string>-->
+    <!--<string name="write_text">写作</string>-->
+    <!--<string name="listen_text">听力</string>-->
+    <!--<string name="read_text">阅读</string>-->
+    <!--<string name="trans_text">翻译</string>-->
+    <!--<string name="mob_text">在线课堂</string>-->
+    <!--&lt;!&ndash; about &ndash;&gt;-->
+    <!--<string name="about_praise">给我评价</string>-->
+    <!--<string name="about_offical">爱语吧应用</string>-->
+    <!--<string name="about_weixin">官方微信:iyubasong</string>-->
+    <!--<string name="about_announcer">诚招主持人</string>-->
+    <!--<string name="about_announcer_alert">听歌学英语节目主持人正在火爆招聘中，如果您的英语发音标准，声音亲和甜美，下一首听歌学英语主持人也许就是你。\n请将个人简历和作品发送至: hr@iyuba.cn</string>-->
+    <!--<string name="about_update">版本更新</string>-->
+    <!--<string name="about_communicate">如有问题，可与商务热线 4008881905或官方邮箱admin@iyuba.cn联系</string>-->
+    <!--<string name="about_title">关于</string>-->
+    <!--<string name="about_wx">微信账号:iyubasong</string>-->
+    <!--<string name="about_update_alert_1">当前有新版本更新：</string>-->
+    <!--<string name="about_update_alert_2">,是否要更新？</string>-->
+    <!--<string name="about_update_running_title">更新应用</string>-->
+    <!--<string name="about_update_running">正在更新，请稍后。。。</string>-->
+    <!--<string name="about_error">服务器忙！请稍后下载！</string>-->
+    <!--<string name="about_update_isnew">四级宝典已经是最新版本</string>-->
+    <!--<string name="about_market_error">您当前未安装应用市场，无法使用该功能。</string>-->
+    <!--&lt;!&ndash; feedback &ndash;&gt;-->
+    <!--<string name="feedback_title">意见反馈</string>-->
+    <!--<string name="feedback_developer">开发者</string>-->
+    <!--<string name="feedback_info">您反馈的问题和建议，将是我们进步的动力！</string>-->
+    <!--<string name="feedback_contact">联系方式（有效的邮箱地址）</string>-->
+    <!--<string name="feedback_info_title">反馈或建议</string>-->
+    <!--<string name="feedback_contact_title">联系方式</string>-->
+    <!--<string name="feedback_submit_success">意见反馈已提交！</string>-->
+    <!--<string name="feedback_info_null">反馈信息不能为空！</string>-->
+    <!--<string name="feedback_email_null">请填写email！</string>-->
+    <!--<string name="feedback_effective_email">请填写有效的email！</string>-->
+    <!--<string name="feedback_network_error">网络错误，未能提交反馈！</string>-->
+    <!--<string name="feedback_submitting">提交中，请稍后！</string>-->
+    <!--&lt;!&ndash; 设置界面相关字符资源 &ndash;&gt;-->
+    <!--<string name="setting_title">设置</string>-->
+    <!--<string name="setting_language">语言设置</string>-->
+    <!--<string name="setting_often">常用设置</string>-->
+    <!--<string name="setting_play">播放设置</string>-->
+    <!--<string name="setting_clear">清除缓存</string>-->
+    <!--<string name="setting_download">下载选项</string>-->
+    <!--<string name="setting_auto_download">边听边下</string>-->
+    <!--&lt;!&ndash;<string name="setting_applanguage">界面语言</string>&ndash;&gt;-->
+    <!--<string name="setting_base">功能设置</string>-->
+    <!--<string name="setting_base_download">高速下载-VIP用户10倍于普通用户</string>-->
+    <!--<string name="setting_base_push">允许四级宝典给您推送消息</string>-->
+    <!--<string name="setting_sleep">提示：点击窗口外部关闭窗口！</string>-->
+    <!--<string name="setting_clear_pic">清理图片缓存</string>-->
+    <!--<string name="setting_clear_video">清理音频缓存</string>-->
+    <!--<string name="setting_clear_microclass">清理微课缓存</string>-->
+    <!--<string name="setting_about">关于</string>-->
+    <!--<string name="setting_recommend">推荐给朋友们</string>-->
+    <!--<string name="setting_about_info">关于爱语吧</string>-->
+    <!--<string name="setting_save_path_info">设置文件保存路径</string>-->
+    <!--<string name="setting_about_feedback">意见反馈</string>-->
+    <!--<string name="setting_help_use">使用帮助</string>-->
+    <!--<string name="setting_loginout_success">注销成功！</string>-->
+    <!--<string name="setting_sleep_mod">睡眠模式</string>-->
+    <!--<string name="setting_night_mod">夜间模式</string>-->
+    <!--<string name="setting_sleep_state_on">开</string>-->
+    <!--<string name="setting_sleep_state_off">关</string>-->
+    <!--<string name="setting_sleep_slecttime">请选择时间</string>-->
+    <!--<string name="setting_sleep_explain">例如设置"01:23"则代表1个小时23分钟之后关闭程序。</string>-->
+    <!--<string name="setting_wakeup">音乐闹钟</string>-->
+    <!--<string name="setting_wakeup_explain">设置闹钟的响铃时间</string>-->
+    <!--<string name="setting_wakeup_set">是否将本篇设为听力闹钟的铃声?</string>-->
+    <!--<string name="setting_wakeup_on">开启</string>-->
+    <!--<string name="setting_wakeup_off">关闭</string>-->
+    <!--<string name="setting_wakeup_nobell">您还没有设置闹铃铃声，请在文章列表页面长按列表项，即可设置您想听的文章作为闹铃铃声</string>-->
+    <!--<string name="setting_wakeup_notdownload">请您下载该文章后再设置为闹铃</string>-->
+    <!--<string name="setting_wakeup_bellok">设置铃声成功，现在您可以开启闹钟功能了！</string>-->
+    <!--<string name="setting_wakeup_bellfail">设置铃声失败，请先下载选定篇目的音频再设定！</string>-->
+    <!--<string name="setting_wakeup_stopbell">滑动关闭闹钟</string>-->
+    <!--<string name="setting_deleting">后台自动删除中……</string>-->
+    <!--<string name="setting_alert">一旦删除，已收藏的本地音频无法再离线收听。\n确定要继续么?</string>-->
+    <!--<string name="setting_logout_alert">登录状态可以享受更多爱语吧服务\n您确定要退出吗？</string>-->
+    <!--<string name="setting_del_fail">已清空</string>-->
+    <!--<string name="setting_share1">我正在使用</string>-->
+    <!--<string name="setting_share2">android版，感觉不错，你也来试试吧。地址:</string>-->
+    <!--<string name="setting_share_ways">选择分享方式</string>-->
+    <!--<string name="setting_vip_download">您可以在登录爱语吧账号后，购买VIP，享受高速通道30倍速率下载。下载速度最高可达1M/s。</string>-->
+    <!--&lt;!&ndash; 资讯 &ndash;&gt;-->
+    <!--<string name="see1">浏览&#160;</string>-->
+    <!--<string name="see2">&#160;次</string>-->
+    <!--<string name="source">来源:</string>-->
+    <!--<string name="desc">导语：</string>-->
+    <!--&lt;!&ndash; 听力 &ndash;&gt;-->
+    <!--<string name="section_a">Section A</string>-->
+    <!--<string name="section_b">Section B</string>-->
+    <!--<string name="section_c">Section C</string>-->
+    <!--<string name="year">年</string>-->
+    <!--<string name="month">月</string>-->
+    <!--<string name="download">正在下载音频压缩包</string>-->
+    <!--<string name="unzip">正在解压音频压缩包</string>-->
+    <!--<string name="download_finish">下载过程全部完成!</string>-->
+    <!--<string name="download_fail">下载失败!</string>-->
+    <!--<string name="submit">提交</string>-->
+    <!--<string name="exit_test">确定退出当前试卷吗？</string>-->
+    <!--<string name="un_vip">您当前不是VIP，无法使用当前功能，可点击下方按钮升级VIP后使用！</string>-->
+    <!--&lt;!&ndash; 单词 &ndash;&gt;-->
+    <!--<string name="sort_set_title">单词排序方式</string>-->
+    <!--<string name="sort_set_order">基本排序</string>-->
+    <!--<string name="sort_set_star">按熟练度排序</string>-->
+    <!--<string name="sort_set_initial">按首字母排序</string>-->
+    <!--<string name="sort_set_default">默认</string>-->
+    <!--<string name="sort_set_random">乱序</string>-->
+    <!--<string name="sort_set_star0">无星星</string>-->
+    <!--<string name="sort_set_star1">一颗星</string>-->
+    <!--<string name="sort_set_star2">两颗星</string>-->
+    <!--<string name="sort_set_star3">三颗星</string>-->
+    <!--<string name="mode_study">学习</string>-->
+    <!--<string name="mode_review">复习</string>-->
+    <!--<string name="word_mode">模式</string>-->
+    <!--<string name="easy">So Easy!</string>-->
+    <!--<string name="difficult">这是神马</string>-->
+    <!--<string name="know_word">我已知晓</string>-->
+    <!--<string name="ask_text">问答</string>-->
+
+    <!--&lt;!&ndash; order pay &ndash;&gt;-->
+    <!--<string name="order_pay_title">订单支付</string>-->
+    <!--<string name="username_hint">欢迎您：</string>-->
+    <!--<string name="iyubi_amount_hint">本次购买爱语币：</string>-->
+    <!--<string name="rmb_amount_hint">需要支付人民币：</string>-->
+    <!--<string name="choose_pay_method">选择支付方式</string>-->
+    <!--<string name="pay_confirm">确认支付</string>-->
+    <!--<string name="app_tip">提示</string>-->
+    <!--<string name="pay_result_tip">这个界面用于显示第三方app通过微信支付的结果</string>-->
+    <!--<string name="pay_result_callback_msg" formatted="false">微信支付结果：%s</string>-->
+    <!--<string name="weixin_key" translatable="false">wxd9f157e6725c27e0</string>-->
+    <!---->
+    <!--<string name="app_name">英语四级宝典</string>-->
+    <!--<string name="home_text">首页</string>-->
+    <!--<string name="info_text">资讯</string>-->
+    <!--<string name="set_text">设置</string>-->
+    <!--<string name="microclass_text">微课</string>-->
+    <!--<string name="word_text">核心词汇</string>-->
+    <!--<string name="write_text">写作</string>-->
+    <!--<string name="listen_text">听力</string>-->
+    <!--<string name="read_text">阅读</string>-->
+    <!--<string name="trans_text">翻译</string>-->
+    <!--<string name="mob_text">在线课堂</string>-->
+    <!--&lt;!&ndash; about &ndash;&gt;-->
+    <!--<string name="about_praise">给我评价</string>-->
+    <!--<string name="about_offical">爱语吧应用</string>-->
+    <!--<string name="about_weixin">官方微信:iyubasong</string>-->
+    <!--<string name="about_announcer">诚招主持人</string>-->
+    <!--<string name="about_announcer_alert">听歌学英语节目主持人正在火爆招聘中，如果您的英语发音标准，声音亲和甜美，下一首听歌学英语主持人也许就是你。\n请将个人简历和作品发送至: hr@iyuba.cn</string>-->
+    <!--<string name="about_update">版本更新</string>-->
+    <!--<string name="about_communicate">如有问题，可与商务热线 4008881905或官方邮箱admin@iyuba.cn联系</string>-->
+    <!--<string name="about_title">关于</string>-->
+    <!--<string name="about_wx">微信账号:iyubasong</string>-->
+    <!--<string name="about_update_alert_1">当前有新版本更新：</string>-->
+    <!--<string name="about_update_alert_2">,是否要更新？</string>-->
+    <!--<string name="about_update_running_title">更新应用</string>-->
+    <!--<string name="about_update_running">正在更新，请稍后。。。</string>-->
+    <!--<string name="about_error">服务器忙！请稍后下载！</string>-->
+    <!--<string name="about_update_isnew">四级宝典已经是最新版本</string>-->
+    <!--<string name="about_market_error">您当前未安装应用市场，无法使用该功能。</string>-->
+    <!--&lt;!&ndash; feedback &ndash;&gt;-->
+    <!--<string name="feedback_title">意见反馈</string>-->
+    <!--<string name="feedback_developer">开发者</string>-->
+    <!--<string name="feedback_info">您反馈的问题和建议，将是我们进步的动力！</string>-->
+    <!--<string name="feedback_contact">联系方式（有效的邮箱地址）</string>-->
+    <!--<string name="feedback_info_title">反馈或建议</string>-->
+    <!--<string name="feedback_contact_title">联系方式</string>-->
+    <!--<string name="feedback_submit_success">意见反馈已提交！</string>-->
+    <!--<string name="feedback_info_null">反馈信息不能为空！</string>-->
+    <!--<string name="feedback_email_null">请填写email！</string>-->
+    <!--<string name="feedback_effective_email">请填写有效的email！</string>-->
+    <!--<string name="feedback_network_error">网络错误，未能提交反馈！</string>-->
+    <!--<string name="feedback_submitting">提交中，请稍后！</string>-->
+    <!--&lt;!&ndash; 设置界面相关字符资源 &ndash;&gt;-->
+    <!--<string name="setting_title">设置</string>-->
+    <!--<string name="setting_language">语言设置</string>-->
+    <!--<string name="setting_often">常用设置</string>-->
+    <!--<string name="setting_play">播放设置</string>-->
+    <!--<string name="setting_clear">清除缓存</string>-->
+    <!--<string name="setting_download">下载选项</string>-->
+    <!--<string name="setting_auto_download">边听边下</string>-->
+    <!--&lt;!&ndash;<string name="setting_applanguage">界面语言</string>&ndash;&gt;-->
+    <!--<string name="setting_base">功能设置</string>-->
+    <!--<string name="setting_base_download">高速下载-VIP用户10倍于普通用户</string>-->
+    <!--<string name="setting_base_push">允许四级宝典给您推送消息</string>-->
+    <!--<string name="setting_sleep">提示：点击窗口外部关闭窗口！</string>-->
+    <!--<string name="setting_clear_pic">清理图片缓存</string>-->
+    <!--<string name="setting_clear_video">清理音频缓存</string>-->
+    <!--<string name="setting_clear_microclass">清理微课缓存</string>-->
+    <!--<string name="setting_about">关于</string>-->
+    <!--<string name="setting_recommend">推荐给朋友们</string>-->
+    <!--<string name="setting_about_info">关于爱语吧</string>-->
+    <!--<string name="setting_save_path_info">设置文件保存路径</string>-->
+    <!--<string name="setting_about_feedback">意见反馈</string>-->
+    <!--<string name="setting_help_use">使用帮助</string>-->
+    <!--<string name="setting_loginout_success">注销成功！</string>-->
+    <!--<string name="setting_sleep_mod">睡眠模式</string>-->
+    <!--<string name="setting_night_mod">夜间模式</string>-->
+    <!--<string name="setting_sleep_state_on">开</string>-->
+    <!--<string name="setting_sleep_state_off">关</string>-->
+    <!--<string name="setting_sleep_slecttime">请选择时间</string>-->
+    <!--<string name="setting_sleep_explain">例如设置"01:23"则代表1个小时23分钟之后关闭程序。</string>-->
+    <!--<string name="setting_wakeup">音乐闹钟</string>-->
+    <!--<string name="setting_wakeup_explain">设置闹钟的响铃时间</string>-->
+    <!--<string name="setting_wakeup_set">是否将本篇设为听力闹钟的铃声?</string>-->
+    <!--<string name="setting_wakeup_on">开启</string>-->
+    <!--<string name="setting_wakeup_off">关闭</string>-->
+    <!--<string name="setting_wakeup_nobell">您还没有设置闹铃铃声，请在文章列表页面长按列表项，即可设置您想听的文章作为闹铃铃声</string>-->
+    <!--<string name="setting_wakeup_notdownload">请您下载该文章后再设置为闹铃</string>-->
+    <!--<string name="setting_wakeup_bellok">设置铃声成功，现在您可以开启闹钟功能了！</string>-->
+    <!--<string name="setting_wakeup_bellfail">设置铃声失败，请先下载选定篇目的音频再设定！</string>-->
+    <!--<string name="setting_wakeup_stopbell">滑动关闭闹钟</string>-->
+    <!--<string name="setting_deleting">后台自动删除中……</string>-->
+    <!--<string name="setting_alert">一旦删除，已收藏的本地音频无法再离线收听。\n确定要继续么?</string>-->
+    <!--<string name="setting_logout_alert">登录状态可以享受更多爱语吧服务\n您确定要退出吗？</string>-->
+    <!--<string name="setting_del_fail">已清空</string>-->
+    <!--<string name="setting_share1">我正在使用</string>-->
+    <!--<string name="setting_share2">android版，感觉不错，你也来试试吧。地址:</string>-->
+    <!--<string name="setting_share_ways">选择分享方式</string>-->
+    <!--<string name="setting_vip_download">您可以在登录爱语吧账号后，购买VIP，享受高速通道30倍速率下载。下载速度最高可达1M/s。</string>-->
+    <!--&lt;!&ndash; 资讯 &ndash;&gt;-->
+    <!--<string name="see1">浏览&#160;</string>-->
+    <!--<string name="see2">&#160;次</string>-->
+    <!--<string name="source">来源:</string>-->
+    <!--<string name="desc">导语：</string>-->
+    <!--&lt;!&ndash; 听力 &ndash;&gt;-->
+    <!--<string name="section_a">Section A</string>-->
+    <!--<string name="section_b">Section B</string>-->
+    <!--<string name="section_c">Section C</string>-->
+    <!--<string name="year">年</string>-->
+    <!--<string name="month">月</string>-->
+    <!--<string name="download">正在下载音频压缩包</string>-->
+    <!--<string name="unzip">正在解压音频压缩包</string>-->
+    <!--<string name="download_finish">下载过程全部完成!</string>-->
+    <!--<string name="download_fail">下载失败!</string>-->
+    <!--<string name="submit">提交</string>-->
+    <!--<string name="exit_test">确定退出当前试卷吗？</string>-->
+    <!--<string name="un_vip">您当前不是VIP，无法使用当前功能，可点击下方按钮升级VIP后使用！</string>-->
+    <!--&lt;!&ndash; 单词 &ndash;&gt;-->
+    <!--<string name="sort_set_title">单词排序方式</string>-->
+    <!--<string name="sort_set_order">基本排序</string>-->
+    <!--<string name="sort_set_star">按熟练度排序</string>-->
+    <!--<string name="sort_set_initial">按首字母排序</string>-->
+    <!--<string name="sort_set_default">默认</string>-->
+    <!--<string name="sort_set_random">乱序</string>-->
+    <!--<string name="sort_set_star0">无星星</string>-->
+    <!--<string name="sort_set_star1">一颗星</string>-->
+    <!--<string name="sort_set_star2">两颗星</string>-->
+    <!--<string name="sort_set_star3">三颗星</string>-->
+    <!--<string name="mode_study">学习</string>-->
+    <!--<string name="mode_review">复习</string>-->
+    <!--<string name="word_mode">模式</string>-->
+    <!--<string name="easy">So Easy!</string>-->
+    <!--<string name="difficult">这是神马</string>-->
+    <!--<string name="know_word">我已知晓</string>-->
+    <!--<string name= "ask_text">问答</string>-->
+
+    <!--&lt;!&ndash; order pay &ndash;&gt;-->
+    <!--<string name="order_pay_title">订单支付</string>-->
+    <!--<string name="username_hint">欢迎您：</string>-->
+    <!--<string name="iyubi_amount_hint">本次购买爱语币：</string>-->
+    <!--<string name="rmb_amount_hint">需要支付人民币：</string>-->
+    <!--<string name="choose_pay_method">选择支付方式</string>-->
+    <!--<string name="pay_confirm">确认支付</string>-->
+    <!--<string name="app_tip">提示</string>-->
+    <!--<string name="pay_result_tip">这个界面用于显示第三方app通过微信支付的结果</string>-->
+    <!--<string name="pay_result_callback_msg" formatted="false">微信支付结果：%s</string>-->
+    <!--<string name="weixin_key" translatable="false">wxd9f157e6725c27e0</string>-->
+
+    <string name="minName">SurfingNearby</string>
+    <string name="minVer">2.0</string>
+    <string name="runEnv_name">Android</string>
+    <string name="ssite_code">10</string>
+    <string name="dialog_title_normal">爱语吧提示</string>
+    <string name="error_net_unavailable">网络错误，无法和服务器取得联系\n按\"退出\"直接退出酣逗畅游，稍后请重试</string>
+    <string name="error_net_wifi_other">网络错误，无法和服务器取得联系\n按\"重设网络\"尝试选择其他Wifi接入点，稍后请重试\n按\"退出\"直接退出酣逗畅游，稍后请重试</string>
+    <string name="error_net_wifi">网络错误，无法和服务器取得联系\n按\"重设网络\"尝试使用Wifi接入点，稍后请重试\n按\"退出\"直接退出酣逗畅游，稍后请重试</string>
+    <string name="error_net_wifi_off">网络错误，无法和服务器取得联系\n按\"重设网络\"选择其他Wifi接入点，稍后请重试\n按\"关闭Wifi\"关闭Wifi尝试使用3G/GPRS\n按\"退出\"直接退出酣逗畅游，稍后请重试</string>
+    <string name="dialog_button_exit">退出软件</string>
+    <string name="dialog_button_resetNet">重设网络</string>
+    <string name="dialog_button_offWifi">关闭Wifi</string>
+
+    <!-- 通用 -->
+
+    <string name="no_login">您还未登录！请登录！</string>
+    <string name="check_network">网络异常或服务器忙，请稍后重试</string>
+    <string name="check_gps">请打开GPS获取位置信息！</string>
+    <string name="action_fail">操作失败，请重试！</string>
+    <string name="send">发送</string>
+    <string name="delete">删除</string>
+    <string name="complete">完成</string>
+    <string name="pic">图片</string>
+    <string name="never_update">从未更新过</string>
+    <string name="exit">退出登录</string>
+    <string name="logout">退出登录</string>
+    <string name="regist">注册</string>
+    <string name="no_account_hint">临时用户不可以修改信息,请注册正式用户</string>
+    <string name="no_account_hint2">请注册正式用户后再进行操作</string>
+    <!-- main -->
+    <string name="discover_text">新闻</string>
+    <!-- buy -->
+    <string name="buy_buy">升级VIP</string>
+    <string name="buy_success">支付成功，更新数据中……</string>
+    <!-- LocalNews -->
+    <!-- login -->
+    <string name="login_title">用户登录</string>
+    <string name="login_auto_login">自动登录</string>
+    <string name="login_check_effective_user_id">请填写有效的用户ID</string>
+    <string name="login_check_user_pwd_null">用户密码不能为空</string>
+    <string name="login_check_user_pwd_constraint">密码为6~20个字符</string>
+    <string name="login_faild">登录失败！请检查网络是否可用！</string>
+    <string name="login_fail">登录失败,请检查用户名和密码</string>
+    <string name="login_find_password">忘记密码？</string>
+    <string name="login_regist">注册</string>
+    <string name="login_login">登录</string>
+    <string name="login_unamehint">请输入用户名</string>
+    <string name="login_pwdhint">请输入密码</string>
+    <!-- doing -->
+    <string name="doing_title">评论</string>
+    <!-- me -->
+    <string name="me_title">我</string>
+    <string name="me_state_text">个性签名</string>
+    <string name="me_attention_text">关注</string>
+    <string name="me_fans_text">粉丝</string>
+    <string name="me_notification_text">通知</string>
+    <string name="me_message_text">消息中心</string>
+    <string name="me_vip_text">会员中心</string>
+    <string name="me_over_fix">字数超过限制</string>
+    <string name="me_state_success">心情修改成功</string>
+    <string name="me_state_fail">心情修改失败。请重新发送</string>
+    <string name="me_view"> 人看过我的主页</string>
+    <string name="me_study_time">学习时长:</string>
+    <string name="me_hour">小时</string>
+    <string name="me_minute">分钟</string>
+    <string name="me_minus">秒</string>
+    <string name="me_study_position">全站排名:</string>
+    <string name="me_lv">等级:</string>
+    <!-- message -->
+    <string name="message_title">私信</string>
+    <string name="write_message">写私信</string>
+    <string name="message_add_all">私信加载完毕</string>
+    <string name="message_content_add_all">全部内容加载完毕</string>
+    <!-- search word -->
+    <string name="search_word_hint">请输入查询内容</string>
+    <string name="word_title">单词</string>
+    <string name="search_word_do">搜索</string>
+    <string name="word_mean">解释:</string>
+    <string name="word_example">例句:</string>
+    <string name="word_null">请填写待查单词后再点击查询:</string>
+    <string name="no_word_example">尚无例句。正在紧张整理中…</string>
+    <!-- social -->
+    <string name="social_default_state">这个人很懒，什么也没有留下</string>
+    <string name="social_add_all">数据已经加载完毕</string>
+    <string name="social_distance">米</string>
+    <string name="social_sameapp">共同应用:</string>
+    <string name="social_cancle_attention">取消关注</string>
+    <string name="social_success_attention">关注成功</string>
+    <string name="social_failed_attention">关注失败</string>
+    <string name="social_success_cancle_attention">取消关注成功</string>
+    <string name="social_failed_cancle_attention">取消关注失败</string>
+    <string name="social_attentioned">您已关注TA啦</string>
+    <string name="social_friends">好友</string>
+    <string name="social_search">搜索</string>
+    <string name="social_search_in_friends">在好友中搜索</string>
+    <string name="social_search_no_result">未找到相关结果</string>
+    <string name="social_search_try_again">试试别的关键字吧！</string>
+    <string name="social_load_more">加载更多</string>
+    <!-- 下拉刷新相关字符资源 -->
+    <string name="pull_to_refresh_pull_label">下拉刷新</string>
+    <string name="pull_to_refresh_release_label">松开刷新</string>
+    <string name="pull_to_refresh_refreshing_label">加载中...</string>
+    <string name="pull_to_refresh_on_refreshing">加载中...</string>
+    <string name="pull_to_refresh_lastest">最新更新:</string>
+    <string name="pull_to_refresh_footer_pull_label">上拉加载更多</string>
+    <string name="pull_to_refresh_footer_release_label">释放加载更多</string>
+    <string name="pull_to_refresh_footer_refreshing_label">加载中...</string>
+    <!-- alert窗口相关字符资源 -->
+    <string name="alert_title">提示</string>
+    <string name="alert_recharge_content">您的爱语币余额不足支付，是否充值？</string>
+    <string name="alert_all_life_vip">您已经是终身VIP</string>
+    <string name="alert_net_content">网络未连接</string>
+    <string name="alert_delete">确定删除该条记录?</string>
+    <string name="alert_btn_cancel">取消</string>
+    <string name="alert_btn_ok">确认</string>
+    <string name="alert_btn_recharge">充值</string>
+    <string name="alert_btn_buy">购买</string>
+    <string name="alert_home">再按一次返回桌面</string>
+    <string name="alert_press">再按一次退出程序</string>
+    <!-- file explorer -->
+    <string name="mainmenu_createdir">新建文件夹</string>
+    <string name="file_rename">重命名</string>
+    <string name="file_info">详情</string>
+    <string name="file_cannotopen">无法打开: %1$s</string>
+    <string name="file_exists">文件已存在！</string>
+    <string name="file_namecannotempty">文件名不能为空</string>
+    <string name="file_create_fail">创建文件失败！</string>
+    <string name="file_rename_fail">重命名失败！</string>
+    <string name="file_name">文件名</string>
+    <string name="file_size">大小</string>
+    <string name="file_contents">内容</string>
+    <string name="file_lastmodified">最后修改时间</string>
+    <string name="file_paste">粘贴</string>
+    <string name="file_create">新建</string>
+    <string name="file_notexists">文件不存在！</string>
+    <!-- person_detail -->
+    <string name="person_detail_title">个人详细资料</string>
+    <string name="person_detail_base">基本信息</string>
+    <string name="person_detail_nickname">昵称</string>
+    <string name="person_detail_edu">教育信息</string>
+    <string name="person_detail_college">大学</string>
+    <string name="person_detail_corp">公司</string>
+    <string name="person_detail_other">其他</string>
+    <string name="person_detail_feeling">情感状态</string>
+    <string name="person_detail_friend_aim">交友目的</string>
+    <string name="person_detail_intro">自我介绍</string>
+    <string name="person_detail_interest">兴趣爱好</string>
+    <!-- person_info -->
+    <string name="person_info_title">编辑个人资料</string>
+    <string name="person_info_gender">性别</string>
+    <string name="person_info_birth">出生日期</string>
+    <string name="person_info_success">修改成功</string>
+    <string name="person_info_fail">修改失败，请重试</string>
+    <string name="person_info_save">保存</string>
+    <string name="person_info_uploadPic">上传头像</string>
+    <string name="person_info_local_now">所在地</string>
+    <string name="person_info_school">大学</string>
+    <string name="person_info_zodiac">生肖</string>
+    <string name="person_info_constellation">星座</string>
+    <!-- ground -->
+    <string name="answer">答案</string>
+    <string name="explain">解析</string>
+    <string name="number">题号</string>
+    <string name="secret">暂时保密</string>
+    <string name="no_answer">未做</string>
+    <string name="your_answer">您的答案</string>
+    <string name="right_answer">正确答案</string>
+    <string name="keys">关键点:</string>
+    <string name="explains">解释:</string>
+    <string name="knowledges">知识点:</string>
+    <!--<string name="section_c">填空</string>-->
+    <!-- discovery -->
+    <!--<string name="discover_title">发现</string>-->
+    <!--<string name="discover_app">应用广场</string>-->
+    <!--<string name="discover_news">听说应用</string>-->
+    <!--<string name="discover_exam">考试应用</string>-->
+    <!--<string name="discover_appall">爱语吧旗下安卓应用</string>-->
+    <!--<string name="discover_mobclass">移动课堂</string>-->
+    <!--<string name="discover_word">单词天地</string>-->
+    <!--<string name="discover_saying">经典谚语</string>-->
+    <!--<string name="discover_collect_word">单词本</string>-->
+    <!--<string name="discover_search_word">查单词</string>-->
+    <!--<string name="discover_friend">好友交流</string>-->
+    <!--<string name="discover_search_friend">搜索朋友</string>-->
+    <!--<string name="discover_message">消息中心</string>-->
+    <!-- saying -->
+    <string name="saying_next">换一个</string>
+    <string name="saying_auto">自动</string>
+    <string name="saying_manul">手动</string>
+    <!-- word -->
+    <string name="newword_please_select_word">请选择要删除的生词</string>
+    <string name="no_new_word">尚未添加生词，无法删除</string>
+    <string name="word_add_all">云生词本加载完毕</string>
+    <string name="word_no_data">生词本中还没有单词,快去添加一条吧</string>
+    <!-- home -->
+    <string name="home_title">个人主页</string>
+    <string name="person_vip_limit">VIP有效期已过</string>
+    <string name="person_common_user">普通用户</string>
+    <string name="person_not_vip">您还不是VIP</string>
+    <string name="person_detail">详细信息</string>
+    <string name="person_message">发私信</string>
+    <string name="person_attention">加关注</string>
+    <string name="person_attention_already">已关注</string>
+    <string name="person_attention_mutually">互相关注</string>
+    <string name="person_fix">修改信息</string>
+    <string name="person_fans_count">粉丝 </string>
+    <string name="person_attention_count">关注 </string>
+    <string name="person_attention_relieve_alert">确定不再关注他了吗？</string>
+    <!-- 注册界面相关字符资源 -->
+    <string name="regist_title">用户注册</string>
+    <string name="regist_user_id_hint">3~20位英文、数字或汉字</string>
+    <string name="regist_user_pwd_hint">6~20位英文、数字或者下划线</string>
+    <string name="regist_user_repwd_hint">确认密码</string>
+    <string name="regist_email_hint">输入常用的邮箱，用于找回密码</string>
+    <string name="regist_check_username_1">3~20字符</string>
+    <string name="regist_check_username_2">不允许使用手机号或邮箱地址作为用户名</string>
+    <string name="regist_check_userpwd_1">6~20字符</string>
+    <string name="regist_check_reuserpwd">两次密码不匹配！</string>
+    <string name="regist_check_email_1">用户email不能为空</string>
+    <string name="regist_check_email_2">请填写有效的email</string>
+    <!-- Regist -->
+    <string name="regist_email_used">邮箱已经被注册</string>
+    <string name="regist_operating">操作中，请等候</string>
+    <string name="regist_userid_exist">账号已存在</string>
+    <string name="regist_phone_getcode">获取验证码</string>
+    <string name="regist_phone_verifycode">进行验证</string>
+    <string name="regist_phone_toemail">邮箱方式注册>>>>></string>
+    <string name="regist_phone_inputphone">请输入你的手机号</string>
+    <string name="regist_phone_inputcode">输入验证码</string>
+    <string name="regist_phone_username">用户名 3~20位英文、数字或汉字</string>
+    <string name="regist_phone_paswd">密码 6~20位英文、数字或者下划线</string>
+    <string name="regist_success">注册成功！欢迎加入爱语吧！</string>
+    <string name="regist_fail">注册失败,请重试</string>
+    <string name="regist_phone_tocomplete">填入用户名和密码就可以完成注册</string>
+    <!-- uploadimage -->
+    <string name="uploadimage">上传头像</string>
+    <string name="uploadimage_default">头像示例</string>
+    <string name="uploadimage_text">上传一张靓照吧，展现个性，积分+20</string>
+    <string name="uploadimage_bycamera">相机拍摄</string>
+    <string name="uploadimage_bylocal">选择本地图片</string>
+    <string name="uploadimage_skip">跳过</string>
+    <string name="uploadimage_uploading">正在上传头像，请稍候~~~</string>
+    <string name="uploadimage_success">您的头像修改成功</string>
+    <string name="uploadimage_failupload">提交失败，请重新上传</string>
+    <!-- hint -->
+    <string name="hint1">说点什么吧...</string>
+    <string name="hint3">请输入内容</string>
+    <!-- 其他 -->
+    <string name="word_add">添加</string>
+    <string name="word_close">关闭</string>
+    <string name="loginout_success">退出成功！</string>
+    <string name="logout_alert">登录状态可以享受更多爱语吧服务\n您确定要退出吗？</string>
+    <string name="submitting">提交中，请稍后！</string>
+    <string name="ground_info">来自爱语吧应用广场</string>
+
+    <!-- 播放设置 -->
+    <string name="setting_play_title">播放设置</string>
+    <string name="setting_base_music_type">当前播放音乐类型</string>
+    <string name="setting_base_music_mode">下一曲模式</string>
+    <string name="setting_base_light">屏幕常亮</string>
+    <string name="setting_base_auto_syncho">原文同步（高亮区域居中）</string>
+    <string name="setting_phone">耳机设置</string>
+    <string name="setting_put_in">耳机插入自动播放</string>
+    <string name="setting_pull_out">耳机拔出自动暂停</string>
+    <!-- 取单词 -->
+    <!--<string name="play_click_word_text">点击英文单词查询释义！</string>-->
+    <!--<string name="play_no_word_interpretation">当前单词未找到释义！</string>-->
+    <!--<string name="play_please_take_the_word">请取英文单词</string>-->
+    <!--<string name="play_ins_new_word_success">成功加入生词本！</string>-->
+
+    <!-- 微课中用到的String -->
+
+    <!-- 播放器页面相关字符资源 -->
+    <string name="play_please_take_the_word">请取英文单词</string>
+    <string name="play_no_login">当前未登录！请登录！</string>
+    <string name="play_no_word_interpretation">当前单词未找到释义！</string>
+    <string name="play_ins_new_word_success">成功加入生词本！</string>
+    <string name="cancel">取消</string>
+
+    <!-- teacher -->
+    <!-- 名师堂中用的字段 -->
+    <string name="integral_notification_text">积分</string>
+    <string name="discover_myques">我的问题</string>
+    <string name="discover_mysubq">我的回复</string>
+    <string name="discover_qnt">问题动态</string>
+    <string name="question_title">问题通知</string>
+    <string name="comment_already">您已经评论过该条了...</string>
+    <string name="agree_already">您已经赞过该条了...</string>
+    <string name="comment_agree">点赞成功~</string>
+    <string name="comment_disagree">鄙视成功-_-</string>
+    <string name="ques_detail_tag">问题详情</string>
+    <string name="ques_disc">添加问题</string>
+    <string name="ques_app_type">选择问题应用来源</string>
+    <string name="ques_ability_type">选择问题考点类型</string>
+    <string name="ques_cancel">取消</string>
+    <string name="ques_pre">上一步</string>
+    <string name="ques_complete">完成</string>
+    <string name="ques_next">下一步</string>
+    <string name="photo">拍照</string>
+    <string name="ques_words_tip">剩余输入字数140</string>
+    <string name="ques_tip">您可以添加图片或文字来提问</string>
+    <string name="show_big_pic">看大图</string>
+    <string name="network_error">网络错误</string>
+    <!--<string name="no_data">没有数据</string>-->
+    <string name="ask_question_fail">提交问题失败！</string>
+    <string name="ask_question_success">提交问题成功！</string>
+    <string name="question_tip">请输入您要提问的问题！</string>
+    <string name="photo_album">相册</string>
+    <string name="take_photo">拍照</string>
+    <string name="input_content">请输入回复的内容</string>
+    <string name="send_success">提交成功</string>
+    <string name="send_fail">提交失败，请重试</string>
+    <!--<string name="app_name">teacher</string>-->
+    <string name="back">返回</string>
+    <string name="select_ques_type">筛选</string>
+    <string name="techer_tang">名师堂</string>
+    <string name="techer_detail">老师详情</string>
+    <string name="f_techer">外语名师</string>
+    <string name="teacher_info1">基本信息</string>
+    <string name="teacher_info2">课程方向</string>
+    <string name="teacher_info3">上传图片</string>
+    <string name="teacher_info_name">姓名:</string>
+    <string name="teacher_info_sex">性别:</string>
+    <string name="teacher_info_mobile">手机号:</string>
+    <string name="teacher_info_email">邮箱:</string>
+    <string name="teacher_info_weeixin">微信:</string>
+    <string name="teacher_info_cert">最高学历:</string>
+    <string name="teacher_info_desc">自我评价:</string>
+    <string name="teacher_info_city">所在城市:</string>
+    <string name="teacher_info_goodm">擅长模块:</string>
+    <string name="teacher_info_goodt">擅长课程类别:</string>
+    <string name="no_data">没有数据</string>
+    <string name="discover_search_teacher">找名师</string>
+    <string name="discover_search_certeacher">教师认证</string>
+    <string name="discover_question">我的问答</string>
+    <string name="write_mood">发表i语</string>
+    <string name="publish_ms">发表</string>
+    <string name="mood_info">写点什么吧....</string>
+    <string name="discover_qlist">问题列表</string>
+    <string name="discover_more_app">更多应用</string>
+    <string name="discover_mteacher">名师堂</string>
+    <string name="discover_search_cfriend">朋友圈</string>
+    <string name="discover_appall">爱语吧旗下安卓应用</string>
+    <string name="discover_word">单词天地</string>
+    <string name="discover_saying">经典谚语</string>
+    <string name="discover_collect_word">单词本</string>
+    <string name="discover_search_word">查单词</string>
+    <string name="discover_friend">好友交流</string>
+    <string name="discover_search_friend">找朋友</string>
+    <string name="discover_vibrate">摇一摇</string>
+    <string name="discover_title">发现</string>
+    <string name="discover_iyubaac">爱语吧活动</string>
+    <string name="discover_exgift">积分兑换</string>
+    <!--<string name="setting_language">语言设置</string>-->
+    <!--<string name="setting_title">设置</string>-->
+    <!--<string name="setting_applanguage">设置语言</string>-->
+    <!--<string name="setting_clear">清理缓存</string>-->
+    <!--<string name="setting_download">下载</string>-->
+    <!--<string name="setting_about">关于</string>-->
+    <!--<string name="setting_recommend">推荐给朋友们</string>-->
+    <!--<string name="setting_about_info">关于爱语吧</string>-->
+    <!--<string name="setting_about_feedback">意见反馈</string>-->
+    <!--<string name="setting_help_use">使用帮助</string>-->
+    
+     <!--<string name="setting_share1">我正在使用</string>-->
+    <!--<string name="setting_share2">android版，感觉不错，你也来试试吧。地址:</string>-->
+    <!--<string name="setting_share_ways">选择分享方式</string>-->
+    <!--<string name="setting_clear_microclass">清理微课缓存</string>-->
+     <string name="action_no_more">加载完毕，无更多数据！</string>
+
+    <!-- 智能化学习平台中用的字段 -->
+    <string name="eng_level">英语等级</string>
+    <string name="lisspe_level">听说水平</string>
+    <string name="reawri_level">读写水平</string>
+    <string name="goal_level">目标水平</string>
+    <string name="eng_now_level">目前水平</string>
+    <string name="commit">提     交</string>
+    <string name="username">用户名</string>
+    <string name="sex">性 别</string>
+    <string name="birthday">生 日</string>
+    <string name="province">省 份</string>
+    <string name="identity">身 份</string>
+    <string name="education">学 历</string>
+    <string name="school">学 校</string>
+
+    <string name="vip_desc_"><u>(点击查看详细介绍)</u></string>
+
+
+</resources>

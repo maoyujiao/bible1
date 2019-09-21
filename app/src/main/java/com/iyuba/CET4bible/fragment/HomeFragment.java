@@ -1,16 +1,19 @@
 package com.iyuba.CET4bible.fragment;
 
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
-import android.graphics.Bitmap;
 import android.graphics.Color;
 import android.graphics.Typeface;
-import android.graphics.drawable.BitmapDrawable;
 import android.location.Location;
 import android.os.Bundle;
 import android.os.Handler;
+import android.os.Message;
+import android.support.annotation.NonNull;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentStatePagerAdapter;
 import android.support.v4.view.ViewPager;
+import android.support.v7.app.AlertDialog;
 import android.text.SpannableStringBuilder;
 import android.text.Spanned;
 import android.text.format.DateFormat;
@@ -28,50 +31,47 @@ import android.widget.AdapterView.OnItemClickListener;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.PopupMenu;
-import android.widget.PopupWindow;
 import android.widget.RelativeLayout;
-import android.widget.ScrollView;
 import android.widget.TextView;
 
 import com.google.gson.Gson;
 import com.iyuba.CET4bible.BuildConfig;
 import com.iyuba.CET4bible.R;
-import com.iyuba.CET4bible.activity.BlogActivity;
-import com.iyuba.CET4bible.activity.InfoActivity;
 import com.iyuba.CET4bible.activity.JpBlogActivity;
 import com.iyuba.CET4bible.activity.JpBlogListActivity;
-import com.iyuba.CET4bible.activity.MainActivity;
 import com.iyuba.CET4bible.activity.TestType;
 import com.iyuba.CET4bible.adapter.CardPagerAdapter;
 import com.iyuba.CET4bible.adapter.JpSimpleBlogListAdapter;
-import com.iyuba.CET4bible.adapter.SimpBlogListAdapter;
 import com.iyuba.CET4bible.bean.JpBlogListBean;
 import com.iyuba.CET4bible.event.JPLevelChangeEvent;
 import com.iyuba.CET4bible.iyulive.adapter.HomeCourseListAdapter;
-import com.iyuba.CET4bible.manager.BlogDataManager;
 import com.iyuba.CET4bible.protocol.AddImageRequest;
 import com.iyuba.CET4bible.protocol.AddImageResponse;
-import com.iyuba.CET4bible.protocol.info.BlogRequest;
-import com.iyuba.CET4bible.protocol.info.BlogResponse;
 import com.iyuba.CET4bible.protocol.info.JpBlogListRequest;
 import com.iyuba.CET4bible.protocol.info.JpBlogListResponse;
 import com.iyuba.CET4bible.sqlite.mode.Blog;
 import com.iyuba.CET4bible.sqlite.mode.ImageData;
 import com.iyuba.CET4bible.sqlite.op.BlogOp;
 import com.iyuba.CET4bible.util.DateUtils;
+import com.iyuba.CET4bible.viewpager.FillInBlankFragment;
+import com.iyuba.CET4bible.viewpager.ListeningFragment;
+import com.iyuba.CET4bible.viewpager.ParagraphMatchingFragment;
+import com.iyuba.CET4bible.viewpager.ReadingFragment;
+import com.iyuba.CET4bible.viewpager.WriteFragment;
 import com.iyuba.CET4bible.vocabulary.Cet4WordList;
 import com.iyuba.abilitytest.activity.AbilityMapActivity;
 import com.iyuba.abilitytest.activity.AbilityTestListActivity;
 import com.iyuba.base.util.BrandUtil;
 import com.iyuba.base.util.T;
 import com.iyuba.base.util.Util;
+import com.iyuba.base.widget.MyViewPager;
 import com.iyuba.configation.ConfigManager;
 import com.iyuba.configation.Constant;
 import com.iyuba.core.discover.activity.WordCollection;
 import com.iyuba.core.http.Http;
 import com.iyuba.core.http.HttpCallback;
 import com.iyuba.core.listener.ProtocolResponse;
-import com.iyuba.core.manager.AccountManager;
+import com.iyuba.core.manager.DataManager;
 import com.iyuba.core.protocol.BaseHttpResponse;
 import com.iyuba.core.sqlite.mode.Sayings;
 import com.iyuba.core.sqlite.mode.microclass.CoursePack;
@@ -82,8 +82,6 @@ import com.iyuba.core.util.MD5;
 import com.iyuba.core.util.NetWorkState;
 import com.iyuba.core.widget.PullToRefreshView_New;
 import com.iyuba.core.widget.SuperListView;
-import com.iyuba.trainingcamp.activity.GoldActivity;
-import com.iyuba.trainingcamp.app.GoldApp;
 import com.iyuba.imooclib.ui.mobclass.MobClassActivity;
 import com.umeng.analytics.MobclickAgent;
 import com.youdao.sdk.nativeads.RequestParameters;
@@ -101,10 +99,36 @@ import java.util.EnumSet;
 import java.util.List;
 import java.util.Random;
 
+import butterknife.BindView;
+import butterknife.ButterKnife;
+import butterknife.OnClick;
+import butterknife.Unbinder;
+import okhttp3.Call;
+import wordtest.WordStepActivity;
+
 /**
  * 类名
  */
 public class HomeFragment extends Fragment implements OnClickListener, PullToRefreshView_New.OnHeaderRefreshListener {
+    @BindView(R.id.tv_testDate)
+    TextView tvTestDate;
+    @BindView(R.id.tv_duration)
+    TextView tvDuration;
+    @BindView(R.id.txt_listen)
+    TextView txtListen;
+    @BindView(R.id.icon_listen_down)
+    ImageView iconListenDown;
+    @BindView(R.id.txt_exam)
+    TextView txtExam;
+    @BindView(R.id.icon_exam_down)
+    ImageView iconExamDown;
+    @BindView(R.id.exam_vp)
+    MyViewPager examVp;
+    Unbinder unbinder;
+    @BindView(R.id.icon_listen)
+    ImageView iconListen;
+    @BindView(R.id.icon_exam)
+    ImageView iconExam;
     private Context mContext;
     private ImageView iv_fuction;
     private View root;
@@ -127,7 +151,6 @@ public class HomeFragment extends Fragment implements OnClickListener, PullToRef
     private TextView chinese;
     private TextView english;
     private SayingsOp sayingsOp;
-    private ScrollView sv;
     private LinearLayout ll_vocabulary;
     private LinearLayout ll_practice;
     private LinearLayout ll_test;
@@ -143,11 +166,13 @@ public class HomeFragment extends Fragment implements OnClickListener, PullToRef
     private int id;
     private Random rnd;
 
+    public static int WORD_COUNT = 30;
+
     private boolean isBannerRequested = true;
 
     Handler handler = new Handler() {
         @Override
-        public void handleMessage(android.os.Message msg) {
+        public void handleMessage(Message msg) {
             switch (msg.what) {
                 case 0:
                     ExeProtocol.exe(new JpBlogListRequest(Constant.APP_CONSTANT.BLOG_ACCOUNT_ID(), "1"), new ProtocolResponse() {
@@ -219,10 +244,8 @@ public class HomeFragment extends Fragment implements OnClickListener, PullToRef
                     T.showShort(mContext, R.string.alert_network_error);
                     break;
                 case 7:
-//                    refreshView.onHeaderRefreshComplete();
                     break;
                 case 8:
-//                    refreshView.onHeaderRefreshComplete();
                     T.showShort(mContext, R.string.alert_network_error);
                     break;
                 default:
@@ -230,21 +253,112 @@ public class HomeFragment extends Fragment implements OnClickListener, PullToRef
             }
         }
     };
+    private int checkedItem;
+
+    ListeningFragment listeningFragment;
+    WriteFragment writeFragment;
+    WriteFragment transFragment;
+    FillInBlankFragment fillFragment;
+    ReadingFragment readFragment;
+    ParagraphMatchingFragment paraFragment;
 
     private void getFromDatabase() {
         jpBlogList.addAll(blogOp.selectData(3, 0));
         handler.sendEmptyMessage(1);
     }
 
+    FragmentStatePagerAdapter adapter;
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         EventBus.getDefault().register(this);
         root = inflater.inflate(R.layout.home, container, false);
+        unbinder = ButterKnife.bind(this, root);
+
         blogOp = new BlogOp(mContext);
         //资讯
         handler.sendEmptyMessage(0);
         init();
+
+        initFragments();
+
+        adapter = new FragmentStatePagerAdapter(getChildFragmentManager()) {
+
+
+            @Override
+            public Fragment getItem(int i) {
+                if (i == 0) {
+                    return listeningFragment;
+                } else {
+                    switch (DataManager.Instance().currentType) {
+                        case 1:
+                            return writeFragment;
+                        case 2:
+                            return transFragment;
+                        case 3:
+                            return fillFragment;
+                        case 4:
+                            return paraFragment;
+                        case 5:
+                            return readFragment;
+                        default:
+                            return readFragment;
+                    }
+                }
+            }
+
+            @Override
+            public int getCount() {
+                return 2;
+            }
+
+            @Override
+            public int getItemPosition(@NonNull Object object) {
+                return POSITION_NONE;
+            }
+        };
+        examVp.setOffscreenPageLimit(2);
+        examVp.setCurrentItem(0);
+
+        setDefaultChoose();
+        examVp.setAdapter(adapter);
+        examVp.resetHeight(0);
+
+        examVp.setFocusable(false);
+        examVp.setEnabled(false);
+        examVp.setOnPageChangeListener(new ViewPager.OnPageChangeListener() {
+            @Override
+            public void onPageScrolled(int i, float v, int i1) {
+
+            }
+
+            @Override
+            public void onPageSelected(final int i) {
+
+                if (i == 0) {
+                    txtListen.setTextColor(getResources().getColor(R.color.black));
+                    txtExam.setTextColor(Color.parseColor("#B8B8B8"));
+                    iconExam.setImageDrawable(getResources().getDrawable(R.drawable.home_icon_others));
+                    iconListen.setImageDrawable(getResources().getDrawable(R.drawable.home_icon_listen));
+                } else {
+                    txtExam.setTextColor(getResources().getColor(R.color.black));
+                    txtListen.setTextColor(Color.parseColor("#B8B8B8"));
+                    iconListen.setImageDrawable(getResources().getDrawable(R.drawable.home_icon_listen_normal));
+                    iconExam.setImageDrawable(getResources().getDrawable(R.drawable.home_icon_others_dark));
+                }
+                examVp.requestLayout();
+                examVp.resetHeight(i);
+
+            }
+
+            @Override
+            public void onPageScrollStateChanged(int i) {
+
+            }
+
+
+        });
 
         pagerAdapter = new CardPagerAdapter(mContext);
         vp.setOffscreenPageLimit(3);
@@ -257,14 +371,44 @@ public class HomeFragment extends Fragment implements OnClickListener, PullToRef
         }
 
         setImages();
-        sv.smoothScrollTo(0, 0);
+//        sv.smoothScrollTo(0, 0);
         return root;
+    }
+
+    private void initFragments() {
+        listeningFragment = new ListeningFragment();
+        listeningFragment.setContainerVp(examVp);
+        writeFragment = new WriteFragment();
+        writeFragment.setContainerVp(examVp);
+        Bundle bundle = new Bundle();
+        bundle.putInt("type", 1);
+        writeFragment.setArguments(bundle);
+        transFragment = new WriteFragment();
+        transFragment.setContainerVp(examVp);
+        Bundle bundleWrite = new Bundle();
+        bundleWrite.putInt("type", 2);
+        transFragment.setArguments(bundleWrite);
+        fillFragment = new FillInBlankFragment();
+        fillFragment.setContainerVp(examVp);
+        paraFragment = new ParagraphMatchingFragment();
+        paraFragment.setContainerVp(examVp);
+        readFragment = new ReadingFragment();
+        readFragment.setContainerVp(examVp);
+    }
+
+
+    private void setDefaultChoose() {
+        txtListen.setTextColor(getResources().getColor(R.color.black));
+        txtExam.setTextColor(Color.parseColor("#B8B8B8"));
+        iconExam.setImageDrawable(getResources().getDrawable(R.drawable.home_icon_others));
+        iconListen.setImageDrawable(getResources().getDrawable(R.drawable.home_icon_listen));
     }
 
     @Override
     public void onDestroyView() {
         super.onDestroyView();
         EventBus.getDefault().unregister(this);
+        unbinder.unbind();
     }
 
     @Subscribe
@@ -295,7 +439,6 @@ public class HomeFragment extends Fragment implements OnClickListener, PullToRef
     private void init() {
         initLive(root);
 
-        sv = root.findViewById(R.id.sv);
 
         vp = root.findViewById(R.id.vp);
 
@@ -325,7 +468,7 @@ public class HomeFragment extends Fragment implements OnClickListener, PullToRef
         tv_testDate = root.findViewById(R.id.tv_testDate);
         tv_duration = root.findViewById(R.id.tv_duration);
         tv_testDate.setText(DateUtils.getTestDate());
-        tv_duration.setText(DateUtils.getDuration());
+        tv_duration.setText(String.format("%sDays",DateUtils.getDuration()));
 
         lv_information = root.findViewById(R.id.lv_information);
         lv_information.setFocusable(false);
@@ -366,11 +509,9 @@ public class HomeFragment extends Fragment implements OnClickListener, PullToRef
         rl_more_live.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View view) {
-//                if (getActivity() != null) {
-//                    ((MainActivity) getActivity()).setTabSelection(1);
-//                }
-                startActivity(new Intent(mContext, MobClassActivity.class));
 
+                Intent intent = MobClassActivity.buildIntent(mContext, Integer.parseInt(Constant.APP_CONSTANT.courseTypeId()), true, getEnglishFilter());
+                startActivity(intent);
             }
         });
         homeCourseListAdapter = new HomeCourseListAdapter(mContext, microClassList);
@@ -379,41 +520,31 @@ public class HomeFragment extends Fragment implements OnClickListener, PullToRef
         list_live.setOnItemClickListener(new OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int position, long l) {
-                if (microClassList.size() > 0) {
-                    MicroClassListBean.DataBean bean = microClassList.get(0);
+//
+                Intent intent = MobClassActivity.buildIntent(mContext, Integer.parseInt(Constant.APP_CONSTANT.courseTypeId()), true, getEnglishFilter());
+                startActivity(intent);
 
-                    Intent intent = new Intent();
-                    intent.setClass(mContext, MobClassActivity.class);
-
-//                    IMoocPackConstant.Instance().packid = bean.getId();
-//                    IMoocPackConstant.Instance().ownerid = Integer.parseInt(bean.getOwnerid());
-//                    IMoocPackConstant.Instance().appId = Constant.APPID;
-//                    IMoocPackConstant.Instance().desc = bean.getDesc();
-//                    IMoocPackConstant.Instance().curPackPrice = Double.parseDouble(bean.getPrice());
-//                    IMoocPackConstant.Instance().CourseNum = bean.getClassNum();
-
-                    intent.putExtra("viewCount", bean.getViewCount());
-                    intent.putExtra("packname", bean.getName());
-                    intent.putExtra("position", 0);
-                    intent.putExtra("coursenum", bean.getClassNum());
-                    startActivity(intent);
-                } else {
-//                    if (getActivity() != null) {
-//                        ((MainActivity) getActivity()).setTabSelection(1);
-//                    }
-                    startActivity(new Intent(mContext, MobClassActivity.class));
-
-                }
             }
         });
 
         getMicroClassData();
     }
 
+    public ArrayList<Integer> getEnglishFilter() {
+        ArrayList<Integer> filter = new ArrayList<>();
+        for (int i = 0; i < 30; i++) {
+            filter.add(i);
+        }
+        filter.remove((Integer) 1);
+        filter.remove((Integer) 5);
+        filter.remove((Integer) 6);
+        filter.add(61);
+        filter.add(91);
+        filter.add(52);
+        return filter;
+    }
+
     private void getMicroClassData() {
-        String n1 = "1";
-        String n2 = "5";
-        String n3 = "6";
         int type = Integer.parseInt(Constant.APP_CONSTANT.TYPE());
         String id = type == 1 ? "1" : (type == 2 ? "5" : "6");
         if (BuildConfig.isEnglish) {
@@ -424,11 +555,11 @@ public class HomeFragment extends Fragment implements OnClickListener, PullToRef
             }
         }
 
-        String url = "http://class.iyuba.com/getClass.iyuba?protocol=10102&id=" + id + "&type=1&pageNumber=1&pageCounts=5" +
+        String url = "http://class.iyuba.cn/getClass.iyuba?protocol=10102&id=" + id + "&type=1&pageNumber=1&pageCounts=5" +
                 "&sign=" + MD5.getMD5ofStr("10102class" + id);
         Http.get(url, new HttpCallback() {
             @Override
-            public void onSucceed(okhttp3.Call call, String response) {
+            public void onSucceed(Call call, String response) {
                 MicroClassListBean bean = new Gson().fromJson(response, MicroClassListBean.class);
                 if (bean.getResult() != 1 || bean.getData() == null || bean.getData().size() <= 0) {
                     return;
@@ -443,7 +574,7 @@ public class HomeFragment extends Fragment implements OnClickListener, PullToRef
             }
 
             @Override
-            public void onError(okhttp3.Call call, Exception e) {
+            public void onError(Call call, Exception e) {
             }
         });
     }
@@ -588,23 +719,14 @@ public class HomeFragment extends Fragment implements OnClickListener, PullToRef
                 break;
             case R.id.iv_fuction:
                 showQQDialog(v);
-
-
                 break;
 
             case R.id.iv_vip:
-                intent = new Intent();
-                intent.setClass(mContext, WordCollection.class);
-                startActivity(intent);
+                showWordDialog(v);
                 break;
             case R.id.rl_more:
-//                if (BuildConfig.isEnglish) {
-//                    intent = new Intent(mContext, InfoActivity.class);
-//                    startActivity(intent);
-//                } else {
                 intent = new Intent(mContext, JpBlogListActivity.class);
                 startActivity(intent);
-//                }
                 break;
             default:
                 break;
@@ -617,7 +739,7 @@ public class HomeFragment extends Fragment implements OnClickListener, PullToRef
         popupMenu.getMenuInflater().inflate(R.menu.menu_home_qq, popupMenu.getMenu());
 
         popupMenu.getMenu().getItem(0).setTitle(
-                isEnglish ? String.format("%s用户群: %s", BrandUtil.getBrandChinese(), BrandUtil.getQQGroupNumber(mContext)) : "安卓用户群: 586621024");
+                isEnglish ? String.format("%s用户群: %s", "四六级", BrandUtil.getQQGroupNumber(mContext)) : "安卓用户群: 913356384");
         popupMenu.getMenu().getItem(1).setTitle(isEnglish ? "客服QQ: 2326344291" : "内容QQ: 3274422495");
         popupMenu.getMenu().getItem(2).setTitle("技术QQ: 1549330086");
         popupMenu.setOnMenuItemClickListener(new PopupMenu.OnMenuItemClickListener() {
@@ -625,13 +747,41 @@ public class HomeFragment extends Fragment implements OnClickListener, PullToRef
             public boolean onMenuItemClick(MenuItem item) {
                 switch (item.getItemId()) {
                     case R.id.qq_group:
-                        Util.startQQGroup(mContext, isEnglish ? BrandUtil.getQQGroupKey(mContext) : "YLNknASyf_6d6M98DVFHyMnSzkkLxcjA");
+//                        Util.startQQGroup(mContext, isEnglish ? BrandUtil.getQQGroupKey(mContext) : "YLNknASyf_6d6M98DVFHyMnSzkkLxcjA");
+                        Util.startQQGroup(mContext, isEnglish ? BrandUtil.getQQGroupKey(mContext) : "uI9-CBBY-HKP2uUYiFKTwblp9zLbGTuI");
                         return true;
                     case R.id.qq_server:
                         Util.startQQ(mContext, isEnglish ? "2326344291" : "3274422495");
                         return true;
                     case R.id.qq_tech:
                         Util.startQQ(mContext, "1549330086");
+                        return true;
+                    default:
+                        return false;
+                }
+            }
+        });
+        popupMenu.show();
+    }
+
+    public void showWordDialog(View v) {
+        final boolean isEnglish = Constant.APP_CONSTANT.isEnglish();
+        PopupMenu popupMenu = new PopupMenu(mContext, v);
+        popupMenu.getMenuInflater().inflate(R.menu.menu_words, popupMenu.getMenu());
+        popupMenu.setOnMenuItemClickListener(new PopupMenu.OnMenuItemClickListener() {
+            @Override
+            public boolean onMenuItemClick(MenuItem item) {
+                Intent intent;
+
+                switch (item.getItemId()) {
+                    case R.id.words_all:
+                        intent = new Intent(mContext, Cet4WordList.class);
+                        startActivity(intent);
+                        return true;
+                    case R.id.words_collect:
+                        intent = new Intent();
+                        intent.setClass(mContext, WordCollection.class);
+                        startActivity(intent);
                         return true;
                     default:
                         return false;
@@ -661,9 +811,67 @@ public class HomeFragment extends Fragment implements OnClickListener, PullToRef
             list_live.setAdapter(homeCourseListAdapter);
         }
 
+        adapter.notifyDataSetChanged();
         if (!isBannerRequested) {
             setImages();
         }
     }
 
+
+
+    private void showAlert() {
+        final String[] wpd = {"30", "50", "70", "100"};
+        final String select = String.valueOf(ConfigManager.Instance().loadInt("wpd", 30));
+        for (int i = 0; i < wpd.length; i++) {
+            if (wpd[i].equals(select)) {
+                checkedItem = i;
+            }
+        }
+        new AlertDialog.Builder(mContext)
+                .setTitle("请选择每关单词数")
+                .setSingleChoiceItems(wpd, checkedItem, new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        WORD_COUNT = Integer.parseInt(wpd[which]);
+                    }
+                })
+                .setNegativeButton("取消", null)
+                .setPositiveButton("确定", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        ConfigManager.Instance().putInt("wpd", WORD_COUNT);
+                        dialog.dismiss();
+                        startActivity(new Intent(mContext, WordStepActivity.class));
+                    }
+                }).create().show();
+        ConfigManager.Instance().putBoolean("isWordNumberSelected", true);
+        ConfigManager.Instance().putBoolean("dbChange", true);
+
+    }
+
+    @OnClick(R.id.listen_ll)
+    public void onListenLlClicked() {
+        examVp.setCurrentItem(0);
+    }
+
+    @OnClick(R.id.exam_ll)
+    public void onExamLlClicked() {
+        startActivity(new Intent(mContext, TestType.class));
+
+//        examVp.setCurrentItem(1);
+    }
+
+    @OnClick(R.id.go_words)
+    public void onGoWordsClicked() {
+        if (ConfigManager.Instance().loadBoolean("isWordNumberSelected", false)) {
+            startActivity(new Intent(mContext, WordStepActivity.class));
+        } else {
+            showAlert();
+        }
+    }
+
+    @OnClick(R.id.go_test)
+    public void onGoTestClicked() {
+        AbilityMapActivity.actionStart(mContext, 1, -1);
+    }
 }

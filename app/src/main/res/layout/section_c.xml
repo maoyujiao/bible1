@@ -1,0 +1,149 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#ffffff"
+    android:orientation="vertical">
+
+    <RelativeLayout
+        android:id="@+id/r1"
+        android:layout_width="fill_parent"
+        android:layout_height="50dp"
+        android:background="@drawable/titlebar_lightgray_bg">
+
+        <ImageView
+            android:id="@+id/button_back"
+            style="@style/base_style_button_back_white"
+            android:background="?attr/selectableItemBackground" />
+
+        <TextView
+            android:id="@+id/play_title_info"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:textAppearance="?android:attr/textAppearanceLarge"
+            android:textColor="#ffffff" />
+
+        <ImageView
+            android:id="@+id/iv_more"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:background="?attr/selectableItemBackground"
+            android:padding="13dp"
+            android:src="@drawable/ic_more_vert_white_24dp" />
+    </RelativeLayout>
+
+    <LinearLayout
+        android:id="@+id/tab"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/r1"
+        android:background="#efefef"
+        android:gravity="center_vertical"
+        android:orientation="horizontal"
+        android:paddingLeft="10dp"
+        android:paddingRight="10dp">
+
+        <com.iyuba.core.widget.TabText
+            android:id="@+id/original"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1" />
+
+        <com.iyuba.core.widget.TabText
+            android:id="@+id/test"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1" />
+
+        <com.iyuba.core.widget.TabText
+            android:id="@+id/comment"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1" />
+    </LinearLayout>
+
+    <android.support.v4.view.ViewPager
+        android:id="@+id/viewpager"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/play_control"
+        android:layout_below="@+id/tab" />
+
+    <LinearLayout
+        android:id="@+id/play_control"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:background="#efefef"
+        android:orientation="vertical">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center_vertical"
+            android:orientation="horizontal"
+            android:padding="5dp">
+
+            <Button
+                android:id="@+id/pause"
+                android:layout_width="35dp"
+                android:layout_height="35dp"
+                android:layout_marginLeft="5dp"
+                android:layout_marginRight="10dp"
+                android:background="@drawable/pause" />
+
+            <RelativeLayout
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1">
+
+                <TextView
+                    android:id="@+id/cur_time"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentLeft="true"
+                    android:layout_alignParentTop="true"
+                    android:layout_marginLeft="10dp"
+                    android:textSize="16sp" />
+
+                <TextView
+                    android:id="@+id/all_time"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignBaseline="@+id/cur_time"
+                    android:layout_alignParentRight="true"
+                    android:layout_marginRight="10dp"
+                    android:textSize="16sp" />
+
+                <SeekBar
+                    android:id="@+id/seekBar"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/cur_time"
+                    android:maxHeight="8dp"
+                    android:minHeight="8dp"
+                    android:progressDrawable="@drawable/seekbar_style"
+                    android:thumb="@android:drawable/ic_notification_overlay"
+                    android:thumbOffset="0dp" />
+            </RelativeLayout>
+
+            <!--<ImageView-->
+            <!--android:id="@+id/favor"-->
+            <!--android:layout_width="wrap_content"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:background="@drawable/un_favor"-->
+            <!--android:contentDescription="@string/pic" />-->
+
+            <TextView
+                android:id="@+id/tv_speed"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="10dp"
+                android:text="x1.0"
+                android:textSize="18sp" />
+        </LinearLayout>
+    </LinearLayout>
+
+</RelativeLayout>

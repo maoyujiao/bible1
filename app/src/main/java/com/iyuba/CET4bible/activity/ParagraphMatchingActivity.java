@@ -85,7 +85,7 @@ public class ParagraphMatchingActivity extends BaseActivity {
 
         recyclerView = findView(R.id.recyclerView);
         recyclerView.setLayoutManager(new LinearLayoutManager(mContext));
-        recyclerView.addItemDecoration(new SimpleLineDividerDecoration(mContext));
+        recyclerView.addItemDecoration(new SimpleLineDividerDecoration(mContext).setColor(R.color.darkgray));
         mOriginalList = new ArrayList<>();
         mTranslationList = new ArrayList<>();
         adapter = new ParagraphItemAdapter(mContext, mOriginalList, mTranslationList);

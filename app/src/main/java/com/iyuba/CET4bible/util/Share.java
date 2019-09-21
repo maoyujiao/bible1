@@ -137,7 +137,7 @@ public class Share {
 //                                Toast.makeText(mContext, "分享成功", Toast.LENGTH_SHORT).show();
 //                            }
 //                        });
-////                service.integral(srid, 1, getTime(), AccountManager.Instace(mContext).getId(), Constant.APPID, id)
+////                service.integral(srid, 1, getTime(), AccountManager.Instance(mContext).getId(), Constant.APPID, id)
 ////                        .subscribeOn(Schedulers.io())
 ////                        .observeOn(AndroidSchedulers.mainThread())
 ////                        .subscribe(new Subscriber<DownLoadJFResult>() {

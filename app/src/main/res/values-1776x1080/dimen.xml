@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+     <dimen name="textsize">20sp</dimen>
+     <dimen name="marginX_title">20px</dimen>
+     <dimen name="marginY_title">80px</dimen>
+      <dimen name="marginX_subTitle">120px</dimen>
+     <dimen name="marginY_subTitle">140px</dimen>
+</resources>

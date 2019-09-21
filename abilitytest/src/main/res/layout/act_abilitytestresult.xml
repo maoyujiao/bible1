@@ -1,0 +1,524 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#F3F9F9"
+    android:orientation="vertical">
+
+    <include layout="@layout/layout_titlebar_sub" />
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:orientation="vertical">
+            <!--得分展示-->
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:id="@+id/tv_user_score"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:gravity="bottom"
+                    android:text="60"
+                    android:textColor="@color/red"
+                    android:textSize="120sp" />
+
+                <ImageView
+                    android:layout_width="50dp"
+                    android:layout_height="50dp"
+                    android:layout_gravity="bottom"
+                    android:layout_marginBottom="20dp"
+                    android:layout_marginLeft="10dp"
+                    android:background="@mipmap/car_score" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="10dp"
+                android:layout_marginLeft="20dp"
+                android:layout_marginRight="20dp"
+                android:background="@drawable/shape_ability_result_bg_white"
+                android:orientation="vertical">
+                <!--题目分析标题-->
+                <TextView
+                    style="@style/IeltsAbilityResultTitlesubStyle"
+                    android:text="题目分析" />
+
+
+                <!--总题数-->
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="3dp"
+                    android:layout_marginLeft="30dp"
+                    android:layout_marginRight="25dp"
+                    android:background="@color/white"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:text="总共题数"
+                        android:textColor="@color/text_black_color" />
+
+                    <TextView
+                        android:id="@+id/tv_ability_result_titleNum"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="8dp"
+                        android:layout_marginRight="15dp"
+                        android:text="90"
+                        android:textColor="@color/text_black_color" />
+                </LinearLayout>
+
+                <include layout="@layout/layout_line_with_margin" />
+                <!--正确题数-->
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="3dp"
+                    android:layout_marginLeft="30dp"
+                    android:layout_marginRight="25dp"
+                    android:layout_marginTop="3dp"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:text="正确题数"
+                        android:textColor="@color/text_black_color" />
+
+                    <TextView
+                        android:id="@+id/tv_ability_result_rightnum"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="8dp"
+                        android:layout_marginRight="15dp"
+                        android:text="90"
+                        android:textColor="@color/text_black_color" />
+                </LinearLayout>
+
+                <include layout="@layout/layout_line_with_margin" />
+                <!--错误题数-->
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="3dp"
+                    android:layout_marginLeft="30dp"
+                    android:layout_marginRight="25dp"
+                    android:layout_marginTop="3dp"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:text="错误题数"
+                        android:textColor="@color/text_black_color" />
+
+                    <TextView
+                        android:id="@+id/tv_ability_result_wrongnum"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="8dp"
+                        android:layout_marginRight="15dp"
+                        android:text="90"
+                        android:textColor="@color/text_black_color" />
+                </LinearLayout>
+
+                <include layout="@layout/layout_line_with_margin" />
+                <!--未答题数-->
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="3dp"
+                    android:layout_marginLeft="30dp"
+                    android:layout_marginRight="25dp"
+                    android:layout_marginTop="3dp"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:text="未答题数"
+                        android:textColor="@color/text_black_color" />
+
+                    <TextView
+                        android:id="@+id/tv_ability_result_undonum"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="8dp"
+                        android:layout_marginRight="15dp"
+                        android:text="90"
+                        android:textColor="@color/text_black_color" />
+                </LinearLayout>
+
+                <include layout="@layout/layout_line_with_margin" />
+                <!--总用时长-->
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="10dp"
+                    android:layout_marginLeft="30dp"
+                    android:layout_marginRight="25dp"
+                    android:layout_marginTop="3dp"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:text="总用时长"
+                        android:textColor="@color/text_black_color" />
+
+                    <TextView
+                        android:id="@+id/tv_ability_result_usetime"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="8dp"
+                        android:layout_marginRight="15dp"
+                        android:text="6分30秒"
+                        android:textColor="@color/text_black_color" />
+                </LinearLayout>
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="10dp"
+                android:layout_marginLeft="20dp"
+                android:layout_marginRight="20dp"
+                android:background="@drawable/shape_ability_result_bg_white"
+                android:orientation="vertical"
+                android:paddingBottom="10dp">
+
+                <TextView
+                    style="@style/IeltsAbilityResultTitlesubStyle"
+                    android:text="能力分析" />
+
+                <com.iyuba.abilitytest.widget.ListViewInScrollView
+                    android:id="@+id/lv_ability_result"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="30dp"
+                    android:layout_marginRight="25dp" />
+                <!--基础表达-->
+                <!-- <LinearLayout
+                     android:id="@+id/ll_ability_result_1"
+                     android:layout_width="match_parent"
+                     android:layout_height="wrap_content"
+                     android:layout_marginLeft="30dp"
+                     android:layout_marginRight="25dp"
+                     android:orientation="horizontal">
+
+                     <TextView
+                         android:id="@+id/tv_ability_result_name1"
+                         style="@style/IeltsAbilityAnalysisTypeTextStyle"
+                         android:text="一毛" />
+
+                     <ProgressBar
+                         android:id="@+id/pb_ability_result_1"
+                         style="?android:attr/progressBarStyleHorizontal"
+                         android:layout_width="0dp"
+                         android:layout_height="6dp"
+                         android:layout_centerInParent="true"
+                         android:layout_marginLeft="8dp"
+                         android:layout_marginTop="5dp"
+                         android:layout_weight="5"
+                         android:max="100"
+                         android:progress="90"
+                         android:progressDrawable="@drawable/progressbar_color" />
+
+                     <TextView
+                         android:id="@+id/tv_ability_result_score1"
+                         android:layout_width="wrap_content"
+                         android:layout_height="wrap_content"
+                         android:layout_marginLeft="8dp"
+                         android:layout_marginRight="15dp"
+                         android:text="90"
+                         android:textColor="@color/text_black_color" />
+                 </LinearLayout>-->
+                <!--结构-->
+                <!-- <LinearLayout
+                     android:id="@+id/ll_ability_result_2"
+                     android:layout_width="match_parent"
+                     android:layout_height="wrap_content"
+                     android:layout_marginLeft="30dp"
+                     android:layout_marginRight="25dp"
+                     android:orientation="horizontal">
+
+                     <TextView
+                         android:id="@+id/tv_ability_result_name2"
+                         style="@style/IeltsAbilityAnalysisTypeTextStyle"
+                         android:text="二毛" />
+
+                     <ProgressBar
+                         android:id="@+id/pb_ability_result_2"
+                         style="?android:attr/progressBarStyleHorizontal"
+                         android:layout_width="0dp"
+                         android:layout_height="6dp"
+                         android:layout_centerInParent="true"
+                         android:layout_marginLeft="8dp"
+                         android:layout_marginTop="5dp"
+                         android:layout_weight="5"
+                         android:max="100"
+                         android:progress="90"
+                         android:progressDrawable="@drawable/progressbar_color" />
+
+                     <TextView
+                         android:id="@+id/tv_ability_result_score2"
+                         android:layout_width="wrap_content"
+                         android:layout_height="wrap_content"
+                         android:layout_marginLeft="8dp"
+                         android:layout_marginRight="15dp"
+                         android:text="90"
+                         android:textColor="@color/text_black_color" />
+                 </LinearLayout>-->
+                <!--逻辑-->
+                <!--<LinearLayout
+                    android:id="@+id/ll_ability_result_3"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="30dp"
+                    android:layout_marginRight="25dp"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:id="@+id/tv_ability_result_name3"
+                        style="@style/IeltsAbilityAnalysisTypeTextStyle"
+                        android:text="三毛" />
+
+                    <ProgressBar
+                        android:id="@+id/pb_ability_result_3"
+                        style="?android:attr/progressBarStyleHorizontal"
+                        android:layout_width="0dp"
+                        android:layout_height="6dp"
+                        android:layout_centerInParent="true"
+                        android:layout_marginLeft="8dp"
+                        android:layout_marginTop="5dp"
+                        android:layout_weight="5"
+                        android:max="100"
+                        android:progress="90"
+                        android:progressDrawable="@drawable/progressbar_color" />
+
+                    <TextView
+                        android:id="@+id/tv_ability_result_score3"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="8dp"
+                        android:layout_marginRight="15dp"
+                        android:text="90"
+                        android:textColor="@color/text_black_color" />
+                </LinearLayout>
+                &lt;!&ndash;素材&ndash;&gt;
+                <LinearLayout
+                    android:visibility="gone"
+                    android:id="@+id/ll_ability_result_4"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="30dp"
+                    android:layout_marginRight="25dp"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:id="@+id/tv_ability_result_name4"
+                        style="@style/IeltsAbilityAnalysisTypeTextStyle"
+                        android:text="四毛" />
+
+                    <ProgressBar
+                        android:id="@+id/pb_ability_result_4"
+                        style="?android:attr/progressBarStyleHorizontal"
+                        android:layout_width="0dp"
+                        android:layout_height="6dp"
+                        android:layout_centerInParent="true"
+                        android:layout_marginLeft="8dp"
+                        android:layout_marginTop="5dp"
+                        android:layout_weight="5"
+                        android:max="100"
+                        android:progress="90"
+                        android:progressDrawable="@drawable/progressbar_color" />
+
+                    <TextView
+                        android:id="@+id/tv_ability_result_score4"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="8dp"
+                        android:layout_marginRight="15dp"
+                        android:text="90"
+                        android:textColor="@color/text_black_color" />
+                </LinearLayout>-->
+                <!--第五项-->
+                <!-- <LinearLayout
+                     android:id="@+id/ll_ability_result_5"
+                     android:layout_width="match_parent"
+                     android:layout_height="wrap_content"
+                     android:layout_marginLeft="30dp"
+                     android:layout_marginRight="25dp"
+                     android:orientation="horizontal"
+                     android:visibility="gone">
+
+                     <TextView
+                         android:id="@+id/tv_ability_result_name5"
+                         style="@style/IeltsAbilityAnalysisTypeTextStyle"
+                         android:text="五毛" />
+
+                     <ProgressBar
+                         android:id="@+id/pb_ability_result_5"
+                         style="?android:attr/progressBarStyleHorizontal"
+                         android:layout_width="0dp"
+                         android:layout_height="6dp"
+                         android:layout_centerInParent="true"
+                         android:layout_marginLeft="8dp"
+                         android:layout_marginTop="5dp"
+                         android:layout_weight="5"
+                         android:max="100"
+                         android:progress="90"
+                         android:progressDrawable="@drawable/progressbar_color" />
+
+                     <TextView
+                         android:id="@+id/tv_ability_result_score5"
+                         android:layout_width="wrap_content"
+                         android:layout_height="wrap_content"
+                         android:layout_marginLeft="8dp"
+                         android:layout_marginRight="15dp"
+                         android:text="90"
+                         android:textColor="@color/text_black_color" />
+                 </LinearLayout>
+                 &lt;!&ndash;第六项&ndash;&gt;
+                 <LinearLayout
+                     android:visibility="gone"
+                     android:id="@+id/ll_ability_result_6"
+                     android:layout_width="match_parent"
+                     android:layout_height="wrap_content"
+
+                     android:layout_marginLeft="30dp"
+                     android:layout_marginRight="25dp"
+                     android:orientation="horizontal">
+
+                     <TextView
+                         android:id="@+id/tv_ability_result_name6"
+                         style="@style/IeltsAbilityAnalysisTypeTextStyle"
+                         android:text="六毛" />
+
+                     <ProgressBar
+                         android:id="@+id/pb_ability_result_6"
+                         style="?android:attr/progressBarStyleHorizontal"
+                         android:layout_width="0dp"
+                         android:layout_height="6dp"
+                         android:layout_centerInParent="true"
+                         android:layout_marginLeft="8dp"
+                         android:layout_marginTop="5dp"
+                         android:layout_weight="5"
+                         android:max="100"
+                         android:progress="90"
+                         android:progressDrawable="@drawable/progressbar_color" />
+
+                     <TextView
+                         android:id="@+id/tv_ability_result_score6"
+                         android:layout_width="wrap_content"
+                         android:layout_height="wrap_content"
+                         android:layout_marginLeft="8dp"
+                         android:layout_marginRight="15dp"
+                         android:text="90"
+                         android:textColor="@color/text_black_color" />
+                 </LinearLayout>-->
+                <!--第七项-->
+                <!--<LinearLayout
+                    android:visibility="gone"
+                    android:id="@+id/ll_ability_result_7"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="12dp"
+                    android:layout_marginLeft="30dp"
+                    android:layout_marginRight="25dp"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:id="@+id/tv_ability_result_name7"
+                        style="@style/IeltsAbilityAnalysisTypeTextStyle"
+                        android:text="七毛" />
+
+                    <ProgressBar
+                        android:id="@+id/pb_ability_result_7"
+                        style="?android:attr/progressBarStyleHorizontal"
+                        android:layout_width="0dp"
+                        android:layout_height="6dp"
+                        android:layout_centerInParent="true"
+                        android:layout_marginLeft="8dp"
+                        android:layout_marginTop="5dp"
+                        android:layout_weight="5"
+                        android:max="100"
+                        android:progress="90"
+                        android:progressDrawable="@drawable/progressbar_color" />
+
+                    <TextView
+                        android:id="@+id/tv_ability_result_score7"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="8dp"
+                        android:layout_marginRight="15dp"
+                        android:text="90"
+                        android:textColor="@color/text_black_color" />
+                </LinearLayout>-->
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center_horizontal"
+                android:orientation="horizontal">
+
+                <Button
+                    android:id="@+id/btn_goto_detail"
+                    android:layout_width="120dp"
+                    android:layout_height="40dp"
+                    android:layout_gravity="center"
+                    android:layout_marginBottom="10dp"
+                    android:layout_marginRight="8dp"
+                    android:layout_marginTop="10dp"
+                    android:background="@drawable/selector_btn_next_bg"
+                    android:gravity="center"
+                    android:text="查看详情"
+                    android:textColor="@drawable/selector_btntext_color_word_ability"
+                    android:textSize="20sp" />
+
+                <Button
+                    android:id="@+id/btn_goto_test"
+                    android:layout_width="120dp"
+                    android:layout_height="40dp"
+                    android:layout_gravity="center"
+                    android:layout_marginBottom="10dp"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginTop="10dp"
+                    android:background="@drawable/selector_btn_next_bg"
+                    android:gravity="center"
+                    android:text="微课学习"
+                    android:textColor="@drawable/selector_btntext_color_word_ability"
+                    android:textSize="20sp" />
+            </LinearLayout>
+        </LinearLayout>
+    </ScrollView>
+
+    <!-- <TextView
+         android:layout_width="match_parent"
+         android:layout_height="wrap_content"
+         android:layout_marginBottom="10dp"
+         android:gravity="center"
+         android:text="* 建议测试时间间隔不低于一周 *"
+         android:textColor="#DB3224"
+         android:textSize="16sp" />-->
+</LinearLayout>

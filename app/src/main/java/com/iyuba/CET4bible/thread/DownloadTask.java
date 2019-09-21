@@ -103,7 +103,6 @@ public class DownloadTask {
 
             @Override
             public void run() {
-
                 downloadFile.downloadSize = 0;
                 downFile();
             }

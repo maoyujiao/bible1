@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:background="#ffffff"
+    android:orientation="vertical">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <android.support.v4.view.ViewPager
+            android:id="@+id/viewpager"
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent" />
+
+        <com.iyuba.core.widget.viewpagerindicator.CirclePageIndicator
+            android:id="@+id/pageIndicator"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:paddingBottom="15dp" />
+
+        <TextView
+            android:id="@+id/close"
+            android:text="立即体验"
+            android:textColor="@color/white"
+            android:gravity="center"
+            android:textSize="22sp"
+            android:paddingBottom="10dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_above="@+id/pageIndicator"
+            android:layout_centerHorizontal="true"
+            android:layout_marginBottom="50dp"
+            android:background="@drawable/start"
+            tools:visibility="visible"
+            android:visibility="invisible" />
+    </RelativeLayout>
+
+</LinearLayout>

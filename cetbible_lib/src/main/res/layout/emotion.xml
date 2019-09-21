@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="wrap_content"
+    android:layout_alignParentBottom="true"
+    android:orientation="vertical" >
+
+    <GridView
+        android:id="@+id/grid_emotion"
+        android:layout_width="fill_parent"
+        android:layout_height="200dip"
+        android:background="#d1d8e3"
+        android:columnWidth="40dp"
+        android:gravity="center"
+        android:numColumns="auto_fit"
+        android:scrollbars="vertical"
+        android:stretchMode="columnWidth"
+        android:verticalSpacing="15dp"
+        android:visibility="gone" >
+    </GridView>
+
+</LinearLayout>

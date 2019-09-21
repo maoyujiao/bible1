@@ -1,0 +1,249 @@
+<?xml version="1.0" encoding="utf-8"?><!--阅读测试界面-->
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:roundProgress="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/bg_ability"
+    android:orientation="vertical">
+
+    <include layout="@layout/layout_titlebar_sub" />
+
+    <include layout="@layout/layout_des" />
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+
+            <ScrollView
+                android:id="@+id/scroll_question"
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="4"
+                android:background="@color/bg_ability"
+                android:focusable="false"
+                android:minHeight="200dp">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="center_horizontal"
+                    android:minHeight="200dp"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:id="@+id/tv_ability_chosn_ques"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="6dp"
+                        android:text="Answer the following question:"
+                        android:textSize="18sp"
+                        android:textStyle="italic" />
+                    <!--问题描述  展示txt里面的内容-->
+                    <TextView
+                        android:id="@+id/write_ques"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="8dp"
+                        android:gravity="center_vertical"
+                        android:lineSpacingMultiplier="1.2"
+                        android:text="请选出与句中划线部分相符的单词或短语。 许多次我都想放弃，但我奋力坚持了下来。"
+                        android:textColor="@color/black_opaque"
+                        android:textSize="19sp" />
+
+                    <LinearLayout
+                        android:id="@+id/ll_play_controller"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal">
+
+                        <ImageButton
+                            android:id="@+id/ibtn_player_controller"
+                            android:layout_width="50dp"
+                            android:layout_height="50dp"
+                            android:layout_gravity="center_vertical"
+                            android:layout_marginLeft="10dp"
+                            android:background="@color/transparent"
+                            android:src="@mipmap/ic_audio_play" />
+
+                        <SeekBar
+                            android:id="@+id/sb_player"
+                            style="@style/Widget.AppCompat.ProgressBar.Horizontal"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center_vertical"
+                            android:clickable="true"
+                            android:padding="6dp" />
+                    </LinearLayout>
+
+                    <!--图片-->
+                    <ImageView
+                        android:id="@+id/word_img"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_horizontal"
+                        android:layout_marginTop="15dp"
+                        android:adjustViewBounds="true"
+                        android:background="@color/transparent" />
+
+                    <!--图片下面的文字-->
+                    <TextView
+                        android:id="@+id/tv_ques_word"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="15dp"
+                        android:layout_marginRight="15dp"
+                        android:text="Hello"
+                        android:textSize="16sp" />
+
+
+                    <!--单词拼写横线-->
+                    <LinearLayout
+                        android:id="@+id/chosen_char"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="8dp"
+                        android:gravity="center"
+                        android:orientation="horizontal" />
+                </LinearLayout>
+
+            </ScrollView>
+            <!--分割线-->
+            <TextView
+                android:id="@+id/tv_question_type"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@color/text_bluenor_color"
+                android:paddingLeft="10dp"
+                android:text="Answer Question"
+                android:textColor="@color/white"
+                android:textSize="18sp" />
+            <!--问题列表选项-->
+            <ScrollView
+                android:id="@+id/scroll_answer"
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="4">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical">
+
+                    <!--多选题目-->
+                    <LinearLayout
+                        android:id="@+id/ll_choose_multy"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical">
+
+                        <include layout="@layout/layout_ability_chose_multy" />
+                    </LinearLayout>
+
+                    <!--判断题目-->
+                    <include layout="@layout/layout_ability_judge_consl" />
+                    <!--填空题目-->
+                    <LinearLayout
+                        android:id="@+id/ll_ability_blank_consl"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="8dp"
+                        android:orientation="vertical">
+
+                        <TextView
+                            android:id="@+id/tv_ability_blank_ques"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:lineSpacingMultiplier="1.2"
+                            android:text="What type of serious climatic event, which took place in southern Rajasthan, is mentioned in this passage? (Choose One WORD Only for the answer.)"
+                            android:textSize="16sp" />
+
+                        <EditText
+                            android:id="@+id/et_ability_uanswer"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:hint="请在此填写答案"
+                            android:textSize="15sp" />
+                    </LinearLayout>
+                    <!--语音评测 声音大小的-->
+                    <com.iyuba.core.widget.RoundProgressBar
+                        android:id="@+id/word_read"
+                        android:layout_width="100dp"
+                        android:layout_height="100dp"
+                        android:layout_gravity="center"
+                        android:layout_margin="50dp"
+                        android:background="@mipmap/speak_ques_read"
+                        android:clickable="true"
+                        roundProgress:circleColor="@color/transparent"
+                        roundProgress:circleProgressColor="@color/blue"
+                        roundProgress:circleWidth="3dip"
+                        roundProgress:textColor="@color/transparent" />
+                    <!--字母录入按键-->
+                    <include layout="@layout/layout_word_keybord" />
+
+                    <TextView
+                        android:id="@+id/tv_practice_explain"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:padding="10dp"
+                        android:scrollbars="none"
+                        android:text="解析:你不懂的才需要看解析."
+                        android:visibility="gone" />
+                </LinearLayout>
+            </ScrollView>
+
+        </LinearLayout>
+
+        <!--<ScrollView-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:layout_alignParentBottom="true"-->
+        <!--android:scrollbars="none"-->
+        <!--android:background="@color/bg_ability"-->
+        <!--tools:layout_height="240dp">-->
+
+        <!--<LinearLayout-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:orientation="vertical">-->
+
+        <!--<View-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="0.5dp"-->
+        <!--android:background="@color/lightgray" />-->
+
+        <!--<TextView-->
+        <!--android:id="@+id/tv_practice_explain"-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:maxHeight="240dp"-->
+        <!--android:padding="10dp"-->
+        <!--android:scrollbars="none"-->
+        <!--android:text="解析:你不懂的才需要看解析."-->
+        <!--android:visibility="gone" />-->
+        <!--</LinearLayout>-->
+        <!--</ScrollView>-->
+
+        <!--会看题卡-->
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/rv_review"
+            android:layout_width="match_parent"
+            android:layout_height="100dp"
+            android:layout_alignParentBottom="true"
+            android:layout_gravity="center"
+            android:layout_marginBottom="0.5dp"
+            android:layout_marginEnd="4dp"
+            android:layout_marginStart="4dp"
+            android:background="@color/white"
+            android:visibility="gone"
+            tools:visibility="visible" />
+    </RelativeLayout>
+
+    <include layout="@layout/layout_bottom_indicator_next" />
+</LinearLayout>

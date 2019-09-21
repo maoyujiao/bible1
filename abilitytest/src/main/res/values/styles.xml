@@ -1,0 +1,84 @@
+<resources>
+
+    <style name="AbilityTestButtonStyle">
+        <item name="android:layout_marginRight">20dp</item>
+        <item name="android:layout_width">120dp</item>
+        <item name="android:layout_height">45dp</item>
+    </style>
+
+    <style name="WordAbalityTextAnswerStyle">
+        <item name="android:background">@drawable/selector_btn_bg</item>
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_marginBottom">5dp</item>
+
+    </style>
+
+    <!--选项ABCD后的背景 背景一个淡蓝色小圆圈-->
+    <style name="WordAbilityTextBackgroundStyle">
+        <item name="android:layout_width">26dp</item>
+        <item name="android:layout_height">26dp</item>
+        <item name="android:layout_margin">5dp</item>
+        <item name="android:background">@drawable/btn_bg_ability_chosen</item>
+        <item name="android:gravity">center</item>
+        <item name="android:textColor">@color/whitesmoke</item>
+        <item name="android:textSize">18sp</item>
+
+    </style>
+
+    <style name="WordAbilityTextBgStyle">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_gravity">center_vertical</item>
+        <item name="android:paddingRight">8dp</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_centerVertical">true</item>
+        <item name="android:layout_marginLeft">10dp</item>
+        <item name="android:textSize">16sp</item>
+    </style>
+
+    <style name="AbilityTestCheckBoxStyle">
+        <item name="android:padding">8dp</item>
+        <item name="android:textSize">18sp</item>
+        <item name="android:button">@drawable/selector_checkbox</item>
+        <item name="android:background">@drawable/selector_btn_bg</item>
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+    </style>
+
+    <style name="IeltsAbilityResultTitlesubStyle">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_marginBottom">10dp</item>
+        <item name="android:background">@drawable/shape_ability_result_bg</item>
+        <item name="android:gravity">center</item>
+        <item name="android:padding">3dp</item>
+        <item name="android:textColor">@color/white</item>
+        <item name="android:textSize">19sp</item>
+    </style>
+    <!--雅思能力测试结果字体的style-->
+    <style name="IeltsAbilityAnalysisTypeTextStyle">
+        <item name="android:layout_width">0dp</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_weight">2</item>
+        <item name="android:textColor">@color/text_black_color</item>
+    </style>
+
+    <!--<style name="HorizontalProgressBarStyle">-->
+    <!--<item name="indeterminateOnly">false</item>-->
+    <!--<item name="progressDrawable">@drawable/progress_horizontal</item>-->
+    <!--<item name="indeterminateDrawable">@drawable/progress_indeterminate_horizontal</item>-->
+    <!--<item name="minHeight">20dip</item>-->
+    <!--<item name="maxHeight">20dip</item>-->
+    <!--<item name="mirrorForRtl">true</item>-->
+    <!--</style>-->
+
+    <style name="dialog_style" parent="@android:style/Theme.Dialog">
+        <item name="android:windowIsFloating">true</item>
+        <item name="android:windowFrame">@null</item>
+        <item name="android:windowIsTranslucent">true</item>
+        <item name="android:windowAnimationStyle">@android:style/Animation.Translucent</item>
+        <item name="android:windowNoTitle">true</item>
+        <item name="android:windowBackground">@android:color/transparent</item>
+        <item name="android:backgroundDimEnabled">true</item>
+    </style>
+</resources>

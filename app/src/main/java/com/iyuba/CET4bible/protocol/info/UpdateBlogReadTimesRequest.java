@@ -14,7 +14,7 @@ import java.io.IOException;
 public class UpdateBlogReadTimesRequest extends BaseXMLRequest {
 
     public UpdateBlogReadTimesRequest(int id) {
-        setAbsoluteURI("http://cms.iyuba.com/cmsApi/updateReadCount.jsp?format=xml&essayids="
+        setAbsoluteURI("http://cms.iyuba.cn/cmsApi/updateReadCount.jsp?format=xml&essayids="
                 + id);
     }
 

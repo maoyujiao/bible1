@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:roundProgress="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <include
+        android:id="@+id/header"
+        layout="@layout/layout_titlebar_sub" />
+
+
+    <com.iyuba.abilitytest.widget.AbilityTestViewPager
+        android:id="@+id/vp_analysis_test"
+        android:layout_width="fill_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1" />
+
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="50dp"
+        android:background="@color/title_bar_bg"
+        android:orientation="horizontal">
+
+        <ImageButton
+            android:id="@+id/ibtn_title_pre"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:layout_gravity="center_vertical"
+            android:layout_marginLeft="15dp"
+            android:background="@drawable/selector_btn_bg"
+            android:src="@mipmap/title_left" />
+
+        <ImageView
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:layout_gravity="center_vertical"
+            android:layout_marginLeft="25dp"
+            android:background="@color/transparent"
+            android:src="@mipmap/audio_play"
+            android:visibility="gone" />
+
+        <com.iyuba.core.widget.RoundProgressBar
+            android:id="@+id/rpb_sound_play"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:layout_gravity="center_vertical"
+            android:layout_marginLeft="25dp"
+            android:background="@mipmap/audio_play"
+            android:clickable="true"
+            roundProgress:circleColor="@color/transparent"
+            roundProgress:circleProgressColor="@color/blue"
+            roundProgress:circleWidth="3dip"
+            roundProgress:textColor="@color/transparent" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_marginLeft="10dp"
+            android:gravity="center_vertical"
+            android:textColor="@color/gray" />
+
+        <Space
+            android:layout_width="10000dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1" />
+
+        <ImageButton
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:layout_gravity="center_vertical"
+            android:background="@color/transparent" />
+
+        <TextView
+            android:id="@+id/tv_current_percent"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_marginRight="25dp"
+            android:gravity="center_vertical"
+            android:text="1/5"
+            android:textColor="@color/gray" />
+
+        <ImageButton
+            android:id="@+id/ibtn_title_next"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:layout_gravity="center_vertical"
+            android:layout_marginLeft="15dp"
+            android:layout_marginRight="10dp"
+            android:background="@drawable/selector_btn_bg"
+            android:src="@mipmap/title_right" />
+
+    </LinearLayout>
+
+
+</LinearLayout>

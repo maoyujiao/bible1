@@ -54,7 +54,6 @@ public class StringUtil {
             SpannableString indexString = new SpannableString(i + 1 + ". ");
             ForegroundColorSpan foregroundColorSpan = new ForegroundColorSpan(isAnswer(answer) ? COLOR_GREEN : COLOR_ORANGE);
             indexString.setSpan(foregroundColorSpan, 0, indexString.length(), Spanned.SPAN_INCLUSIVE_EXCLUSIVE);
-
             builder.append(indexString);
 
             // 单词
@@ -75,13 +74,11 @@ public class StringUtil {
                 wordString.setSpan(new CustomSpan(i, isAnswer(answer), !TextUtils.isEmpty(word), onClickListener), 0, wordString.length(), Spanned.SPAN_INCLUSIVE_EXCLUSIVE);
             }
             builder.append(wordString);
-
             builder.append(" ");
             // 解析
             if (answer != null) {
                 SpannableString explainString = new SpannableString("  ？ ");
                 explainString.setSpan(new CustomSpan22(i, answer, explainListener), 0, explainString.length(), Spanned.SPAN_INCLUSIVE_EXCLUSIVE);
-
                 builder.append(explainString);
             }
         }

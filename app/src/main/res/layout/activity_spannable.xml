@@ -1,0 +1,112 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#ffffff"
+    android:orientation="vertical">
+
+    <android.support.design.widget.AppBarLayout
+        android:id="@+id/appBarLayout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:background="?attr/colorPrimary"
+            android:elevation="2dp">
+
+            <ImageView
+                android:id="@+id/button_back"
+                style="@style/base_style_button_back_white"
+                android:background="?attr/selectableItemBackground" />
+
+            <TextView
+                android:id="@+id/title_info"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_centerInParent="true"
+                android:layout_marginEnd="60dp"
+                android:layout_marginStart="60dp"
+                android:gravity="center"
+                android:text="选词填空"
+                android:textColor="#ffffff"
+                android:textSize="19sp" />
+
+            <CheckBox
+                android:id="@+id/cb_favorite"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentEnd="true"
+                android:layout_centerVertical="true"
+                android:layout_marginEnd="16dp"
+                android:button="@drawable/selector_checkbox_question_favorite" />
+        </RelativeLayout>
+    </android.support.design.widget.AppBarLayout>
+
+    <TextView
+        android:id="@+id/tv_question_title"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="6dp"
+        android:layout_marginTop="6dp"
+        android:gravity="center"
+        android:text="20XX年06选词填空"
+        android:textSize="16sp"
+        android:textStyle="bold" />
+
+    <ScrollView
+        android:id="@+id/scroll"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <com.iyuba.core.widget.subtitle.TextPage
+                android:id="@+id/text"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="16dp"
+                android:background="@null"
+                android:lineSpacingMultiplier="1.2"
+                android:textColor="#444444"
+                android:textSize="16sp" />
+        </LinearLayout>
+
+    </ScrollView>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center_horizontal"
+        android:orientation="horizontal">
+
+        <Button
+            android:id="@+id/submit"
+            android:layout_width="140dp"
+            android:layout_height="40dp"
+            android:layout_marginBottom="8dp"
+            android:layout_marginTop="6dp"
+            android:background="@drawable/select_button_orange"
+            android:gravity="center"
+            android:text="提交"
+            android:textColor="@color/base_white"
+            android:textSize="16sp"
+            tools:background="@color/title_bar_color" />
+
+
+        <Button
+            android:id="@+id/reset"
+            android:layout_width="160dp"
+            android:layout_height="50dp"
+            android:layout_marginBottom="10dp"
+            android:gravity="center"
+            android:text="重新开始"
+            android:visibility="gone" />
+    </LinearLayout>
+</LinearLayout>

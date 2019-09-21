@@ -1,5 +1,5 @@
 /*
- * 文件名 
+ * 文件名
  * 包含类名列表
  * 版本信息，版本号
  * 创建日期
@@ -11,6 +11,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.Handler;
 import android.os.Message;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -32,7 +33,6 @@ import com.iyuba.CET4bible.sqlite.op.SectionCAnswerOp;
 import com.iyuba.CET4bible.sqlite.op.SectionCTextOp;
 import com.iyuba.CET4bible.thread.DownloadTask;
 import com.iyuba.configation.Constant;
-import com.iyuba.core.setting.SettingConfig;
 import com.iyuba.core.util.NetWorkState;
 import com.iyuba.core.widget.RoundProgressBar;
 import com.iyuba.core.widget.dialog.CustomToast;
@@ -45,7 +45,7 @@ import java.util.HashMap;
  * 类名
  *
  * @author 作者 <br/>
- *         实现的主要功能。 创建日期 修改者，修改日期，修改内容。
+ * 实现的主要功能。 创建日期 修改者，修改日期，修改内容。
  */
 public class TestListAdapter extends BaseAdapter {
     private Context mContext;
@@ -218,6 +218,8 @@ public class TestListAdapter extends BaseAdapter {
             DownloadFile file;
             for (int i = 0; i < size; i++) {
                 file = DownloadManager.Instance().fileList.get(i);
+                Log.d("diao", file.downLoadAddress);
+
                 if (file.id.equals(test)) {
                     progresses.put(file.id, curViewHolder.progressBar);
                     Message message = new Message();
@@ -245,7 +247,6 @@ public class TestListAdapter extends BaseAdapter {
 
             @Override
             public void onClick(View arg0) {
-
                 if (prepareDownload(test) == 1) {
                     Intent intent = new Intent(mContext, SectionA.class);
                     getData(0, test);
@@ -354,13 +355,8 @@ public class TestListAdapter extends BaseAdapter {
         downloadFile.downloadState = "start";
         downloadFile.fileAppend = ".zip";
         downloadFile.fileName = year;
-        if (SettingConfig.Instance().isHighSpeed()) {
-            downloadFile.downLoadAddress = "http://cetsoundsvip.iyuba.com/4/"
-                    + year + ".zip";
-        } else {
-            downloadFile.downLoadAddress = "http://cetsounds.iyuba.com/4/"
-                    + year + ".zip";
-        }
+        downloadFile.downLoadAddress = "http://cetsounds.iyuba.cn/" + Constant.APP_CONSTANT.TYPE() + "/"
+                + year + ".zip";
         DownloadManager.Instance().fileList.add(downloadFile);
         DownloadTask task = new DownloadTask(downloadFile);
         task.start();

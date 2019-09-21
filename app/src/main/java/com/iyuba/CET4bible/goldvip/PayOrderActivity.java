@@ -136,8 +136,8 @@ public class PayOrderActivity extends Activity {
                                     @Override
                                     public void onClick(DialogInterface dialog, int which) {
                                         dialog.dismiss();
-                                        String url = "http://www.iyuba.com/sendbook/indexmm.jsp?uid="
-                                                + AccountManager.Instace(mContext).userId + "&platform=android";
+                                        String url = "http://www.iyuba.cn/sendbook/indexmm.jsp?uid="
+                                                + AccountManager.Instance(mContext).userId + "&platform=android";
                                        *//* Intent intent = WebActivity.buildIntent(PayOrderActivity
                                                 .this, url, "赠送礼品");
                                         startActivity(intent);*//*
@@ -176,7 +176,6 @@ public class PayOrderActivity extends Activity {
         setContentView(R.layout.activity_payorder);
         Intent intent = getIntent();
         price = intent.getStringExtra("price");
-//        price = "0.01";
         subject = intent.getStringExtra("subject");
         amount = intent.getStringExtra("amount");
         body = intent.getStringExtra("body");
@@ -368,8 +367,8 @@ public class PayOrderActivity extends Activity {
     }
 
     /*private void payByWeb() {
-        String url = "http://app.iyuba.com/wap/servlet/paychannellist?";
-        url += "out_user=" + AccountManager.Instace(mContext).userId;
+        String url = "http://app.iyuba.cn/wap/servlet/paychannellist?";
+        url += "out_user=" + AccountManager.Instance(mContext).userId;
         url += "&appid=" + Constant.APPID;
         url += "&amount=" + 0;
         Intent intent = WebActivity.buildIntent(this, url, "订单支付");

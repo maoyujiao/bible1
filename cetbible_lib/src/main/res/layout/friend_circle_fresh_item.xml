@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@drawable/microclass_classlist_item_select"
+    android:baselineAligned="false"
+    android:orientation="horizontal" >
+
+    <LinearLayout
+        android:id="@+id/RL_coursePack_list_image"
+        android:layout_width="52dp"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="8dp"
+        android:layout_marginLeft="6dp"
+        android:layout_marginTop="8dp" >
+
+        <ImageView
+            android:id="@+id/head_pic"
+            android:layout_width="50dp"
+            android:layout_height="50dp" />
+        
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/LL_coursePack_content"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_weight="0.94"
+        android:layout_marginLeft="3dp"
+        android:orientation="vertical" >
+
+        <LinearLayout
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal" >
+
+            <TextView
+                android:id="@+id/index_name"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="0dp"
+                android:layout_marginTop="6dp"
+                android:ellipsize="end"
+                android:maxLines="1"
+                android:text="用户名"
+                android:textColor="#0077d5"
+                android:textSize="14sp" />
+
+            <TextView
+                android:id="@+id/index_time"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="5dp"
+                android:layout_marginTop="6dp"
+                android:ellipsize="end"
+                android:text="2015-09-12"
+                android:textColor="@color/gray"
+                android:textSize="12sp" />
+        </LinearLayout>
+
+        <TextView
+            android:id="@+id/index_action"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="5dp"
+            android:maxLines="20"
+            android:text="用户动作"
+            android:textColor="@color/black"
+            android:textSize="16sp" />
+
+        <TextView
+            android:id="@+id/index_content"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="5dp"
+            android:layout_marginRight="15dp"
+            android:ellipsize="end"
+            android:lineSpacingMultiplier="1.2"
+            android:maxLines="20"
+            android:text="发布内容"
+            android:textColor="@color/gray"
+            android:textSize="13sp" />
+
+        <ImageView
+            android:id="@+id/content_pic"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="5dp"
+            android:layout_marginBottom="10dp"
+            android:adjustViewBounds="true"
+            android:maxHeight="120dp"
+            android:scaleType="centerInside" />
+    </LinearLayout>
+
+</LinearLayout>

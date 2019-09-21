@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/background_color"
+    android:orientation="vertical">
+
+    <!--<ImageView-->
+    <!--android:id="@+id/ad"-->
+    <!--android:layout_width="match_parent"-->
+    <!--android:layout_height="0dp"-->
+    <!--android:layout_gravity="center"-->
+    <!--android:layout_weight="0.86"-->
+    <!--android:contentDescription="@string/pic" />-->
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="0.86">
+
+
+        <ImageView
+            android:id="@+id/ad"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:scaleType="fitXY" />
+
+        <Button
+            android:id="@+id/btn_skip"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentEnd="true"
+            android:layout_marginEnd="8dp"
+            android:layout_marginTop="20dp"
+            android:background="@color/trainingcamp_transparent"
+            android:text="跳过(5s)"
+            android:textColor="#494949" />
+
+    </RelativeLayout>
+
+    <ImageView
+        android:id="@+id/base"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="0.14"
+        android:contentDescription="@string/pic"
+        tools:src="@drawable/base" />
+
+</LinearLayout>

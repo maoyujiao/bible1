@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="base_white">@android:color/white</color>
+    <color name="base_night_float_color">#8a000000</color>
+    <color name="base_divider_color">#e2e2e2</color>
+
+    <color name="colorPrimary">@color/base_white</color>
+    <color name="colorPrimaryDark">@color/base_white</color>
+
+    <color name="title_bar_title_text">#fff</color>
+
+
+</resources>

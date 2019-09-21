@@ -1,14 +1,11 @@
 package com.iyuba.CET4bible.util;
 
 import android.annotation.TargetApi;
-import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.os.Build;
 import android.os.Handler;
-import android.os.Looper;
-import android.support.annotation.NonNull;
 import android.text.TextUtils;
 import android.util.Log;
 import android.view.View;
@@ -16,15 +13,10 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.addam.library.api.AddamBanner;
-import com.addam.library.api.AddamError;
-import com.addam.library.api.AddamManager;
 import com.bumptech.glide.Glide;
 import com.google.gson.Gson;
 import com.google.gson.JsonSyntaxException;
 import com.google.gson.reflect.TypeToken;
-import com.iyuba.CET4bible.BuildConfig;
-import com.iyuba.CET4bible.R;
 import com.iyuba.CET4bible.bean.IyubaADBean;
 import com.iyuba.adsdk.extra.common.AdWebBrowser;
 import com.iyuba.base.util.L;
@@ -32,8 +24,6 @@ import com.iyuba.configation.Constant;
 import com.iyuba.core.http.Http;
 import com.iyuba.core.http.HttpCallback;
 import com.iyuba.core.manager.AccountManager;
-import com.miaoze.sdk.dsp.DspFailInto;
-import com.miaoze.sdk.dsp.dsp_out.BannerAdDsp;
 import com.youdao.sdk.nativeads.ImageService;
 import com.youdao.sdk.nativeads.NativeErrorCode;
 import com.youdao.sdk.nativeads.NativeResponse;
@@ -42,10 +32,14 @@ import com.youdao.sdk.nativeads.YouDaoNative;
 
 import org.json.JSONObject;
 
+import java.text.DateFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Date;
 import java.util.List;
 import java.util.Map;
-import java.util.Random;
 import java.util.concurrent.TimeUnit;
 
 import okhttp3.Call;
@@ -63,7 +57,7 @@ public class AdBannerUtil {
     private YouDaoNative youdaoNative;
     private View adView;
     private ImageView adImageView;
-    private AddamBanner addamBanner;
+//    private AddamBanner addamBanner;
     private ViewGroup adMiaozeParent;
 //    private AdView miaozeBannerAdView;
 
@@ -78,7 +72,7 @@ public class AdBannerUtil {
     // 广告自己切换的时间
     private int adIntervalTime = 10;
 
-
+    private TextView close ;
     private boolean isIyubaAdTimerStarted = false;
     private Handler iyubaAdHandler = new Handler();
     private Runnable iyubaAdRunnable = new Runnable() {
@@ -97,33 +91,12 @@ public class AdBannerUtil {
         youdaoNative = new YouDaoNative(context, "230d59b7c0a808d01b7041c2d127da95", youDaoAdListener);
     }
 
-    public void setView(View view, ImageView imageView) {
+    public void setView(View view, ImageView imageView ,TextView textView) {
         this.adImageView = imageView;
         this.adView = view;
+        this.close =textView;
     }
 
-    public void setAddamView(View view) {
-        addamBanner = (AddamBanner) view;
-        addamBanner.setAdSize(AddamBanner.Size.BannerAuto);
-        addamBanner.setAdUnitID(Constant.ADDAM_APPKEY); // 设置广告位id
-        addamBanner.setCallback(new AddamBanner.Callback() {
-            @Override
-            public void bannerDidDisplayed(AddamBanner addamBanner, int errorCode) {
-                if (errorCode == AddamError.NO_ERROR) {
-                    Log.e(TAG, "嗒萌加载成功");
-                    setADViewVisibility();
-                    addamBanner.setVisibility(View.VISIBLE);
-                } else {
-                    loadYouDaoAD();
-                    Log.e(TAG, "addam error: " + errorCode);
-                }
-            }
-
-            @Override
-            public void bannerDidSelected(AddamBanner addamBanner) {
-            }
-        });
-    }
 
     public void setMiaozeView(ViewGroup viewGroup) {
         this.adMiaozeParent = viewGroup;
@@ -133,15 +106,22 @@ public class AdBannerUtil {
      * iyuba三秒超时，失败后加载有道广告
      */
     public void loadAd() {
-        if (context == null || AccountManager.isVip()) {
+        if (context == null || AccountManager.isVip()||forCheck("2018-12-15")) {
             return;
         }
+
+        close.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                adView.setVisibility(View.GONE);
+            }
+        });
 
         String userId = AccountManager.Instace(context).getId();
         if (TextUtils.isEmpty(userId)) {
             userId = "0";
         }
-        String url = "http://dev.iyuba.com/getAdEntryAll.jsp?uid=" + userId
+        String url = "http://dev.iyuba.cn/getAdEntryAll.jsp?uid=" + userId
                 + "&appId=" + Constant.APPID //104 224
                 + "&flag=4";
         Request request = new Request.Builder().url(url).build();
@@ -150,10 +130,6 @@ public class AdBannerUtil {
         Http.getOkHttpClient3().newCall(request).enqueue(new HttpCallback() {
             @Override
             public void onSucceed(Call call, String response) {
-//        String response = "[{\"result\":\"1\",\"data\":{\"id\":\"676\",\"adId\":\"VOA慢速英语华尔街banneriOSLearn-Word8-30\",\"startuppic_StartDate\":\"2017-08-30\",\"startuppic_EndDate\":\"2017-09-05\",\"startuppic\":\"upload/1504064808441.jpg\"," +
-//                "\"type\":\"ssp\",\"startuppic_Url\":\"http://dev.iyuba.com/ad.jsp?adId=676&uid=0&appId=104\",\"classNum\":\"0\"}}]";
-
-//        String response = "[{\"result\":\"1\",\"data\":{\"id\":\"811\",\"adId\":\"淼森信息安卓banner\",\"startuppic_StartDate\":\"2017-11-01\",\"startuppic_EndDate\":\"2017-11-29\",\"startuppic\":\"\",\"type\":\"ssp\",\"startuppic_Url\":\"http://app.iyuba.com/android/index.jsp\",\"classNum\":\"0\"}}]";
                 if (context == null) {
                     return;
                 }
@@ -174,8 +150,6 @@ public class AdBannerUtil {
                 try {
                     IyubaADBean adBean = list.get(0);
 
-//            adBean.getData().setType(ads[new Random().nextInt(100) % 4]);
-
                     if ("1".equals(adBean.getResult())) {
                         Log.e(TAG, "type = " + adBean.getData().getType());
                         Log.e(TAG, "last type = " + lastAD);
@@ -184,7 +158,7 @@ public class AdBannerUtil {
 
                         if (TYPE_YOUDAO.equals(adBean.getData().getType())) {
                             loadYouDaoAD();
-                        } else if (addamBanner != null && TYPE_DAM.equals(adBean.getData().getType())) { // 嗒萌广告
+                        } else if (TYPE_DAM.equals(adBean.getData().getType())) { // 嗒萌广告
                             loadDamAD();
                         } else if (adMiaozeParent != null && TYPE_MIAOZE.equals(adBean.getData().getType())) {  // 淼泽广告
                             Observable.interval(0, 10, TimeUnit.SECONDS)
@@ -193,9 +167,7 @@ public class AdBannerUtil {
                                     .subscribe(new Action1<Long>() {
                                         @Override
                                         public void call(Long aLong) {
-                                            Log.e(TAG, "加载Miaoze Banner广告");
-//                                            loadMiaozeAd();
-                                            loadBanner(adMiaozeParent);
+
                                         }
                                     });
                         } else if (TYPE_IYUBA.equals(adBean.getData().getType().toLowerCase())) {
@@ -204,7 +176,7 @@ public class AdBannerUtil {
                                     && !TextUtils.isEmpty(adBean.getData().getStartuppic())
                                     ) {
 
-                                loadIyubaAD("http://static3.iyuba.com/dev/" + adBean.getData().getStartuppic(), adBean.getData().getStartuppic_Url());
+                                loadIyubaAD("http://static3.iyuba.cn/dev/" + adBean.getData().getStartuppic(), adBean.getData().getStartuppic_Url());
                             } else {
                                 loadYouDaoAD();
                             }
@@ -213,13 +185,9 @@ public class AdBannerUtil {
                         }
 
                         lastAD = adBean.getData().getType();
-                        if (!lastAD.equals(TYPE_DAM) && addamBanner != null) {
-                            addamBanner.unLoad();
+                        if (!lastAD.equals(TYPE_DAM) ) {
+//                            addamBanner.unLoad();
                         }
-//                        if (!lastAD.equals(TYPE_MIAOZE) && miaozeBannerAdView != null) {
-//                            adMiaozeParent.removeView(miaozeBannerAdView);
-//                            miaozeBannerAdView = null;
-//                        }
                     } else {
                         loadYouDaoAD();
                     }
@@ -228,6 +196,8 @@ public class AdBannerUtil {
                     e.printStackTrace();
                     loadYouDaoAD();
                 }
+
+
             }
 
             @Override
@@ -259,133 +229,6 @@ public class AdBannerUtil {
     }
 
     /**
-     * 淼泽广告
-     */
-    /*
-    private void loadMiaozeAd() {
-        if (context == null) {
-            return;
-        }
-        Log.e(TAG, "加载Miaoze Banner广告");
-
-        setADViewVisibility();
-        adMiaozeParent.setVisibility(View.VISIBLE);
-
-        View view = adMiaozeParent;
-        final ImageView imageView = (ImageView) view.findViewById(R.id.ad_miaoze_image);
-        final TextView title = (TextView) view.findViewById(R.id.ad_miaoze_title);
-        final TextView desc = (TextView) view.findViewById(R.id.ad_miaoze_desc);
-
-        //初始化淼擇的API
-
-        //英语四级   s0022001
-        //英语六级   s0023001
-
-        AdvancedApi advancedApii = new AdvancedApi(context, "s1a5c176",
-                AdSize.Interstitial, null);
-        advancedApii.setListener(getAdvancedApiListener(advancedApii, imageView, title, desc));
-        advancedApii.register(context, adMiaozeParent);
-        // 测试sa3a22b4
-    }*/
-    private void loadBanner(final ViewGroup viewGroup){
-
-        Log.e(TAG, "加载Miaoze Banner广告");
-        viewGroup.removeAllViews();
-        BannerAdDsp adMiaozeDSP =new BannerAdDsp(context, new BannerAdDsp.BannerAdDspListener() {
-            @Override
-            public void onAdReady() {
-
-            }
-
-            @Override
-            public void onAdFailed(DspFailInto dspFailInto) {
-                loadYouDaoAD();
-            }
-
-            @Override
-            public void onAdClick(JSONObject jsonObject) {
-
-            }
-
-            @Override
-            public void onAdShow(JSONObject jsonObject) {
-
-            }
-        });
-        adMiaozeDSP.loadBanner("s0022001");
-        viewGroup.addView(adMiaozeDSP);
-    }
-    //淼擇sdk的接口
-//    @NonNull
-//    private AdvancedApi.AdvancedApiListener getAdvancedApiListener(final AdvancedApi advancedApii,
-//                                                                   final ImageView imageView,
-//                                                                   final TextView title,
-//                                                                   final TextView desc) {
-//        return new AdvancedApi.AdvancedApiListener() {
-//            @Override
-//            public void onAdReady(AdvancedApi advancedApi) {
-//                final String titleStr = advancedApi.getTitle();
-//                final String descStr = advancedApi.getDesc1();
-//                String logoStr = advancedApi.getLogoUrl();
-//                String imgStr = advancedApi.getImgUrl();
-//                Log.e(TAG, "onAdReady  "
-//                        + "\ntitle: " + titleStr
-//                        + "\ndesc: " + descStr
-//                        + "\nimageUrl: " + imgStr
-//                        + "\nlogoUrl: " + logoStr);
-//                if (context == null) {
-//                    return;
-//                }
-//                String imageUrl = logoStr;
-//                if (TextUtils.isEmpty(imageUrl)) {
-//                    imageUrl = imgStr;
-//                }
-//                final String finalImageUrl = imageUrl;
-//                new Handler(Looper.getMainLooper()).post(new Runnable() {
-//                    @Override
-//                    public void run() {
-//                        if (context != null) {
-//                            try {
-//                                if (context instanceof Activity) {
-//                                    if (((Activity) context).isDestroyed() || ((Activity) context).isFinishing()) {
-//                                        return;
-//                                    }
-//                                }
-//                                title.setText(titleStr);
-//                                Glide.with(context).load(finalImageUrl).placeholder(R.drawable.nearby_no_icon2).into(imageView);
-//                                desc.setText(descStr);
-//                            } catch (Exception e) {
-//                                e.printStackTrace();
-//                            }
-//                        }
-//                    }
-//                });
-//            }
-//
-//            @Override
-//            public void onAdFailed(JSONObject jsonObject) {
-//                Log.e(TAG, "onAdFailed   " + jsonObject.toString());
-//                loadYouDaoAD();
-//            }
-//
-//            @Override
-//            public void onAdLPFinish(JSONObject jsonObject) {
-//                Log.e(TAG, "onAdLPFinish   " + jsonObject.toString());
-//            }
-//
-//            @Override
-//            public void onAdClick(JSONObject jsonObject) {
-//                Log.e(TAG, "onAdClick   " + jsonObject.toString());
-//            }
-//
-//            @Override
-//            public void onAdShow(JSONObject jsonObject) {
-//                Log.e(TAG, "onAdShow   " + jsonObject.toString());
-//            }
-//        };
-//    }
-
-    /**
      * 嗒萌广告
      */
     private void loadDamAD() {
@@ -393,17 +236,12 @@ public class AdBannerUtil {
             return;
         }
         Log.e(TAG, "加载嗒萌广告");
-        Log.e(TAG, "加载嗒萌name:  " + AddamManager.getSDKVersionName());
-        // Log.e(TAG, "加载嗒萌code:  " + AddamManager.getSDKVersionCode());
 
         setADViewVisibility();
-        addamBanner.setVisibility(View.VISIBLE);
 
         if (TYPE_DAM.equals(lastAD)) {
             return;
         }
-
-        addamBanner.load(); // 开始加载
     }
 
     private void loadIyubaAD(String picUrl, final String adUrl) {
@@ -444,19 +282,12 @@ public class AdBannerUtil {
         if (adMiaozeParent != null) {
             adMiaozeParent.setVisibility(View.GONE);
         }
-        if (addamBanner != null) {
-            addamBanner.setVisibility(View.GONE);
-        }
     }
 
     public void destroy() {
         Log.e(TAG, "onDestroy");
         context = null;
         youdaoNative.destroy();
-        if (addamBanner != null) {
-            addamBanner.setCallback(null);
-            addamBanner.unLoad();
-        }
         stopIyubaAdTimer();
     }
 
@@ -516,4 +347,22 @@ public class AdBannerUtil {
             Log.e(TAG, "有道广告加载失败onNativeFail:  " + nativeErrorCode.name());
         }
     };
+
+    private boolean forCheck(String s){
+        DateFormat df = new SimpleDateFormat("yyyy-MM-dd");
+        Date date = null;
+        try {
+            date = df.parse(s);
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+        Calendar cal = Calendar.getInstance();
+        cal.setTime(date);
+        long timestamp = cal.getTimeInMillis();
+        if (System.currentTimeMillis()<timestamp){
+            return true;
+        }else {
+            return false ;
+        }
+    }
 }

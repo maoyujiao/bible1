@@ -9,6 +9,7 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.iyuba.CET4bible.R;
+import com.iyuba.CET4bible.activity.MainActivity;
 import com.iyuba.CET4bible.adapter.FavoriteParagraphMatchingAdapter;
 import com.iyuba.CET4bible.sqlite.mode.ParagraphMatchingBean;
 import com.iyuba.CET4bible.sqlite.op.ParagraphMatchingOp;
@@ -16,6 +17,7 @@ import com.iyuba.CET4bible.util.AdInfoFlowUtil;
 import com.iyuba.base.BaseFragment;
 import com.iyuba.base.util.SimpleLineDividerDecoration;
 import com.iyuba.core.manager.AccountManager;
+import com.iyuba.core.manager.DataManager;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -35,7 +37,11 @@ public class ParagraphMatchingFragment extends BaseFragment {
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        return inflater.inflate(R.layout.fragment_fillinblank, container, false);
+        View view = inflater.inflate(R.layout.fragment_fillinblank, container, false);
+        if (containerVp!=null){
+            containerVp.setObjectForPosition(view, 1);
+        }
+        return view ;
     }
 
     @Override
@@ -43,11 +49,11 @@ public class ParagraphMatchingFragment extends BaseFragment {
         super.onViewCreated(view, savedInstanceState);
         recyclerView = view.findViewById(R.id.recyclerView);
         recyclerView.setLayoutManager(new LinearLayoutManager(mContext));
-        recyclerView.addItemDecoration(new SimpleLineDividerDecoration(mContext));
+        recyclerView.addItemDecoration(new SimpleLineDividerDecoration(mContext).setColor(R.color.darkgray));
 
         mList = new ArrayList<>();
 
-        adapter = new FavoriteParagraphMatchingAdapter(mContext, mList);
+        adapter = new FavoriteParagraphMatchingAdapter(mContext, mList, getActivity() instanceof MainActivity);
         recyclerView.setAdapter(adapter);
 
         ParagraphMatchingOp op = new ParagraphMatchingOp(mContext);
@@ -70,5 +76,13 @@ public class ParagraphMatchingFragment extends BaseFragment {
     public void onDestroyView() {
         super.onDestroyView();
         adInfoFlowUtil.destroy();
+    }
+
+    @Override
+    public void setUserVisibleHint(boolean isVisibleToUser) {
+        if (isVisibleToUser){
+            DataManager.Instance().currentType = 4;
+        }
+        super.setUserVisibleHint(isVisibleToUser);
     }
 }

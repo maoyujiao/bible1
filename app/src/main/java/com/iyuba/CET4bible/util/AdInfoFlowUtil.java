@@ -72,10 +72,6 @@ public class AdInfoFlowUtil {
                     mDataList.add(index, ads.get(0));
                     ads.remove(0);
                     L.e("=== ad position =22222=  " + index);
-//                } else if (videoAds.size() > 0) {
-//                    mDataList.add(index, videoAds.get(0));
-//                    videoAds.remove(0);
-//                    L.e("=== ad position =33333=  " + index);
                 }
                 count += 1;
             }

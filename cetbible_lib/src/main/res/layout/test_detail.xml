@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical" >
+
+    <RelativeLayout
+        android:layout_width="fill_parent"
+        android:layout_height="50dp" >
+
+        <RelativeLayout
+            android:id="@+id/r11"
+            android:layout_width="60dp"
+            android:layout_height="50dp"
+            android:background="@drawable/content_bg" >
+
+            <TextView
+                android:id="@+id/time"
+                android:layout_width="fill_parent"
+                android:layout_height="fill_parent"
+                android:gravity="center"
+                android:text="时间"
+                android:textSize="13sp" />
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:id="@+id/r12"
+            android:layout_width="60dp"
+            android:layout_height="50dp"
+            android:layout_toRightOf="@+id/r11"
+            android:background="@drawable/content_bg" >
+
+            <TextView
+                android:id="@+id/lessonid"
+                android:layout_width="fill_parent"
+                android:layout_height="fill_parent"
+                android:gravity="center"
+                android:text="LessonId"
+                android:textSize="13sp" />
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:id="@+id/r13"
+            android:layout_width="60dp"
+            android:layout_height="50dp"
+            android:layout_toRightOf="@+id/r12"
+            android:background="@drawable/content_bg" >
+
+            <TextView
+                android:id="@+id/ques_num"
+                android:layout_width="fill_parent"
+                android:layout_height="fill_parent"
+                android:gravity="center"
+                android:text="题号"
+                android:textSize="13sp" />
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:id="@+id/r14"
+            android:layout_width="60dp"
+            android:layout_height="50dp"
+            android:layout_toRightOf="@+id/r13"
+            android:background="@drawable/content_bg" >
+
+            <TextView
+                android:id="@+id/choices"
+                android:layout_width="fill_parent"
+                android:layout_height="fill_parent"
+                android:gravity="center"
+                android:text="选项"
+                android:textSize="13sp" />
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:id="@+id/r15"
+            android:layout_width="60dp"
+            android:layout_height="50dp"
+            android:layout_toRightOf="@+id/r14"
+            android:background="@drawable/content_bg" >
+
+            <TextView
+                android:id="@+id/ans"
+                android:layout_width="fill_parent"
+                android:layout_height="fill_parent"
+                android:gravity="center"
+                android:text="答案"
+                android:textSize="13sp" />
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:layout_width="60dp"
+            android:layout_height="50dp"
+            android:layout_toRightOf="@+id/r15"
+            android:background="@drawable/content_bg" >
+
+            <TextView
+                android:id="@+id/grade"
+                android:layout_width="fill_parent"
+                android:layout_height="fill_parent"
+                android:gravity="center"
+                android:text="得分"
+                android:textSize="13sp" />
+        </RelativeLayout>
+    </RelativeLayout>
+
+</LinearLayout>

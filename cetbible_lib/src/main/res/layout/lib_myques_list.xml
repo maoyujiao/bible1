@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:background="#eeeeee">
+
+    <RelativeLayout
+        android:id="@+id/title_part"
+        android:layout_width="fill_parent"
+        android:layout_height="50dp"
+        android:background="?attr/colorPrimary">
+
+        <ImageView
+            android:id="@+id/btn_back"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:layout_alignParentLeft="true"
+            android:layout_centerVertical="true"
+            android:src="@drawable/lib_back_button" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:text="@string/techer_tang"
+            android:textColor="@color/base_white"
+            android:textSize="18sp" />
+
+        <ImageView
+            android:id="@+id/tinsert"
+            android:layout_width="46dp"
+            android:layout_height="30dp"
+            android:layout_alignParentBottom="true"
+            android:layout_alignParentRight="true"
+            android:layout_alignParentTop="true"
+            android:paddingEnd="10dp"
+            android:paddingStart="10dp"
+            android:src="@drawable/edt_question" />
+
+    </RelativeLayout>
+
+    <View
+        android:id="@+id/line"
+        android:layout_width="match_parent"
+        android:layout_height="0.5dp"
+        android:layout_below="@id/title_part"
+        android:background="#e2e2e2" />
+
+    <FrameLayout
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:layout_below="@id/line">
+
+        <com.iyuba.core.widget.pulltorefresh.PullToRefreshView
+            android:id="@+id/ll_queslist_content"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+
+            <ListView
+                android:id="@android:id/list"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@color/white"
+                android:cacheColorHint="#00000000"
+                android:divider="#e2e2e2"
+                android:dividerHeight="0.5dp"
+                android:fadingEdge="none"
+                android:fastScrollEnabled="false"
+                android:listSelector="@drawable/item_select" />
+
+        </com.iyuba.core.widget.pulltorefresh.PullToRefreshView>
+    </FrameLayout>
+
+    <com.iyuba.core.widget.ContextMenu
+        android:id="@+id/context_menu"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:visibility="gone" />
+</RelativeLayout>

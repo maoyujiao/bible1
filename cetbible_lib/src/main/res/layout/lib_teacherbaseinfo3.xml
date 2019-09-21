@@ -1,0 +1,126 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/backlayout"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#f8f6f6"
+    android:orientation="vertical"
+
+    >
+
+    <RelativeLayout
+        android:layout_width="fill_parent"
+        android:layout_height="50dp"
+        android:background="?attr/colorPrimary">
+
+        <Button
+            android:id="@+id/tbutton_back3"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:layout_alignParentLeft="true"
+            android:layout_centerVertical="true"
+            android:background="@drawable/lib_back_button" />
+
+        <TextView
+            android:id="@+id/title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:text="@string/teacher_info3"
+            android:textColor="#fff"
+            android:textSize="18sp" />
+
+        <TextView
+            android:id="@+id/next2"
+            android:layout_width="wrap_content"
+            android:layout_height="50px"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="8dp"
+            android:layout_marginRight="5dp"
+            android:text="完成"
+            android:textColor="#000"
+            android:textSize="15sp"
+            android:visibility="gone" />
+
+    </RelativeLayout>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="0.5dp"
+        android:background="@color/divider_line" />
+
+    <RelativeLayout
+        android:layout_width="fill_parent"
+        android:layout_height="200dp">
+
+        <ImageView
+            android:id="@+id/fj1"
+            android:layout_width="160dp"
+            android:layout_height="190dp"
+            android:layout_centerInParent="true"
+            android:background="@drawable/photo_pic" />
+
+
+    </RelativeLayout>
+
+
+    <LinearLayout
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:background="#ffffff">
+
+        <Button
+            android:id="@+id/button1"
+            android:layout_width="match_parent"
+            android:layout_height="60dp"
+            android:layout_marginTop="10dp"
+            android:background="#399fe8"
+            android:text="上传"
+            android:textColor="@color/base_white" />
+
+    </LinearLayout>
+
+
+    <LinearLayout
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:background="#ffffff"
+        android:orientation="vertical"
+        android:padding="16dp"
+
+        >
+
+        <TextView
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:text="1.您可以上传一份毕业证、学历证书、教师资格证书等一切可证明您专业身份的材料照片，更容易通过审核"
+            android:textSize="10sp"
+
+            />
+
+        <TextView
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center_vertical"
+            android:text="2.每个文件大小不超过10M"
+            android:textSize="10sp" />
+
+        <TextView
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center_vertical"
+            android:text="注：您的信息不会被其他网友看到，我们将严格保密，请放心上传"
+            android:textSize="10sp" />
+
+    </LinearLayout>
+
+
+    <com.iyuba.core.widget.ContextMenu
+        android:id="@+id/context_menu3"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:visibility="gone" />
+</LinearLayout>
+

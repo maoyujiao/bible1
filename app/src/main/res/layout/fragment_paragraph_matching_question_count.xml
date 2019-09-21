@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.v4.widget.NestedScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#fcfcfc"
+    android:orientation="vertical"
+    android:scrollbars="vertical">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/tv_title"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:background="#d9e7f2"
+            android:elevation="1dp"
+            android:gravity="center"
+            android:paddingBottom="8dp"
+            android:paddingTop="8dp"
+            android:text="当前题目作答情况"
+            android:textSize="17sp" />
+
+
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/recyclerView"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:visibility="visible" />
+
+        <Button
+            android:id="@+id/tvSubmit"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="32dp"
+            android:layout_marginEnd="64dp"
+            android:layout_marginStart="64dp"
+            android:layout_marginTop="32dp"
+            android:background="@drawable/select_button_orange"
+            android:text="提交"
+            android:textColor="#fff"
+            android:textSize="16sp" />
+
+    </LinearLayout>
+</android.support.v4.widget.NestedScrollView>

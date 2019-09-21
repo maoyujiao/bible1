@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="divider_line">#e2e2e2</color>
+    <color name="status_bar_color">@color/colorPrimaryDark</color>
+    <color name="title_bar_color">@color/colorPrimary</color>
+
+
+    <color name="item_color_1">#ffe14438</color>
+    <color name="item_color_2">#ff826cab</color>
+    <color name="item_color_3">#ff62aa46</color>
+    <color name="item_color_4">#ffe38f2b</color>
+    <color name="item_color_5">#ff4fbdf0</color>
+</resources>

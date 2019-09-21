@@ -34,9 +34,6 @@ import android.widget.SeekBar.OnSeekBarChangeListener;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.google.ads.AdRequest;
-import com.google.ads.AdSize;
-import com.google.ads.AdView;
 import com.iyuba.CET4bible.R;
 import com.iyuba.CET4bible.listening.ListenCTestFragment.OnBackPressListener;
 import com.iyuba.CET4bible.manager.ListenDataManager;
@@ -75,7 +72,7 @@ public class SectionC extends BasisActivity implements OnBackPressListener {
     private ListenCFragmentAdapter adapter;
     private int playTimes;
     private boolean backPressed;
-    private AdView adView;
+//    private AdView adView;
     private ImageView favor;
     private ExtendedPlayer extendedPlayer;
     OnClickListener ocl = new OnClickListener() {
@@ -438,13 +435,13 @@ public class SectionC extends BasisActivity implements OnBackPressListener {
 
     private void initAD() {
         int isvip = ConfigManager.Instance().loadInt("isvip");
-        if (isvip == 0) {
-            // Create the adView
-            adView = new AdView(this, AdSize.BANNER, "a150c0277858794");
-            LinearLayout layout = findViewById(R.id.play_control);
-            layout.addView(adView);
-            adView.loadAd(new AdRequest());
-        }
+//        if (isvip == 0) {
+//            // Create the adView
+//            adView = new AdView(this, AdSize.BANNER, "a150c0277858794");
+//            LinearLayout layout = findViewById(R.id.play_control);
+//            layout.addView(adView);
+//            adView.loadAd(new AdRequest());
+//        }
     }
 
     private void initTabText() {
@@ -594,11 +591,11 @@ public class SectionC extends BasisActivity implements OnBackPressListener {
         super.onDestroy();
         videoHandler.removeMessages(0);
         videoHandler.removeMessages(1);
-        if (adView != null) {
-            adView.stopLoading();
-            adView.destroy();
-            adView.destroyDrawingCache();
-        }
+//        if (adView != null) {
+//            adView.stopLoading();
+//            adView.destroy();
+//            adView.destroyDrawingCache();
+//        }
     }
 
     @Override

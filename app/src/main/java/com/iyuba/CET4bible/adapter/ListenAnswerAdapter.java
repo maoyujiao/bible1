@@ -102,7 +102,7 @@ public class ListenAnswerAdapter extends BaseAdapter {
 
             @Override
             public void onClick(View arg0) {
-                callBack.setResult(pos);
+                callBack.setResult(pos); // 由于没有知识点fragment  所以要-1
             }
         });
         return convertView;

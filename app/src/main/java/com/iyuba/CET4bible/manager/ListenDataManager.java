@@ -36,12 +36,14 @@ public class ListenDataManager {
             "2015_12_192", "2015_12_191", "2015_06_133", "2015_06_132", "2015_06_131"};
     public static int curPos;
     private static ListenDataManager dataManager;
-    public String year;
-    public String rowString;
+    public String year = "";
+    public String rowString ="";
     public ArrayList<CetAnswer> answerList = new ArrayList<>();
     public ArrayList<CetExplain> explainList = new ArrayList<>();
     public ArrayList<CetText> textList = new ArrayList<>();
     public ArrayList<CetFillInBlank> blankList = new ArrayList<>();
+    public String section = "A";
+    public String para ;
 
     public ListenDataManager() {
     }

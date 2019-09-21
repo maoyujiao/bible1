@@ -509,7 +509,7 @@ public class SetFragment extends Fragment {
         String text = getResources().getString(R.string.setting_share1)
                 + Constant.APPName
                 + getResources().getString(R.string.setting_share2)
-                + "：http://app.iyuba.com/android/androidDetail.jsp?id="
+                + "：http://app.iyuba.cn/android/androidDetail.jsp?id="
                 + Constant.APPID;
         Intent shareInt = new Intent(Intent.ACTION_SEND);
         shareInt.setType("text/*");

@@ -42,12 +42,6 @@ public class GoldDesActivity extends BaseActivity implements View.OnClickListene
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_golddes);
-//        Intent intent = getIntent();
-//        price = intent.getStringExtra("price");
-//        subject = intent.getStringExtra("subject");
-//        body = intent.getStringExtra("body");
-//        out_trade_no = intent.getStringExtra("out_trade_no");
-////        items_purchase = intent.getIntExtra("items_purchase", -1);
         findView();
 
         ImageView header = findView(R.id.iv_header);
@@ -64,6 +58,10 @@ public class GoldDesActivity extends BaseActivity implements View.OnClickListene
                 header.setImageResource(R.drawable.vip_header3);
                 desc.setImageResource(R.drawable.cet_des3);
             }
+        }else if(Constant.APP_CONSTANT.TYPE().equals("4")){
+            desc.setImageResource(R.drawable.cet4des);
+        }else {
+            desc.setImageResource(R.drawable.cet6des);
         }
     }
 
@@ -87,13 +85,6 @@ public class GoldDesActivity extends BaseActivity implements View.OnClickListene
                 }
             }
         });
-//        ll_golddes = (ImageView) findViewById(R.id.iv_golddes);
-//        if(items_purchase==0){
-//            ll_golddes.setBackgroundResource(R.drawable.cet4des);
-//        }else if(items_purchase==1){
-//            ll_golddes.setBackgroundResource(R.drawable.cet6des);
-//        }
-//        iv_goldphone = (ImageView) findViewById(R.id.iv_goldphone);
         vip_99 = findViewById(R.id.vip_99);
         vip_199 = findViewById(R.id.vip_199);
         vip1_99 = findViewById(R.id.vip1_99);
@@ -173,7 +164,7 @@ public class GoldDesActivity extends BaseActivity implements View.OnClickListene
                     }
 
                     subject = "黄金会员";
-                    price = "199";
+                    price = "288";
                     amount = "3";
                     body = Constant.APP + "-" + "花费" + price + "元购买" + Constant.APP + "黄金会员";
                     intent.setClass(this, PayOrderActivity.class);
@@ -196,7 +187,7 @@ public class GoldDesActivity extends BaseActivity implements View.OnClickListene
                     }
 
                     subject = "黄金会员";
-                    price = "199";
+                    price = "288";
                     amount = "3";
                     body = Constant.APP + "-" + "花费" + price + "元购买" + Constant.APP + "黄金会员";
                     intent.setClass(this, PayOrderActivity.class);

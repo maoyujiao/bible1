@@ -102,7 +102,7 @@ public class About extends BasisActivity implements AppUpdateCallBack {
                 onBackPressed();
             }
         });
-        ((TextView) findViewById(R.id.tv_app_name)).setText(Constant.APP);
+        ((TextView) findViewById(R.id.tv_app_name)).setText(Constant.APP_CONSTANT.APPName());
 
         praise = findViewById(R.id.praise);
         praise.setOnClickListener(new OnClickListener() {
@@ -258,7 +258,7 @@ public class About extends BasisActivity implements AppUpdateCallBack {
         downloadFile.downloadState = "start";
         downloadFile.fileAppend = ".apk";
 //		downloadFile.downLoadAddress = appUpdateUrl;
-        downloadFile.downLoadAddress = "http://static3.iyuba.com/android/apk/Valuablecet4/Valuablecet4.apk";
+        downloadFile.downLoadAddress = "http://static3.iyuba.cn/android/apk/Valuablecet4/Valuablecet4.apk";
         downloadFile.filePath = Constant.envir + "/appUpdate/";
         downloadFile.fileName = path;
         DownloadManager.Instance().fileList.add(downloadFile);

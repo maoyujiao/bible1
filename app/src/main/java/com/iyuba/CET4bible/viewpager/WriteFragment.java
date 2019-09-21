@@ -9,6 +9,7 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.iyuba.CET4bible.R;
+import com.iyuba.CET4bible.activity.MainActivity;
 import com.iyuba.CET4bible.adapter.FavoriteTranslateAdapter;
 import com.iyuba.CET4bible.sqlite.mode.Write;
 import com.iyuba.CET4bible.sqlite.op.TranslateOp;
@@ -18,6 +19,7 @@ import com.iyuba.base.BaseFragment;
 import com.iyuba.base.util.L;
 import com.iyuba.base.util.SimpleLineDividerDecoration;
 import com.iyuba.core.manager.AccountManager;
+import com.iyuba.core.manager.DataManager;
 
 import java.util.ArrayList;
 import java.util.Collection;
@@ -35,11 +37,18 @@ public class WriteFragment extends BaseFragment {
     ArrayList mList;
 
     AdInfoFlowUtil adInfoFlowUtil;
+    public static final int TRANSLATE = 1;
+    public static final int WRITE = 2;
 
+    int type  ;
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        return inflater.inflate(R.layout.fragment_fillinblank, container, false);
+        View view = inflater.inflate(R.layout.fragment_fillinblank, container, false);
+        if (containerVp!=null){
+            containerVp.setObjectForPosition(view, 1);
+        }
+        return view;
     }
 
     @Override
@@ -47,13 +56,13 @@ public class WriteFragment extends BaseFragment {
         super.onViewCreated(view, savedInstanceState);
         recyclerView = view.findViewById(R.id.recyclerView);
         recyclerView.setLayoutManager(new LinearLayoutManager(mContext));
-        recyclerView.addItemDecoration(new SimpleLineDividerDecoration(mContext));
+        recyclerView.addItemDecoration(new SimpleLineDividerDecoration(mContext).setColor(R.color.darkgray));
 
-        int type = getArguments().getInt("type", 1);
+        type = getArguments().getInt("type", 1);
 
         mList = new ArrayList<>();
         //  翻译
-        if (type == 1) {
+        if (type == TRANSLATE) {
             mList.addAll(new TranslateOp(mContext).selectData());
         } else {
             // 写作
@@ -66,7 +75,7 @@ public class WriteFragment extends BaseFragment {
             Write w = (Write) mList.get(i);
             int year = Integer.parseInt(w.num);
 
-            if (type == 1) {
+            if (type == TRANSLATE) {
                 if (year > 20150000) {
                     writes.add(w);
                 }
@@ -79,7 +88,7 @@ public class WriteFragment extends BaseFragment {
         mList.removeAll(writes);
         mList.addAll(0, sort(writes));
 
-        adapter = new FavoriteTranslateAdapter(mContext, mList);
+        adapter = new FavoriteTranslateAdapter(mContext, mList, getActivity() instanceof MainActivity);
         adapter.setWrite(type != 1);
 
         recyclerView.setAdapter(adapter);
@@ -91,7 +100,7 @@ public class WriteFragment extends BaseFragment {
                 adapter.notifyDataSetChanged();
             }
         });
-        if (type == 2) {
+        if (type == WRITE) {
             adInfoFlowUtil.setSupportVideo(true);
             adInfoFlowUtil.setAdRequestSize(14).setVideoAdRequestSize(1).refreshAd();
         } else {
@@ -116,6 +125,14 @@ public class WriteFragment extends BaseFragment {
             writes.addAll(list);
         }
         return writes;
+    }
+
+    @Override
+    public void setUserVisibleHint(boolean isVisibleToUser) {
+        if (isVisibleToUser){
+            DataManager.Instance().currentType = type;
+        }
+        super.setUserVisibleHint(isVisibleToUser);
     }
 
     @Override

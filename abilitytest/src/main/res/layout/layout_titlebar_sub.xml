@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="horizontal">
+
+    <ImageButton
+        android:id="@+id/btn_nav_sub"
+        android:layout_width="45dp"
+        android:layout_height="45dp"
+        android:layout_centerVertical="true"
+        android:layout_gravity="center_vertical"
+        android:background="@drawable/selector_btn_bg_front_trans"
+        android:src="@mipmap/btn_titlebar_back_blue" />
+
+    <TextView
+        android:id="@+id/tv_titlebar_sub"
+        android:layout_width="0dp"
+        android:layout_height="match_parent"
+        android:layout_weight="1"
+        android:gravity="center"
+        android:text="我的能力图谱"
+        android:textColor="@color/text_bluenor_color"
+        android:textSize="20sp" />
+    <!--使用帮助指南按钮-->
+    <ImageButton
+        android:id="@+id/ibtn_test_guide"
+        android:layout_width="45dp"
+        android:layout_height="45dp"
+        android:layout_marginRight="8dp"
+        android:background="@drawable/selector_btn_bg_front_trans"
+        android:src="@mipmap/help_guide"
+        android:visibility="gone" />
+    <!--练习模块题目更新按钮--> <!--android:visibility="gone"-->
+    <ImageButton
+        android:id="@+id/ibtn_test_reload"
+        android:layout_width="30dp"
+        android:layout_height="30dp"
+        android:layout_gravity="center_vertical"
+        android:layout_marginRight="10dp"
+        android:background="@mipmap/btn_refresh"
+        android:visibility="gone" />
+
+    <ImageButton
+        android:id="@+id/ibtn_test_share"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_vertical"
+        android:layout_marginRight="10dp"
+        android:background="@color/transparent"
+        android:padding="2dp"
+        android:src="@mipmap/btn_ability_share"
+        tools:visibility="visible"
+        android:visibility="gone" />
+
+    <TextView
+        android:id="@+id/tv_ability_right"
+        android:layout_width="35dp"
+        android:layout_height="35dp"
+        android:layout_gravity="center_vertical"
+        android:layout_marginRight="10dp"
+        android:background="@drawable/btn_bg_ability_explains_grey"
+        android:gravity="center"
+        android:text="解"
+        android:textSize="16sp"
+        android:textStyle="bold"
+        android:visibility="gone"
+        tools:visibility="visible" />
+
+    <ImageView
+        android:id="@+id/iv_delete"
+        android:layout_width="45dp"
+        android:layout_height="45dp"
+        android:padding="13dp"
+        android:layout_gravity="center_vertical"
+        android:src="@mipmap/delete"
+        android:visibility="gone"
+        tools:visibility="visible" />
+</LinearLayout>
+

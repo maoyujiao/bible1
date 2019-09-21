@@ -187,26 +187,9 @@ public class DragLayout extends ViewGroup {
         public void onViewPositionChanged(View changedView, int left, int top, int dx, int dy) {
             Log.e("DragLayout top ", "" + top);
             mTop = top;
-            /*mDragOffset = (float) top / mDragRange;
-
-            mHeaderView.setPivotX(mHeaderView.getWidth());
-            mHeaderView.setPivotY(mHeaderView.getHeight());
-            mHeaderView.setScaleX(1 - mDragOffset / 2);
-            mHeaderView.setScaleY(1 - mDragOffset / 2);
-            mDescView.setAlpha(1 - mDragOffset);*/
             requestLayout();
         }
 
-        /*@Override
-        public void onViewReleased(View releasedChild, float xvel, float yvel) {
-            int top = getPaddingTop();
-            if (yvel > 0 || (yvel == 0 && mDragOffset > 0.5f)) {
-                top += mDragRange;
-            }
-            mDragHelper.settleCapturedViewAt(releasedChild.getLeft(), top);
-            invalidate();
-        }
-*/
         @Override
         public int getViewVerticalDragRange(View child) {
             return mDragRange;

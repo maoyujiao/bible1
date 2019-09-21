@@ -10,6 +10,7 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.iyuba.CET4bible.R;
+import com.iyuba.CET4bible.activity.MainActivity;
 import com.iyuba.CET4bible.adapter.ListeningTestListAdapter;
 import com.iyuba.CET4bible.manager.ListenDataManager;
 import com.iyuba.CET4bible.util.AdInfoFlowUtil;
@@ -45,7 +46,11 @@ public class ListeningFragment extends BaseFragment {
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        return inflater.inflate(R.layout.fragment_listening_cet, container, false);
+        View view = inflater.inflate(R.layout.fragment_listening_cet, container, false);
+        if (containerVp != null) {
+            containerVp.setObjectForPosition(view, 0);
+        }
+        return view;
     }
 
     @Override
@@ -53,7 +58,7 @@ public class ListeningFragment extends BaseFragment {
         super.onViewCreated(view, savedInstanceState);
         recyclerView = view.findViewById(R.id.recyclerView);
         recyclerView.setLayoutManager(new LinearLayoutManager(mContext));
-        recyclerView.addItemDecoration(new SimpleLineDividerDecoration(mContext));
+
         swipeRefreshLayout = view.findViewById(R.id.swipe_refresh_layout);
         swipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
             @Override
@@ -61,8 +66,9 @@ public class ListeningFragment extends BaseFragment {
                 refreshExamList();
             }
         });
+
         mList = new ArrayList<>();
-        adapter = new ListeningTestListAdapter(mContext);
+        adapter = new ListeningTestListAdapter(mContext, getActivity() instanceof MainActivity);
         adapter.setList(mList);
         recyclerView.setAdapter(adapter);
 

@@ -12,6 +12,7 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.iyuba.CET4bible.R;
+import com.iyuba.CET4bible.activity.MainActivity;
 import com.iyuba.CET4bible.adapter.FavoriteAdapter;
 import com.iyuba.CET4bible.adapter.FavoriteFillInBlankAdapter;
 import com.iyuba.CET4bible.adapter.FavoriteParagraphMatchingAdapter;
@@ -149,7 +150,7 @@ public class FavoriteFragment extends BaseFragment {
         }
         dataList.removeAll(tempList);
 
-        mAdapter = new FavoriteParagraphMatchingAdapter(mContext, dataList);
+        mAdapter = new FavoriteParagraphMatchingAdapter(mContext, dataList, getActivity() instanceof MainActivity);
     }
 
     private void setFillInBlankAdapter() {
@@ -164,7 +165,7 @@ public class FavoriteFragment extends BaseFragment {
         }
         dataList.removeAll(tempList);
 
-        mAdapter = new FavoriteFillInBlankAdapter(mContext, dataList);
+        mAdapter = new FavoriteFillInBlankAdapter(mContext, dataList ,getActivity() instanceof MainActivity);
     }
 
     private void setListeningAdapter() {
@@ -223,7 +224,7 @@ public class FavoriteFragment extends BaseFragment {
         dataList = new WriteOp(mContext).selectData();
         filterData(dataList, "write");
 
-        mAdapter = new FavoriteTranslateAdapter(mContext, dataList);
+        mAdapter = new FavoriteTranslateAdapter(mContext, dataList , getActivity() instanceof MainActivity);
         ((FavoriteTranslateAdapter) mAdapter).setWrite(true);
     }
 
@@ -231,7 +232,7 @@ public class FavoriteFragment extends BaseFragment {
         dataList = new TranslateOp(mContext).selectData();
         filterData(dataList, "translate");
 
-        mAdapter = new FavoriteTranslateAdapter(mContext, dataList);
+        mAdapter = new FavoriteTranslateAdapter(mContext, dataList, getActivity() instanceof MainActivity);
         ((FavoriteTranslateAdapter) mAdapter).setWrite(false);
     }
 
@@ -269,7 +270,7 @@ public class FavoriteFragment extends BaseFragment {
                 return rhs.toString().compareTo(lhs.toString());
             }
         });
-        mAdapter = new FavoriteReadingAdapter(mContext, (List<String>) dataList);
+        mAdapter = new FavoriteReadingAdapter(mContext, (List<String>) dataList  , getActivity() instanceof MainActivity);
     }
 
     private void deleteFavorite(int pos) {

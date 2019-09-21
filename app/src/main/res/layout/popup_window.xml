@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    tools:background="@color/gray">
+
+    <LinearLayout
+        android:layout_width="120dp"
+        android:layout_height="wrap_content"
+        android:gravity="end"
+        android:orientation="horizontal">
+
+        <ImageView
+            android:layout_width="16dp"
+            android:layout_height="16dp"
+            android:layout_marginEnd="16dp"
+            android:background="@android:color/transparent"
+            android:src="@drawable/shape_trangle" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/shpe_pop_window_listen"
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/lv_vip_testlib"
+            android:layout_width="120dp"
+            android:layout_height="40dp"
+            android:gravity="center"
+            android:text="选择播放器"
+            android:textColor="#ffffffff"
+            android:textSize="14sp" />
+
+        <View
+            android:layout_width="120dp"
+            android:layout_height="0.1dp"
+            android:background="#686868" />
+
+
+        <TextView
+            android:id="@+id/lv_server"
+            android:layout_width="120dp"
+            android:layout_height="40dp"
+            android:gravity="center"
+            android:text="分享试题"
+            android:textColor="#ffffffff"
+            android:textSize="14sp" />
+
+        <View
+            android:layout_width="120dp"
+            android:layout_height="0.1dp"
+            android:background="#686868" />
+
+
+        <TextView
+            android:id="@+id/lv_sheet"
+            android:layout_width="120dp"
+            android:layout_height="40dp"
+            android:gravity="center"
+            android:text="答题卡"
+            android:textColor="#ffffffff"
+            android:textSize="14sp" />
+
+        <View
+            android:layout_width="120dp"
+            android:layout_height="0.1dp"
+            android:background="#686868" />
+
+
+        <TextView
+            android:id="@+id/tv_pdf"
+            android:layout_width="120dp"
+            android:layout_height="40dp"
+            android:gravity="center"
+            android:text="下载PDF"
+            android:textColor="#ffffffff"
+            android:textSize="14sp" />
+
+        <View
+            android:layout_width="120dp"
+            android:layout_height="0.1dp"
+            android:background="#686868" />
+
+
+        <TextView
+            android:id="@+id/tv_feedback"
+            android:layout_width="120dp"
+            android:layout_height="40dp"
+            android:gravity="center"
+            android:text="错题反馈"
+            android:textColor="#ffffffff"
+            android:textSize="14sp" />
+    </LinearLayout>
+
+</LinearLayout>

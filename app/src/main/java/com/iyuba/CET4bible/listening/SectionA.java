@@ -5,7 +5,9 @@ import android.app.Dialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.graphics.drawable.ColorDrawable;
+import android.media.MediaPlayer;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
@@ -26,6 +28,7 @@ import android.widget.SeekBar.OnSeekBarChangeListener;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.blankj.utilcode.util.ToastUtils;
 import com.iyuba.CET4bible.R;
 import com.iyuba.CET4bible.listening.presenter.PDFUtil;
 import com.iyuba.CET4bible.manager.ListenDataManager;
@@ -59,12 +62,12 @@ import com.iyuba.core.widget.dialog.WaittingDialog;
 import com.iyuba.play.ExtendedPlayer;
 import com.iyuba.play.OnStateChangeListener;
 
-import net.protyposis.android.mediaplayer.MediaPlayer;
 
 import java.io.File;
 import java.util.ArrayList;
 import java.util.concurrent.TimeUnit;
 
+import cn.sharesdk.onekeyshare.OnekeyShare;
 import okhttp3.Call;
 import rx.Observable;
 import rx.Subscription;
@@ -74,41 +77,44 @@ import rx.functions.Action1;
 /**
  */
 public class SectionA extends BasisActivity {
+    public static int REQUEST_CODE_CONTACT;
     Handler handler = new Handler() {
         @Override
         public void handleMessage(Message msg) {
             super.handleMessage(msg);
             switch (msg.what) {
                 case 1:
-                    previous.setBackgroundResource(R.drawable.un_previous_question);
                     previous.setEnabled(false);
-                    next.setBackgroundResource(R.drawable.next_question);
+                    previous.setBackgroundResource(R.drawable.bg_disable);
+                    next.setBackgroundResource(R.drawable.pre_bg);
                     next.setEnabled(true);
                     submit.setVisibility(View.GONE);
                     break;
                 case 2:
-                    previous.setBackgroundResource(R.drawable.previous_question);
+                    previous.setBackgroundResource(R.drawable.pre_bg);
+                    next.setBackgroundResource(R.drawable.pre_bg);
                     previous.setEnabled(true);
-                    next.setBackgroundResource(R.drawable.next_question);
                     next.setEnabled(true);
                     submit.setVisibility(View.GONE);
                     break;
                 case 3:
-                    previous.setBackgroundResource(R.drawable.previous_question);
                     previous.setEnabled(true);
-                    next.setBackgroundResource(R.drawable.trainingcamp_un_next_question);
                     next.setEnabled(false);
+                    next.setBackgroundResource(R.drawable.bg_disable);
+                    previous.setBackgroundResource(R.drawable.pre_bg);
+
                     submit.setVisibility(View.VISIBLE);
                     break;
             }
         }
     };
     private Context mContext;
-    private Button previous, next, pause, submit, sheet;
+    private TextView previous, next ,submit;
+    private Button   pause, sheet;
     private ViewPager viewPager;
     private TextView title;
     private int curPos;
-    private String section;
+    public String section;
     private ArrayList<CetAnswer> answerList;
     private ListenFragmentAdapter adapter;
     private SeekBar seekbar;
@@ -118,6 +124,25 @@ public class SectionA extends BasisActivity {
     private ImageView iv_more;
     private PopupWindow popupWindow;
     private ExtendedPlayer extendedPlayer;
+
+    public MediaPlayer getOriginFragmentPlayer() {
+        return originFragmentPlayer;
+    }
+
+    public void setOriginFragmentPlayer(MediaPlayer originFragmentPlayer) {
+        this.originFragmentPlayer = originFragmentPlayer;
+    }
+
+    public MediaPlayer getRecordFragmentPlayer() {
+        return recordFragmentPlayer;
+    }
+
+    public void setRecordFragmentPlayer(MediaPlayer recordFragmentPlayer) {
+        this.recordFragmentPlayer = recordFragmentPlayer;
+    }
+
+    private MediaPlayer originFragmentPlayer;
+    private MediaPlayer recordFragmentPlayer;
     Handler videoHandler = new Handler() {
         @Override
         public void handleMessage(Message msg) {
@@ -134,7 +159,7 @@ public class SectionA extends BasisActivity {
                     break;
                 case 2:
                     Log.e("onCompletion", "onCompletion");
-                    viewPager.setCurrentItem(1, true);
+                    viewPager.setCurrentItem(0, true);
                     setContent(1, true, false);
                     break;
                 default:
@@ -171,18 +196,18 @@ public class SectionA extends BasisActivity {
                 case R.id.preview:
                     if (isExplain) {
                         // 是否为查看解析
-                        viewPager.setCurrentItem(2, true);
+                        viewPager.setCurrentItem(0, true);
                     } else {
-                        viewPager.setCurrentItem(1, true);
+                        viewPager.setCurrentItem(0, true);
                     }
                     setContent(-1, false, false);
                     break;
                 case R.id.next:
                     if (isExplain) {
                         // 是否为查看解析
-                        viewPager.setCurrentItem(2, true);
+                        viewPager.setCurrentItem(0, true);
                     } else {
-                        viewPager.setCurrentItem(1, true);
+                        viewPager.setCurrentItem(0, true);
                     }
                     setContent(1, false, false);
                     break;
@@ -205,8 +230,10 @@ public class SectionA extends BasisActivity {
     private CustomDialog waitingDialog;
 
     private PDFUtil pdfUtil;
-    private String mExamTime;
+    public String mExamTime;
     private TextView tvAB;
+    private OnekeyShare oks;
+    private LinearLayout play_control;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -237,9 +264,7 @@ public class SectionA extends BasisActivity {
         studyRecordInfo.LessonId = ListenDataManager.Instance().year;
         studyRecordInfo.BeginTime = deviceInfo.getCurrentTime();
         startTime = System.currentTimeMillis();
-
         mExamTime = ListenDataManager.Instance().year;
-
         tvAB = findView(R.id.tv_ab);
         tvAB.setOnClickListener(new OnClickListener() {
             @Override
@@ -257,6 +282,11 @@ public class SectionA extends BasisActivity {
             }
         });
 
+        if (TextUtils.isEmpty(ListenDataManager.Instance().year)){
+            finish();
+            return ;
+        }
+
         if (isNewType) {
             String strTitle = ListenDataManager.Instance().year;
             StringBuilder sb = new StringBuilder();
@@ -267,24 +297,63 @@ public class SectionA extends BasisActivity {
             title.setText(ListenDataManager.Instance().year);
         }
 
+        play_control = findView(R.id.play_control);
         viewPager = findViewById(R.id.viewpager);
         adapter = new ListenFragmentAdapter(mContext, getSupportFragmentManager(), section,mExamTime);
         viewPager.setAdapter(adapter);
+        viewPager.setOffscreenPageLimit(4);
+        viewPager.setOnPageChangeListener(new ViewPager.OnPageChangeListener() {
+            @Override
+            public void onPageScrolled(int i, float v, int i1) {
+
+            }
+
+            @Override
+            public void onPageSelected(int i) {
+                if (i==2 || i==3){
+                    previous.setVisibility(View.GONE);
+                    next.setVisibility(View.GONE);
+                    play_control.setVisibility(View.GONE);
+                    submit.setVisibility(View.GONE);
+                    if (extendedPlayer.isPlaying()){
+                        extendedPlayer.pause();
+                    }else if (extendedPlayer.isPreparing()){
+                        extendedPlayer.setInstantPlay(false);
+                    }
+                }else {
+                    previous.setVisibility(View.VISIBLE);
+                    next.setVisibility(View.VISIBLE);
+                    play_control.setVisibility(View.VISIBLE);
+                    if (originFragmentPlayer!=null && originFragmentPlayer.isPlaying()){
+                        originFragmentPlayer.pause();
+                    }
+                    if (recordFragmentPlayer!=null && recordFragmentPlayer.isPlaying()){
+                        recordFragmentPlayer.pause();
+                    }
+                }
+            }
+
+            @Override
+            public void onPageScrollStateChanged(int i) {
+
+            }
+        });
+
         TabLayout tabLayout = findView(R.id.tabLayout);
         tabLayout.setupWithViewPager(viewPager);
         initView();
         adBannerUtil = new AdBannerUtil(mContext);
-        adBannerUtil.setView(findViewById(R.id.youdao_ad), (ImageView) findViewById(R.id.photoImage));
-        adBannerUtil.setAddamView(findViewById(R.id.ad_addam));
+        adBannerUtil.setView(findViewById(R.id.youdao_ad), (ImageView) findViewById(R.id.photoImage), (TextView) findViewById(R.id.close));
         adBannerUtil.setMiaozeView((ViewGroup) findById(R.id.adMiaozeParent));
         adBannerUtil.loadAd();
-        viewPager.setCurrentItem(1, true);
+        viewPager.setCurrentItem(0, true);
     }
 
     int abRepeatStatus = 0;
     int abRepeatStart = 0;
     long abRepeatEnd = 0;
     Subscription abRepeatSub;
+
 
     private void abRepeat() {
         if (abRepeatStatus == 0) {
@@ -372,9 +441,8 @@ public class SectionA extends BasisActivity {
                 Share share = new Share(getApplicationContext());
                 share.setListener(getApplicationContext(), mExamTime);
                 share.shareMessage(imagePath, Constant.APPName,
-                        "http://m.iyuba.com/ncet/t.jsp?l=" + Constant.APP_CONSTANT.TYPE()
+                        "http://m.iyuba.cn/ncet/t.jsp?l=" + Constant.APP_CONSTANT.TYPE()
                                 + "&i=" + ListenDataManager.Instance().year + "&s=" + section,title.getText().toString()+"听力真题");
-//                new Share(mContext).prepareMessage("", "英语六级宝典", "http://m.iyuba.com/ncet/t.jsp?l=6&i="+ListenDataManager.Instance().year+"&s="+section);
             }
         });
 
@@ -486,7 +554,6 @@ public class SectionA extends BasisActivity {
                                 @Override
                                 public void result(boolean result, String message) {
                                     if (result) {
-//                            showLong("积分扣取成功");
                                         showPDFDialog(message);
                                     } else {
                                         showLong(message);
@@ -495,48 +562,6 @@ public class SectionA extends BasisActivity {
                             });
     }
 
-//    private void showPdfClassDialog() {
-//        final String[] items = new String[]{"英文", "中英双语"};
-//        new AlertDialog.Builder(mContext).setTitle("请选择生成pdf的种类")
-//                .setItems(items, new DialogInterface.OnClickListener() {
-//                    @Override
-//                    public void onClick(DialogInterface dialog, int which) {
-//                        if (which == 0) {
-//                            pdfUtil.getPDF(mContext, pdfUtil.getPDFId(mExamTime), true, new PDFUtil.Callback() {
-//                                @Override
-//                                public void result(boolean result, String message) {
-//                                    if (result) {
-////                            showLong("积分扣取成功");
-//                                        showPDFDialog(message);
-//                                    } else {
-//                                        showLong(message);
-//                                    }
-//                                }
-//                            });
-//                            dialog.dismiss();
-//                        } else {
-//                            pdfUtil.getPDF(mContext, pdfUtil.getPDFId(mExamTime), false, new PDFUtil.Callback() {
-//                                @Override
-//                                public void result(boolean result, String message) {
-//                                    if (result) {
-////                            showLong("积分扣取成功");
-//                                        showPDFDialog(message);
-//                                    } else {
-//                                        showLong(message);
-//                                    }
-//                                }
-//                            });
-//                            dialog.dismiss();
-//                        }
-//
-//                    }
-//                }).setNegativeButton("取消", new DialogInterface.OnClickListener() {
-//                    @Override
-//                    public void onClick(DialogInterface dialog, int which) {
-//                        dialog.dismiss();
-//                    }
-//                }).create().show();
-//    }
 
     private void createDialog() {
         Dialog dialog = null;
@@ -645,7 +670,7 @@ public class SectionA extends BasisActivity {
             }
         });
         controlVideo();
-        setContent(1, false, false);
+        setContent(1, false, false);  // 在这里开启播放
 
         if (ConfigManager.Instance().loadBoolean("isChangePlayer")) {
             tv_speed.setVisibility(View.VISIBLE);
@@ -739,9 +764,9 @@ public class SectionA extends BasisActivity {
                 videoHandler.sendEmptyMessageDelayed(2, 1000);
             }
         });
-        extendedPlayer.setOnErrorListener(new MediaPlayer.OnErrorListener() {
+        extendedPlayer.setOnErrorListener(new net.protyposis.android.mediaplayer.MediaPlayer.OnErrorListener() {
             @Override
-            public boolean onError(MediaPlayer mediaPlayer, int i, int i1) {
+            public boolean onError(net.protyposis.android.mediaplayer.MediaPlayer mediaPlayer, int i, int i1) {
                 if (waitingDialog.isShowing()) {
                     waitingDialog.dismiss();
                 }
@@ -804,7 +829,6 @@ public class SectionA extends BasisActivity {
 
     private void setContent(int to, boolean nextQuestion, boolean change) {
         if (nextQuestion) {
-//            curPos = curPos + minus - 1;
             curPos = getNextQuestion(curPos);
         }
         if (to == 1) {
@@ -893,6 +917,7 @@ public class SectionA extends BasisActivity {
         }
         changeQuestion = changeQuestion || change;
         if (changeQuestion) {
+            ListenDataManager.Instance().para  = questionId ;
             try {
                 resetABRepeat();
                 startToPlay();
@@ -991,14 +1016,14 @@ public class SectionA extends BasisActivity {
     }
 
     @NonNull
-    private String getSoundPath() {
+    public String getSoundPath() {
         if (checkLocalFiles()) {
             return Constant.videoAddr
                     + mExamTime + File.separator
                     + answerList.get(curPos).sound;
         } else {
             String type = Constant.APP_CONSTANT.TYPE();
-            String path = "http://cetsounds.iyuba.com/" + type
+            String path = "http://cetsounds.iyuba.cn/" + type
                     + "/" + mExamTime + "/" + answerList.get(curPos).sound;
             return path;
         }
@@ -1077,8 +1102,6 @@ public class SectionA extends BasisActivity {
     @Override
     protected void onPause() {
         super.onPause();
-//        if (extendedPlayer.isPlaying())
-//            extendedPlayer.pause();
     }
 
     @Override
@@ -1100,10 +1123,10 @@ public class SectionA extends BasisActivity {
                         curPos--;
                     }
                     if (resultCode == 0) {
-                        viewPager.setCurrentItem(1, true);
+                        viewPager.setCurrentItem(0, true);
                     } else if (resultCode == 1) {
                         isExplain = true;
-                        viewPager.setCurrentItem(2, true);
+                        viewPager.setCurrentItem(0, true);
                     }
                     setContent(1, false, true);
                 }
@@ -1120,4 +1143,20 @@ public class SectionA extends BasisActivity {
         return extendedPlayer;
     }
 
+    public void showShare(String title, String text, String url) {
+        String imagePath = Constant.iconAddr;
+        Share share = new Share(getApplicationContext());
+        share.setListener(getApplicationContext(), mExamTime);
+        share.shareMessage(imagePath, text, url + section,title);
+    }
+
+    @Override
+    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
+        for (int i = 0 ; i<grantResults.length ; i++) {
+            if (grantResults[i] != PackageManager.PERMISSION_GRANTED){
+                ToastUtils.showShort("权限被拒绝");
+            }
+        }
+    }
 }

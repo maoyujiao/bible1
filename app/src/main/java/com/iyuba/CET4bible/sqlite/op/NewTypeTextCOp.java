@@ -20,6 +20,10 @@ public class NewTypeTextCOp extends DatabaseService {
     public static final String SENTENCE = "Sentence";
     public static final String SOUND = "Sound";
     public static final String SEX = "sex";
+    public static final String GOOD = "good";
+    public static final String BAD = "bad";
+    public static final String SCORE = "score";
+    public static final String URL = "record_url";
 
     public NewTypeTextCOp(Context context) {
         super(context);
@@ -29,7 +33,9 @@ public class NewTypeTextCOp extends DatabaseService {
         ArrayList<CetText> texts = new ArrayList<CetText>();
         Cursor cursor = importDatabase.openDatabase().rawQuery(
                 "select " + TESTTIME + "," + NUMBER + "," + NUMBERINDEX + ","
-                        + TIMING + "," + SENTENCE + "," + SOUND + "," + SEX + " from "
+                        + TIMING + "," + SENTENCE + "," + SOUND + "," + SEX
+                        +"," + GOOD + "," + BAD + "," + SCORE + "," + URL
+                        + " from "
                         + getTableName() + " where " + TESTTIME + "= ?",
                 new String[]{year});
         for (cursor.moveToFirst(); !cursor.isAfterLast(); cursor.moveToNext()) {
@@ -46,7 +52,10 @@ public class NewTypeTextCOp extends DatabaseService {
         ArrayList<CetText> texts = new ArrayList<CetText>();
         Cursor cursor = importDatabase.openDatabase().rawQuery(
                 "select " + TESTTIME + "," + NUMBER + "," + NUMBERINDEX + ","
-                        + TIMING + "," + SENTENCE + "," + SOUND + "," + SEX + " from "
+                        + TIMING + "," + SENTENCE + "," + SOUND + "," + SEX
+                        +"," + GOOD + "," + BAD + "," + SCORE + "," + URL
+
+                        + " from "
                         + getTableName() + " where " + TESTTIME + "= ? and "
                         + NUMBER + "= ?", new String[]{year, id});
         for (cursor.moveToFirst(); !cursor.isAfterLast(); cursor.moveToNext()) {
@@ -56,6 +65,7 @@ public class NewTypeTextCOp extends DatabaseService {
         if (texts.size() != 0) {
             return texts;
         }
+        cursor.close();
         return null;
     }
 
@@ -67,10 +77,15 @@ public class NewTypeTextCOp extends DatabaseService {
     private CetText fillIn(Cursor cursor) {
         CetText text = new CetText();
         text.id = cursor.getString(1);
+        text.testTime = cursor.getString(0);
         text.index = cursor.getString(2);
         text.time = cursor.getString(3);
         text.sentence = cursor.getString(4);
         text.sex = cursor.getString(6);
+        text.good = cursor.getString(7);
+        text.bad = cursor.getString(8);
+        text.score = cursor.getString(9);
+        text.record_url = cursor.getString(10);
         return text;
     }
 

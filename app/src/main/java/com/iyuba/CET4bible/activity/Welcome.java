@@ -14,7 +14,6 @@ import android.widget.Button;
 import android.widget.ImageView;
 
 import com.bumptech.glide.Glide;
-import com.flurry.android.FlurryAgent;
 import com.iyuba.CET4bible.R;
 import com.iyuba.CET4bible.sqlite.ImportDatabase;
 import com.iyuba.CET4bible.util.AdSplashUtil;
@@ -148,10 +147,6 @@ public class Welcome extends BasisActivity {
                 WindowManager.LayoutParams.FLAG_FULLSCREEN);
         setContentView(R.layout.welcome);
         CrashApplication.getInstance().addActivity(this);
-        FlurryAgent.onStartSession(this, "M9ZZXM95GV92XJC5B2ZQ");
-
-//        initLiving();
-
         btn_skip = findViewById(R.id.btn_skip);
         btn_skip.setVisibility(View.INVISIBLE);
         btn_skip.setOnClickListener(new View.OnClickListener() {
@@ -294,26 +289,16 @@ public class Welcome extends BasisActivity {
 
     private void loadLocalAd() {
         try {
-            //File basePic = new File(Constant.envir + "/ad/base.jpg");
             File adPic = new File(Constant.envir + "/ad/ad.jpg");
-            Log.d("diaodebug",Constant.envir);
             if (adPic.exists()) {
-                Log.d("diaodebug","adFile exists");
                 int screenWidth = ((Activity) mContext).getWindowManager()
                         .getDefaultDisplay().getWidth();
                 int screenHeight = ((Activity) mContext).getWindowManager()
                         .getDefaultDisplay().getHeight();
-                Log.d("diaodebug","adFile exists"+screenHeight+screenHeight);
-                /*double screenRatio = (screenHeight * 0.14) / screenWidth;
-                base.setImageBitmap(SaveImage.resizeImage(
-						ReadBitmap.readBitmap(mContext,
-								new FileInputStream(basePic)), screenRatio));*/
                 double screenRatio = (screenHeight * 0.86) / screenWidth;
-
                 ad.setImageBitmap(SaveImage.resizeImage(ReadBitmap
                                 .readBitmap(mContext, new FileInputStream(adPic)),
                         screenRatio));
-                Log.d("diaodebug","adFile exists");
             }
         } catch (FileNotFoundException e) {
             e.printStackTrace();
@@ -333,9 +318,7 @@ public class Welcome extends BasisActivity {
             InputStream is = mContext.getResources().openRawResource(
                     R.raw.icon_icon);
             BufferedInputStream bis = new BufferedInputStream(is);
-        /*if (!(new File(DB_PATH).exists())) {
-            new File(DB_PATH).mkdir();
-		}*/
+
             FileOutputStream fos = new FileOutputStream(Environment.getExternalStorageDirectory() + "/icon_icon.png");
             BufferedOutputStream bfos = new BufferedOutputStream(fos);
             byte[] buffer = new byte[400000];
@@ -383,9 +366,5 @@ public class Welcome extends BasisActivity {
         super.onDestroy();
     }
 
-//    private void initLiving() {
-//        EngineRunner.init(CrashApplication.getInstance(), null);
-//        Mqtt.initialize(CrashApplication.getInstance(), MqttService.class);
-//        x.Ext.init(CrashApplication.getInstance());
-//    }
+
 }

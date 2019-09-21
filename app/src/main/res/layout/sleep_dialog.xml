@@ -1,0 +1,117 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/exit_layout"
+    android:layout_width="280dp"
+    android:layout_height="wrap_content"
+    android:background="@drawable/blog_desc"
+    android:gravity="center_horizontal"
+    android:orientation="vertical" >
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="4dp"
+        android:padding="5dp"
+        android:text="@string/setting_sleep_slecttime"
+        android:textColor="#333"
+        android:textSize="20sp" />
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:orientation="horizontal" >
+
+        <Button
+            android:id="@+id/sleeptime_de"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:layout_weight="1"
+            android:textSize="24sp" />
+
+        <EditText
+            android:id="@+id/sleeptime_hour"
+            android:layout_width="50dp"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="10dp"
+            android:layout_marginTop="1dp"
+            android:layout_weight="3"
+            android:digits="1234567890"
+            android:gravity="center_horizontal"
+            android:inputType="number"
+            android:maxLength="2"
+            android:padding="10dp"
+            android:textColor="#333"
+            android:textSize="16sp" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp"
+            android:text=":"
+            android:textSize="20sp" />
+
+        <EditText
+            android:id="@+id/sleeptime_minute"
+            android:layout_width="50dp"
+            android:layout_height="wrap_content"
+            android:layout_marginRight="10dp"
+            android:layout_marginTop="1dp"
+            android:layout_weight="3"
+            android:digits="1234567890"
+            android:gravity="center_horizontal"
+            android:inputType="number"
+            android:maxLength="2"
+            android:padding="10dp"
+            android:textColor="#333"
+            android:textSize="16sp" />
+
+        <Button
+            android:id="@+id/sleeptime_in"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:layout_weight="1"
+            android:textSize="20sp" />
+    </LinearLayout>
+
+    <TextView
+        android:id="@+id/explain"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp"
+        android:text="@string/setting_sleep_explain"
+        android:textColor="#999999" />
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="10dp"
+        android:layout_marginTop="20dp" >
+
+        <Button
+            android:id="@+id/exitBtn0"
+            android:layout_width="110dp"
+            android:layout_height="wrap_content"
+            android:background="@drawable/button_background"
+            android:gravity="center"
+            android:minHeight="30dp"
+            android:text="@string/alert_btn_ok"
+            android:textColor="#fff"
+            android:textSize="16sp" />
+
+        <Button
+            android:id="@+id/exitBtn1"
+            android:layout_width="110dp"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="10dp"
+            android:background="@drawable/button_background"
+            android:gravity="center"
+            android:minHeight="30dp"
+            android:text="@string/alert_btn_cancel"
+            android:textColor="#fff"
+            android:textSize="16sp" />
+    </LinearLayout>
+
+</LinearLayout>

@@ -1,0 +1,132 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#F3F9F9"
+    android:orientation="vertical">
+
+    <include layout="@layout/layout_titlebar_sub" />
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:orientation="vertical">
+
+
+            <LinearLayout
+                android:id="@+id/root"
+                android:layout_width="wrap_content"
+                android:layout_height="0dp"
+                android:layout_weight="1"
+                android:orientation="vertical" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="10dp"
+                android:layout_marginRight="10dp"
+                android:layout_marginTop="8dp"
+                android:text="图示为掌握比例(%)"
+                android:textColor="@color/text_bluenor_color"
+                android:textSize="20sp" />
+
+
+            <TextView
+                android:id="@+id/tv_result_advice"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="15dp"
+                android:layout_marginRight="10dp"
+                android:lineSpacingMultiplier="1.3"
+                android:text="上次测试时间:2016.8.15\n雅思考试总词汇4521个\n您目前掌握单词3012个"
+                android:textColor="@color/text_bluenor_color"
+                android:textSize="16sp"
+                android:visibility="gone" />
+            <!--进度条 及文字指示-->
+            <LinearLayout
+                android:id="@+id/ll_progress_indictor"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="5dp"
+                android:visibility="invisible">
+
+                <ProgressBar
+                    android:id="@+id/pb_download"
+                    style="?android:attr/progressBarStyleHorizontal"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_horizontal"
+                    android:layout_weight="1"
+                    android:max="100"
+                    android:progress="0"
+                    android:visibility="visible" />
+
+                <TextView
+                    android:id="@+id/tv_download"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="8dp"
+                    android:text="0%" />
+            </LinearLayout>
+
+
+            <Button
+                android:id="@+id/btn_goto_test"
+                android:layout_width="130dp"
+                android:layout_height="35dp"
+                android:layout_marginBottom="10dp"
+                android:layout_marginTop="2dp"
+                android:background="@drawable/selector_btn_next_bg"
+                android:gravity="center"
+                android:text="进入测试"
+                android:textColor="@drawable/selector_btntext_color_word_ability"
+                android:textSize="20sp" />
+
+            <Button
+                android:id="@+id/btn_goto_test_wrong"
+                android:layout_width="130dp"
+                android:layout_height="35dp"
+                android:layout_marginBottom="10dp"
+                android:layout_marginTop="2dp"
+                android:background="@drawable/selector_btn_next_bg"
+                android:gravity="center"
+                android:text="错误"
+                android:textColor="@drawable/selector_btntext_color_word_ability"
+                android:textSize="20sp"
+                android:visibility="gone" />
+
+            <Button
+                android:id="@+id/btn_goto_test_undo"
+                android:layout_width="130dp"
+                android:layout_height="35dp"
+                android:layout_marginBottom="10dp"
+                android:layout_marginTop="2dp"
+                android:background="@drawable/selector_btn_next_bg"
+                android:gravity="center"
+                android:text="未答"
+                android:textColor="@drawable/selector_btntext_color_word_ability"
+                android:textSize="20sp"
+                android:visibility="gone" />
+
+
+        </LinearLayout>
+    </ScrollView>
+
+    <TextView
+        android:id="@+id/tv_next_testtime"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="10dp"
+        android:gravity="center"
+        android:text="* 温馨提示: 测试时间间隔大于等于一周 *"
+        android:textColor="@color/black"
+        android:textSize="16sp"
+        android:visibility="gone" />
+    <!--  android:textColor="#DB3224"-->
+</LinearLayout>

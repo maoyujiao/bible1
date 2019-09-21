@@ -9,6 +9,7 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.iyuba.CET4bible.R;
+import com.iyuba.CET4bible.activity.MainActivity;
 import com.iyuba.CET4bible.adapter.FavoriteReadingAdapter;
 import com.iyuba.CET4bible.sqlite.op.ReadingInfoOp;
 import com.iyuba.CET4bible.util.AdInfoFlowUtil;
@@ -16,6 +17,7 @@ import com.iyuba.base.BaseFragment;
 import com.iyuba.base.util.L;
 import com.iyuba.base.util.SimpleLineDividerDecoration;
 import com.iyuba.core.manager.AccountManager;
+import com.iyuba.core.manager.DataManager;
 
 import java.util.ArrayList;
 import java.util.Collection;
@@ -37,20 +39,30 @@ public class ReadingFragment extends BaseFragment {
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        return inflater.inflate(R.layout.fragment_fillinblank, container, false);
+        View view = inflater.inflate(R.layout.fragment_fillinblank, container, false);
+        if (containerVp!=null){
+            containerVp.setObjectForPosition(view, 1);
+        }
+        return view ;
     }
 
     @Override
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         recyclerView = view.findViewById(R.id.recyclerView);
-        recyclerView.setLayoutManager(new LinearLayoutManager(mContext));
-        recyclerView.addItemDecoration(new SimpleLineDividerDecoration(mContext));
+        recyclerView.setLayoutManager(new LinearLayoutManager(mContext)
+
+        );
+
+        recyclerView.addItemDecoration(new SimpleLineDividerDecoration(mContext).setColor(R.color.darkgray));
 
         mList = new ArrayList<>();
-        adapter = new FavoriteReadingAdapter(mContext, mList);
+        adapter = new FavoriteReadingAdapter(mContext, mList, getActivity() instanceof MainActivity);
         recyclerView.setAdapter(adapter);
-
+        recyclerView.setNestedScrollingEnabled(false);
+        recyclerView.setHasFixedSize(true);
+        //解决数据加载完成后, 没有停留在顶部的问题
+        recyclerView.setFocusable(false);
         mList.addAll(sort(new ReadingInfoOp(mContext).findPackName()));
         adapter.notifyDataSetChanged();
 
@@ -108,5 +120,13 @@ public class ReadingFragment extends BaseFragment {
     public void onDestroyView() {
         super.onDestroyView();
         adInfoFlowUtil.destroy();
+    }
+
+    @Override
+    public void setUserVisibleHint(boolean isVisibleToUser) {
+        super.setUserVisibleHint(isVisibleToUser);
+        if (isVisibleToUser){
+            DataManager.Instance().currentType = 5;
+        }
     }
 }

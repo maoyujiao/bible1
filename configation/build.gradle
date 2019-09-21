@@ -1,0 +1,18 @@
+apply plugin: 'com.android.library'
+
+dependencies {
+    implementation fileTree(include: '*.jar', dir: 'libs')
+    api project(':base')
+}
+
+android {
+    compileSdkVersion 28
+    buildToolsVersion '28.0.3'
+
+    defaultConfig {
+        minSdkVersion min_sdk_version
+        targetSdkVersion 26
+        versionCode 1
+        versionName "1.0"
+    }
+}

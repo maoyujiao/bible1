@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/backlayout"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:padding="15dp" >
+
+    <RelativeLayout
+        android:id="@+id/r1"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp" >
+
+        <TextView
+            android:id="@+id/number"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="15dp"
+            android:textSize="20sp"
+            android:textStyle="bold" />
+
+        <Button
+            android:id="@+id/qsound"
+            android:layout_width="26dp"
+            android:layout_height="22dp"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="25dp"
+            android:layout_toRightOf="@+id/number"
+            android:background="@drawable/qsound" />
+    </RelativeLayout>
+
+    <TextView
+        android:id="@+id/blank"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/r1"
+        android:layout_marginTop="10dp"
+        android:textColor="#444444"
+        android:maxLines="4"
+        android:ellipsize="end"
+        android:textSize="18sp" />
+
+    <EditText
+        android:id="@+id/youranswer"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/blank"
+        android:layout_marginTop="10dp"
+        android:hint="请输入答案"
+        android:textColor="#444444"
+        android:textSize="18sp" />
+
+    <TextView
+        android:id="@+id/rightanswer"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/youranswer"
+        android:layout_above="@+id/cut"
+        android:layout_marginTop="10dp"
+        android:lineSpacingMultiplier="1.3"
+        android:textColor="#444444"
+        android:textSize="18sp"
+        android:visibility="gone" />
+
+    <RelativeLayout
+        android:id="@+id/cut"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true" >
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:orientation="horizontal" >
+
+            <Button
+                android:id="@+id/preview"
+                android:layout_width="91dp"
+                android:layout_height="30dp"
+                android:background="@drawable/un_previous_question" />
+
+            <Button
+                android:id="@+id/next"
+                android:layout_width="91dp"
+                android:layout_height="30dp"
+                android:layout_marginLeft="20dp"
+                android:background="@drawable/next_question" />
+
+            <Button
+                android:id="@+id/submit"
+                android:layout_width="91dp"
+                android:layout_height="30dp"
+                android:layout_marginLeft="20dp"
+                android:background="@drawable/submit_answer" />
+        </LinearLayout>
+    </RelativeLayout>
+
+</RelativeLayout>

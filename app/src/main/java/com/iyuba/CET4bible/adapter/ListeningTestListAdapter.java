@@ -1,7 +1,10 @@
 package com.iyuba.CET4bible.adapter;
 
+import android.Manifest;
+import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.os.Handler;
 import android.os.Message;
 import android.support.v7.widget.RecyclerView;
@@ -10,6 +13,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
@@ -58,8 +62,17 @@ public class ListeningTestListAdapter extends BaseRecyclerViewAdapter {
     private List mList;
     private int clickPosition = 0;
     private Map<String, Integer> yearImageMap;
+    private NewTypeSectionAAnswerOp op ;
     private Map<String, String> imageUrls;
     private CustomDialog waitingDialog;
+    private final static int[] drawables = new int[]{
+            R.drawable.icon1,
+            R.drawable.icon2,
+            R.drawable.icon3,
+            R.drawable.icon4,
+            R.drawable.icon5,
+            R.drawable.icon6};
+    private Boolean isHome ; // 是否是首页 , 首页只加载3个
 
     private HashMap<String, RoundProgressBar> progresses = new HashMap<>();
     Handler handler = new Handler() {
@@ -130,8 +143,10 @@ public class ListeningTestListAdapter extends BaseRecyclerViewAdapter {
         this.mList = list;
     }
 
-    public ListeningTestListAdapter(Context context) {
+    public ListeningTestListAdapter(Context context , Boolean isHome) {
         super(context);
+        op= new NewTypeSectionAAnswerOp(context);
+        this.isHome  = isHome ;
         this.waitingDialog = WaittingDialog.showDialog(mContext);
 
         final VideoStrategy videoStrategy = YouDaoAd.getYouDaoOptions()
@@ -154,24 +169,33 @@ public class ListeningTestListAdapter extends BaseRecyclerViewAdapter {
         } else if (viewType == 2) {
             return new VideoHolder(youdaoAdRenders.createAdView(mContext, parent));
         } else {
-            return new Holder(LayoutInflater.from(mContext).inflate(R.layout.item_testlist_newtype, parent, false));
+            return new Holder(LayoutInflater.from(mContext).inflate(R.layout.year_item_new1, parent, false));
         }
     }
 
+
+
     @Override
     public int getItemCount() {
+        if (isHome){
+            return 3 ;
+        }
         return mList.size() + 1;
     }
 
     @Override
     public int getItemViewType(int position) {
-        if (position == mList.size()) {
-            return 1;
-        } else if (mList.get(position) instanceof NativeResponse) {
-            NativeResponse nativeResponse = (NativeResponse) mList.get(position);
-            if (nativeResponse.getVideoAd() != null) {
-                return 2;
+        try {
+            if (position == mList.size()) {
+                return 1;
+            } else if (mList.get(position) instanceof NativeResponse) {
+                NativeResponse nativeResponse = (NativeResponse) mList.get(position);
+                if (nativeResponse.getVideoAd() != null) {
+                    return 2;
+                }
             }
+        } catch (Exception e) {
+            e.printStackTrace();
         }
         return 0;
     }
@@ -215,23 +239,39 @@ public class ListeningTestListAdapter extends BaseRecyclerViewAdapter {
                     response.handleClick(curViewHolder.itemView);
                 }
             });
+            curViewHolder.rate.setVisibility(View.GONE);
+            curViewHolder.image.setVisibility(View.GONE);
+            curViewHolder.progressBar.setVisibility(View.GONE);
+
+            curViewHolder.ad_title.setText(response.getTitle());
+            curViewHolder.ad_title.setVisibility(View.VISIBLE);
+            curViewHolder.title.setVisibility(View.GONE);
             Glide.with(mContext).load(response.getMainImageUrl())
                     .error(R.drawable.nearby_no_icon2)
                     .placeholder(R.drawable.nearby_no_icon2)
-                    .into(curViewHolder.iv_year);
-
-            curViewHolder.title.setText("(推广) " + response.getTitle());
+                    .into(curViewHolder.adimage);
+            curViewHolder.rr.setVisibility(View.GONE);
             curViewHolder.ll_touch.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
                     response.handleClick(curViewHolder.itemView);
                 }
             });
-            curViewHolder.progressBar.setVisibility(View.GONE);
-            curViewHolder.image.setVisibility(View.GONE);
-            curViewHolder.functionView.setVisibility(View.GONE);
+            curViewHolder.adimage.setVisibility(View.VISIBLE);
+            curViewHolder.download.setVisibility(View.GONE);
+            curViewHolder.ad_note.setVisibility(View.VISIBLE);
+
             return;
+        }else {
+            curViewHolder.ad_title.setVisibility(View.GONE);
+            curViewHolder.title.setVisibility(View.VISIBLE);
+            curViewHolder.adimage.setVisibility(View.GONE);
+            curViewHolder.image.setVisibility(View.VISIBLE);
+            curViewHolder.ad_note.setVisibility(View.GONE);
+
         }
+        curViewHolder.download.setVisibility(View.VISIBLE);
+
 
         final int curPosition = position;
         L.e("==== list size :::  " + mList.size());
@@ -239,22 +279,23 @@ public class ListeningTestListAdapter extends BaseRecyclerViewAdapter {
         final String test;
         String[] years;
 
+        curViewHolder.rr.setVisibility(View.VISIBLE);
+        curViewHolder.image.setImageDrawable(mContext.getResources().getDrawable(drawables[position%6]));
+
         if (curYear.contains("_")) {
             final int ic_year = yearImageMap.get(curYear.replace("_", ""));
-            Glide.with(mContext).load(ic_year).into(curViewHolder.iv_year);
             years = curYear.split("_");
         } else {
-            Glide.with(mContext).load(ExamDataUtil.getImageUrl(imageUrls.get(curYear)))
-                    .placeholder(R.drawable.nearby_no_icon2)
-                    .error(R.drawable.nearby_no_icon2)
-                    .dontAnimate()
-                    .into(curViewHolder.iv_year);
+
             years = new String[3];
             years[0] = curYear.substring(0, 4);
             years[1] = curYear.substring(4, 6);
             years[2] = curYear.substring(6, curYear.length());
         }
 
+        curViewHolder.rate.setVisibility(View.VISIBLE);
+        curViewHolder.rate.setText(String.format
+                ("正确 : %d/%d",op.getRightSum(curYear),25));
         sb = new StringBuffer();
         sb.append(years[0]).append(mContext.getString(R.string.year));
         sb.append(years[1]).append(mContext.getString(R.string.month));
@@ -270,37 +311,29 @@ public class ListeningTestListAdapter extends BaseRecyclerViewAdapter {
             }
             curViewHolder.title.setText(sb.toString());
         }
-        if (curPosition != clickPosition) {
-            curViewHolder.title.setTextColor(mContext.getResources().getColor(
-                    R.color.black));
-            curViewHolder.functionView.setVisibility(View.GONE);
-            curViewHolder.functionImage.setBackgroundResource(R.drawable.go);
-        } else {
-            curViewHolder.title.setTextColor(mContext.getResources().getColor(
-                    R.color.app_color));
-            curViewHolder.functionView.setVisibility(View.VISIBLE);
-            curViewHolder.functionImage
-                    .setBackgroundResource(R.drawable.go_press);
-        }
+
         if (prepareDownload(test) == 1) {
             curViewHolder.image.setVisibility(View.VISIBLE);
             curViewHolder.progressBar.setVisibility(View.GONE);
-            curViewHolder.ivDownload.setVisibility(View.GONE);
+            curViewHolder.download.setImageDrawable(mContext.getResources().getDrawable(R.drawable.icon_download_finished));
         } else if (prepareDownload(test) == 0) {
-            curViewHolder.image.setVisibility(View.GONE);
             curViewHolder.progressBar.setVisibility(View.GONE);
-            curViewHolder.ivDownload.setVisibility(View.VISIBLE);
-            curViewHolder.ivDownload.setOnClickListener(new View.OnClickListener() {
+            curViewHolder.download.setVisibility(View.VISIBLE);
+            curViewHolder.download.setImageDrawable(mContext.getResources().getDrawable(R.drawable.home_icon_download));
+
+            curViewHolder.download.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    handler.obtainMessage(5, test).sendToTarget();
-                    checkNetWork(test);
-                    handler.sendEmptyMessageDelayed(-1, 1000);
+                    if (checkStoragePermission()){
+                        handler.obtainMessage(5, test).sendToTarget();
+                        checkNetWork(test);
+                        handler.sendEmptyMessageDelayed(-1, 1000);
+                    }
+
                 }
             });
         } else {
-            curViewHolder.ivDownload.setVisibility(View.GONE);
-            curViewHolder.image.setVisibility(View.GONE);
+            curViewHolder.download.setVisibility(View.GONE);
             curViewHolder.progressBar.setVisibility(View.VISIBLE);
             int size = DownloadManager.Instance().fileList.size();
             DownloadFile file;
@@ -321,11 +354,6 @@ public class ListeningTestListAdapter extends BaseRecyclerViewAdapter {
 
             @Override
             public void onClick(View arg0) {
-                if (curViewHolder.functionView.isShown()) {
-                    clickPosition = -1;
-                } else {
-                    clickPosition = curPosition;
-                }
                 handler.sendEmptyMessage(-1);
 
             }
@@ -335,52 +363,32 @@ public class ListeningTestListAdapter extends BaseRecyclerViewAdapter {
             @Override
             public void onClick(View arg0) {
                 Log.e("TestListAdapter", "test>>>>>" + test);
-//                if (prepareDownload(test) == 1) {
-
                 startListeningActivity(0, test, "A", true, sb.toString(), position);
-
-//                } else if (prepareDownload(test) == 2) {
-//                    handler.sendEmptyMessage(2);
-//                } else {
-//                    handler.obtainMessage(5, test).sendToTarget();
-//                    checkNetWork(test);
-//                    handler.sendEmptyMessageDelayed(-1, 1000);
-//                }
             }
         });
         curViewHolder.section_b.setOnClickListener(new View.OnClickListener() {
 
             @Override
             public void onClick(View arg0) {
-//                if (prepareDownload(test) == 1) {
-
                 startListeningActivity(1, test, "B", true, sb.toString(), position);
-//
-//                } else if (prepareDownload(test) == 2) {
-//                    handler.sendEmptyMessage(2);
-//                } else {
-//                    handler.obtainMessage(5, test).sendToTarget();
-//                    checkNetWork(test);
-//                    handler.sendEmptyMessageDelayed(-1, 1000);
-//                }
             }
         });
         curViewHolder.section_c.setOnClickListener(new View.OnClickListener() {
 
             @Override
             public void onClick(View arg0) {
-//                if (prepareDownload(test) == 1) {
                 startListeningActivity(2, test, "C", true, sb.toString(), position);
 
-//                } else if (prepareDownload(test) == 2) {
-//                    handler.sendEmptyMessage(2);
-//                } else {
-//                    handler.obtainMessage(5, test).sendToTarget();
-//                    checkNetWork(test);
-//                    handler.sendEmptyMessageDelayed(-1, 1000);
-//                }
             }
         });
+    }
+
+    private boolean checkStoragePermission() {
+        if(mContext.checkSelfPermission(Manifest.permission.WRITE_EXTERNAL_STORAGE)!= PackageManager.PERMISSION_GRANTED){
+            ((Activity)mContext).requestPermissions(new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE}, 100);
+            return false ;
+        }
+        return true;
     }
 
     private void startListeningActivity(int type, String test, final String section, final boolean isNewType, final String title, int position) {
@@ -439,24 +447,29 @@ public class ListeningTestListAdapter extends BaseRecyclerViewAdapter {
     }
 
     private int prepareDownload(String year) {
-        String fileNoAppend = Constant.videoAddr + year + ".cet4";
-        String folder = Constant.videoAddr + year;
-        File file1 = new File(folder);
-        File file2 = new File(fileNoAppend);
-        if (file1.exists()) {
-            if (file1.list().length <= 0) {
-                file1.delete();
+        if (checkStoragePermission()){
+            String fileNoAppend = Constant.videoAddr + year + ".cet4";
+            String folder = Constant.videoAddr + year;
+            File file1 = new File(folder);
+            File file2 = new File(fileNoAppend);
+            if (file1.exists()) {
+                if (file1.list().length <= 0) {
+                    file1.delete();
+                    return 0;
+                }
+                // complete
+                return 1;
+            } else if (file2.exists()) {
+                // downloading
+                return 2;
+            } else {
+                // no down
                 return 0;
             }
-            // complete
-            return 1;
-        } else if (file2.exists()) {
-            // downloading
-            return 2;
-        } else {
-            // no down
+        }else {
             return 0;
         }
+
     }
 
     private void initDownload(String year) {
@@ -466,10 +479,10 @@ public class ListeningTestListAdapter extends BaseRecyclerViewAdapter {
         downloadFile.fileAppend = ".zip";
         downloadFile.fileName = year;
         if (SettingConfig.Instance().isHighSpeed()) {
-            downloadFile.downLoadAddress = "http://cetsoundsvip.iyuba.com/" + Constant.APP_CONSTANT.TYPE() + "/"
+            downloadFile.downLoadAddress = "http://cetsounds.iyuba.cn/" + Constant.APP_CONSTANT.TYPE() + "/"
                     + year + ".zip";
         } else {
-            downloadFile.downLoadAddress = "http://cetsounds.iyuba.com/" + Constant.APP_CONSTANT.TYPE() + "/"
+            downloadFile.downLoadAddress = "http://cetsounds.iyuba.cn/" + Constant.APP_CONSTANT.TYPE() + "/"
                     + year + ".zip";
         }
         Log.e("TestListAdapter", "downloadAddress>>>>" + downloadFile.downLoadAddress);
@@ -526,30 +539,35 @@ public class ListeningTestListAdapter extends BaseRecyclerViewAdapter {
     }
 
     class Holder extends RecyclerView.ViewHolder {
-        private ImageView functionImage, iv_year;
         private TextView title;
-        private View section_a, section_b, section_c, touch, ll_touch;
-        private View functionView;
+        private TextView ad_title;
+        private View section_a, section_b, section_c, ll_touch;
         private RoundProgressBar progressBar;
+        private TextView ad_note ;
         private ImageView image;
-        private TextView tv_question_number;
-        private View ivDownload;
+        private ImageView adimage;
+        private ImageView download;
+        private RelativeLayout rr;
+        private TextView rate;
+//        private View ivDownload;
 
         public Holder(View itemView) {
             super(itemView);
-            title = itemView.findViewById(R.id.artical_title);
-            tv_question_number = itemView.findViewById(R.id.tv_question_number);
-            functionView = itemView.findViewById(R.id.testlist_sub);
-            functionImage = itemView.findViewById(R.id.go);
+            title = itemView.findViewById(R.id.exam_year);
+            ad_title = itemView.findViewById(R.id.ad_title);
             ll_touch = itemView.findViewById(R.id.ll_touch);
-            iv_year = itemView.findViewById(R.id.iv_year);
-            touch = itemView.findViewById(R.id.touch);
-            section_a = itemView.findViewById(R.id.section_a);
-            section_b = itemView.findViewById(R.id.section_b);
-            section_c = itemView.findViewById(R.id.section_c);
+            section_a = itemView.findViewById(R.id.icon_a);
+            section_b = itemView.findViewById(R.id.icon_b);
+            section_c = itemView.findViewById(R.id.icon_c);
+            rr = itemView.findViewById(R.id.rr);
             progressBar = itemView.findViewById(R.id.roundProgressBar);
-            image = itemView.findViewById(R.id.image_downed);
-            ivDownload = itemView.findViewById(R.id.iv_audio_download);
+            image = itemView.findViewById(R.id.src_img);
+            adimage = itemView.findViewById(R.id.ad_img);
+            download = itemView.findViewById(R.id.dl_view);
+            rate = itemView.findViewById(R.id.rate);
+            ad_note = itemView.findViewById(R.id.ad_note);
+
+//            ivDownload = itemView.findViewById(R.id.iv_audio_download);
         }
     }
 

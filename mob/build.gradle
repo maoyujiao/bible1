@@ -1,0 +1,25 @@
+apply plugin: 'com.android.library'
+
+android {
+    compileSdkVersion 28
+    buildToolsVersion '28.0.3'
+
+    defaultConfig {
+        minSdkVersion min_sdk_version
+        targetSdkVersion 26
+        versionCode 1
+        versionName "1.0"
+    }
+
+    buildTypes {
+        release {
+            minifyEnabled false
+        }
+    }
+}
+
+dependencies {
+    api fileTree(include: ['*.jar'], dir: 'libs')
+    //    compile name:'SMSSDK-3.0.0',ext:'aar'
+    //    compile name:'SMSSDKGUI-3.0.0',ext:'aar'
+}

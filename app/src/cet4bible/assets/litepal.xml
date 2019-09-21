@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <litepal>
     <dbname value="Cost_Bible_cet4" />
-    <version value="13" />
+    <version value="14" />
     <list>
         <mapping class="com.iyuba.CET4bible.sqlite.mode.ImageData" />
         <mapping class="com.iyuba.trainingcamp.db.dbclass.GoldDateRecord"/>

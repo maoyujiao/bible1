@@ -13,6 +13,7 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.Toast;
 
+import com.blankj.utilcode.util.ToastUtils;
 import com.bumptech.glide.Glide;
 import com.iyuba.CET4bible.BuildConfig;
 import com.iyuba.CET4bible.R;
@@ -23,8 +24,10 @@ import com.iyuba.configation.Constant;
 import com.iyuba.core.activity.Login;
 import com.iyuba.core.activity.Web;
 import com.iyuba.core.manager.AccountManager;
+import com.iyuba.core.me.activity.VipCenter;
 import com.iyuba.core.util.MD5;
 import com.iyuba.core.util.TouristUtil;
+import com.iyuba.imooclib.ui.content.ContentActivity;
 import com.iyuba.imooclib.ui.mobclass.MobClassActivity;
 
 import org.greenrobot.eventbus.EventBus;
@@ -91,8 +94,7 @@ public class CardPagerAdapter extends PagerAdapter {
 
     private void bind(final ImageData data, View view) {
         ImageView iv_card = view.findViewById(R.id.iv_card);
-//        ImageLoader.getInstance().displayImage("http://app.iyuba.com/dev/" + data.pic, iv_card);
-        Glide.with(mContext).load("http://dev.iyuba.com/" + data.pic)
+        Glide.with(mContext).load("http://dev.iyuba.cn/" + data.pic)
                 .placeholder(R.drawable.nearby_no_icon2).dontAnimate().into(iv_card);
 
         iv_card.setOnClickListener(new View.OnClickListener() {
@@ -102,66 +104,31 @@ public class CardPagerAdapter extends PagerAdapter {
                 String name = data.name;
                 String desc = data.desc1;
                 if (name.equals("1")) {
-                    intent.setClass(mContext, GoldDesActivity.class);
-                    mContext.startActivity(intent);
+                    VipCenter.start(mContext, true);
                 } else if (name.equals("2")) {
                     if (AccountManager.Instace(mContext).checkUserLogin()) {
                         if (TouristUtil.isTourist()) {
-                            TouristUtil.showTouristHint(mContext);
+                            mContext.startActivity(new Intent(mContext, Login.class));
+                            ToastUtils.showShort( "请注册正式账户后，再进行领取");
                             return;
                         }
-                        if (BuildConfig.isEnglish) {
-                            intent.setClass(mContext, Web.class);
-                            intent.putExtra("url", "http://m.iyuba.com/mall/addressManage.jsp?"
-                                    + "&uid=" + AccountManager.Instace(mContext).getId()
-                                    + "&sign=" + MD5.getMD5ofStr("iyuba" + AccountManager.Instace(mContext).getId() + "camstory")
-                                    + "&username=" + AccountManager.Instace(mContext).getUserName()
-                                    + "&appid="
-                                    + Constant.APPID + "&presentId=" + (BuildConfig.isCET4 ? "52" : "54"));
 
-                            intent.putExtra("title", BuildConfig.isCET4 ? "免费赠送四级真题书" : "免费赠送六级真题书");
-                            mContext.startActivity(intent);
-                        } else {
-                            if (!AccountManager.isVip()) {
-                                new AlertDialog.Builder(mContext)
-                                        .setTitle("提示")
-                                        .setMessage("开通会员后可免费领取日语真题书")
-                                        .setPositiveButton("确认", null)
-                                        .show();
-                                return;
-                            }
+                        intent.setClass(mContext, Web.class);
+                        intent.putExtra("url", "http://m.iyuba.cn/mall/addressManage.jsp?"
+                                + "&uid=" + AccountManager.Instace(mContext).userId
+                                + "&sign=" + MD5.getMD5ofStr("iyuba" + AccountManager.Instace(mContext).userId + "camstory")
+                                + "&username=" + AccountManager.Instace(mContext).getUserName()
+                                + "&appid="
+                                + Constant.APPID + "&presentId=" + Constant.APP_CONSTANT.presentId());
 
-                            AlertDialog.Builder builder = new AlertDialog.Builder(mContext);
-                            builder.setTitle("免费送真题书")
-                                    .setMessage("开通iyuba会员，添加QQ 3274422495，免费赠送日语N" + Constant.APP_CONSTANT.TYPE() + "真题书")
-                                    .setPositiveButton("添加", new DialogInterface.OnClickListener() {
-                                        @Override
-                                        public void onClick(DialogInterface dialog, int which) {
-                                            try {
-                                                String url = "mqqwpa://im/chat?chat_type=wpa&uin=";
-                                                mContext.startActivity(new Intent(Intent.ACTION_VIEW,
-                                                        Uri.parse(url + "3274422495")));
-                                            } catch (Exception e) {
-                                                e.printStackTrace();
-                                                Toast.makeText(mContext, "您的设备尚未安装QQ客户端", Toast.LENGTH_SHORT).show();
-                                                e.printStackTrace();
-                                            }
-                                        }
-                                    })
-                                    .setNegativeButton("取消", null)
-                                    .show();
-                        }
+                        intent.putExtra("title", "免费送英语"+Constant.APP_CONSTANT.TYPE()+"级真题书");
+                        mContext.startActivity(intent);
                     } else {
                         intent.setClass(mContext, Login.class);
                         mContext.startActivity(intent);
                     }
                 } else if (name.equals("3")) {
-
-//                    EventBus.getDefault().post(new MainMicroClassEvent())
-
-                    mContext.startActivity(new Intent(mContext, MobClassActivity.class));
-
-
+                    mContext.startActivity(ContentActivity.buildIntent(mContext, Integer.parseInt(data.course_id)));
                 } else if (name.equals("4")) {
                     intent.setClass(mContext, Web.class);
                     intent.putExtra("url", desc);

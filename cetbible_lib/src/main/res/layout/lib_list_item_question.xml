@@ -1,0 +1,207 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:padding="10dp">
+
+    <RelativeLayout
+        android:id="@+id/top_part"
+        android:layout_width="fill_parent"
+        android:layout_height="45dp"
+        android:layout_marginLeft="4dp"
+        android:layout_marginRight="4dp"
+        android:layout_marginTop="3dp">
+
+        <ImageView
+            android:id="@+id/ques_icon"
+            android:layout_width="45dp"
+            android:layout_height="45dp"
+            android:layout_alignParentLeft="true" />
+
+        <RelativeLayout
+            android:layout_width="wrap_content"
+            android:layout_height="45dp"
+            android:layout_marginLeft="15dp"
+            android:layout_toRightOf="@+id/ques_icon">
+
+            <TextView
+                android:id="@+id/ques_name"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentTop="true"
+                android:layout_marginTop="2dp"
+                android:text=""
+                android:textColor="#000000"
+                android:textSize="14sp" />
+
+            <TextView
+                android:id="@+id/ques_info"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentBottom="true"
+                android:layout_marginBottom="2dp"
+                android:text=""
+                android:textColor="#898989"
+                android:textSize="10sp" />
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:id="@+id/user_inf"
+            android:layout_width="wrap_content"
+            android:layout_height="45dp"
+            android:layout_alignParentRight="true">
+
+            <ImageView
+                android:id="@+id/iv_ques_recommend"
+                android:layout_width="42dp"
+                android:layout_height="40dp"
+                android:layout_alignParentRight="true"
+                android:layout_alignParentTop="true"
+                android:background="@drawable/ques_recommend"
+                android:visibility="visible" />
+
+            <RelativeLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginRight="5dp"
+                android:layout_marginTop="2dp"
+                android:layout_toLeftOf="@+id/iv_ques_recommend">
+
+                <ImageView
+                    android:id="@+id/answer_icon"
+                    android:layout_width="8dp"
+                    android:layout_height="8dp"
+                    android:layout_centerVertical="true" />
+
+                <TextView
+                    android:id="@+id/is_answer"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:layout_marginLeft="5dp"
+                    android:layout_toRightOf="@id/answer_icon"
+                    android:text="已回答"
+                    android:textColor="#0077d5"
+                    android:textSize="10sp" />
+            </RelativeLayout>
+
+            <TextView
+                android:id="@+id/answer_name"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentBottom="true"
+                android:layout_alignParentRight="true"
+                android:layout_marginBottom="4dp"
+                android:text="鲁美小洋洋"
+                android:textColor="#898989"
+                android:textSize="10sp"
+                android:visibility="invisible" />
+        </RelativeLayout>
+    </RelativeLayout>
+
+    <TextView
+        android:id="@+id/ques_disc"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/top_part"
+        android:layout_marginTop="10dp"
+        android:textColor="@color/black" />
+
+    <ImageView
+        android:id="@+id/ques_pic"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/ques_disc"
+        android:layout_marginLeft="5dp"
+        android:layout_marginRight="5dp"
+        android:layout_marginTop="6dp"
+        android:adjustViewBounds="true"
+        android:maxWidth="120dp"
+        android:scaleType="centerInside"
+        android:src="#dcdcdc" />
+
+    <RelativeLayout
+        android:layout_width="wrap_content"
+        android:layout_height="20dp"
+        android:layout_below="@id/ques_pic"
+        android:layout_marginTop="10dp">
+
+        <TextView
+            android:id="@+id/ques_source"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:text="BBC英语"
+            android:textColor="#898989"
+            android:textSize="10sp" />
+
+        <ImageView
+            android:layout_width="8dp"
+            android:layout_height="8dp"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="5dp"
+            android:layout_toRightOf="@+id/ques_source" />
+
+        <TextView
+            android:id="@+id/agree_num"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:text="4"
+            android:textColor="#898989"
+            android:textSize="12sp" />
+
+        <ImageView
+            android:id="@+id/agree"
+            android:layout_width="18dp"
+            android:layout_height="18dp"
+            android:layout_centerVertical="true"
+            android:layout_marginRight="5dp"
+            android:layout_toLeftOf="@id/agree_num"
+            android:clickable="true"
+            android:src="@drawable/agree_normal" />
+
+
+        <ImageView
+            android:id="@+id/teacher_answer"
+            android:layout_width="16dp"
+            android:layout_height="16dp"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="5dp"
+            android:layout_toRightOf="@id/ques_source"
+            android:src="@drawable/teacher_answer" />
+
+        <TextView
+            android:id="@+id/answer_num"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="5dp"
+            android:layout_toRightOf="@id/teacher_answer"
+            android:text="4"
+            android:textColor="#898989"
+            android:textSize="10sp" />
+
+        <ImageView
+            android:id="@+id/answer"
+            android:layout_width="16dp"
+            android:layout_height="16dp"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="5dp"
+            android:layout_toRightOf="@id/answer_num"
+            android:src="@drawable/already_answer" />
+
+        <TextView
+            android:id="@+id/comment_num"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="5dp"
+            android:layout_toRightOf="@id/answer"
+            android:text="5"
+            android:textColor="#898989"
+            android:textSize="10sp" />
+
+    </RelativeLayout>
+</RelativeLayout>

@@ -1,0 +1,205 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/backlayout"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:background="@color/background_color">
+
+    <RelativeLayout
+        android:id="@+id/relativeLayout_title_and_back"
+        android:layout_width="fill_parent"
+        android:layout_height="50dp"
+        android:layout_alignParentLeft="true"
+        android:background="@color/colorPrimary">
+
+        <ImageView
+            android:id="@+id/button_back"
+            style="@style/base_style_button_back_white"
+            android:background="?attr/selectableItemBackground" />
+
+        <TextView
+            android:id="@+id/play_title_info"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:text="@string/regist_title"
+            android:textAppearance="?android:attr/textAppearanceLarge"
+            android:textColor="@color/title_bar_text" />
+    </RelativeLayout>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="0.5dp"
+        android:layout_below="@+id/relativeLayout_title_and_back"
+        android:background="@color/divider_line" />
+
+    <ImageView
+        android:id="@+id/imageView1"
+        android:layout_width="100dp"
+        android:layout_height="50dp"
+        android:layout_below="@+id/relativeLayout_title_and_back"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="20dp"
+        android:src="@drawable/logo" />
+
+    <LinearLayout
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_below="@+id/imageView1"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp"
+        android:layout_marginTop="10dp"
+        android:orientation="vertical">
+
+        <LinearLayout
+            android:layout_width="fill_parent"
+            android:layout_height="50dp"
+            android:layout_marginBottom="20dp"
+            android:background="@drawable/edittext_bkg">
+
+            <ImageView
+                android:layout_width="25dp"
+                android:layout_height="25dp"
+                android:layout_gravity="center_vertical"
+                android:layout_marginLeft="10dp"
+                android:layout_marginRight="10dp"
+                android:src="@drawable/phoneicon" />
+
+            <EditText
+                android:id="@+id/regist_phone_numb"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_gravity="center_vertical"
+                android:background="@color/transparent"
+                android:ems="10"
+                android:hint="@string/regist_phone_inputphone"
+                android:imeActionId="0"
+                android:imeOptions="actionNext"
+                android:inputType="phone"
+                android:maxLength="11"
+                android:paddingRight="15dp"
+                android:singleLine="true"
+                android:textColor="#000000"
+                android:textCursorDrawable="@null"
+                android:textSize="18sp" />
+        </LinearLayout>
+
+        <RelativeLayout
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent"
+            android:layout_marginBottom="20dp">
+
+            <EditText
+                android:id="@+id/regist_phone_code"
+                android:layout_width="140dp"
+                android:layout_height="50dp"
+                android:layout_gravity="center_vertical"
+                android:background="@drawable/randcodebkg"
+                android:ems="10"
+                android:hint="@string/regist_phone_inputcode"
+                android:imeActionId="0"
+                android:imeOptions="actionNext"
+                android:inputType="text|number"
+                android:maxLength="6"
+                android:paddingLeft="15dp"
+                android:paddingRight="15dp"
+                android:singleLine="true"
+                android:textColor="#000000"
+                android:textCursorDrawable="@null"
+                android:textSize="16sp" />
+
+            <Button
+                android:id="@+id/regist_getcode"
+                android:layout_width="wrap_content"
+                android:layout_height="50dp"
+                android:layout_alignParentRight="true"
+                android:layout_marginLeft="20dp"
+                android:layout_toRightOf="@id/regist_phone_code"
+                android:background="@drawable/button_background"
+                android:minHeight="30dp"
+                android:text="@string/regist_phone_getcode"
+                android:textColor="@color/base_white"
+                android:textSize="16sp" />
+
+            <Button
+                android:layout_width="wrap_content"
+                android:layout_height="50dp"
+                android:layout_alignParentRight="true"
+                android:layout_marginLeft="20dp"
+                android:layout_toRightOf="@id/regist_phone_code"
+                android:background="@drawable/randcodebtn"
+                android:minHeight="30dp"
+                android:text="@string/regist_phone_verifycode"
+                android:textColor="#fff"
+                android:textSize="16sp"
+                android:visibility="gone" />
+
+            <Button
+                android:layout_width="wrap_content"
+                android:layout_height="50dp"
+                android:layout_alignParentRight="true"
+                android:layout_marginLeft="20dp"
+                android:layout_toRightOf="@id/regist_phone_code"
+                android:background="@drawable/button_gray_normal"
+                android:minHeight="30dp"
+                android:text="请等待20秒左右"
+                android:textColor="#ffffffff"
+                android:textSize="16sp"
+                android:visibility="gone" />
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent">
+
+            <Button
+                android:id="@+id/nextstep_unfocus"
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:background="@drawable/nextstep_unfocus"
+                android:text="下一步"
+                android:textColor="#55000000"
+                android:textSize="20sp" />
+
+            <Button
+                android:id="@+id/nextstep_focus"
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:background="@drawable/button_background"
+                android:text="下一步"
+                android:textColor="#ffffffff"
+                android:textSize="20sp"
+                android:visibility="gone" />
+
+        </RelativeLayout>
+
+        <LinearLayout
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/protocol"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="5dp"
+                android:drawableLeft="@drawable/check_box_checked"
+                android:drawablePadding="5dp" />
+
+            <TextView
+                android:id="@+id/regist_email"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginRight="20dp"
+                android:layout_marginTop="15dp"
+                android:gravity="right"
+                android:minHeight="30dp"
+                android:text="@string/regist_phone_toemail"
+                android:textColor="#000000"
+                android:textSize="16sp" />
+        </LinearLayout>
+    </LinearLayout>
+
+</RelativeLayout>

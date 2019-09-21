@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <declare-styleable name="LoadingCircle">
+        <attr name="lcborder_color" format="color" />
+        <attr name="lcborder_width" format="dimension" />
+        <attr name="lcradius" format="dimension" />
+    </declare-styleable>
+
+    <attr name="textModeColor" format="color|reference" />
+    <attr name="mainBackground" format="color|reference" />
+    <attr name="titleBarColor" format="color|reference" />
+    <attr name="buttonBackColor" format="color|reference" />
+    <attr name="buttonTextColor" format="color|reference" />
+    <attr name="commentBackground" format="color|reference" />
+
+    <declare-styleable name="circleProgressBar">
+        <attr name="circleColor" format="color" />
+        <attr name="circleProgressColor" format="color" />
+        <attr name="circleWidth" format="dimension"></attr>
+        <attr name="textColor" format="color" />
+        <attr name="textSize" format="dimension" />
+        <attr name="max" format="integer"></attr>
+        <attr name="textIsDisplayable" format="boolean"></attr>
+        <attr name="style">
+            <enum name="STROKE" value="0"></enum>
+            <enum name="FILL" value="1"></enum>
+        </attr>
+    </declare-styleable>
+    <declare-styleable name="CircleImageView">
+        <attr name="border_width" format="dimension" />
+        <attr name="border_color" format="color" />
+    </declare-styleable>
+    <declare-styleable name="CircularImageView">
+        <attr name="border_thickness" format="dimension" />
+        <attr name="border_outside_color" format="color" />
+        <attr name="border_inside_color" format="color" />
+    </declare-styleable>
+
+    <declare-styleable name="AmountView">
+        <!-- 左右2边+-按钮的宽度 -->
+        <attr name="btnWidth" format="dimension" />
+        <!-- 中间TextView的宽度 -->
+        <attr name="tvWidth" format="dimension" />
+        <!--<attr name="tvColor" format="color"/>-->
+        <attr name="tvTextSize" format="dimension" />
+        <attr name="btnTextSize" format="dimension" />
+    </declare-styleable>
+
+</resources>

@@ -40,7 +40,7 @@ public class VersionManager {
      * @param aucb
      */
     public void checkNewVersion(int version, final AppUpdateCallBack aucb) {
-        ClientSession.Instace().asynGetResponse(new appUpdateRequest(version),
+        ClientSession.Instance().asynGetResponse(new appUpdateRequest(version),
                 new IResponseReceiver() {
                     @Override
                     public void onResponse(BaseHttpResponse response,

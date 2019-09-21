@@ -1,0 +1,114 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#efefef">
+
+    <!-- 标题 -->
+
+
+    <RelativeLayout
+        android:id="@+id/r1"
+        android:layout_width="fill_parent"
+        android:layout_height="50dp"
+        android:background="?attr/colorPrimary"
+        android:elevation="2dp">
+
+        <ImageView
+            android:id="@+id/button_back"
+            style="@style/base_style_button_back_white"
+            android:background="?attr/selectableItemBackground" />
+
+        <TextView
+            android:id="@+id/title_info"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:layout_marginEnd="60dp"
+            android:layout_marginStart="60dp"
+            android:gravity="center"
+            android:text="@string/read_text"
+            android:textColor="#ffffff"
+            android:textSize="19sp" />
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:id="@+id/rl_section"
+        android:layout_width="match_parent"
+        android:layout_height="65dp"
+        android:layout_below="@id/r1"
+        android:background="#ffffff">
+
+        <RelativeLayout
+            android:id="@+id/rl_section1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="70dp">
+
+            <TextView
+                android:id="@+id/tv1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerHorizontal="true"
+                android:text="passage"
+                android:textColor="#BABABA"
+                android:textSize="13sp" />
+
+            <ImageView
+                android:id="@+id/iv_section1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/tv1"
+                android:layout_centerHorizontal="true"
+                android:src="@drawable/section1" />
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:id="@+id/rl_section2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:layout_marginRight="70dp">
+
+            <TextView
+                android:id="@+id/tv2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerHorizontal="true"
+                android:text="passage"
+                android:textColor="#BABABA"
+                android:textSize="13sp" />
+
+            <ImageView
+                android:id="@+id/iv_section2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/tv2"
+                android:layout_centerHorizontal="true"
+                android:src="@drawable/section2" />
+        </RelativeLayout>
+
+
+        <View
+            android:layout_width="wrap_content"
+            android:layout_height="2dp"
+            android:layout_centerHorizontal="true"
+            android:layout_marginLeft="5dp"
+            android:layout_marginRight="5dp"
+            android:layout_marginTop="40dp"
+            android:layout_toLeftOf="@id/rl_section2"
+            android:layout_toRightOf="@id/rl_section1"
+            android:background="#DEDEDE" />
+    </RelativeLayout>
+
+    <android.support.v4.view.ViewPager
+        android:id="@+id/viewpager_reading"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@id/rl_section"
+        android:layout_marginTop="10dp" />
+
+</RelativeLayout>

@@ -23,6 +23,7 @@ import com.iyuba.CET4bible.R;
 import com.iyuba.CET4bible.event.JPLevelChangeEvent;
 import com.iyuba.CET4bible.sqlite.op.BlogOp;
 import com.iyuba.CET4bible.util.ClearBuffer;
+import com.iyuba.CET4bible.util.Share;
 import com.iyuba.CET4bible.widget.SleepDialog;
 import com.iyuba.configation.ConfigManager;
 import com.iyuba.configation.Constant;
@@ -191,7 +192,12 @@ public class SetActivity extends BasisActivity {
                     startActivityForResult(intent, 23);
                     break;
                 case R.id.recommend_btn:
-                    prepareMessage();
+                    String text = getResources().getString(R.string.setting_share1)
+                            + Constant.APPName
+                            + getResources().getString(R.string.setting_share2);
+                    showShare("我正在使用"+Constant.APP_CONSTANT.APPName(), text,"https://sj.qq.com/myapp/detail.htm?apkName="
+                            + mContext.getPackageName());
+//                    prepareMessage();
                     break;
                 case R.id.save_path_btn:
 //				mContext.startActivity(new Intent(mContext,
@@ -225,7 +231,7 @@ public class SetActivity extends BasisActivity {
                 case 3:
                     break;
                 case 4:
-                    picSize.setText("0B");
+                    picSize.setText(getSize(0));
                     break;
                 case 5:
                     initLanguage();
@@ -506,7 +512,7 @@ public class SetActivity extends BasisActivity {
         String text = getResources().getString(R.string.setting_share1)
                 + Constant.APPName
                 + getResources().getString(R.string.setting_share2)
-                + "：http://app.iyuba.com/android/androidDetail.jsp?id="
+                + "：http://app.iyuba.cn/android/androidDetail.jsp?id="
                 + Constant.APPID;
         Intent shareInt = new Intent(Intent.ACTION_SEND);
         shareInt.setType("text/*");
@@ -588,9 +594,9 @@ public class SetActivity extends BasisActivity {
 
     /*********************************************************************************/
 
-	/*
+    /*
      * 文件夹大小
-	 */
+     */
     private long GetDirSize(File dir) {
         if (null == dir) {
             return 0;
@@ -651,7 +657,7 @@ public class SetActivity extends BasisActivity {
                 soundSize.post(new Runnable() {
                     @Override
                     public void run() {
-                        soundSize.setText("0B");
+                        soundSize.setText(getSize(0));
                     }
                 });
             }
@@ -678,8 +684,8 @@ public class SetActivity extends BasisActivity {
                         int pos = which + 1 + 4 + 10;
                         if (pos != level) {
                             ConstantManager.init(pos);
-//                            IMooc.initAPP(Constant.APPID, AccountManager.Instace(mContext).getId(),
-//                                    AccountManager.Instace(mContext).getVipStatus() + "");
+//                            IMooc.initAPP(Constant.APPID, AccountManager.Instance(mContext).getId(),
+//                                    AccountManager.Instance(mContext).getVipStatus() + "");
 //                            IMooc.setOid(Constant.VIP_STATUS + "");
                             tvCurrentLevel.setText(String.format(Locale.CHINA, "日语N%d", which + 1));
                             // 修改主页
@@ -711,4 +717,11 @@ public class SetActivity extends BasisActivity {
         builder.show();
     }
 
+
+    public void showShare(String title, String text, String url) {
+        String imagePath = Constant.iconAddr;
+
+        Share share = new Share(getApplicationContext());
+        share.shareMessage(imagePath, text, url ,title);
+    }
 }

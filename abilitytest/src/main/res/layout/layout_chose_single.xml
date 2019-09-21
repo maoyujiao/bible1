@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="utf-8"?><!--单选题目答题卡-->
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginTop="10dp"
+    android:orientation="vertical">
+    <!--A选项-->
+    <LinearLayout
+        android:id="@+id/ll_ansA"
+        style="@style/WordAbalityTextAnswerStyle">
+
+        <TextView
+            style="@style/WordAbilityTextBackgroundStyle"
+            android:text="A" />
+
+        <TextView
+            android:id="@+id/tv_ans_A"
+
+            style="@style/WordAbilityTextBgStyle"
+            android:text="adv.很想当" />
+    </LinearLayout>
+    <!--B选项-->
+    <LinearLayout
+        android:id="@+id/ll_ansB"
+        style="@style/WordAbalityTextAnswerStyle">
+
+        <TextView
+            style="@style/WordAbilityTextBackgroundStyle"
+            android:text="B" />
+
+        <TextView
+            android:id="@+id/tv_ans_B"
+            style="@style/WordAbilityTextBgStyle"
+            android:text="The Internet is playing a more and more important part in our daily life." />
+    </LinearLayout>
+    <!--C选项-->
+    <LinearLayout
+        android:id="@+id/ll_ansC"
+        style="@style/WordAbalityTextAnswerStyle">
+
+        <TextView
+            style="@style/WordAbilityTextBackgroundStyle"
+            android:text="C" />
+
+        <TextView
+            android:id="@+id/tv_ans_C"
+            style="@style/WordAbilityTextBgStyle"
+            android:text="The Internet is playing a more and more important part in our daily life." />
+    </LinearLayout>
+    <!--D选项-->
+    <LinearLayout
+        android:id="@+id/ll_ansD"
+        style="@style/WordAbalityTextAnswerStyle">
+
+        <TextView
+            style="@style/WordAbilityTextBackgroundStyle"
+            android:text="D" />
+
+        <TextView
+            android:id="@+id/tv_ans_D"
+            style="@style/WordAbilityTextBgStyle"
+            android:text="The Internet is playing a more and more important part in our daily life." />
+    </LinearLayout>
+    <!--E选项-->
+    <LinearLayout
+        android:id="@+id/ll_ansE"
+        style="@style/WordAbalityTextAnswerStyle"
+        android:visibility="gone">
+
+        <TextView
+            style="@style/WordAbilityTextBackgroundStyle"
+            android:text="E" />
+
+        <TextView
+            android:id="@+id/tv_ans_E"
+            style="@style/WordAbilityTextBgStyle"
+            android:text="The Internet is playing a more and more important part in our daily life." />
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/ll_rightanswer"
+        style="@style/WordAbalityTextAnswerStyle"
+        android:visibility="gone">
+
+        <TextView
+            android:id="@+id/tv_rightanswer"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="8dp"
+            android:text="正确答案"
+            android:textColor="@color/text_bluenor_color"
+            android:textSize="18sp" />
+    </LinearLayout>
+</LinearLayout>

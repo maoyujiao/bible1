@@ -1,6 +1,7 @@
 package com.iyuba.CET4bible.activity;
 
 import android.app.Dialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
@@ -20,6 +21,7 @@ import android.widget.CheckBox;
 import android.widget.CompoundButton;
 import android.widget.ListView;
 import android.widget.PopupWindow;
+import android.widget.ScrollView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -32,7 +34,6 @@ import com.iyuba.CET4bible.widget.ConfirmDialog;
 import com.iyuba.base.BaseActivity;
 import com.iyuba.base.util.ClickableMovementMethod;
 import com.iyuba.configation.Constant;
-import com.iyuba.core.activity.Login;
 import com.iyuba.core.discover.protocol.WordUpdateRequest;
 import com.iyuba.core.discover.protocol.WordUpdateResponse;
 import com.iyuba.core.http.Http;
@@ -43,8 +44,6 @@ import com.iyuba.core.network.ClientSession;
 import com.iyuba.core.network.IResponseReceiver;
 import com.iyuba.core.protocol.BaseHttpRequest;
 import com.iyuba.core.protocol.BaseHttpResponse;
-import com.iyuba.core.protocol.base.DictRequest;
-import com.iyuba.core.protocol.base.DictResponse;
 import com.iyuba.core.sqlite.mode.Word;
 import com.iyuba.core.sqlite.op.WordOp;
 import com.iyuba.core.util.GetDeviceInfo;
@@ -112,6 +111,7 @@ public class FillInBlankActivity extends BaseActivity {
     //学习纪录
     private StudyRecordInfo studyRecordInfo;
     private GetDeviceInfo deviceInfo;
+    private ScrollView scrollView;
     private long startTime;
 
     @Override
@@ -125,10 +125,11 @@ public class FillInBlankActivity extends BaseActivity {
                 onBackPressed();
             }
         });
+        scrollView = findViewById(R.id.scroll);
         TextView tvTitle = findView(R.id.tv_question_title);
         textView = findView(R.id.text);
         textView.setDefaultSelection(false);
-        textView.setSelectEnable(false);
+//        textView.setSelectEnable(true);
 
         FillInBlankBean data = (FillInBlankBean) getIntent().getSerializableExtra("data");
         bean = data;
@@ -290,7 +291,6 @@ public class FillInBlankActivity extends BaseActivity {
 
 
     class SpanClickListener implements View.OnClickListener {
-
         @Override
         public void onClick(View v) {
             if (isShowAnswer) {
@@ -351,22 +351,18 @@ public class FillInBlankActivity extends BaseActivity {
         AlertDialog.Builder builder = new AlertDialog.Builder(mContext);
         View view = getLayoutInflater().inflate(R.layout.dialog_choose, null);
         builder.setView(view);
-
         dialog = builder.create();
+        textView.setFocusable(false);
 
         final ListView listView = view.findViewById(R.id.list);
         // 单词是否被选中
         SparseBooleanArray selectArray = new SparseBooleanArray();
-
         // 当前选中的单词
         String word = selectWordArray.get(pos, null);
-
-
         for (int k = 0; k < sortedAnswerWordList.size(); k++) {
             String s = sortedAnswerWordList.get(k);
             int flag = -1;
             for (int i = 0; i < selectWordArray.size(); i++) {
-
                 int key = selectWordArray.keyAt(i);
                 if (selectWordArray.get(key).equals(s)) {
                     flag = key;
@@ -399,6 +395,13 @@ public class FillInBlankActivity extends BaseActivity {
         });
         dialog.show();
 
+        dialog.setOnDismissListener(new DialogInterface.OnDismissListener() {
+            @Override
+            public void onDismiss(DialogInterface dialog) {
+                textView.setFocusable(true);
+            }
+        });
+
     }
 
 
@@ -410,48 +413,15 @@ public class FillInBlankActivity extends BaseActivity {
             selectCurrWordTemp = null;
             confirmDialog = new ConfirmDialog(mContext,
                     selectText, "加载中...", "", "",
-                    null, new ConfirmDialog.OnConfirmDialogClickListener() {
+                    null, null);
+            confirmDialog.show();
+            textView.setFocusable(false);
+            confirmDialog.setOnDismissListener(new DialogInterface.OnDismissListener() {
                 @Override
-                public void onSave() {
-                    if (!AccountManager.Instace(mContext).checkUserLogin()) {
-                        Toast.makeText(mContext, R.string.play_no_login, Toast.LENGTH_SHORT).show();
-                        Intent intent = new Intent();
-                        intent.setClass(mContext, Login.class);
-                        startActivity(intent);
-                    } else {
-                        if (selectCurrWordTemp != null) {
-                            selectCurrWordTemp.key = selectText;
-                            selectCurrWordTemp.userid = AccountManager.Instace(mContext).userId;
-                            saveNewWords(selectCurrWordTemp);
-                        }
-                    }
-                }
-
-                @Override
-                public void onCancel() {
+                public void onDismiss(DialogInterface dialog) {
+                    textView.setFocusable(true);
                 }
             });
-            confirmDialog.show();
-
-            ClientSession.Instace().asynGetResponse(
-                    new DictRequest(selectText), new IResponseReceiver() {
-                        @Override
-                        public void onResponse(BaseHttpResponse response,
-                                               BaseHttpRequest request, int rspCookie) {
-                            DictResponse dictResponse = (DictResponse) response;
-                            selectCurrWordTemp = dictResponse.word;
-                            if (selectCurrWordTemp != null) {
-                                if (selectCurrWordTemp.def != null
-                                        && selectCurrWordTemp.def.length() != 0) {
-                                    handler.sendEmptyMessage(0);
-                                } else {
-                                    handler.sendEmptyMessage(1);
-                                }
-                            }
-                        }
-
-
-                    }, null, null);
         } else {
             Toast.makeText(mContext, "请选择英文单词", Toast.LENGTH_SHORT).show();
         }
@@ -475,16 +445,13 @@ public class FillInBlankActivity extends BaseActivity {
     }
 
     public void addNetwordWord(String wordTemp) {
-        ClientSession.Instace().asynGetResponse(
+        ClientSession.Instance().asynGetResponse(
                 new WordUpdateRequest(AccountManager.Instace(mContext).userId,
                         WordUpdateRequest.MODE_INSERT, wordTemp),
                 new IResponseReceiver() {
                     @Override
                     public void onResponse(BaseHttpResponse response, BaseHttpRequest request, int rspCookie) {
                         WordUpdateResponse wur = (WordUpdateResponse) response;
-                        if (wur.result == 1) {
-                            // Log.e("添加网络生词本", wur.word+","+true);
-                        }
                     }
                 }, null, null);
     }

@@ -43,7 +43,7 @@ public class UpdateStudyRecordRequestNew extends BaseHttpRequest {
 
     public static String getUrl(StudyRecordInfo studyRecordInfo, String testMode, String testWords) {
         try {
-            return "http://daxue.iyuba.com/ecollege/updateStudyRecordNew.jsp?format=json"
+            return "http://daxue.iyuba.cn/ecollege/updateStudyRecordNew.jsp?format=json"
                     + "&uid=" + studyRecordInfo.getUid()
                     + "&BeginTime=" + URLEncoder.encode(studyRecordInfo.getBeginTime(), "UTF-8")
                     + "&EndTime=" + URLEncoder.encode(studyRecordInfo.getEndTime(), "UTF-8")

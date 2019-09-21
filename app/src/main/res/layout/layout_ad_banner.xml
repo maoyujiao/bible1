@@ -1,0 +1,125 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <RelativeLayout
+        android:id="@+id/youdao_ad"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:clickable="true"
+        android:gravity="center_vertical"
+        android:visibility="gone"
+        tools:visibility="visible">
+
+        <ImageView
+            android:id="@+id/photoImage"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentTop="true"
+            android:background="@android:color/white"
+            android:scaleType="fitXY" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_alignParentBottom="true"
+            android:background="#77000000"
+            android:gravity="center_vertical"
+            android:padding="1dp"
+            android:text=" 广告 "
+            android:textColor="#ededed"
+            android:textSize="9sp" />
+
+        <TextView
+            android:id="@+id/close"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_alignParentTop="true"
+            android:background="#77000000"
+            android:gravity="center_vertical"
+            android:padding="1dp"
+            android:text=" 关闭 "
+            android:textColor="#ededed"
+            android:textSize="9sp" />
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <!--<com.addam.library.api.AddamBanner-->
+        <!--android:id="@+id/ad_addam"-->
+        <!--android:layout_width="wrap_content"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:visibility="gone"-->
+        <!--tools:visibility="visible" />-->
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:id="@+id/adMiaozeParent"
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
+        android:visibility="gone"
+        tools:visibility="visible">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@color/trainingcamp_white"
+            android:orientation="horizontal"
+            tools:background="@color/text_light_gray_color"
+            tools:layout_height="60dp">
+
+            <ImageView
+                android:layout_width="66dp"
+                android:layout_height="60dp"
+                android:layout_gravity="center_vertical"
+                android:layout_marginStart="1dp"
+                android:scaleType="fitXY"
+                tools:src="@color/blue" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginStart="6dp"
+                android:layout_marginEnd="8dp"
+                android:orientation="vertical">
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="2dp"
+                    android:maxLines="2"
+                    android:minLines="2"
+                    android:textColor="@color/black"
+                    android:textSize="14sp"
+                    tools:text="titletitletitletitletitletitletitletitletitletitletitletitletitletitletitle" />
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:maxLines="1"
+                    android:textSize="13sp"
+                    tools:text="desc" />
+            </LinearLayout>
+        </LinearLayout>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_alignParentBottom="true"
+            android:background="#77000000"
+            android:gravity="center_vertical"
+            android:padding="1dp"
+            android:text=" 广告 "
+            android:textColor="#ededed"
+            android:textSize="9sp" />
+    </RelativeLayout>
+</LinearLayout>

@@ -14,7 +14,7 @@ import org.json.JSONObject;
 public class BlogRequest extends BaseJSONRequest {
 
     public BlogRequest(String cate, int page) {
-        setAbsoluteURI("http://cms.iyuba.com/cmsApi/getEssay.jsp?format=json&pageCounts=15&catids="
+        setAbsoluteURI("http://cms.iyuba.cn/cmsApi/getEssay.jsp?format=json&pageCounts=15&catids="
                 + cate + "&pageNumber=" + page);
     }
 

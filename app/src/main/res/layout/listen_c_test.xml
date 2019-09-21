@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/backlayout"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/background_color"
+    android:orientation="vertical" >
+
+    <com.iyuba.CET4bible.widget.subtitle.SubtitleSynView
+        android:id="@+id/original"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_margin="10dp"
+        android:gravity="center_vertical"
+        android:textColor="@color/black" />
+
+    <TextView
+        android:id="@+id/submit"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentTop="true"
+        android:layout_marginRight="10dp"
+        android:layout_marginTop="10dp"
+        android:alpha="0.4"
+        android:background="#000000"
+        android:padding="6dp"
+        android:text="@string/submit"
+        android:textColor="#ffffff"
+        android:textSize="18sp" />
+
+    <LinearLayout
+        android:id="@+id/youranswer"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:background="#444444"
+        android:orientation="horizontal"
+        android:padding="10dp" >
+
+        <TextView
+            android:id="@+id/question_number"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="6dp"
+            android:layout_marginRight="6dp"
+            android:textColor="@color/trainingcamp_white"
+            android:textSize="16sp" />
+
+        <RelativeLayout
+            android:id="@+id/edittext"
+            android:layout_width="wrap_content"
+            android:layout_height="32dp"
+            android:layout_marginLeft="6dp"
+            android:layout_marginRight="6dp"
+            android:layout_weight="1"
+            android:background="@drawable/border"
+            android:paddingLeft="8dp"
+            android:paddingRight="8dp" >
+
+            <EditText
+                android:id="@+id/answer"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:background="#00000000"
+                android:singleLine="true"
+                android:textColor="#000000"
+                android:textSize="16sp" />
+        </RelativeLayout>
+
+        <Button
+            android:id="@+id/sure"
+            android:layout_width="50dp"
+            android:layout_height="30dp"
+            android:layout_marginLeft="6dp"
+            android:layout_marginRight="6dp"
+            android:background="@drawable/button_background"
+            android:text="@string/alert_btn_ok"
+            android:textColor="@color/trainingcamp_white"
+            android:textSize="16sp" />
+    </LinearLayout>
+
+</RelativeLayout>

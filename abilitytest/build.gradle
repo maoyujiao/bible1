@@ -1,0 +1,62 @@
+apply plugin: 'com.android.library'
+
+repositories {
+    jcenter()
+}
+android {
+    compileSdkVersion 28
+    buildToolsVersion '28.0.3'
+
+    aaptOptions.cruncherEnabled = false
+    aaptOptions.useNewCruncher = false
+
+    defaultConfig {
+        minSdkVersion min_sdk_version
+        targetSdkVersion 26
+        versionCode 1
+        versionName "1.0"
+    }
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+        }
+    }
+    sourceSets {
+        main {
+//            jniLibs.srcDirs = ['libs']
+        }
+    }
+
+
+    repositories {
+        flatDir {
+            dirs 'libs', '../cetbible_lib/libs'
+        }
+    }
+}
+
+dependencies {
+    api fileTree(include: ['*.jar'], dir: 'libs')
+    api project(':cetbible_lib')
+
+    //    provided files('libs/Sunflower.jar')//科大讯飞的包
+    //    provided files('libs/Msc.jar')//科大讯飞的包
+    implementation 'com.android.support:multidex:1.0.2'
+    implementation "com.android.support:appcompat-v7:$rootProject.ext.supportLibraryVersion"
+    implementation "com.android.support:recyclerview-v7:$rootProject.ext.supportLibraryVersion"
+    implementation 'com.android.support.constraint:constraint-layout:1.0.2'
+    implementation('com.android.volley:volley:1.0.0') {
+        exclude group: 'com.android.support'
+    }
+    //下载
+    implementation 'com.liulishuo.filedownloader:library:1.6.5'
+    compileOnly "com.squareup.okhttp3:logging-interceptor:$rootProject.ext.okhttpVersion"
+    implementation 'com.flyco.roundview:FlycoRoundView_Lib:1.1.4'
+    //    compile 'com.iyuba.module:imooclib:1.0.6'
+//    implementation 'com.iflytek:iseSdk:2.0.1018.1013'
+
+    implementation "com.github.bumptech.glide:glide:$rootProject.ext.glideVersion"
+    implementation 'org.greenrobot:eventbus:3.0.0'
+    implementation project(':mob')
+}

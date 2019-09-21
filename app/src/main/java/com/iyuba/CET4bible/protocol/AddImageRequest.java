@@ -12,7 +12,7 @@ import org.json.JSONObject;
 public class AddImageRequest extends BaseJSONRequest {
     public AddImageRequest(String type) {
 
-        String url = "http://dev.iyuba.com/getScrollPicApi.jsp?type=class." + type;
+        String url = "http://dev.iyuba.cn/getScrollPicApi.jsp?type=class." + type;
         setAbsoluteURI(url);
         Log.e("AddImageRequest", url);
     }

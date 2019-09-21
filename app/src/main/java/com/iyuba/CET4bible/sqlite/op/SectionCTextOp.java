@@ -34,6 +34,7 @@ public class SectionCTextOp extends DatabaseService {
     public static final String SENTENCE = "sentence";
     public static final String QWORD = "qwords";
 
+
     public SectionCTextOp(Context context) {
         super(context);
     }
@@ -43,7 +44,9 @@ public class SectionCTextOp extends DatabaseService {
         Cursor cursor = importDatabase.openDatabase().rawQuery(
                 "select " + TESTTIME + "," + NUMBER + "," + NUMBERINDEX + ","
                         + TIMING1 + "," + TIMING2 + "," + TIMING3 + ","
-                        + SENTENCE + "," + QWORD + " from " + getTableName()
+                        + SENTENCE + "," + QWORD
+
+                        + " from " + getTableName()
                         + " where " + TESTTIME + "= ?", new String[]{year});
         for (cursor.moveToFirst(); !cursor.isAfterLast(); cursor.moveToNext()) {
             texts.add(fillIn(cursor));
@@ -69,6 +72,7 @@ public class SectionCTextOp extends DatabaseService {
         text.time3 = cursor.getString(5);
         text.sentence = cursor.getString(6);
         text.qwords = cursor.getString(7);
+
         return text;
     }
 }

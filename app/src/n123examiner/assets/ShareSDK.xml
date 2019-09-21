@@ -55,14 +55,22 @@
     <!--<ShareSDK AppKey="b2d304edfd22" /> &lt;!&ndash; 修改成你在sharesdk后台注册的应用的appkey"&ndash;&gt;-->
 
     <!-- ShareByAppClient标识是否使用微博客户端分享，默认是false -->
-    <SinaWeibo
-        Id="1"
-        SortId="1"
-        AppKey="864956084"
-        AppSecret="bc70cae2c4c534ec2a9558ff97c3f12a"
-        RedirectUrl="http://www.sharesdk.cn"
-        ShareByAppClient="true"
-        Enable="false" />
+    <!--<SinaWeibo-->
+        <!--Id="1"-->
+        <!--SortId="1"-->
+        <!--AppKey="864956084"-->
+        <!--AppSecret="bc70cae2c4c534ec2a9558ff97c3f12a"-->
+        <!--RedirectUrl="http://www.sharesdk.cn"-->
+        <!--ShareByAppClient="true"-->
+        <!--Enable="false" />-->
+	<SinaWeibo
+		Id="1"
+		SortId="1"
+		AppKey="3661139667"
+		AppSecret="48de154ab35ac4f4147c949e7b4720d9"
+		RedirectUrl="http://www.iyuba.com"
+		ShareByAppClient="false"
+		Enable="true" />
 
     <TencentWeibo
         Id="2" 

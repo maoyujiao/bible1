@@ -34,14 +34,24 @@ import java.util.List;
 public class FavoriteTranslateAdapter extends BaseRecyclerViewAdapter {
     private final static int[] colorful = new int[]{0xffe14438, 0xff826cab,
             0xff62aa46, 0xffe38f2b, 0xff4fbdf0};
+
+    private final static int[] drawables = new int[]{
+            R.drawable.icon1,
+            R.drawable.icon2,
+            R.drawable.icon3,
+            R.drawable.icon4,
+            R.drawable.icon5,
+            R.drawable.icon6};
     private final ListVideoAdRenderer youdaoAdRenders;
 
     private List mList;
     private boolean isWrite = false;
+    private boolean isHome = false;
 
-    public FavoriteTranslateAdapter(Context mContext, List list) {
+    public FavoriteTranslateAdapter(Context mContext, List list , Boolean isHome ) {
         super(mContext);
         this.mList = list;
+        this.isHome = isHome;
 
         final VideoStrategy videoStrategy = YouDaoAd.getYouDaoOptions()
                 .getDefaultVideoStrategy();
@@ -115,18 +125,18 @@ public class FavoriteTranslateAdapter extends BaseRecyclerViewAdapter {
         curViewHolder.item_bg.setVisibility(View.VISIBLE);
         String month = write.num.substring(4, 6);
         if (month.equals("12")) {
-            curViewHolder.item_bg.setBg(R.drawable.winter);
             curViewHolder.item_bg.setText(write.num.substring(0, 4) + "年");
             curViewHolder.item_bg.setSubText("12月");
         } else if (month.equals("06")) {
-            curViewHolder.item_bg.setBg(R.drawable.summer);
             curViewHolder.item_bg.setText(write.num.substring(0, 4) + "年");
             curViewHolder.item_bg.setSubText("6月");
         } else {
-            curViewHolder.item_bg.setBg(R.drawable.winter);
             curViewHolder.item_bg.setText(write.num.substring(0, 4) + "年");
             curViewHolder.item_bg.setSubText("1月");
         }
+
+        curViewHolder.item_bg.setBg(drawables[position%6]);
+
         curViewHolder.title.setText(write.name);
         StringBuffer sb = new StringBuffer();
         if (!TextUtils.isEmpty(write.title) && !TextUtils.isEmpty(write.catename)) {
@@ -152,6 +162,9 @@ public class FavoriteTranslateAdapter extends BaseRecyclerViewAdapter {
 
     @Override
     public int getItemCount() {
+        if (isHome){
+            return 4 ;
+        }
         return mList.size();
     }
 

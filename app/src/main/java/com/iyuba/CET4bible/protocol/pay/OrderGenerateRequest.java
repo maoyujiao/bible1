@@ -14,8 +14,8 @@ import java.text.SimpleDateFormat;
 
 public class OrderGenerateRequest extends BaseJsonObjectRequest {
     private static final String TAG = OrderGenerateRequest.class.getSimpleName();
-    private static final String oldApi = "http://vip.iyuba.com/chargeapi.jsp?";
-    private static final String newApi = "http://vip.iyuba.com/chargeapinew.jsp?";
+    private static final String oldApi = "http://vip.iyuba.cn/chargeapi.jsp?";
+    private static final String newApi = "http://vip.iyuba.cn/chargeapinew.jsp?";
     public String result;
     public String message;
     public String orderInfo;

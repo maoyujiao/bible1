@@ -2,12 +2,12 @@
           xmlns:tools="http://schemas.android.com/tools"
           package="com.iyuba.CET4bible">
 
-    <supports-screens
-        android:anyDensity="true"
-        android:largeScreens="true"
-        android:normalScreens="true"
-        android:resizeable="true"
-        android:smallScreens="true"/>
+    <!--<supports-screens-->
+        <!--android:anyDensity="true"-->
+        <!--android:largeScreens="true"-->
+        <!--android:normalScreens="true"-->
+        <!--android:resizeable="true"-->
+        <!--android:smallScreens="true"/>-->
 
     <uses-permission android:name="android.permission.RECORD_AUDIO"/>
     <uses-permission android:name="android.permission.INTERNET"/>
@@ -70,7 +70,8 @@
         android:icon="@drawable/icon"
         android:label="@string/app_name"
         android:theme="@style/ThemeDefault"
-        tools:replace="android:theme,android:name">
+        tools:replace="android:theme,android:name"
+        android:resizeableActivity="true">
 
         <!--android:theme="@style/Theme.AppCompat.Light.NoActionBar"-->
         <activity
@@ -95,9 +96,19 @@
             android:screenOrientation="portrait"/>
 
         <!-- =============  嗒萌广告  ========== -->
+        <!--<provider-->
+            <!--android:name="android.support.v4.content.FileProvider"-->
+            <!--android:authorities="${applicationId}.addam.apkdn.fileprovider"-->
+            <!--android:exported="false"-->
+            <!--android:grantUriPermissions="true">-->
+            <!--<meta-data-->
+                <!--android:name="android.support.FILE_PROVIDER_PATHS"-->
+                <!--android:resource="@xml/file_paths"/>-->
+        <!--</provider>-->
+
         <provider
             android:name="android.support.v4.content.FileProvider"
-            android:authorities="${applicationId}.addam.apkdn.fileprovider"
+            android:authorities="${applicationId}.fileprovider"
             android:exported="false"
             android:grantUriPermissions="true">
             <meta-data
@@ -233,6 +244,10 @@
             android:configChanges="keyboardHidden|orientation|locale"
             android:screenOrientation="portrait"/>
         <activity
+            android:name="com.iyuba.activity.sign.SignActivity"
+            android:configChanges="keyboardHidden|orientation|locale"
+            android:screenOrientation="portrait"/>
+        <activity
             android:name="com.iyuba.CET4bible.activity.BlogActivity"
             android:configChanges="keyboardHidden|orientation|locale"
             android:screenOrientation="portrait"/>
@@ -251,10 +266,12 @@
         <activity
             android:name="com.iyuba.CET4bible.listening.SectionA"
             android:configChanges="keyboardHidden|orientation|locale"
+            android:launchMode="singleTop"
             android:screenOrientation="portrait"/>
         <activity
             android:name="com.iyuba.CET4bible.listening.ListenSubmit"
             android:configChanges="keyboardHidden|orientation|locale"
+            android:launchMode="singleTop"
             android:screenOrientation="portrait"/>
         <activity
             android:name="com.iyuba.CET4bible.listening.SectionC"
@@ -444,6 +461,14 @@
             android:screenOrientation="portrait"/>
         <activity
             android:name="com.iyuba.core.teacher.activity.TeacherBaseInfo"
+            android:configChanges="keyboardHidden|orientation|locale"
+            android:screenOrientation="portrait"/>
+        <activity
+            android:name="com.iyuba.core.teacher.activity.TeacherBaseInfo2"
+            android:configChanges="keyboardHidden|orientation|locale"
+            android:screenOrientation="portrait"/>
+        <activity
+            android:name="com.iyuba.core.teacher.activity.TeacherBaseInfo3"
             android:configChanges="keyboardHidden|orientation|locale"
             android:screenOrientation="portrait"/>
         <activity
@@ -695,10 +720,7 @@
         <activity
             android:name=".listening.ErrorFeedbackActivity"
             android:screenOrientation="portrait"/>
-        <activity
-            android:name="com.iyuba.dailybonus.SignActivity"
-            android:screenOrientation="portrait">
-        </activity>
+
         <activity
             android:name="com.iyuba.trainingcamp.activity.GoldActivity"
             android:screenOrientation="portrait">
@@ -755,6 +777,11 @@
             android:name="com.iyuba.trainingcamp.activity.GoldShareActivity"
             android:screenOrientation="portrait">
         </activity>
+        <activity android:name="wordtest.WordDetailActiivty" />
+        <activity android:name="wordtest.WordListActivity" />
+        <activity android:name="wordtest.WordStepActivity" />
+        <activity android:name="wordtest.WordTestActivity" />
+        <activity android:name=".listening.DubbingPlayListActivity" />
 
 
         <!-- Mqtt Service -->

@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="60dip"
+    android:gravity="center_vertical"
+    android:padding="5dip" >
+
+    <ImageView
+        android:id="@+id/mutualattentionlist_portrait"
+        android:layout_width="50dip"
+        android:layout_height="50dip"
+        android:layout_marginLeft="5dip"
+        android:layout_marginRight="15dip"
+        android:scaleType="centerCrop"
+        android:src="@drawable/defaultavatar" />
+
+    <TextView
+        android:id="@+id/mutualattentionlist_username"
+        android:layout_width="wrap_content"
+        android:layout_height="50dip"
+        android:ellipsize="end"
+        android:gravity="center_vertical"
+        android:singleLine="true"
+        android:text="爱语吧"
+        android:textColor="#000000"
+        android:textSize="17sp" />
+
+</LinearLayout>

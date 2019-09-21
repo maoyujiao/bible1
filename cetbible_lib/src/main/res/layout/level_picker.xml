@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#80000000"
+    android:orientation="vertical" >
+
+    <RelativeLayout
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent" >
+
+        <RelativeLayout
+            android:layout_width="fill_parent"
+            android:layout_height="50dp"
+            android:background="@drawable/shape_setting_panel_background" 
+            android:layout_above="@+id/rl">
+
+            <Button
+                android:id="@+id/lp_cancel"
+                android:layout_width="70dp"
+                android:layout_height="50dp"
+                android:layout_alignParentLeft="true"
+                android:background="@drawable/shape_setting_panel_background"
+                android:text="@string/cancel"
+                android:textColor="@color/black"
+                android:textSize="20sp" />
+
+            <Button
+                android:id="@+id/lp_sure"
+                android:layout_width="70dp"
+                android:layout_height="50dp"
+                android:layout_alignParentRight="true"
+                android:background="@drawable/shape_setting_panel_background"
+                android:text="@string/alert_btn_ok"
+                android:textColor="@color/black"
+                android:textSize="20sp" />
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:id="@+id/rl"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:background="@drawable/shape_setting_panel_background" >
+
+            <com.iyuba.core.me.widget.PickerView
+                android:id="@+id/level_pk"
+                android:layout_width="fill_parent"
+                android:layout_height="200dp"
+                android:layout_gravity="center_horizontal" />
+        </RelativeLayout>
+    </RelativeLayout>
+
+</LinearLayout>

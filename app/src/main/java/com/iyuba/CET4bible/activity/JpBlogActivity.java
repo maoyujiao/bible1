@@ -1,25 +1,18 @@
 package com.iyuba.CET4bible.activity;
 
-import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
 import android.support.annotation.Nullable;
 import android.support.v7.widget.RecyclerView;
-import android.text.Html;
 import android.text.Spanned;
 import android.text.TextUtils;
-import android.util.DisplayMetrics;
 import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.bumptech.glide.Glide;
-import com.bumptech.glide.load.resource.drawable.GlideDrawable;
-import com.bumptech.glide.request.animation.GlideAnimation;
-import com.bumptech.glide.request.target.SimpleTarget;
 import com.iyuba.CET4bible.R;
 import com.iyuba.CET4bible.protocol.StudyRecordInfo;
 import com.iyuba.CET4bible.protocol.UpdateStudyRecordRequestNew;
@@ -30,7 +23,6 @@ import com.iyuba.CET4bible.sqlite.op.BlogOp;
 import com.iyuba.CET4bible.util.AdBannerUtil;
 import com.iyuba.CET4bible.util.Share;
 import com.iyuba.base.BaseActivity;
-import com.iyuba.base.util.L;
 import com.iyuba.configation.Constant;
 import com.iyuba.core.activity.CrashApplication;
 import com.iyuba.core.http.Http;
@@ -41,13 +33,11 @@ import com.iyuba.core.protocol.BaseHttpResponse;
 import com.iyuba.core.util.ExeProtocol;
 import com.iyuba.core.util.GetDeviceInfo;
 import com.iyuba.core.util.TouristUtil;
-import com.iyuba.core.widget.ContextMenu;
 import com.iyuba.core.widget.dialog.CustomDialog;
 import com.iyuba.core.widget.dialog.CustomToast;
 import com.iyuba.core.widget.dialog.WaittingDialog;
 
 import org.sufficientlysecure.htmltextview.HtmlHttpImageGetter;
-import org.sufficientlysecure.htmltextview.HtmlTextView;
 
 import okhttp3.Call;
 
@@ -57,7 +47,6 @@ public class JpBlogActivity extends BaseActivity {
     private TextView title, createtime, Title;
     private org.sufficientlysecure.htmltextview.HtmlTextView content;
     private Blog blog;
-    private ContextMenu contextMenu;
     private BlogOp blogOp;
     private String message;
     private CustomDialog waitting;
@@ -72,18 +61,6 @@ public class JpBlogActivity extends BaseActivity {
             super.handleMessage(msg);
             switch (msg.what) {
                 case 1:
-//                    ExeProtocol.exe(new UpdateBlogReadTimesRequest(blog.getBlogid()),
-//                            new ProtocolResponse() {
-//                                @Override
-//                                public void finish(BaseHttpResponse bhr) {
-//
-//                                }
-//
-//                                @Override
-//                                public void error() {
-//
-//                                }
-//                            });
                     break;
                 case 2:
                     ExeProtocol.exe(new JpBlogContentRequest(blog.id + ""), new ProtocolResponse() {
@@ -108,56 +85,12 @@ public class JpBlogActivity extends BaseActivity {
                     title.setText(blog.title);
                     createtime.setText(blog.createtime);
                     Log.e("---", message);
-//                    content.setHtml(message , new HtmlHttpImageGetter(content, null, true));
                     content.setHtml(message,new HtmlHttpImageGetter(content,null,true));
                     content.refreshDrawableState();
-//
-//                    thread = new Thread() {
-//                        @Override
-//                        public void run() {
-//                            super.run();
-//                            spanned = Html.fromHtml(message, new Html.ImageGetter() {
-//                                @Override
-//                                public Drawable getDrawable(String source) {
-//                                    InputStream is = null;
-//                                    try {
-//                                        is = (InputStream) new URL(source).getContent();
-//                                        Drawable d = Drawable.createFromStream(is, "src");
-//                                        int intrinsicWidth = d.getIntrinsicWidth();
-//                                        int intrinsicHeight = d.getIntrinsicHeight();
-//                                        Log.e("intrinsicWidth", "" + intrinsicWidth);
-//                                        Log.e("dIntrinsicHeight", "" + intrinsicHeight);
-//                                        DisplayMetrics dm = new DisplayMetrics();
-//                                        // 获取屏幕信息 用于设置图片宽度
-//                                        getWindowManager().getDefaultDisplay().getMetrics(dm);
-//                                        final int screenWidth = dm.widthPixels;
-//                                        int drawWidth = (int) (0.95f * screenWidth);
-//                                        float rate = drawWidth / intrinsicWidth;
-//                                        Log.e("rate", "" + rate);
-//                                        int drawHeight = (int) (rate * intrinsicHeight);
-//                                        Log.e("drawWidth", "" + drawWidth);
-//                                        Log.e("drawHeight", "" + drawHeight);
-//                                        d.setBounds(0, 0, drawWidth, drawHeight);
-//                                        is.close();
-//                                        return d;
-//                                    } catch (Exception e) {
-//                                        e.printStackTrace();
-//                                        return null;
-//                                    }
-//                                }
-//                            }, null);
-//                            handler.sendEmptyMessageDelayed(111, 500);
-//                        }
-//                    };
-//                    thread.start();
                     break;
                 case 5:
                     waitting.dismiss();
                     CustomToast.showToast(mContext, "加载失败");
-                    break;
-                case 111:
-                    L.e("sssssssss ===== " + spanned.toString());
-//                    content.setText(spanned);
                     break;
                 default:
                     break;
@@ -171,7 +104,6 @@ public class JpBlogActivity extends BaseActivity {
     private GetDeviceInfo deviceInfo;
     private long time;
     private AdBannerUtil adBannerUtil;
-
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -191,7 +123,6 @@ public class JpBlogActivity extends BaseActivity {
         });
         Title = findViewById(R.id.title_info);
         Title.setText("资讯");
-        contextMenu = findViewById(R.id.context_menu);
         moreBtn = findViewById(R.id.more);
         moreBtn.setClickable(false);
 //        moreBtn.setOnClickListener(new View.OnClickListener() {
@@ -233,7 +164,6 @@ public class JpBlogActivity extends BaseActivity {
             });
         }
         init();
-
         blog = blogOp.selectData(blog.id);
 
         if (TextUtils.isEmpty(blog.essay)) {
@@ -243,7 +173,6 @@ public class JpBlogActivity extends BaseActivity {
             message = blog.essay;
             handler.sendEmptyMessage(3);
         }
-
 
         deviceInfo = new GetDeviceInfo(mContext);
         studyRecordInfo = new StudyRecordInfo();
@@ -259,10 +188,9 @@ public class JpBlogActivity extends BaseActivity {
         studyRecordInfo.TestNumber = blog.id + "";
         time = System.currentTimeMillis();
 
-
         adBannerUtil = new AdBannerUtil(mContext);
-        adBannerUtil.setView(findViewById(R.id.youdao_ad), (ImageView) findViewById(R.id.photoImage));
-        adBannerUtil.setAddamView(findViewById(R.id.ad_addam));
+        adBannerUtil.setView(findViewById(R.id.youdao_ad), (ImageView) findViewById(R.id.photoImage), (TextView) findViewById(R.id.close));
+//        adBannerUtil.setAddamView(findViewById(R.id.ad_addam));
         adBannerUtil.setMiaozeView((ViewGroup) findViewById(R.id.adMiaozeParent));
         adBannerUtil.loadAd();
     }
@@ -278,7 +206,7 @@ public class JpBlogActivity extends BaseActivity {
         Share share = new Share(getApplicationContext());
         share.setListener(getApplicationContext(), blog.id + "");
         share.prepareMessage(blog.title, "爱语吧 " + blog.title,
-                "http://m.iyuba.com/news.html?id=" + blog.id + "&type=cet" + Constant.APP_CONSTANT.TYPE());
+                "http://m.iyuba.cn/news.html?id=" + blog.id + "&type=cet" + Constant.APP_CONSTANT.TYPE());
     }
 
     @Override

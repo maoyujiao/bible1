@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@color/white"
+    android:orientation="horizontal">
+
+    <ImageView
+        android:id="@+id/iv_ad"
+        android:layout_width="99dp"
+        android:layout_height="64dp"
+        android:layout_marginBottom="6dp"
+        android:layout_marginLeft="12dp"
+        android:layout_marginRight="8dp"
+        android:layout_marginTop="6dp"
+        android:scaleType="fitXY"
+        android:visibility="gone" />
+
+    <com.iyuba.abilitytest.widget.CustomBgView
+        android:id="@+id/view_season"
+        android:layout_width="99dp"
+        android:layout_height="64dp"
+        android:layout_marginBottom="6dp"
+        android:layout_marginLeft="12dp"
+        android:layout_marginRight="8dp"
+        android:layout_marginTop="6dp" />
+
+    <com.flyco.roundview.RoundTextView
+        android:id="@+id/rtv_title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="16dp"
+        android:layout_marginRight="30dp"
+        android:layout_marginTop="4dp"
+        android:background="@color/white"
+        android:text="剑桥雅思1测试题"
+        android:textColor="@color/text_blue_color"
+        android:textSize="16sp"
+        app:rv_backgroundPressColor="@color/text_bluenor_color"
+        app:rv_cornerRadius="18dp"
+        app:rv_textPressColor="@color/red" />
+</LinearLayout>

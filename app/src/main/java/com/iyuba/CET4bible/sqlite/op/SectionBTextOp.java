@@ -1,5 +1,5 @@
 /*
- * 文件名 
+ * 文件名
  * 包含类名列表
  * 版本信息，版本号
  * 创建日期
@@ -21,7 +21,7 @@ import java.util.ArrayList;
  * 类名
  *
  * @author 作者 <br/>
- *         实现的主要功能。 创建日期 修改者，修改日期，修改内容。
+ * 实现的主要功能。 创建日期 修改者，修改日期，修改内容。
  */
 public class SectionBTextOp extends DatabaseService {
     public static final String TABLE_NAME = "textb" + Constant.APP_CONSTANT.TYPE();
@@ -40,7 +40,10 @@ public class SectionBTextOp extends DatabaseService {
         ArrayList<CetText> texts = new ArrayList<CetText>();
         Cursor cursor = importDatabase.openDatabase().rawQuery(
                 "select " + TESTTIME + "," + NUMBER + "," + NUMBERINDEX + ","
-                        + TIMING + "," + SENTENCE + "," + SOUND + " from "
+                        + TIMING + "," + SENTENCE + "," + SOUND
+
+
+                        + " from "
                         + getTableName() + " where " + TESTTIME + "= ?",
                 new String[]{year});
         for (cursor.moveToFirst(); !cursor.isAfterLast(); cursor.moveToNext()) {
@@ -57,7 +60,9 @@ public class SectionBTextOp extends DatabaseService {
         ArrayList<CetText> texts = new ArrayList<CetText>();
         Cursor cursor = importDatabase.openDatabase().rawQuery(
                 "select " + TESTTIME + "," + NUMBER + "," + NUMBERINDEX + ","
-                        + TIMING + "," + SENTENCE + "," + SOUND  + " from "
+                        + TIMING + "," + SENTENCE + "," + SOUND
+
+                        + " from "
                         + getTableName() + " where " + TESTTIME + "= ? and "
                         + NUMBER + "= ?", new String[]{year, id});
         for (cursor.moveToFirst(); !cursor.isAfterLast(); cursor.moveToNext()) {
@@ -80,6 +85,7 @@ public class SectionBTextOp extends DatabaseService {
         text.index = cursor.getString(2);
         text.time = cursor.getString(3);
         text.sentence = cursor.getString(4);
+
         return text;
     }
 }

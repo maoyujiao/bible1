@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/relativeLayout_title_and_back"
+    android:layout_width="fill_parent"
+    android:layout_height="50dp"
+    android:background="@color/app_color">
+
+    <ImageView
+        android:id="@+id/iv_title_back"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:layout_alignParentLeft="true"
+        android:layout_centerVertical="true"
+        android:src="@drawable/lib_back_button" />
+
+    <!--android:shadowColor="#ff000000"
+        android:shadowDx="3.0"
+        android:shadowDy="3.0"
+        android:shadowRadius="3.0"-->
+    <TextView
+        android:layout_marginLeft="50dp"
+        android:layout_marginRight="50dp"
+        android:id="@+id/tv_nav_title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:textColor="#ffffff" />
+
+    <!--<com.andexert.library.RippleView-->
+        <!--android:layout_width="70dp"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:layout_alignParentRight="true">-->
+
+        <!--<TextView-->
+            <!--android:id="@+id/tv_web_more"-->
+            <!--android:layout_width="70dp"-->
+            <!--android:layout_height="45dp"-->
+            <!--android:layout_alignParentRight="true"-->
+            <!--android:gravity="center"-->
+            <!--android:text="更多"-->
+            <!--android:textColor="@color/white"-->
+            <!--android:visibility="gone" />-->
+    <!--</com.andexert.library.RippleView>-->
+
+    <!--<com.andexert.library.RippleView-->
+        <!--android:layout_width="50dp"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:layout_alignParentRight="true"-->
+        <!--android:layout_centerVertical="true">-->
+        <!--&lt;!&ndash;收藏&ndash;&gt;-->
+        <!--<ImageButton-->
+            <!--android:id="@+id/ibtn_save"-->
+            <!--android:layout_width="30dp"-->
+            <!--android:layout_height="30dp"-->
+            <!--android:background="@color/transparent"-->
+            <!--android:textColor="@color/transparent"-->
+            <!--android:visibility="gone" />-->
+    <!--</com.andexert.library.RippleView>-->
+
+</RelativeLayout>
+

@@ -28,6 +28,7 @@ import com.iyuba.core.http.HttpCallback;
 import com.iyuba.core.manager.AccountManager;
 import com.iyuba.core.util.GetDeviceInfo;
 import com.iyuba.core.util.TouristUtil;
+import com.iyuba.core.widget.WordCard;
 
 import java.util.List;
 

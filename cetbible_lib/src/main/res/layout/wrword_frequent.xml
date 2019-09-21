@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical" >
+    
+<RelativeLayout
+        android:layout_width="fill_parent"
+        android:layout_height="50dp" >
+
+        <RelativeLayout
+            android:id="@+id/r11"
+            android:layout_width="160dp"
+            android:layout_height="50dp"
+            android:background="@drawable/content_bg" >
+
+            <TextView
+                android:id="@+id/lesson"
+                android:layout_width="fill_parent"
+                android:layout_height="fill_parent"
+                android:gravity="center"
+                android:text="Lesson"
+                android:textSize="13sp" />
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:id="@+id/r12"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:layout_toRightOf="@+id/r11"
+            android:background="@drawable/content_bg" >
+
+            <TextView
+                android:id="@+id/lessonId"
+                android:layout_width="fill_parent"
+                android:layout_height="fill_parent"
+                android:gravity="center"
+                android:text="篇号"
+                android:textSize="13sp" />
+        </RelativeLayout>
+        
+        <RelativeLayout
+            android:id="@+id/r13"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:layout_toRightOf="@+id/r12"
+            android:background="@drawable/content_bg" >
+
+            <TextView
+                android:id="@+id/test_num"
+                android:layout_width="fill_parent"
+                android:layout_height="fill_parent"
+                android:gravity="center"
+                android:text="ID"
+                android:textSize="13sp" />
+        </RelativeLayout>
+        
+        <RelativeLayout
+            android:id="@+id/r14"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:layout_toRightOf="@+id/r13"
+            android:background="@drawable/content_bg" >
+
+            <TextView
+                android:id="@+id/test_wd"
+                android:layout_width="fill_parent"
+                android:layout_height="fill_parent"
+                android:gravity="center"
+                android:text="单词数"
+                android:textSize="13sp" />
+        </RelativeLayout>
+        
+        <RelativeLayout
+            android:id="@+id/r15"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:layout_toRightOf="@+id/r14"
+            android:background="@drawable/content_bg" >
+
+            <TextView
+                android:id="@+id/time"
+                android:layout_width="fill_parent"
+                android:layout_height="fill_parent"
+                android:gravity="center"
+                android:text="时间"
+                android:textSize="13sp" />
+        </RelativeLayout>
+
+        
+    </RelativeLayout>
+</LinearLayout>

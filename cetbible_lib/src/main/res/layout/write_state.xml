@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/backlayout"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/background_color"
+    android:orientation="vertical">
+
+    <RelativeLayout
+        android:id="@+id/relativeLayout_title_and_back"
+        android:layout_width="fill_parent"
+        android:layout_height="50dp"
+        android:background="?attr/colorPrimary">
+
+        <Button
+            android:id="@+id/button_back"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:layout_alignParentLeft="true"
+            android:layout_centerVertical="true"
+            android:background="@drawable/lib_back_button" />
+
+        <TextView
+            android:id="@+id/play_title_info"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:text="@string/me_state_text"
+            android:textAppearance="?android:attr/textAppearanceLarge"
+            android:textColor="@color/base_white" />
+    </RelativeLayout>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="0.5dp"
+        android:background="@color/divider_line" />
+
+    <RelativeLayout
+        android:layout_width="wrap_content"
+        android:layout_height="160dp"
+        android:layout_margin="20dp">
+
+        <EditText
+            android:id="@+id/content"
+            android:layout_width="fill_parent"
+            android:layout_height="160dp"
+            android:background="@drawable/border"
+            android:gravity="top"
+            android:hint="@string/hint1"
+            android:padding="10dp"
+            android:textColor="#000000"
+            android:textCursorDrawable="@null"
+            android:textSize="14sp" />
+
+        <TextView
+            android:id="@+id/fix"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:layout_alignParentRight="true"
+            android:padding="10dp"
+            android:textColor="@color/gray"
+            android:textSize="14sp" />
+
+        <ImageView
+            android:id="@+id/face"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:layout_alignParentLeft="true"
+            android:padding="10dp"
+            android:src="@drawable/emotion" />
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:id="@+id/rl_show"
+        android:layout_width="fill_parent"
+        android:layout_height="200dp"
+        android:background="@drawable/txt_msg_bg"
+        android:orientation="horizontal"
+        android:visibility="gone">
+
+        <include
+            layout="@layout/emotion"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content" />
+    </RelativeLayout>
+
+    <Button
+        android:id="@+id/submit"
+        android:layout_width="100dp"
+        android:layout_height="40dp"
+        android:layout_gravity="center_horizontal"
+        android:background="@drawable/button_background"
+        android:text="@string/send"
+        android:textColor="#ffffff"
+        android:textSize="18sp" />
+
+</LinearLayout>

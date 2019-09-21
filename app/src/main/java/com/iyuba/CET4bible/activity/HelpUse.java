@@ -8,9 +8,8 @@ import android.support.v4.view.ViewPager;
 import android.support.v4.view.ViewPager.OnPageChangeListener;
 import android.view.View;
 import android.view.View.OnClickListener;
-import android.view.Window;
 import android.view.WindowManager;
-import android.widget.Button;
+import android.widget.TextView;
 
 import com.iyuba.CET4bible.R;
 import com.iyuba.CET4bible.viewpager.HelpFragmentAdapter;
@@ -27,7 +26,7 @@ public class HelpUse extends BasisActivity {
     private ViewPager viewPager;
     private CirclePageIndicator pi;
     private String source;
-    private Button close;
+    private TextView close;
     Handler handler = new Handler() {
         @Override
         public void handleMessage(Message msg) {
@@ -80,6 +79,16 @@ public class HelpUse extends BasisActivity {
             @Override
             public void onPageSelected(int arg0) {
                 pi.setCurrentItem(arg0);
+                switch (arg0) {
+                    case 3: // 停止变更
+                        if (viewPager.getCurrentItem() == 3 ) {
+                            handler.sendEmptyMessage(1);
+                        } else {
+                            handler.sendEmptyMessage(2);
+                        }
+                        break;
+                    default:break;
+                }
             }
 
             @Override
@@ -88,16 +97,7 @@ public class HelpUse extends BasisActivity {
 
             @Override
             public void onPageScrollStateChanged(int arg0) {
-                switch (arg0) {
-                    case 0: // 停止变更
-                        if (viewPager.getCurrentItem() == 2) {
-                            handler.sendEmptyMessage(1);
-                        } else {
-                            handler.sendEmptyMessage(2);
-                        }
-                        break;
-                    default:break;
-                }
+
             }
         });
         viewPager.setAdapter(new HelpFragmentAdapter(

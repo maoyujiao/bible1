@@ -60,13 +60,14 @@ public class WriteExampleFragment extends Fragment implements TextPageSelectText
     };
 
 
-    public WriteExampleFragment(Context mContext) {
-        this.mContext = mContext;
-    }
+
+
+    public WriteExampleFragment() {}
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
+        mContext = container.getContext() ;
         root = inflater.inflate(R.layout.write_example, container, false);
         init();
         return root;
@@ -175,7 +176,7 @@ public class WriteExampleFragment extends Fragment implements TextPageSelectText
             });
             confirmDialog.show();
 
-            ClientSession.Instace().asynGetResponse(
+            ClientSession.Instance().asynGetResponse(
                     new DictRequest(selectText), new IResponseReceiver() {
                         @Override
                         public void onResponse(BaseHttpResponse response,
@@ -218,7 +219,7 @@ public class WriteExampleFragment extends Fragment implements TextPageSelectText
     }
 
     public void addNetwordWord(String wordTemp) {
-        ClientSession.Instace().asynGetResponse(
+        ClientSession.Instance().asynGetResponse(
                 new WordUpdateRequest(AccountManager.Instace(mContext).userId,
                         WordUpdateRequest.MODE_INSERT, wordTemp),
                 new IResponseReceiver() {

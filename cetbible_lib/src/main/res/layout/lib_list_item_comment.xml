@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:background="#ffffff"
+    android:padding="8dp" >
+
+    <RelativeLayout
+        android:id="@+id/top_part"
+        android:layout_width="fill_parent"
+        android:layout_height="40dp"
+        android:layout_marginTop="3dp" >
+
+        <ImageView
+            android:id="@+id/user_icon"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:layout_alignParentLeft="true" />
+
+        <RelativeLayout
+            android:layout_width="wrap_content"
+            android:layout_height="40dp"
+            android:layout_toRightOf="@+id/user_icon"
+            android:layout_marginLeft="10dp" >
+
+            <TextView
+                android:id="@+id/user_name"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentTop="true"
+                android:layout_marginTop="4dp"
+                android:text="iyuba"
+                android:textColor="#000000"
+                android:textSize="14sp" />
+
+            <TextView
+                android:id="@+id/comment_info"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentBottom="true"
+                android:layout_marginTop="24dp"
+                android:text="2015-05-03"
+                android:textColor="#898989"
+                android:textSize="10sp" />
+        </RelativeLayout>
+    </RelativeLayout>
+
+
+            <ImageView
+                android:id="@+id/other_contentc"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                 android:layout_alignLeft="@+id/top_part"
+                android:layout_below="@+id/top_part"
+                android:layout_marginTop="22dp"
+                 android:visibility="gone"
+                android:background="@drawable/chatfrom_voice_playing" />
+    
+    <TextView
+        android:id="@+id/comment_disc"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/top_part"
+        android:layout_below="@+id/top_part"
+        android:layout_marginTop="22dp"
+       
+        android:text="爱学习爱英语尽在爱语吧" />
+
+</RelativeLayout>

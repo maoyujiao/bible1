@@ -1,0 +1,54 @@
+<resources>
+
+    <style name="BaseDialog" parent="@android:style/Theme.Dialog">
+        <item name="android:windowBackground">@drawable/bg_dialog</item>
+    </style>
+
+
+    <style name="MyDialogStyle">
+        <item name="android:windowBackground">@android:color/transparent</item>
+        <item name="android:windowFrame">@null</item>
+        <item name="android:windowNoTitle">true</item>
+        <item name="android:windowIsFloating">true</item>
+        <item name="android:windowIsTranslucent">true</item>
+        <item name="android:windowContentOverlay">@null</item>
+        <item name="android:windowAnimationStyle">@android:style/Animation.Dialog</item>
+        <item name="android:backgroundDimEnabled">true</item>
+    </style>
+
+
+    <style name="PayMethodCheckBox" parent="@android:style/Widget.CompoundButton.CheckBox">
+        <item name="android:button">@drawable/paymethod_cb</item>
+        <item name="android:padding">5.0dp</item>
+        <item name="android:maxHeight">10.0dp</item>
+    </style>
+
+    <style name="Dialog" parent="android:style/Theme.Dialog">
+        <item name="android:windowBackground">@color/trainingcamp_transparent</item>
+        <item name="android:windowNoTitle">true</item>
+        <item name="android:windowIsFloating">true</item>
+    </style>
+
+    <style name="DialogText">
+        <item name="android:textColor">#FF000000</item>
+        <item name="android:textSize">12sp</item>
+    </style>
+
+    <style name="DialogText.Title">
+        <item name="android:textSize">16sp</item>
+        <item name="android:textStyle">bold</item>
+    </style>
+
+    <style name="MyCheckBox" parent="@android:style/Widget.CompoundButton.CheckBox">
+        <item name="android:button">@drawable/checkbox</item>
+        <item name="android:paddingLeft">10.0dip</item>
+        <item name="android:maxHeight">15.0dip</item>
+    </style>
+
+    <style name="Theme.AppLauncher" parent="Theme.AppCompat.Light.NoActionBar">
+        <item name="android:windowBackground">@drawable/background</item>
+    </style>
+
+
+
+</resources>

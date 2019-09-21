@@ -11,4 +11,5 @@ public class ImageData extends DataSupport {
     public String pic;
     public String desc1;
     public String name;
+    public String course_id;
 }

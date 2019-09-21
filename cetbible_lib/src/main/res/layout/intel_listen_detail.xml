@@ -1,0 +1,133 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical" >
+
+    <RelativeLayout
+        android:id="@+id/r1"
+        android:layout_width="fill_parent"
+        android:layout_height="100dp"
+        android:background="@drawable/titlebar_yellowcheese_bg" >
+
+        <Button
+            android:id="@+id/button_back"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentTop="true"
+            android:background="@drawable/lib_back_button" />
+
+        <ImageView
+            android:id="@+id/wc"
+            android:layout_width="90dp"
+            android:layout_height="90dp"
+            android:layout_centerVertical="true"
+            android:layout_toRightOf="@+id/button_back"
+            android:src="@drawable/boy" />
+
+        <TextView
+            android:id="@+id/intel_conclusion"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_margin="8dp"
+            android:layout_toRightOf="@+id/wc"
+            android:text="快来看看自己的的学习收获吧！\n努力坚持，再接再厉，加油加油！！"
+            android:textColor="@color/white"
+            android:textSize="12sp" />
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:layout_width="fill_parent"
+        android:layout_height="60dp" >
+
+        <RelativeLayout
+            android:id="@+id/r11"
+            android:layout_width="160dp"
+            android:layout_height="60dp"
+            android:background="@drawable/content_bg" >
+
+            <TextView
+                android:layout_width="fill_parent"
+                android:layout_height="fill_parent"
+                android:gravity="center"
+                android:text="Lesson"
+                android:textColor="@color/app_color"
+                android:textSize="13sp" />
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:id="@+id/r12"
+            android:layout_width="50dp"
+            android:layout_height="60dp"
+            android:layout_toRightOf="@+id/r11"
+            android:background="@drawable/content_bg" >
+
+            <TextView
+                android:layout_width="fill_parent"
+                android:layout_height="fill_parent"
+                android:gravity="center"
+                android:text="篇号"
+                android:textColor="@color/app_color"
+                android:textSize="13sp" />
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:id="@+id/r13"
+            android:layout_width="50dp"
+            android:layout_height="60dp"
+            android:layout_toRightOf="@+id/r12"
+            android:background="@drawable/content_bg" >
+
+            <TextView
+                android:layout_width="fill_parent"
+                android:layout_height="fill_parent"
+                android:gravity="center"
+                android:text="ID"
+                android:textColor="@color/app_color"
+                android:textSize="13sp" />
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:id="@+id/r14"
+            android:layout_width="50dp"
+            android:layout_height="60dp"
+            android:layout_toRightOf="@+id/r13"
+            android:background="@drawable/content_bg" >
+
+            <TextView
+                android:layout_width="fill_parent"
+                android:layout_height="fill_parent"
+                android:gravity="center"
+                android:text="单词数"
+                android:textColor="@color/app_color"
+                android:textSize="13sp" />
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:id="@+id/r15"
+            android:layout_width="50dp"
+            android:layout_height="60dp"
+            android:layout_toRightOf="@+id/r14"
+            android:background="@drawable/content_bg" >
+
+            <TextView
+                android:layout_width="fill_parent"
+                android:layout_height="fill_parent"
+                android:gravity="center"
+                android:text="时间(s)"
+                android:textColor="@color/app_color"
+                android:textSize="13sp" />
+        </RelativeLayout>
+    </RelativeLayout>
+
+    <ListView
+        android:id="@+id/detail_list"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentTop="true" >
+    </ListView>
+
+</LinearLayout>

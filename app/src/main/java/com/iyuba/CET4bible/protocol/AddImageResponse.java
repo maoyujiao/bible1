@@ -35,12 +35,12 @@ public class AddImageResponse extends BaseJSONResponse {
                     imageData.name = jsonObjectData.getString("name");
                     imageData.pic = jsonObjectData.getString("pic");
                     imageData.desc1 = jsonObjectData.getString("desc1");
+                    imageData.course_id = jsonObjectData.getString("id");
                     imageDatas.add(imageData);
                 }
             } else {
             }
         } catch (JSONException e) {
-
             e.printStackTrace();
         }
 

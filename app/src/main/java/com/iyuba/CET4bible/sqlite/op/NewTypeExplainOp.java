@@ -32,7 +32,8 @@ public class NewTypeExplainOp extends DatabaseService {
         for (cursor.moveToFirst(); !cursor.isAfterLast(); cursor.moveToNext()) {
             texts.add(fillIn(cursor));
         }
-        closeDatabase(null);
+        closeDatabase(null,cursor);
+
         if (texts.size() != 0) {
             return texts;
         }
@@ -40,7 +41,6 @@ public class NewTypeExplainOp extends DatabaseService {
     }
 
     private String getTableName() {
-
         return "newtype_explain" + Constant.APP_CONSTANT.TYPE();
     }
 

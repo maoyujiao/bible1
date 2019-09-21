@@ -2,8 +2,17 @@ package com.iyuba.CET4bible.sqlite.db;
 
 import android.content.Context;
 import android.database.Cursor;
+import android.database.sqlite.SQLiteDatabase;
 
 import com.iyuba.CET4bible.sqlite.ImportDatabase;
+import com.iyuba.configation.ConfigManager;
+import com.iyuba.configation.Constant;
+
+import java.util.ArrayList;
+import java.util.List;
+
+import newDB.CetDataBase;
+import newDB.CetRootWord;
 
 
 /**
@@ -35,6 +44,10 @@ public class DatabaseService {
      * @param DatabaseName
      */
     public void closeDatabase(String DatabaseName) {
+    }
+
+    public void closeDatabase(String DatabaseName,Cursor cursor) {
+        cursor.close();
     }
 
     /**
@@ -79,5 +92,8 @@ public class DatabaseService {
      */
     public void close() {
     }
+
+
+
 
 }

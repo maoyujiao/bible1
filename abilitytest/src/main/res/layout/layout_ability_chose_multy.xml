@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginLeft="8dp"
+    android:layout_marginRight="8dp"
+    android:orientation="vertical">
+
+    <CheckBox
+        android:id="@+id/checkBoxA"
+        style="@style/AbilityTestCheckBoxStyle"
+        android:text="A豆" />
+
+    <CheckBox
+        android:id="@+id/checkBoxB"
+        style="@style/AbilityTestCheckBoxStyle"
+        android:text="B豆" />
+
+    <CheckBox
+        android:id="@+id/checkBoxC"
+        style="@style/AbilityTestCheckBoxStyle"
+        android:text="C豆" />
+
+    <CheckBox
+        android:id="@+id/checkBoxD"
+        style="@style/AbilityTestCheckBoxStyle"
+        android:text="D豆" />
+
+    <CheckBox
+        android:id="@+id/checkBoxE"
+        style="@style/AbilityTestCheckBoxStyle"
+        android:text="E豆" />
+</LinearLayout>

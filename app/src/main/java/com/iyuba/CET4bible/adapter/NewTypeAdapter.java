@@ -30,6 +30,7 @@ import com.iyuba.core.setting.SettingConfig;
 import com.iyuba.core.util.NetWorkState;
 import com.iyuba.core.widget.RoundProgressBar;
 import com.iyuba.core.widget.dialog.CustomToast;
+import com.iyuba.trainingcamp.utils.ACache;
 
 import java.io.File;
 import java.util.HashMap;
@@ -205,6 +206,7 @@ public class NewTypeAdapter extends BaseAdapter {
             DownloadFile file;
             for (int i = 0; i < size; i++) {
                 file = DownloadManager.Instance().fileList.get(i);
+                Log.d("diao", file.downLoadAddress);
                 if (file.id.equals(test)) {
                     progresses.put(file.id, curViewHolder.progressBar);
                     Message message = new Message();
@@ -252,6 +254,7 @@ public class NewTypeAdapter extends BaseAdapter {
                     getData(0, test);
                     intent.putExtra("section", "A");
                     intent.putExtra("isNewType", true);
+                    ACache.get(mContext).put("testType","A");
                     intent.putExtra("title", sb.toString());
                     mContext.startActivity(intent);
                 } else if (prepareDownload(test) == 2) {
@@ -272,6 +275,8 @@ public class NewTypeAdapter extends BaseAdapter {
                     getData(1, test);
                     intent.putExtra("section", "B");
                     intent.putExtra("isNewType", true);
+                    ACache.get(mContext).put("testType","B");
+
                     intent.putExtra("title", sb.toString());
                     mContext.startActivity(intent);
                 } else if (prepareDownload(test) == 2) {
@@ -290,6 +295,8 @@ public class NewTypeAdapter extends BaseAdapter {
                 if (prepareDownload(test) == 1) {
                     Intent intent = new Intent(mContext, SectionA.class);
                     intent.putExtra("section", "C");
+                    ACache.get(mContext).put("testType","C");
+
                     intent.putExtra("isNewType", true);
                     intent.putExtra("title", sb.toString());
                     getData(2, test);
@@ -362,10 +369,10 @@ public class NewTypeAdapter extends BaseAdapter {
         downloadFile.fileAppend = ".zip";
         downloadFile.fileName = year;
         if (SettingConfig.Instance().isHighSpeed()) {
-            downloadFile.downLoadAddress = "http://cetsoundsvip.iyuba.com/" + Constant.APP_CONSTANT.TYPE() + "/"
+            downloadFile.downLoadAddress = "http://cetsoundsvip.iyuba.cn/" + Constant.APP_CONSTANT.TYPE() + "/"
                     + year + ".zip";
         } else {
-            downloadFile.downLoadAddress = "http://cetsounds.iyuba.com/" + Constant.APP_CONSTANT.TYPE() + "/"
+            downloadFile.downLoadAddress = "http://cetsounds.iyuba.cn/" + Constant.APP_CONSTANT.TYPE() + "/"
                     + year + ".zip";
         }
         Log.e("TestListAdapter", "downloadAddress>>>>" + downloadFile.downLoadAddress);

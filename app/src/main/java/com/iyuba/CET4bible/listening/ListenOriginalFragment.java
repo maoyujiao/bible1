@@ -58,8 +58,12 @@ public class ListenOriginalFragment extends Fragment {
                     break;
                 case 1:
                     if (getPlayer() != null) {
-                        currParagraph = subtitleSum.getParagraph(mPlayer
-                                .getCurrentPosition() / 1000.0);
+                        try{
+                            currParagraph = subtitleSum.getParagraph(mPlayer
+                                    .getCurrentPosition() / 1000.0);
+                        }catch (Exception e){
+                            e.printStackTrace();
+                        }
                         handler.sendEmptyMessage(0);
                         handler.sendEmptyMessageDelayed(1, 1500);
                     }
@@ -217,23 +221,12 @@ public class ListenOriginalFragment extends Fragment {
                 }
                 L.e("---- ====  - -- -  -  " + sb.toString());
                 st.content = sb.toString();
+                st.testTime = textList.get(i).testTime ;
                 if (textList.get(i).time != null) {
                     st.pointInTime = Integer.parseInt(textList.get(i).time);
                 }
                 subtitleSum.subtitles.add(st);
             }
-            /*sb = new StringBuffer();
-            sb.append("\tQuestion: ");
-			sb.append(ListenDataManager.Instance().answerList
-					.get(ListenDataManager.Instance().curPos).question);
-			sb.append("\n");
-			st = new Subtitle();
-			st.content = sb.toString();
-			String time = textList.get(size - 1).time;
-			if (time != null) {
-				st.pointInTime = Integer.parseInt(time) + 10;
-			}
-			subtitleSum.subtitles.add(st);*/
         }
     }
 }

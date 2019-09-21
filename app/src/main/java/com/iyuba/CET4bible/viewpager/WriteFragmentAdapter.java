@@ -28,7 +28,7 @@ public class WriteFragmentAdapter extends FragmentPagerAdapter {
                 fragment = new WriteQuestionFragment();
                 break;
             case 1:
-                fragment = new WriteExampleFragment(mContext);
+                fragment = new WriteExampleFragment();
                 break;
             case 2:
                 fragment = new WriteCommentFragment();

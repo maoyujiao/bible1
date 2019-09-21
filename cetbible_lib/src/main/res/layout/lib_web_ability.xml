@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/backlayout"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <include
+        android:id="@+id/layout_title"
+        layout="@layout/layout_nav_titlebar" />
+
+    <ProgressBar
+        android:layout_below="@+id/layout_title"
+        style="?android:attr/progressBarStyleHorizontal"
+        android:id="@+id/pb_progress_indictor"
+        android:layout_width="fill_parent"
+        android:layout_height="3dip"
+        android:indeterminateOnly="false"
+        android:max="100"
+        android:progressDrawable="@drawable/layout_progressbar_state"/>
+
+    <WebView
+        android:layout_below="@+id/pb_progress_indictor"
+        android:id="@+id/webView"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" />
+
+    <com.iyuba.core.widget.ContextMenu
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:visibility="gone" />
+
+</RelativeLayout>

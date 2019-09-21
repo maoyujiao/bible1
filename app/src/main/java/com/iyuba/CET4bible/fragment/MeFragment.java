@@ -1,5 +1,5 @@
 /*
- * 文件名 
+ * 文件名
  * 包含类名列表
  * 版本信息，版本号
  * 创建日期
@@ -19,26 +19,28 @@ import android.os.Looper;
 import android.os.Message;
 import android.support.v4.app.Fragment;
 import android.text.SpannableString;
+import android.text.TextUtils;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ImageView;
-import android.widget.PopupWindow;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.blankj.utilcode.util.ToastUtils;
 import com.iyuba.CET4bible.BuildConfig;
 import com.iyuba.CET4bible.activity.About;
 import com.iyuba.CET4bible.activity.SetActivity;
+import com.iyuba.activity.sign.SignActivity;
 import com.iyuba.biblelib.R;
 import com.iyuba.configation.ConfigManager;
 import com.iyuba.configation.Constant;
 import com.iyuba.core.activity.Login;
 import com.iyuba.core.activity.Web;
 import com.iyuba.core.discover.activity.DiscoverForAt;
-import com.iyuba.core.http.Http;
 import com.iyuba.core.listener.ProtocolResponse;
 import com.iyuba.core.manager.AccountManager;
 import com.iyuba.core.manager.SocialDataManager;
@@ -75,17 +77,18 @@ import com.iyuba.core.thread.GitHubImageLoader;
 import com.iyuba.core.util.CheckGrade;
 import com.iyuba.core.util.ExeProtocol;
 import com.iyuba.core.util.Expression;
+import com.iyuba.core.util.ToastUtil;
 import com.iyuba.core.util.TouristUtil;
 import com.iyuba.core.widget.dialog.CustomToast;
-import com.iyuba.dailybonus.DailyBonusUtil;
-import com.iyuba.dailybonus.SignActivity;
-import com.iyuba.headlinelibrary.IHeadlineManager;
-import com.iyuba.headlinelibrary.ui.search.MSearchActivity;
+
+import com.iyuba.headlinelibrary.ui.circle.SpeakCircleActivity;
 import com.iyuba.imooclib.ImoocManager;
 import com.iyuba.module.dl.DLActivity;
 import com.iyuba.module.favor.ui.BasicFavorActivity;
 import com.iyuba.module.intelligence.ui.LearningGoalActivity;
-import com.iyuba.module.movies.ui.movie.MovieActivity;
+import com.iyuba.module.intelligence.ui.WordResultActivity;
+import com.iyuba.module.user.IyuUserManager;
+import com.iyuba.module.user.User;
 import com.umeng.analytics.MobclickAgent;
 
 import java.text.SimpleDateFormat;
@@ -96,9 +99,9 @@ import java.util.Locale;
  * 类名
  *
  * @author 作者 <br/>
- *         实现的主要功能。 创建日期 修改者，修改日期，修改内容。
+ * 实现的主要功能。 创建日期 修改者，修改日期，修改内容。
  */
-public class  MeFragment extends Fragment {
+public class MeFragment extends Fragment {
     private View noLogin, login; // 登录提示面板
     private Button loginBtn, logout;
     private Context mContext;
@@ -109,7 +112,7 @@ public class  MeFragment extends Fragment {
     private View stateView, messageView, vipView;
     private View local, favor, read, back;
     private View attentionView, fansView, notificationView, integralView,
-            discover_rqlist, discover_qnotice, discover_myq, discover_mysub;
+            discover_rqlist, discover_qnotice, discover_myq, discover_mysub ,speak_circle;
     private UserInfo userInfo;
     private View root;
     private boolean showLocal;
@@ -119,6 +122,7 @@ public class  MeFragment extends Fragment {
     private View intel_test_result;
     private View intel_word_result;
     private View study_ranking;
+    private TextView money;
 
     private View tv_sign;
 
@@ -137,9 +141,6 @@ public class  MeFragment extends Fragment {
                 case 0:
                     CustomToast.showToast(mContext, R.string.check_network);
                     break;
-                case 1:
-                    CustomToast.showToast(mContext, R.string.action_fail);
-                    break;
                 case 2:
                     root.findViewById(R.id.newletter).setVisibility(View.VISIBLE);
                     break;
@@ -148,6 +149,7 @@ public class  MeFragment extends Fragment {
                     break;
                 case 4:
                     AccountManager.Instace(mContext).loginOut();
+                    resetLogoutStatus();
                     CustomToast.showToast(mContext, R.string.loginout_success);
                     SettingConfig.Instance().setHighSpeed(false);
                     onResume();
@@ -178,13 +180,24 @@ public class  MeFragment extends Fragment {
             }
         }
     };
+    private View me_top;
+
+    private void resetLogoutStatus() {
+        ImoocManager.appId = Constant.APPID;
+        User user = new User();
+
+        user.vipStatus = "0";
+        user.name = "";
+        user.uid = 0;
+        IyuUserManager.getInstance().setCurrentUser(user);
+    }
+
     private OnClickListener ocl = new OnClickListener() {
 
         @Override
         public void onClick(View arg0) {
             Intent intent;
             int id = arg0.getId();
-            String packageName = mContext.getPackageName();
             if (id == R.id.personalhome) {
                 if (AccountManager.Instace(mContext).checkUserLogin()) {
                     intent = new Intent(mContext, PersonalHome.class);
@@ -198,21 +211,18 @@ public class  MeFragment extends Fragment {
                     startActivity(intent);
                 }
             } else if (id == R.id.me_vip) {
-                if (AccountManager.Instace(mContext).checkUserLogin()) {
-                    intent = new Intent(mContext, VipCenter.class);
-                    startActivity(intent);
-                }
+                intent = new Intent(mContext, VipCenter.class);
+                startActivity(intent);
+
             } else if (id == R.id.me_privilege) {
                 if (AccountManager.Instace(mContext).checkUserLogin()) {
                     if (TouristUtil.isTourist()) {
                         TouristUtil.showTouristHint(mContext);
                         return;
                     }
-
                     intent = new Intent();
                     intent.setClass(mContext, Web.class);
-//                    http://vip.iyuba.com/mycode.jsp?uid=3830618&appid=148&sign=a4fa0c78b161c2f7b6fe91fdab352553
-                    intent.putExtra("url", "http://vip.iyuba.com/mycode.jsp?"
+                    intent.putExtra("url", "http://vip.iyuba.cn/mycode.jsp?"
                             + "uid=" + AccountManager.Instace(mContext).userId
                             + "&appid=" + Constant.APPID
                             + "&sign=" + MD5.getMD5ofStr(AccountManager.Instace(mContext).userId + "iyuba" + Constant.APPID + date));
@@ -225,16 +235,30 @@ public class  MeFragment extends Fragment {
                     startActivity(intent);
                 }
             } else if (id == R.id.me_discover) {
-                intent = new Intent(mContext, DiscoverForAt.class);
-                startActivity(intent);
+                if (AccountManager.Instace(mContext).checkUserLogin()) {
+                    intent = new Intent(mContext, DiscoverForAt.class);
+                    startActivity(intent);
+                } else {
+                    ToastUtils.showShort("请登录正式账号");
+                }
+
             } else if (id == R.id.me_message) {
-                intent = new Intent(mContext, MessageCenter.class);
-                startActivity(intent);
+                if (AccountManager.Instace(mContext).checkUserLogin()) {
+                    intent = new Intent(mContext, MessageCenter.class);
+                    startActivity(intent);
+                } else {
+                    ToastUtils.showShort("请登录正式账号");
+                }
+
             } else if (id == R.id.attention_area) {
-                intent = new Intent(mContext, AttentionCenter.class);
-                intent.putExtra("userid",
-                        AccountManager.Instace(mContext).userId);
-                startActivity(intent);
+                if (AccountManager.Instace(mContext).checkUserLogin()) {
+                    intent = new Intent(mContext, AttentionCenter.class);
+                    intent.putExtra("userid",
+                            AccountManager.Instace(mContext).userId);
+                    startActivity(intent);
+                } else {
+                    ToastUtils.showShort("请登录正式账号");
+                }
             } else if (id == R.id.fans_area) {
                 intent = new Intent(mContext, FansCenter.class);
                 intent.putExtra("userid",
@@ -246,31 +270,65 @@ public class  MeFragment extends Fragment {
                         AccountManager.Instace(mContext).userId);
                 startActivity(intent);
             } else if (id == R.id.Integral) {
-                intent = new Intent(mContext, Web.class);
-                intent.putExtra("title", "积分明细");
-                intent.putExtra("url",
-                        "http://api.iyuba.com/credits/useractionrecordmobileList1.jsp?uid="
-                                + AccountManager.Instace(mContext).userId);
-                startActivity(intent);
+                if(AccountManager.Instace(mContext).checkUserLogin()) {
+
+                    intent = new Intent(mContext, Web.class);
+                    intent.putExtra("title", "积分兑换");
+                    intent.putExtra("url", "http://m.iyuba.cn/mall/index.jsp?"
+                            + "&uid=" + AccountManager.Instace(mContext).getId()
+                            + "&sign=" + com.iyuba.core.util.MD5.getMD5ofStr("iyuba" + AccountManager.Instace(mContext).getId() + "camstory")
+                            + "&username=" + AccountManager.Instace(mContext).getUserName()
+                            + "&platform=android&appid="
+                            + Constant.APPID);
+//                    intent.putExtra("url",
+//                            "http://api.iyuba.cn/credits/useractionrecordmobileList1.jsp?uid="
+//                                    + AccountManager.Instace(mContext).userId);
+                    startActivity(intent);
+                }else {
+                    ToastUtils.showShort("请登录正式账号");
+                }
             } else if (id == R.id.discover_rqlist) {
-                intent = new Intent();
-                intent.setClass(mContext, QuesListActivity.class);
-                startActivity(intent);
+                if(AccountManager.Instace(mContext).checkUserLogin()){
+                    intent = new Intent();
+                    intent.setClass(mContext, QuesListActivity.class);
+                    startActivity(intent);
+                }else {
+                    ToastUtils.showShort("请登录正式账号");
+                }
+
             } else if (id == R.id.discover_qnotice) {
                 intent = new Intent();
                 intent.setClass(mContext, QuestionNotice.class);
                 startActivity(intent);
             } else if (id == R.id.discover_myq) {
-                intent = new Intent();
-                intent.setClass(mContext, TheQuesListActivity.class);
-                intent.putExtra("utype", "4");
-                startActivity(intent);
+                if (AccountManager.Instace(mContext).checkUserLogin()){
+                    intent = new Intent();
+                    intent.setClass(mContext, TheQuesListActivity.class);
+                    intent.putExtra("utype", "4");
+                    startActivity(intent);
+                }else {
+                    ToastUtils.showShort("请登录正式账号");
+                }
+
             } else if (id == R.id.discover_mysub) {
-                intent = new Intent();
-                intent.setClass(mContext, TheQuesListActivity.class);
-                intent.putExtra("utype", "2");
-                startActivity(intent);
-            } else if (id == R.id.intel_userinfo) {
+                if (AccountManager.Instace(mContext).checkUserLogin()) {
+
+                    intent = new Intent();
+                    intent.setClass(mContext, TheQuesListActivity.class);
+                    intent.putExtra("utype", "2");
+                    startActivity(intent);
+                }else {
+                    ToastUtils.showShort("请登录正式账号");
+                }
+            } else if (id == R.id.speak_circle) {
+                if (AccountManager.Instace(mContext).checkUserLogin()) {
+
+                    SpeakCircleActivity.instance(mContext, Constant.APP_CONSTANT.mListen());
+                    Log.d("diao",Constant.APP_CONSTANT.mListen());
+                }else {
+                    ToastUtils.showShort("请登录正式账号");
+                }
+            }else if (id == R.id.intel_userinfo) {
                 if (AccountManager.Instace(mContext).checkUserLogin()) {
                     intent = new Intent();
                     intent.setClass(mContext, InfoFullFillActivity.class);
@@ -278,8 +336,6 @@ public class  MeFragment extends Fragment {
                 }
             } else if (id == R.id.intel_goal) {
                 if (bInfoFullFill) {
-//                    intent = new Intent();
-//                    intent.setClass(mContext, IntelLearningActivity.class);
                     try {
                         startActivity(LearningGoalActivity.buildIntent(mContext,
                                 Integer.valueOf(AccountManager.Instace(mContext).getId()),
@@ -318,7 +374,7 @@ public class  MeFragment extends Fragment {
             } else if (id == R.id.intel_word_result) {
                 if (bLearnTarget) {
                     try {
-                        startActivity(com.iyuba.module.intelligence.ui.WordResultActivity.buildIntent(mContext,
+                        startActivity(WordResultActivity.buildIntent(mContext,
                                 Integer.valueOf(AccountManager.Instace(mContext).getId())
                         ));
                     } catch (NumberFormatException e) {
@@ -329,9 +385,15 @@ public class  MeFragment extends Fragment {
                 }
 
             } else if (id == R.id.study_ranking) {
-                intent = new Intent();
-                intent.setClass(mContext, StudyRankingActivity.class);
-                startActivity(intent);
+                if (AccountManager.Instace(mContext).checkUserLogin()) {
+
+                    intent = new Intent();
+                    intent.setClass(mContext, StudyRankingActivity.class);
+                    startActivity(intent);
+                } else {
+                    ToastUtils.showShort("请登录正式账号");
+
+                }
             }
         }
     };
@@ -346,10 +408,12 @@ public class  MeFragment extends Fragment {
 
     private void initView(View root) {
         person = root.findViewById(R.id.personalhome);
+        me_top = root.findViewById(R.id.me_top);
         photo = root.findViewById(R.id.me_pic);
         name = root.findViewById(R.id.me_name);
         state = root.findViewById(R.id.me_state);
         attention = root.findViewById(R.id.me_attention);
+        money = root.findViewById(R.id.money);
         listem_time = root.findViewById(R.id.me_listem_time);
         position = root.findViewById(R.id.me_position);
         lv = root.findViewById(R.id.lv);
@@ -369,6 +433,7 @@ public class  MeFragment extends Fragment {
         discover_qnotice = root.findViewById(R.id.discover_qnotice);
         discover_myq = root.findViewById(R.id.discover_myq);
         discover_mysub = root.findViewById(R.id.discover_mysub);
+        speak_circle = root.findViewById(R.id.speak_circle);
 
         //智能化学习
         intel_userinfo = root.findViewById(R.id.intel_userinfo);
@@ -404,13 +469,17 @@ public class  MeFragment extends Fragment {
         root.findViewById(R.id.rl_favorite).setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity(new Intent(mContext,BasicFavorActivity.class));
+                if (AccountManager.Instace(mContext).checkUserLogin()) {
+                    startActivity(BasicFavorActivity.buildIntent(mContext));
+                } else {
+                    ToastUtils.showShort("请登录正式账号");
+                }
             }
         });
         root.findViewById(R.id.rl_download).setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity(new Intent(mContext,DLActivity.class));
+                startActivity(new Intent(mContext, DLActivity.class));
             }
         });
         root.findViewById(R.id.rl_community).setOnClickListener(new OnClickListener() {
@@ -435,52 +504,11 @@ public class  MeFragment extends Fragment {
                         type = 9;
                     }
                 }
-
                 ConfigManager.Instance().putInt("quesAppType", type + 100);
-
                 startActivity(new Intent(mContext, CommunityActivity.class));
             }
         });
-        root.findViewById(R.id.ll_souyisou).setOnClickListener(new OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                if (AccountManager.Instace(mContext.getApplicationContext())
-                        .checkUserLogin()) {
 
-                    ImoocManager.userId = ConfigManager.Instance().loadString("userId");
-                    ImoocManager.vipStatus = ConfigManager.Instance().loadInt("isvip") + "";
-                    ImoocManager.appId = Constant.APPID;
-
-                    IHeadlineManager.appId = Constant.APPID;
-                    IHeadlineManager.appName = Constant.AppName;
-                    IHeadlineManager.userId = Integer.parseInt(ConfigManager.Instance().loadString("userId"));
-                    IHeadlineManager.username = AccountManager.Instace(getActivity()).userName;
-                    IHeadlineManager.vipStatus = ConfigManager.Instance().loadInt("isvip") + "";
-                } else {
-
-                    ImoocManager.userId = "0";
-                    ImoocManager.vipStatus = "0";
-                    ImoocManager.appId = Constant.APPID;
-
-                    IHeadlineManager.appId = Constant.APPID;
-                    IHeadlineManager.appName = Constant.AppName;
-                    IHeadlineManager.userId = 0;
-                    IHeadlineManager.username = "";
-                    IHeadlineManager.vipStatus = "0";
-
-                }
-
-
-                startActivity(MSearchActivity.buildIntent(getContext(), "noqw"));
-//                startActivity(new Intent(mContext, MSearchActivity.class).putExtra("showtype", "noqw"));
-            }
-        });
-        root.findViewById(R.id.ll_kanyikan).setOnClickListener(new OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                startActivity(new Intent(mContext, MovieActivity.class));
-            }
-        });
     }
 
     @Override
@@ -508,6 +536,7 @@ public class  MeFragment extends Fragment {
         super.onResume();
         MobclickAgent.onResume(getActivity());
         viewChange();
+        init();
         verifyUsrInfoAndTarget();
     }
 
@@ -561,7 +590,7 @@ public class  MeFragment extends Fragment {
     private void viewChange() {
         if (checkLogin()) {
             userInfo = AccountManager.Instace(mContext).userInfo;
-            ClientSession.Instace()
+            ClientSession.Instance()
                     .asynGetResponse(
                             new RequestNewInfo(
                                     AccountManager.Instace(mContext).userId),
@@ -584,10 +613,11 @@ public class  MeFragment extends Fragment {
         }
     }
 
-    private boolean checkLogin() {
+    public boolean checkLogin() {
         if (!AccountManager.Instace(mContext).checkUserLogin()) {
             noLogin.setVisibility(View.VISIBLE);
-            login.setVisibility(View.GONE);
+            me_top.setVisibility(View.GONE);
+            login.setVisibility(View.VISIBLE);
             loginBtn = root.findViewById(R.id.button_to_login);
             loginBtn.setOnClickListener(new OnClickListener() {
                 @Override
@@ -601,13 +631,13 @@ public class  MeFragment extends Fragment {
             tv_sign.setVisibility(View.GONE);
             return false;
         } else {
+            me_top.setVisibility(View.VISIBLE);
             noLogin.setVisibility(View.GONE);
             login.setVisibility(View.VISIBLE);
             logout.setVisibility(View.VISIBLE);
             tv_sign.setVisibility(View.VISIBLE);
             if (TouristUtil.isTourist()) {
                 logout.setText("注册/登录");
-
                 logout.setOnClickListener(new OnClickListener() {
                     @Override
                     public void onClick(View view) {
@@ -627,27 +657,6 @@ public class  MeFragment extends Fragment {
                 tv_sign.setOnClickListener(new OnClickListener() {
                     @Override
                     public void onClick(View v) {
-//                        new DailyBonusUtil(getActivity(), AccountManager.Instace(mContext).getId(), Constant.APPID)
-//                                .setOkHttpClient(Http.getOkHttpClient())
-//                                .sign(new DailyBonusUtil.DailyBonusCallback() {
-//                                    @Override
-//                                    public void onADClick(String s) {
-//                                        Intent intent = new Intent();
-//                                        intent.setClass(mContext, Web.class);
-//                                        intent.putExtra("url", s);
-//                                        startActivity(intent);
-//                                    }
-//
-//                                    @Override
-//                                    public void umengDailyBonusEvent() {
-//                                        MobclickAgent.onEvent(mContext, "dailybonus");
-//                                    }
-//                                }, new PopupWindow.OnDismissListener() {
-//                                    @Override
-//                                    public void onDismiss() {
-//                                        refreshIntegral();
-//                                    }
-//                                });
                         Intent intent = new Intent(mContext, SignActivity.class);
                         startActivity(intent);
                     }
@@ -785,6 +794,7 @@ public class  MeFragment extends Fragment {
         discover_qnotice.setOnClickListener(ocl);
         discover_myq.setOnClickListener(ocl);
         discover_mysub.setOnClickListener(ocl);
+        speak_circle.setOnClickListener(ocl);
 
         intel_userinfo.setOnClickListener(ocl);
         intel_learn_goal.setOnClickListener(ocl);
@@ -798,7 +808,7 @@ public class  MeFragment extends Fragment {
     /**
      *
      */
-    private void setTextViewContent() {
+    public void setTextViewContent() {
         GitHubImageLoader.Instace(mContext).setCirclePic(
                 AccountManager.Instace(mContext).userId, photo);
 
@@ -824,11 +834,25 @@ public class  MeFragment extends Fragment {
 
             String zhengze = "image[0-9]{2}|image[0-9]";
             Emotion emotion = new Emotion();
-            userInfo.text = Emotion.replace(userInfo.text);
+            userInfo.text = emotion.replace(userInfo.text);
             SpannableString spannableString = Expression.getExpressionString(
                     mContext, userInfo.text, zhengze);
             state.setText(spannableString);
         }
+        if (TextUtils.isEmpty(userInfo.money)) {
+            money.setText(String.format("钱包余额:%s", "0"));
+        } else {
+            final double f = Integer.parseInt(userInfo.money) * 0.01;
+            money.setText(String.format("钱包余额:%s", String.format("%.2f", f)));
+            money.setOnClickListener(new OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    showMoneyDialog(String.format("%.2f", f));
+                }
+            });
+        }
+
+
         attention.setText(userInfo.following);
         fans.setText(userInfo.follower);
         listem_time.setText(exeStudyTime());
@@ -836,6 +860,14 @@ public class  MeFragment extends Fragment {
         lv.setText(exeIyuLevel());
         notification.setText(userInfo.notification);
         integral.setText(userInfo.icoins);
+    }
+
+    private void showMoneyDialog(String money) {
+        AlertDialog.Builder builder = new AlertDialog.Builder(mContext);
+        builder.setMessage("当前钱包余额" + money + "元,满10元可在[AI学语言]微信公众号提现(关注绑定爱语吧账号),每天坚持打卡分享,获得更多红包吧!")
+                .setTitle("提示")
+                .setPositiveButton("确定", null);
+        builder.show();
     }
 
     private String exeStudyTime() {

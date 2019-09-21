@@ -1,0 +1,144 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/background_color"
+    android:orientation="vertical" >
+
+    <RelativeLayout
+        android:id="@+id/title"
+        android:layout_width="fill_parent"
+        android:layout_height="50dp"
+        android:background="?attr/colorPrimary" >
+
+        <Button
+            android:id="@+id/friendlist_back_btn"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:layout_centerVertical="true"
+            android:background="@drawable/lib_back_button" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="50dp"
+            android:layout_alignParentBottom="true"
+            android:layout_centerHorizontal="true"
+            android:gravity="center"
+            android:text="@string/social_friends"
+            android:textColor="@color/new_black"
+            android:textSize="18sp" />
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:layout_width="fill_parent"
+        android:layout_height="50dp"
+        android:background="#e0e8ed"
+        android:paddingLeft="15dip"
+        android:paddingRight="15dip" >
+
+        <Button
+            android:id="@+id/surebutton"
+            android:layout_width="70dip"
+            android:layout_height="37dip"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp"
+            android:background="@drawable/button_background"
+            android:text="@string/alert_btn_ok"
+            android:textColor="#ffffff" />
+
+        <RelativeLayout
+            android:layout_width="fill_parent"
+            android:layout_height="35dip"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="5dp"
+            android:layout_toLeftOf="@+id/surebutton"
+            android:background="@drawable/searchbox" >
+
+            <Button
+                android:id="@+id/search_icon"
+                android:layout_width="27dip"
+                android:layout_height="27dip"
+                android:layout_centerVertical="true"
+                android:layout_marginLeft="5dp"
+                android:background="@drawable/search_icon" />
+
+            <EditText
+                android:id="@+id/findfriend"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:layout_marginLeft="5dp"
+                android:layout_toRightOf="@+id/search_icon"
+                android:background="#00000000"
+                android:hint="@string/social_search_in_friends"
+                android:imeOptions="actionSend"
+                android:singleLine="true"
+                android:textColor="#0e497b" />
+        </RelativeLayout>
+    </RelativeLayout>
+
+    <LinearLayout
+        android:id="@+id/layout_friend"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:orientation="vertical" >
+
+        <ListView
+            android:id="@+id/friend_list"
+            android:layout_width="fill_parent"
+            android:layout_height="0dip"
+            android:layout_weight="1"
+            android:cacheColorHint="#00000000"
+            android:divider="#b1b6b9"
+            android:dividerHeight="1dip"
+            android:fastScrollEnabled="true" >
+        </ListView>
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/layout_search"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:orientation="vertical"
+        android:visibility="gone" >
+
+        <ListView
+            android:id="@+id/friendsearch_list"
+            android:layout_width="fill_parent"
+            android:layout_height="0dip"
+            android:layout_weight="1"
+            android:cacheColorHint="#00000000"
+            android:divider="#dcdcdc"
+            android:dividerHeight="1dip"
+            android:fastScrollEnabled="true" >
+        </ListView>
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/layout_nodata"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:gravity="center"
+        android:orientation="vertical"
+        android:visibility="gone" >
+
+        <TextView
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:text="@string/social_search_no_result"
+            android:textColor="#0e497b"
+            android:textSize="20sp" />
+
+        <TextView
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:text="@string/social_search_try_again"
+            android:textColor="#0e497b"
+            android:textSize="20sp" />
+    </LinearLayout>
+
+</LinearLayout>

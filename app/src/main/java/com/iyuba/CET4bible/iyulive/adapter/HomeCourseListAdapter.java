@@ -101,7 +101,7 @@ public class HomeCourseListAdapter extends BaseAdapter {
         }
         allPicUrl = Constant.MOB_CLASS_PACK_IMAGE + cp.getPic() + ".jpg";
         GitHubImageLoader.Instace(mContext).setPic(allPicUrl, viewHolder.pic, R.drawable.nearby_no_icon);
-        //GitHubImageLoader.Instace(mContext).setPic(allPicUrl, viewHolder.pic,R.drawable.nearby_no_icon);
+        //GitHubImageLoader.Instance(mContext).setPic(allPicUrl, viewHolder.pic,R.drawable.nearby_no_icon);
         return convertView;
     }
 

@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:dmy="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:background="?attr/selectableItemBackground"
+    android:orientation="horizontal"
+    android:gravity="center_vertical">
+
+    <ImageView
+        android:visibility="gone"
+        android:id="@+id/append"
+        android:layout_width="5dp"
+        android:layout_height="match_parent"
+        android:contentDescription="@string/pic" />
+
+    <com.iyuba.CET4bible.widget.CustomBgView
+        android:id="@+id/item_bg"
+        android:layout_width="120dp"
+        android:layout_height="80dp"
+        android:paddingLeft="5dp"
+        android:paddingTop="5dp"
+        dmy:image="@drawable/winter" />
+
+    <ImageView
+        android:id="@+id/iv_ad"
+        android:layout_width="120dp"
+        android:layout_height="80dp"
+        android:paddingLeft="9dp"
+        android:paddingRight="9dp"
+        android:paddingTop="11dp"
+        android:paddingBottom="11dp"
+        android:visibility="gone" />
+
+    <LinearLayout
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_margin="5dp"
+        android:layout_weight="1"
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:ellipsize="end"
+            android:layout_marginLeft="3dp"
+            tools:text="2019年06月四级真题翻译(第二套)"
+            android:maxLines="2"
+            android:textColor="#333333"
+            android:textSize="15sp" />
+
+        <TextView
+            android:id="@+id/desc"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="3dp"
+            android:ellipsize="end"
+            android:maxLines="2"
+            tools:text="灯笼起源于东汉，最初主要用于照明。在唐代，人们用红灯笼来庆祝安定的生"
+            android:textColor="#999999"
+            android:textSize="13sp" />
+    </LinearLayout>
+
+    <!--<ImageView-->
+    <!--android:layout_width="wrap_content"-->
+    <!--android:layout_height="wrap_content"-->
+    <!--android:layout_gravity="center"-->
+    <!--android:layout_marginRight="5dp"-->
+    <!--android:background="@drawable/go"-->
+    <!--android:contentDescription="@string/pic" />-->
+
+</LinearLayout>

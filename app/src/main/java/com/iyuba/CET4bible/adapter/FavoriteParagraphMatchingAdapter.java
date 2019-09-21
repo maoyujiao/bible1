@@ -32,13 +32,23 @@ import java.util.List;
 public class FavoriteParagraphMatchingAdapter extends BaseRecyclerViewAdapter {
     private final static int[] colorful = new int[]{0xffe14438, 0xff826cab,
             0xff62aa46, 0xffe38f2b, 0xff4fbdf0};
+    private final static int[] drawables = new int[]{
+            R.drawable.icon1,
+            R.drawable.icon2,
+            R.drawable.icon3,
+            R.drawable.icon4,
+            R.drawable.icon5,
+            R.drawable.icon6};
     private final ListVideoAdRenderer youdaoAdRenders;
 
     private List mList;
+    private Boolean  isHome;
 
-    public FavoriteParagraphMatchingAdapter(Context mContext, List list) {
+    public FavoriteParagraphMatchingAdapter(Context mContext, List list , Boolean isHome) {
         super(mContext);
         this.mList = list;
+        this.isHome = isHome;
+
 
         final VideoStrategy videoStrategy = YouDaoAd.getYouDaoOptions()
                 .getDefaultVideoStrategy();
@@ -96,22 +106,13 @@ public class FavoriteParagraphMatchingAdapter extends BaseRecyclerViewAdapter {
                     .into(curViewHolder.ivAd);
             curViewHolder.bg_item_reading.setVisibility(View.INVISIBLE);
 
-            curViewHolder.title.setText(response.getTitle() + "（推广）");
+            curViewHolder.title.setText(response.getTitle() + "（广告）");
             curViewHolder.subTitle.setText("");
             return;
         }
         final ParagraphMatchingBean bean = (ParagraphMatchingBean) mList.get(position);
         curViewHolder.bg_item_reading.setVisibility(View.VISIBLE);
-        String month = bean.year.substring(4, 6);
-        if (month.equals("12")) {
-            curViewHolder.bg_item_reading.setBg(R.drawable.winter);
-            curViewHolder.bg_item_reading.setText(bean.year.substring(0, 4));
-            curViewHolder.bg_item_reading.setSubText("12月");
-        } else {
-            curViewHolder.bg_item_reading.setBg(R.drawable.summer);
-            curViewHolder.bg_item_reading.setText(bean.year.substring(0, 4));
-            curViewHolder.bg_item_reading.setSubText("6月");
-        }
+        curViewHolder.bg_item_reading.setBg(drawables[position%6]);
         curViewHolder.title.setText(bean.title);
         curViewHolder.subTitle.setText(bean.original.substring(0, bean.original.indexOf("+")));
         curViewHolder.append.setBackgroundColor(colorful[position % colorful.length]);

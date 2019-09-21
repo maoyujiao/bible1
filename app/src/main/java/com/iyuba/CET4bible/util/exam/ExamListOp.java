@@ -132,7 +132,7 @@ public class ExamListOp {
         for (int i = 0; i < textList.size(); i++) {
             ExamDataBean.ItemListBean.TextListBean bean = textList.get(i);
             importDatabase.openDatabase().execSQL(
-                    "insert into " + "newtype_text" + section + Constant.APP_CONSTANT.TYPE() + " values(?,?,?,?,?,?,?,?)",
+                    "insert into " + "newtype_text" + section + Constant.APP_CONSTANT.TYPE() + " values(?,?,?,?,?,?,?,?,?,?,?,?)",
                     new String[]{
                             bean.getTestTime(),
                             textList.get(0).getSound().split("-")[0],
@@ -142,7 +142,11 @@ public class ExamListOp {
                             bean.getSentence().replace("'", "’").replace("\\\"", "”"),
                             bean.getVipFlg(),
                             bean.getSex(),
-                            bean.getSound()
+                            bean.getSound(),
+                            "",
+                            "",
+                            "",
+                            ""
                     }
             );
             L.e("=== DB INSERT === TABLE :::  " + "newtype_text" + section.toLowerCase() + Constant.APP_CONSTANT.TYPE() + "   === ID :  " + bean.getTestTime());
@@ -156,7 +160,7 @@ public class ExamListOp {
         for (int i = 0; i < answerList.size(); i++) {
             ExamDataBean.ItemListBean.AnswerBean answer = answerList.get(i);
             importDatabase.openDatabase().execSQL(
-                    "insert into " + "newtype_answer" + section + Constant.APP_CONSTANT.TYPE() + " values(?,?,?,?,?,?,?,?,?,?)",
+                    "insert into " + "newtype_answer" + section + Constant.APP_CONSTANT.TYPE() + " values(?,?,?,?,?,?,?,?,?,? ,?)",
                     new String[]{
                             answer.getTestTime(),
                             answer.getNumber() + "",
@@ -167,7 +171,8 @@ public class ExamListOp {
                             answer.getAnswerD().replace("'", "’").replace("\\\"", "”"),
                             answer.getSound(),
                             answer.getAnswer(),
-                            answer.getFlg()
+                            answer.getFlg(),
+                            ""
                     }
             );
             L.e("=== DB INSERT === TABLE :::  " + "newtype_answer" + section.toLowerCase() + Constant.APP_CONSTANT.TYPE() + "   === ID :  " + answer.getTestTime());

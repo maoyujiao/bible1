@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/backlayout"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <RelativeLayout
+        android:id="@+id/relativeLayout_title_and_back"
+        android:layout_width="fill_parent"
+        android:layout_height="50dp"
+        android:background="@color/theme_color">
+
+        <ImageView
+            android:id="@+id/lib_button_back"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:layout_alignParentLeft="true"
+            android:layout_centerVertical="true"
+            android:src="@drawable/lib_back_button" />
+
+        <TextView
+            android:id="@+id/web_buyiyubi_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:shadowColor="#ff000000"
+            android:shadowDx="3.0"
+            android:shadowDy="3.0"
+            android:shadowRadius="3.0"
+            android:textAppearance="?android:attr/textAppearanceLarge"
+            android:textColor="#ffffff" />
+    </RelativeLayout>
+
+    <ProgressBar
+        android:id="@+id/pb_progress_indictor"
+        style="?android:attr/progressBarStyleHorizontal"
+        android:layout_width="match_parent"
+        android:layout_height="10dp"
+        android:background="@color/white" />
+
+    <WebView
+        android:id="@+id/webView"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" />
+
+</LinearLayout>

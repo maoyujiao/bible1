@@ -1,6 +1,7 @@
 package com.iyuba.CET4bible.fragment;
 
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Typeface;
 import android.os.Bundle;
@@ -27,7 +28,6 @@ import com.iyuba.CET4bible.sqlite.op.ReadingExplainOp;
 import com.iyuba.CET4bible.sqlite.op.ReadingInfoOp;
 import com.iyuba.CET4bible.sqlite.op.ReadingTextOp;
 import com.iyuba.CET4bible.widget.ConfirmDialog;
-import com.iyuba.CET4bible.widget.ConfirmDialog.OnConfirmDialogClickListener;
 import com.iyuba.core.activity.Login;
 import com.iyuba.core.discover.protocol.WordUpdateRequest;
 import com.iyuba.core.discover.protocol.WordUpdateResponse;
@@ -160,38 +160,6 @@ public class ReadingFragment extends Fragment implements TextPageSelectTextCallB
     public void selectParagraph(int paragraph) {
     }
 
-    /**
-     * 显示翻译面板
-     */
-    protected void showTranslationDialog() {
-        if (selectCurrWordTemp != null) {
-            confirmDialog = new ConfirmDialog(context,
-                    selectCurrWordTemp.key, selectCurrWordTemp.def,
-                    selectCurrWordTemp.pron, selectCurrWordTemp.audioUrl,
-                    null, new OnConfirmDialogClickListener() {
-                @Override
-                public void onSave() {
-                    if (!AccountManager.Instace(context)
-                            .checkUserLogin()) {// 未登录
-                        Toast.makeText(context,
-                                R.string.play_no_login,
-                                Toast.LENGTH_SHORT).show();
-                        Intent intent = new Intent();
-                        intent.setClass(context, Login.class);
-                        startActivity(intent);
-                    } else {
-                        saveNewWords(selectCurrWordTemp);
-                    }
-                }
-
-                @Override
-                public void onCancel() {
-
-                }
-            });
-            confirmDialog.show();
-        }
-    }
 
     /**
      * 获取单词释义
@@ -201,56 +169,18 @@ public class ReadingFragment extends Fragment implements TextPageSelectTextCallB
             selectCurrWordTemp = null;
             confirmDialog = new ConfirmDialog(context,
                     selectText, "加载中...",
-                    "", "",
-                    null, new ConfirmDialog.OnConfirmDialogClickListener() {
+                    "", "",null
+                    , null);
+            confirmDialog.show();
+            tv_content.setFocusable(false);
+            tv_content.setEnabled(false);
+            confirmDialog.setOnDismissListener(new DialogInterface.OnDismissListener() {
                 @Override
-                public void onSave() {
-                    if (!AccountManager.Instace(context)
-                            .checkUserLogin()) {// 未登录
-                        Toast.makeText(context,
-                                R.string.play_no_login,
-                                Toast.LENGTH_SHORT).show();
-                        Intent intent = new Intent();
-                        intent.setClass(context, Login.class);
-                        startActivity(intent);
-                    } else {
-                        if (selectCurrWordTemp != null) {
-                            selectCurrWordTemp.key = selectText;
-                            selectCurrWordTemp.userid = AccountManager.Instace(context).userId;
-                            saveNewWords(selectCurrWordTemp);
-                        }
-                    }
-                }
-
-                @Override
-                public void onCancel() {
+                public void onDismiss(DialogInterface dialog) {
+                    tv_content.setFocusable(true);
+                    tv_content.setEnabled(true);
                 }
             });
-            confirmDialog.show();
-
-
-            ClientSession.Instace().asynGetResponse(
-                    new DictRequest(selectText), new IResponseReceiver() {
-                        @Override
-                        public void onResponse(BaseHttpResponse response,
-                                               BaseHttpRequest request, int rspCookie) {
-
-                            DictResponse dictResponse = (DictResponse) response;
-                            selectCurrWordTemp = dictResponse.word;
-                            if (selectCurrWordTemp != null) {
-                                if (selectCurrWordTemp.def != null
-                                        && selectCurrWordTemp.def.length() != 0) {
-                                    handler.sendEmptyMessage(2);
-                                } else {
-                                    handler.sendEmptyMessage(5);
-                                }
-                            } else {
-
-                            }
-                        }
-
-
-                    }, null, null);
         } else {
             Toast.makeText(context, "请选择英文单词", Toast.LENGTH_SHORT).show();
         }
@@ -276,7 +206,7 @@ public class ReadingFragment extends Fragment implements TextPageSelectTextCallB
     }
 
     public void addNetwordWord(String wordTemp) {
-        ClientSession.Instace().asynGetResponse(
+        ClientSession.Instance().asynGetResponse(
                 new WordUpdateRequest(AccountManager.Instace(context).userId,
                         WordUpdateRequest.MODE_INSERT, wordTemp),
                 new IResponseReceiver() {

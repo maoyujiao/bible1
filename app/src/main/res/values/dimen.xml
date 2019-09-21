@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <dimen name="dialog_corner">10dp</dimen>
+    <dimen name="textsize">20sp</dimen>
+    <dimen name="marginX_title">20px</dimen>
+    <dimen name="marginY_title">50px</dimen>
+    <dimen name="marginX_subTitle">80px</dimen>
+    <dimen name="marginY_subTitle">90px</dimen>
+
+
+    <dimen name="item_read_evaluate_text_padding_horizontal">24dp</dimen>
+    <dimen name="item_read_evaluate_text_padding_vertical">12dp</dimen>
+    <dimen name="item_read_evaluate_normal_distance">12dp</dimen>
+    <dimen name="item_read_evaluate_short_distance">6dp</dimen>
+    <dimen name="item_read_evaluate_text_size">16sp</dimen>
+    <dimen name="item_read_evaluate_label_distance">12dp</dimen>
+    <dimen name="item_read_evaluate_label_height">22dp</dimen>
+    <dimen name="item_read_evaluate_label_text_size">14sp</dimen>
+
+
+    <!-- rank fragment -->
+    <dimen name="no_ranking_width">200dp</dimen>
+    <dimen name="no_ranking_height">160dp</dimen>
+</resources>

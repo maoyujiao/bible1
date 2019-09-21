@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:padding="8dp" >
+
+    <TextView
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/file_name"
+        android:textColor="@color/app_color"
+        android:textSize="16sp" />
+
+    <TextView
+        android:id="@+id/file_name"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="4dp"
+        android:textSize="16sp" />
+
+    <TextView
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:text="@string/file_size"
+        android:textColor="@color/app_color"
+        android:textSize="16sp" />
+
+    <TextView
+        android:id="@+id/file_size"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="4dp"
+        android:textSize="16sp" />
+
+    <TextView
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:text="@string/file_lastmodified"
+        android:textColor="@color/app_color"
+        android:textSize="16sp" />
+
+    <TextView
+        android:id="@+id/file_lastmodified"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="4dp"
+        android:textSize="16sp" />
+
+    <TextView
+        android:id="@+id/file_contents_info"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:text="@string/file_contents"
+        android:textColor="@color/app_color"
+        android:textSize="16sp" />
+
+    <TextView
+        android:id="@+id/file_contents"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="4dp"
+        android:textSize="16sp" />
+
+</LinearLayout>

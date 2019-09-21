@@ -6,6 +6,8 @@ import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentStatePagerAdapter;
 
+import com.iyuba.core.manager.DataManager;
+
 public class TestTpyeFragmentAdapter extends FragmentStatePagerAdapter {
     private Context mContext;
 

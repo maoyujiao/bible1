@@ -56,7 +56,7 @@ public class PDFUtil {
         } catch (UnsupportedEncodingException e) {
             e.printStackTrace();
         }
-        String integralPath = String.format("http://api.iyuba.com/credits/updateScore.jsp?srid=40&mobile=1" +
+        String integralPath = String.format("http://api.iyuba.cn/credits/updateScore.jsp?srid=40&mobile=1" +
                 "&flag=%s=&uid=%s&appid=%s&idindex=%s", flag, AccountManager.Instace(mContext).getId(), Constant.APPID, idIndex);
 
         Log.d("diaodebug",integralPath+"");
@@ -99,7 +99,7 @@ public class PDFUtil {
         final CustomDialog waitingDialog = WaittingDialog.showDialog(mContext);
         waitingDialog.show();
 
-        Http.get("http://class.iyuba.com/getCetPdfFile_new.jsp?lessonType=" +
+        Http.get("http://class.iyuba.cn/getCetPdfFile_new.jsp?lessonType=" +
                 type + "&lessonId=" + idIndex + "&isEnglish=" + integerEnglish, new HttpCallback() {
             @Override
             public void onSucceed(Call call, String response) {
@@ -113,7 +113,7 @@ public class PDFUtil {
                     if (TextUtils.isEmpty(bean.path)) {
                         callback.result(false, "PDF获取失败");
                     } else {
-                        String path = "http://class.iyuba.com" + bean.path;
+                        String path = "http://class.iyuba.cn" + bean.path;
                         if (AccountManager.isVip()) {
                             callback.result(true, path);
                         } else {
@@ -141,7 +141,7 @@ public class PDFUtil {
         //创建下载任务,downloadUrl就是下载链接
         DownloadManager.Request request = new DownloadManager.Request(Uri.parse(url));
         //指定下载路径和下载文件名
-        request.setTitle(com.iyuba.configation.Constant.APPName + "-" + mExamTime + "真题PDF");
+        request.setTitle(Constant.APPName + "-" + mExamTime + "真题PDF");
         request.setDestinationInExternalPublicDir("/iyuba/" + Constant.AppName, mExamTime + ".pdf");
         request.setNotificationVisibility(DownloadManager.Request.VISIBILITY_VISIBLE_NOTIFY_COMPLETED);
         //获取下载管理器

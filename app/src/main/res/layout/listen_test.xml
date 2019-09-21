@@ -1,0 +1,160 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <LinearLayout
+        android:id="@+id/backlayout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/background_color"
+        android:orientation="vertical">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:gravity="center_vertical"
+            android:orientation="horizontal">
+
+            <TextView
+                android:id="@+id/row"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="15dp"
+                android:textSize="20sp"
+                android:textStyle="bold"
+                tools:text="1231231231" />
+
+            <ImageView
+                android:id="@+id/cb_favorite"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp" />
+
+        </LinearLayout>
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp">
+
+            <TextView
+                android:id="@+id/question"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="15dp"
+                android:textSize="20sp" />
+
+            <Button
+                android:id="@+id/qsound"
+                android:layout_width="26dp"
+                android:layout_height="22dp"
+                android:layout_centerVertical="true"
+                android:layout_marginLeft="25dp"
+                android:layout_toRightOf="@+id/question"
+                android:background="@drawable/qsound" />
+        </RelativeLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="15dp"
+            android:layout_marginRight="15dp"
+            android:layout_marginTop="10dp"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/answer1"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/shape_setting_panel_background"
+                android:padding="8dp"
+                android:textSize="18sp" />
+
+            <TextView
+                android:id="@+id/answer2"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="15dp"
+                android:background="@drawable/shape_setting_panel_background"
+                android:padding="8dp"
+                android:textSize="18sp" />
+
+            <TextView
+                android:id="@+id/answer3"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="15dp"
+                android:background="@drawable/shape_setting_panel_background"
+                android:padding="8dp"
+                android:textSize="18sp" />
+
+            <TextView
+                android:id="@+id/answer4"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="15dp"
+                android:background="@drawable/shape_setting_panel_background"
+                android:padding="8dp"
+                android:textSize="18sp" />
+        </LinearLayout>
+
+
+        <TextView
+            android:id="@+id/see_comments"
+            android:text="查看解析"
+            android:textColor="@color/white"
+            android:paddingLeft="12dp"
+            android:paddingRight="12dp"
+            android:paddingBottom="4dp"
+            android:paddingTop="4dp"
+            android:layout_marginTop="20dp"
+            android:background="@drawable/base_bg"
+            android:layout_gravity="center"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+
+        <TextView
+            android:id="@+id/comment"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:padding="15dp"
+            android:lineSpacingMultiplier="1.3"
+            tools:visibility="visible"
+            android:textColor="#444444"
+            android:textSize="18sp" />
+
+        <LinearLayout
+            android:id="@+id/un_vip"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:paddingLeft="15dp"
+            android:paddingRight="15dp">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="5dp"
+                android:lineSpacingMultiplier="1.3"
+                android:text="@string/un_vip"
+                android:textColor="#444444"
+                android:textSize="18sp" />
+
+            <Button
+                android:id="@+id/buy"
+                android:layout_width="100dp"
+                android:layout_height="30dp"
+                android:layout_gravity="center"
+                android:layout_marginTop="15dp"
+                android:layout_marginBottom="10dp"
+                android:background="@drawable/button_background"
+                android:textColor="#ffffff"
+                android:text="@string/buy_buy" />
+        </LinearLayout>
+    </LinearLayout>
+
+</ScrollView>

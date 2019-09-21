@@ -1,0 +1,151 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <ScrollView
+        android:id="@+id/scrollview"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_below="@id/rl_bar">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+
+            <ImageView
+                android:id="@+id/iv_header"
+                android:layout_width="match_parent"
+                android:layout_height="100dp"
+                android:background="@drawable/vip_header" />
+
+            <RelativeLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="#FFFFFF">
+
+
+                <ImageView
+                    android:id="@+id/vip_99"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerHorizontal="true"
+                    android:layout_marginTop="10dp"
+                    android:src="@drawable/vip_99" />
+
+                <ImageView
+                    android:id="@+id/vip_199"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/vip_99"
+                    android:layout_centerHorizontal="true"
+                    android:layout_marginTop="10dp"
+                    android:src="@drawable/vip_288" />
+
+                <ImageView
+                    android:id="@+id/vip_299"
+                    android:visibility="gone"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/vip_199"
+                    android:layout_centerHorizontal="true"
+                    android:layout_marginTop="10dp"
+                    android:src="@drawable/vip_299" />
+
+                <ImageView
+                    android:id="@+id/iv_goldvip1"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_below="@id/vip_299"
+                    android:adjustViewBounds="true"
+                    android:src="@drawable/cet_des" />
+
+                <!--<ImageView-->
+                <!--android:id="@+id/iv_goldvip2"-->
+                <!--android:layout_width="match_parent"-->
+                <!--android:layout_height="match_parent"-->
+                <!--android:layout_below="@id/iv_goldvip1"-->
+                <!--android:background="@drawable/goldvip2" />-->
+
+                <!--<ImageView-->
+                <!--android:id="@+id/iv_goldvip3"-->
+                <!--android:layout_width="match_parent"-->
+                <!--android:layout_height="match_parent"-->
+                <!--android:layout_below="@id/iv_goldvip2"-->
+                <!--android:background="@drawable/goldvip3" />-->
+
+
+            </RelativeLayout>
+
+            <ImageView
+                android:id="@+id/vip1_99"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginTop="10dp"
+                android:src="@drawable/vip_99" />
+
+            <ImageView
+                android:id="@+id/vip1_199"
+
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/vip_99"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginTop="10dp"
+                android:src="@drawable/vip_288" />
+
+            <ImageView
+                android:id="@+id/vip1_299"
+                android:visibility="gone"
+
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/vip_199"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginBottom="10dp"
+                android:layout_marginTop="10dp"
+                android:src="@drawable/vip_299" />
+
+
+        </LinearLayout>
+    </ScrollView>
+
+    <RelativeLayout
+        android:id="@+id/rl_bar"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:background="?attr/colorPrimary">
+
+        <TextView
+            android:id="@+id/tv_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:text="冲刺会员/黄金会员"
+            android:textColor="@color/base_white"
+            android:textSize="20dp" />
+
+        <ImageView
+            android:id="@+id/btn_back"
+            style="@style/base_style_button_back_white"
+            android:background="?attr/selectableItemBackground" />
+
+        <ImageView
+            android:id="@+id/btn_qq"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:padding="12dp"
+            android:src="@drawable/iv_home_qq" />
+    </RelativeLayout>
+</RelativeLayout>

@@ -28,12 +28,20 @@ import java.util.List;
 public class FavoriteReadingAdapter extends BaseRecyclerViewAdapter<FavoriteReadingAdapter.Holder> {
     private final int[] colorful = new int[]{R.color.item_color_1, R.color.item_color_2,
             R.color.item_color_3, R.color.item_color_4, R.color.item_color_5};
-
+    private final static int[] drawables = new int[]{
+            R.drawable.icon1,
+            R.drawable.icon2,
+            R.drawable.icon3,
+            R.drawable.icon4,
+            R.drawable.icon5,
+            R.drawable.icon6};
     private List mList;
+    private Boolean isHome;
 
-    public FavoriteReadingAdapter(Context mContext, List packNames) {
+    public FavoriteReadingAdapter(Context mContext, List packNames, Boolean isHome) {
         super(mContext);
         this.mList = packNames;
+        this.isHome = isHome;
     }
 
     @Override
@@ -53,29 +61,23 @@ public class FavoriteReadingAdapter extends BaseRecyclerViewAdapter<FavoriteRead
                     response.handleClick(holder.itemView);
                 }
             });
+            holder.ivAd.setVisibility(View.VISIBLE);
+
             Glide.with(mContext).load(response.getMainImageUrl())
                     .error(R.drawable.nearby_no_icon2)
                     .placeholder(R.drawable.nearby_no_icon2)
                     .into(holder.ivAd);
             holder.bg_item_reading.setVisibility(View.INVISIBLE);
-
-            holder.reading_title.setText(response.getTitle() + "（推广）");
+            holder.reading_title.setText(response.getTitle() + "（广告）");
             return;
         }
+        holder.ivAd.setVisibility(View.GONE);
 
         final String packName = (String) mList.get(position);
         holder.reading_title.setText(packName);
         holder.bg_item_reading.setVisibility(View.VISIBLE);
-        String month = packName.substring(5, 7);
-        if (month.equals("12")) {
-            holder.bg_item_reading.setBg(R.drawable.winter);
-            holder.bg_item_reading.setText(packName.substring(0, 5));
-            holder.bg_item_reading.setSubText("12月");
-        } else {
-            holder.bg_item_reading.setBg(R.drawable.summer);
-            holder.bg_item_reading.setText(packName.substring(0, 5));
-            holder.bg_item_reading.setSubText("6月");
-        }
+        holder.bg_item_reading.setBg(drawables[position%6]);
+
         holder.append.setBackgroundColor(ResourcesCompat.getColor(mContext.getResources(),
                 colorful[position % colorful.length], mContext.getTheme()));
 
@@ -91,6 +93,10 @@ public class FavoriteReadingAdapter extends BaseRecyclerViewAdapter<FavoriteRead
 
     @Override
     public int getItemCount() {
+        if (isHome){
+            return 4 ;
+        }
+
         return mList.size();
     }
 

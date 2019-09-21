@@ -2,14 +2,20 @@ package com.iyuba.CET4bible.sqlite.op;
 
 import android.content.Context;
 import android.database.Cursor;
+import android.database.sqlite.SQLiteDatabase;
 
 import com.iyuba.CET4bible.BuildConfig;
 import com.iyuba.CET4bible.sqlite.db.DatabaseService;
 import com.iyuba.CET4bible.sqlite.mode.Cet4RootWord;
 import com.iyuba.CET4bible.sqlite.mode.Cet4Word;
+import com.iyuba.configation.ConfigManager;
 import com.iyuba.configation.Constant;
 
 import java.util.ArrayList;
+import java.util.List;
+
+import newDB.CetDataBase;
+import newDB.CetRootWord;
 
 /**
  * 获取单词表数据库
@@ -220,5 +226,30 @@ public class Cet4WordOp extends DatabaseService {
         } else {
             return "n" + Constant.APP_CONSTANT.TYPE() + "word";
         }
+    }
+
+    public synchronized void writeToRoomDB(Context context) {
+        List<CetRootWord> words = new ArrayList<>();
+        Cursor c ;
+        if (Constant.APP_CONSTANT.TYPE().equals("4")){
+            c = importDatabase . openDatabase().rawQuery("select * from Cet4word", null);
+        }else {
+            c = importDatabase . openDatabase().rawQuery("select * from Cet6word", null);
+        }
+
+        c.moveToFirst();
+
+        while (c.moveToNext()){
+            CetRootWord word = new CetRootWord();
+            word.def = c.getString(c.getColumnIndex("def"));
+            word.pron = c.getString(c.getColumnIndex("pron"));
+            word.sound = c.getString(c.getColumnIndex("sound"));
+            word.word = c.getString(c.getColumnIndex("word"));
+            word.remembered = 0 ;
+            words.add(word);
+        }
+        CetDataBase.getInstance(context.getApplicationContext()).getUserDao().insertWord(words);
+        ConfigManager.Instance().putBoolean("wordloaded",true);
+        c.close();
     }
 }

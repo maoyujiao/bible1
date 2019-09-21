@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/backlayout"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/background_color"
+    android:orientation="vertical">
+
+    <com.iyuba.CET4bible.widget.subtitle.SubtitleSynView
+        android:id="@+id/original"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_margin="10dp"
+        android:gravity="center_vertical"
+        android:textColor="@color/black" />
+
+    <com.iyuba.core.widget.WordCard
+        android:id="@+id/word"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true"
+        android:visibility="gone" />
+
+    <LinearLayout
+        android:id="@+id/un_vip"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true"
+        android:orientation="vertical"
+        android:padding="15dp">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="5dp"
+            android:lineSpacingMultiplier="1.3"
+            android:text="@string/un_vip"
+            android:textColor="#444444"
+            android:textSize="18sp" />
+
+        <Button
+            android:id="@+id/buy"
+            android:layout_width="100dp"
+            android:layout_height="30dp"
+            android:layout_gravity="center"
+            android:layout_marginTop="15dp"
+            android:background="@drawable/button_background"
+            android:text="@string/buy_buy"
+            android:textColor="#ffffff" />
+    </LinearLayout>
+
+</RelativeLayout>

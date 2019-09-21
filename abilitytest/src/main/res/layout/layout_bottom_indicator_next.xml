@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<!--问题-->
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:rv="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="50dp"
+    android:background="@color/white"
+    tools:showIn="@layout/act_speakabilitytest">
+
+    <TextView
+        android:id="@+id/tv_ques_index"
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:layout_marginLeft="12dp"
+        android:gravity="center_vertical"
+        android:text="2/40"
+        android:textColor="@color/text_bluenor_color"
+        android:textSize="18sp" />
+    <com.flyco.roundview.RoundTextView
+        android:gravity="center"
+        android:layout_centerVertical="true"
+        android:layout_width="64dp"
+        android:layout_height="30dp"
+        android:layout_toRightOf="@+id/tv_ques_index"
+        android:id="@+id/tv_review_title"
+        android:layout_marginLeft="12dp"
+        android:text="回顾"
+        android:textColor="@color/white"
+        rv:rv_backgroundColor="@color/text_bluenor_color"
+        rv:rv_backgroundPressColor="@color/text_bluenor_color_press"
+        rv:rv_cornerRadius="7dp"
+        android:textSize="16sp" />
+
+
+    <com.flyco.roundview.RoundTextView
+        android:id="@+id/tv_next_ques"
+        android:layout_width="70dp"
+        android:layout_height="30dp"
+        android:layout_alignParentRight="true"
+        android:layout_centerVertical="true"
+        android:layout_marginRight="15dp"
+        android:gravity="center"
+        android:padding="4dp"
+        android:text=" 下一题 "
+        android:textColor="@drawable/selector_btntext_color_word_ability"
+        rv:rv_backgroundColor="@color/text_bluenor_color"
+        rv:rv_backgroundPressColor="@color/text_bluenor_color_press"
+        rv:rv_cornerRadius="7dp" />
+
+    <com.flyco.roundview.RoundTextView
+        android:id="@+id/tv_pre_ques"
+        android:layout_width="70dp"
+        android:layout_height="30dp"
+        android:layout_centerVertical="true"
+        android:layout_marginRight="10dp"
+        android:layout_toLeftOf="@+id/tv_next_ques"
+        android:gravity="center"
+        android:padding="4dp"
+        android:text=" 上一题 "
+        android:textColor="@color/white"
+        rv:rv_backgroundColor="@color/text_bluenor_color"
+        rv:rv_backgroundPressColor="@color/text_bluenor_color_press"
+        rv:rv_cornerRadius="7dp" />
+</RelativeLayout>

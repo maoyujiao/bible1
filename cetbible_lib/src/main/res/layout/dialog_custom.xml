@@ -1,0 +1,64 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_gravity="center_horizontal"
+    android:background="@drawable/yuanjiao_all_white"
+    android:orientation="vertical">
+    <!--标题-->
+    <TextView
+        android:id="@+id/tv_dialog_title"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/transparent"
+        android:gravity="center"
+        android:lineSpacingExtra="3dp"
+        android:padding="15dp"
+        android:text="退出当前账号"
+        android:textColor="@color/text_blue_color"
+        android:textSize="20sp" />
+    <!--内容-->
+    <TextView
+        android:id="@+id/tv_dialog_content"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center|left"
+        android:lineSpacingExtra="3dp"
+
+        android:paddingLeft="20dp"
+        android:paddingRight="20dp"
+        android:text="退出当前账号?"
+        android:textColor="@color/black_two"
+        android:textSize="17sp" />
+
+    <!--确定和取消按钮-->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="46dp"
+        android:layout_gravity="center"
+        android:layout_marginTop="10dp"
+        android:orientation="horizontal">
+
+        <Button
+            android:id="@+id/btn_dialog_no"
+            style="@style/dialog_confirm_btn_style"
+            android:layout_weight="1"
+            android:background="@drawable/yuanjiao_cancelbtn_bg"
+            android:onClick="whenClicked"
+            android:text="@string/cancel" />
+
+        <TextView
+            android:layout_width="1px"
+            android:layout_height="match_parent"
+            android:background="@color/stroke_color" />
+
+        <Button
+            android:id="@+id/btn_dialog_yes"
+            style="@style/dialog_confirm_btn_style"
+            android:layout_weight="1"
+            android:background="@drawable/yuanjiao_confirmbtn_bg"
+            android:onClick="whenClicked"
+            android:text="确定" />
+
+    </LinearLayout>
+
+</LinearLayout>

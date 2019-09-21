@@ -1,0 +1,444 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/background_color"
+    android:orientation="vertical">
+
+    <RelativeLayout
+        android:id="@+id/r1"
+        android:layout_width="fill_parent"
+        android:layout_height="100dp"
+        android:background="@drawable/titlebar_lightgray_bg">
+
+        <ImageView
+            android:id="@+id/button_back"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:padding="12dp"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentTop="true"
+            android:src="@drawable/ic_arrow_back_white_24dp" />
+
+        <ImageView
+            android:id="@+id/wc"
+            android:layout_width="70dp"
+            android:layout_height="70dp"
+            android:layout_centerVertical="true"
+            android:layout_toRightOf="@+id/button_back"
+            android:src="@drawable/girl" />
+
+        <ImageView
+            android:layout_width="190dp"
+            android:layout_height="240dp"
+            android:layout_centerVertical="true"
+            android:layout_toRightOf="@+id/wc"
+            android:src="@drawable/fill_userinfo_word" />
+        <!--
+        <ImageView
+            android:id="@+id/lv"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:src="@drawable/double_heart" />
+        -->
+    </RelativeLayout>
+
+    <ScrollView
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content">
+
+        <LinearLayout
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <LinearLayout
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="15dp"
+                android:layout_marginLeft="10dp"
+                android:layout_marginRight="10dp"
+                android:layout_marginTop="16dp"
+                android:background="@drawable/shape_setting_panel_background"
+                android:orientation="vertical">
+
+                <RelativeLayout
+                    android:layout_width="fill_parent"
+                    android:layout_height="50dp">
+
+                    <ImageView
+                        android:id="@+id/iv_mine_que_myque2"
+                        android:layout_width="40dp"
+                        android:layout_height="40dp"
+                        android:layout_alignParentLeft="true"
+                        android:layout_centerVertical="true"
+                        android:layout_marginLeft="10dp"
+                        android:src="@drawable/man" />
+
+                    <TextView
+                        android:id="@+id/unt"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_centerVertical="true"
+                        android:layout_margin="10dp"
+                        android:layout_toRightOf="@id/iv_mine_que_myque2"
+                        android:drawablePadding="5dp"
+                        android:gravity="center"
+                        android:text="用户名"
+                        android:textColor="#444444"
+                        android:textSize="17sp" />
+
+                    <EditText
+                        android:id="@+id/editText_username"
+                        android:layout_width="fill_parent"
+                        android:layout_height="match_parent"
+                        android:layout_gravity="center_vertical"
+                        android:layout_toRightOf="@+id/unt"
+                        android:background="@color/transparent"
+                        android:editable="false"
+                        android:singleLine="true"
+                        android:textColor="@color/gray"
+                        android:textCursorDrawable="@null" />
+                </RelativeLayout>
+
+                <ImageView
+                    android:layout_width="fill_parent"
+                    android:layout_height="1dp"
+                    android:background="#dcdcdc" />
+
+                <RelativeLayout
+                    android:id="@+id/choose_sex"
+                    android:layout_width="fill_parent"
+                    android:layout_height="50dp">
+
+                    <ImageView
+                        android:id="@+id/iv_mine_que_notification"
+                        android:layout_width="40dp"
+                        android:layout_height="40dp"
+                        android:layout_alignParentLeft="true"
+                        android:layout_centerVertical="true"
+                        android:layout_marginLeft="10dp"
+                        android:src="@drawable/male_sign" />
+
+                    <TextView
+                        android:id="@+id/lwlt"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_centerVertical="true"
+                        android:layout_margin="10dp"
+                        android:layout_toRightOf="@id/iv_mine_que_notification"
+                        android:drawablePadding="5dp"
+                        android:gravity="center"
+                        android:text="性 别"
+                        android:textColor="#444444"
+                        android:textSize="17sp" />
+
+                    <TextView
+                        android:id="@+id/chosen_sex"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_centerVertical="true"
+                        android:layout_margin="10dp"
+                        android:layout_toRightOf="@+id/lwlt"
+                        android:drawablePadding="5dp"
+                        android:gravity="center"
+                        android:textColor="@color/gray"
+                        android:textSize="17sp" />
+
+                    <ImageView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentRight="true"
+                        android:layout_centerVertical="true"
+                        android:layout_marginRight="10dp"
+                        android:src="@drawable/go2" />
+                </RelativeLayout>
+
+                <ImageView
+                    android:layout_width="fill_parent"
+                    android:layout_height="1dp"
+                    android:background="#dcdcdc" />
+
+                <RelativeLayout
+                    android:id="@+id/choose_birth"
+                    android:layout_width="fill_parent"
+                    android:layout_height="50dp">
+
+                    <ImageView
+                        android:id="@+id/iv_mine_que_notification"
+                        android:layout_width="40dp"
+                        android:layout_height="40dp"
+                        android:layout_alignParentLeft="true"
+                        android:layout_centerVertical="true"
+                        android:layout_marginLeft="10dp"
+                        android:src="@drawable/calendar2" />
+
+                    <TextView
+                        android:id="@+id/rwlt"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_centerVertical="true"
+                        android:layout_margin="10dp"
+                        android:layout_toRightOf="@id/iv_mine_que_notification"
+                        android:drawablePadding="5dp"
+                        android:gravity="center"
+                        android:text="生 日"
+                        android:textColor="#444444"
+                        android:textSize="17sp" />
+
+                    <TextView
+                        android:id="@+id/chosen_birth"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_centerVertical="true"
+                        android:layout_margin="10dp"
+                        android:layout_toRightOf="@+id/rwlt"
+                        android:drawablePadding="5dp"
+                        android:gravity="center"
+                        android:textColor="@color/gray"
+                        android:textSize="17sp" />
+
+                    <ImageView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentRight="true"
+                        android:layout_centerVertical="true"
+                        android:layout_marginRight="10dp"
+                        android:src="@drawable/go2" />
+                </RelativeLayout>
+
+                <ImageView
+                    android:layout_width="fill_parent"
+                    android:layout_height="1dp"
+                    android:background="#dcdcdc" />
+
+                <RelativeLayout
+                    android:id="@+id/choose_province"
+                    android:layout_width="fill_parent"
+                    android:layout_height="50dp">
+
+                    <ImageView
+                        android:id="@+id/iv_mine_que_notification"
+                        android:layout_width="40dp"
+                        android:layout_height="40dp"
+                        android:layout_alignParentLeft="true"
+                        android:layout_centerVertical="true"
+                        android:layout_marginLeft="10dp"
+                        android:src="@drawable/building" />
+
+                    <TextView
+                        android:id="@+id/rwlt"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_centerVertical="true"
+                        android:layout_margin="10dp"
+                        android:layout_toRightOf="@id/iv_mine_que_notification"
+                        android:drawablePadding="5dp"
+                        android:gravity="center"
+                        android:text="省 份"
+                        android:textColor="#444444"
+                        android:textSize="17sp" />
+
+                    <TextView
+                        android:id="@+id/chosen_province"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_centerVertical="true"
+                        android:layout_margin="10dp"
+                        android:layout_toRightOf="@+id/rwlt"
+                        android:drawablePadding="5dp"
+                        android:gravity="center"
+                        android:textColor="@color/gray"
+                        android:textSize="17sp" />
+
+                    <ImageView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentRight="true"
+                        android:layout_centerVertical="true"
+                        android:layout_marginRight="10dp"
+                        android:src="@drawable/go2" />
+                </RelativeLayout>
+
+                <ImageView
+                    android:layout_width="fill_parent"
+                    android:layout_height="1dp"
+                    android:background="#dcdcdc" />
+
+                <RelativeLayout
+                    android:id="@+id/choose_identity"
+                    android:layout_width="fill_parent"
+                    android:layout_height="50dp">
+
+                    <ImageView
+                        android:id="@+id/iv_mine_que_notification"
+                        android:layout_width="40dp"
+                        android:layout_height="40dp"
+                        android:layout_alignParentLeft="true"
+                        android:layout_centerVertical="true"
+                        android:layout_marginLeft="10dp"
+                        android:src="@drawable/v_card_3" />
+
+                    <TextView
+                        android:id="@+id/rwlt"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_centerVertical="true"
+                        android:layout_margin="10dp"
+                        android:layout_toRightOf="@id/iv_mine_que_notification"
+                        android:drawablePadding="5dp"
+                        android:gravity="center"
+                        android:text="身 份"
+                        android:textColor="#444444"
+                        android:textSize="17sp" />
+
+                    <TextView
+                        android:id="@+id/chosen_identity"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_centerVertical="true"
+                        android:layout_margin="10dp"
+                        android:layout_toRightOf="@+id/rwlt"
+                        android:drawablePadding="5dp"
+                        android:gravity="center"
+                        android:textColor="@color/gray"
+                        android:textSize="17sp" />
+
+                    <ImageView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentRight="true"
+                        android:layout_centerVertical="true"
+                        android:layout_marginRight="10dp"
+                        android:src="@drawable/go2" />
+                </RelativeLayout>
+
+                <ImageView
+                    android:layout_width="fill_parent"
+                    android:layout_height="1dp"
+                    android:background="#dcdcdc" />
+
+                <RelativeLayout
+                    android:id="@+id/choose_education"
+                    android:layout_width="fill_parent"
+                    android:layout_height="50dp">
+
+                    <ImageView
+                        android:id="@+id/iv_mine_que_notification"
+                        android:layout_width="40dp"
+                        android:layout_height="40dp"
+                        android:layout_alignParentLeft="true"
+                        android:layout_centerVertical="true"
+                        android:layout_marginLeft="10dp"
+                        android:src="@drawable/graduate" />
+
+                    <TextView
+                        android:id="@+id/rwlt"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_centerVertical="true"
+                        android:layout_margin="10dp"
+                        android:layout_toRightOf="@id/iv_mine_que_notification"
+                        android:drawablePadding="5dp"
+                        android:gravity="center"
+                        android:text="学 历"
+                        android:textColor="#444444"
+                        android:textSize="17sp" />
+
+                    <TextView
+                        android:id="@+id/chosen_education"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_centerVertical="true"
+                        android:layout_margin="10dp"
+                        android:layout_toRightOf="@+id/rwlt"
+                        android:drawablePadding="5dp"
+                        android:gravity="center"
+                        android:textColor="@color/gray"
+                        android:textSize="17sp" />
+
+                    <ImageView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentRight="true"
+                        android:layout_centerVertical="true"
+                        android:layout_marginRight="10dp"
+                        android:src="@drawable/go2" />
+                </RelativeLayout>
+
+                <ImageView
+                    android:layout_width="fill_parent"
+                    android:layout_height="1dp"
+                    android:background="#dcdcdc" />
+
+                <RelativeLayout
+                    android:id="@+id/choose_school"
+                    android:layout_width="fill_parent"
+                    android:layout_height="50dp">
+
+                    <ImageView
+                        android:id="@+id/iv_mine_que_notification"
+                        android:layout_width="40dp"
+                        android:layout_height="40dp"
+                        android:layout_alignParentLeft="true"
+                        android:layout_centerVertical="true"
+                        android:layout_marginLeft="10dp"
+                        android:src="@drawable/university" />
+
+                    <TextView
+                        android:id="@+id/rwlt"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_centerVertical="true"
+                        android:layout_margin="10dp"
+                        android:layout_toRightOf="@id/iv_mine_que_notification"
+                        android:drawablePadding="5dp"
+                        android:gravity="center"
+                        android:text="学 校"
+                        android:textColor="#444444"
+                        android:textSize="17sp" />
+
+                    <TextView
+                        android:id="@+id/chosen_school"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_centerVertical="true"
+                        android:layout_margin="10dp"
+                        android:layout_toRightOf="@+id/rwlt"
+                        android:drawablePadding="5dp"
+                        android:gravity="center"
+                        android:textColor="@color/gray"
+                        android:textSize="17sp" />
+
+                    <ImageView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentRight="true"
+                        android:layout_centerVertical="true"
+                        android:layout_marginRight="10dp"
+                        android:src="@drawable/go2" />
+                </RelativeLayout>
+
+                <ImageView
+                    android:layout_width="fill_parent"
+                    android:layout_height="1dp"
+                    android:background="#dcdcdc" />
+            </LinearLayout>
+
+            <Button
+                android:id="@+id/userinfo_commit"
+                android:layout_width="300dp"
+                android:layout_height="50dp"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginBottom="30dp"
+                android:layout_marginTop="20dp"
+                android:background="@drawable/button_background"
+                android:text="提 交"
+                android:textColor="@color/white"
+                android:textSize="20sp" />
+        </LinearLayout>
+    </ScrollView>
+
+</LinearLayout>

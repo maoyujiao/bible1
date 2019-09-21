@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="fill_parent"
+    android:layout_height="wrap_content"
+    android:background="@color/background_color"
+    android:orientation="vertical" >
+
+    <LinearLayout
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content" >
+
+        <ImageView
+            android:id="@+id/doings_userPortrait"
+            android:layout_width="50dip"
+            android:layout_height="50dip"
+            android:layout_margin="10dip"
+            android:scaleType="centerCrop"
+            android:src="@drawable/defaultavatar" />
+
+        <LinearLayout
+            android:layout_width="0dip"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:orientation="vertical" >
+
+            <TextView
+                android:id="@+id/doings_username"
+                android:layout_width="wrap_content"
+                android:layout_height="0dp"
+                android:layout_marginTop="10dip"
+                android:layout_weight="1"
+                android:textColor="@color/app_color"
+                android:textSize="18sp" />
+
+            <TextView
+                android:id="@+id/doings_message"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="5dip"
+                android:layout_marginRight="10dip"
+                android:layout_marginTop="5dip"
+                android:textColor="@color/black"
+                android:textSize="16sp" />
+
+            <TextView
+                android:id="@+id/doings_time"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="5dip"
+                android:textColor="@color/text_gray_color" />
+        </LinearLayout>
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:background="#afcbdf"
+        android:paddingLeft="10dip" >
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:paddingBottom="5dip"
+            android:paddingTop="5dip"
+            android:text="评论："
+            android:textColor="@color/app_color"
+            android:textSize="16sp" />
+
+        <TextView
+            android:id="@+id/doings_replynum"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="@color/app_color"
+            android:textSize="16sp" />
+    </LinearLayout>
+
+</LinearLayout>

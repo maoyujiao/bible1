@@ -61,7 +61,7 @@ public class AdSplashUtil {
         if (TextUtils.isEmpty(userId)) {
             userId = "0";
         }
-        String url = "http://dev.iyuba.com/getAdEntryAll.jsp?uid=" + userId
+        String url = "http://dev.iyuba.cn/getAdEntryAll.jsp?uid=" + userId
                 + "&appId=" + //"148"
                 Constant.APPID //148
                 + "&flag=1";
@@ -83,7 +83,7 @@ public class AdSplashUtil {
                     e.printStackTrace();
                 }
                 if(list != null) {
-                    Log.i("diaodebug", list.size() + "::::" + list.get(0).getData().getStartuppic_Url());
+//                    Log.i("diaodebug", list.size() + "::::" + list.get(0).getData().getStartuppic_Url());
                 }
                 if (list == null || list.size() < 1) {
                     showYDSplash();

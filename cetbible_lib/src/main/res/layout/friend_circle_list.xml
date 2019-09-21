@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/com.iyuba.iyubaclient"
+    android:id="@+id/backlayout"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent">
+
+    <RelativeLayout
+        android:id="@+id/r1_coursetitle"
+        android:layout_width="fill_parent"
+        android:layout_height="50dp"
+        android:background="?attr/colorPrimary">
+
+        <Button
+            android:id="@+id/button_back"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:layout_alignParentLeft="true"
+            android:layout_centerVertical="true"
+            android:background="@drawable/lib_back_button" />
+
+        <ImageView
+            android:id="@+id/iv_publish_fresh"
+            android:layout_width="45dp"
+            android:layout_height="35dp"
+            android:layout_alignParentRight="true"
+            android:tint="@color/white"
+            android:layout_centerVertical="true"
+            android:layout_marginRight="16dp"
+            android:src="@drawable/iv_lib_camera" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:layout_centerVertical="true"
+            android:textColor="#fff"
+            android:text="朋友圈"
+            android:textAppearance="?android:attr/textAppearanceLarge" />
+
+    </RelativeLayout>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="0.5dp"
+        android:layout_below="@id/r1_coursetitle"
+        android:background="@color/divider_line" />
+
+    <FrameLayout
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/r1_coursetitle">
+
+        <RelativeLayout
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent"
+            android:background="@color/gray_white"
+            android:orientation="vertical">
+
+            <ProgressBar
+                android:id="@+id/courselist_waitbar"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerHorizontal="true"
+                android:layout_marginTop="20dp" />
+
+            <com.iyuba.core.widget.pulltorefresh.PullToRefreshListView
+                android:id="@+id/course_list"
+                android:layout_width="fill_parent"
+                android:layout_height="fill_parent"
+                android:cacheColorHint="#00000000"
+                android:divider="#e1e1e1"
+                android:dividerHeight="0.5dp"
+                android:fadingEdge="none"
+                android:fastScrollEnabled="true"
+                android:listSelector="#00000000"
+                app:effect="tilt"
+                app:max_velocity="0"
+                app:only_animate_fling="false"
+                app:only_animate_new_items="false" />
+
+        </RelativeLayout>
+    </FrameLayout>
+</RelativeLayout>

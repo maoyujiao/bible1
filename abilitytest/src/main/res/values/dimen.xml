@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!--能力测试-->
+    <!--时间显示字体大小-->
+    <dimen name="ts_time_left">12sp</dimen>
+    <dimen name="textsize">18sp</dimen>
+    <dimen name="marginX_title">20px</dimen>
+    <dimen name="marginY_title">50px</dimen>
+    <dimen name="marginX_subTitle">80px</dimen>
+    <dimen name="marginY_subTitle">90px</dimen>
+</resources>

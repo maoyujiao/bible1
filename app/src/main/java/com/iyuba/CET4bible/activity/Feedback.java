@@ -68,7 +68,7 @@ public class Feedback extends BasisActivity {
                     CustomToast.showToast(mContext, R.string.feedback_submitting);
                     break;
                 case 3:
-                    ClientSession.Instace().asynGetResponse(
+                    ClientSession.Instance().asynGetResponse(
                             new RequestSendMessageLetter(
                                     AccountManager.Instace(mContext).userId,
                                     "tunye", content), new IResponseReceiver() {

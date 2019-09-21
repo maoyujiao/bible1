@@ -168,13 +168,13 @@ public class Cet4WordContent extends BasisActivity implements
         position.setText(sb.toString());
         if (pos == 0) {
             leftImage.setBackgroundResource(R.drawable.no_left);
-            rightImage.setBackgroundResource(R.drawable.trainingcamp_right_arrow);
+            rightImage.setBackgroundResource(R.drawable.no_right);
         } else if (pos == all - 1) {
-            leftImage.setBackgroundResource(R.drawable.trainingcamp_left_arrow);
+            leftImage.setBackgroundResource(R.drawable.no_left);
             rightImage.setBackgroundResource(R.drawable.no_right);
         } else {
-            leftImage.setBackgroundResource(R.drawable.trainingcamp_left_arrow);
-            rightImage.setBackgroundResource(R.drawable.trainingcamp_right_arrow);
+            leftImage.setBackgroundResource(R.drawable.no_left);
+            rightImage.setBackgroundResource(R.drawable.no_right);
         }
         fromTestDifficult = false;
         setContent();
@@ -270,7 +270,7 @@ public class Cet4WordContent extends BasisActivity implements
 
     private void playAudio() {
         if (BuildConfig.isEnglish) {
-            String url = "http://staticvip2.iyuba.com/aiciaudio/" + cet4Word.word
+            String url = "http://staticvip2.iyuba.cn/aiciaudio/" + cet4Word.word
                     + ".mp3";
             vv.setVideoPath(url);
         } else {

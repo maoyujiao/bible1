@@ -1,7 +1,6 @@
 package com.iyuba.CET4bible.adapter;
 
 import android.content.Context;
-import android.content.Intent;
 import android.os.Handler;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
@@ -14,18 +13,7 @@ import android.widget.Toast;
 
 import com.iyuba.CET4bible.R;
 import com.iyuba.CET4bible.widget.ConfirmDialog;
-import com.iyuba.core.activity.Login;
-import com.iyuba.core.discover.protocol.WordUpdateRequest;
-import com.iyuba.core.discover.protocol.WordUpdateResponse;
-import com.iyuba.core.manager.AccountManager;
-import com.iyuba.core.network.ClientSession;
-import com.iyuba.core.network.IResponseReceiver;
-import com.iyuba.core.protocol.BaseHttpRequest;
-import com.iyuba.core.protocol.BaseHttpResponse;
-import com.iyuba.core.protocol.base.DictRequest;
-import com.iyuba.core.protocol.base.DictResponse;
 import com.iyuba.core.sqlite.mode.Word;
-import com.iyuba.core.sqlite.op.WordOp;
 import com.iyuba.core.widget.subtitle.TextPage;
 import com.iyuba.core.widget.subtitle.TextPageSelectTextCallBack;
 
@@ -154,84 +142,13 @@ public class ParagraphItemAdapter extends RecyclerView.Adapter<ParagraphItemAdap
             selectCurrWordTemp = null;
             confirmDialog = new ConfirmDialog(mContext,
                     selectText, "加载中...", "", "",
-                    null, new ConfirmDialog.OnConfirmDialogClickListener() {
-                @Override
-                public void onSave() {
-                    if (!AccountManager.Instace(mContext).checkUserLogin()) {
-                        Toast.makeText(mContext, R.string.play_no_login, Toast.LENGTH_SHORT).show();
-                        Intent intent = new Intent();
-                        intent.setClass(mContext, Login.class);
-                        mContext.startActivity(intent);
-                    } else {
-                        if (selectCurrWordTemp != null) {
-                            selectCurrWordTemp.key = selectText;
-                            selectCurrWordTemp.userid = AccountManager.Instace(mContext).userId;
-                            saveNewWords(selectCurrWordTemp);
-                        }
-                    }
-                }
-
-                @Override
-                public void onCancel() {
-                }
-            });
+                    null,null);
             confirmDialog.show();
-
-            ClientSession.Instace().asynGetResponse(
-                    new DictRequest(selectText), new IResponseReceiver() {
-                        @Override
-                        public void onResponse(BaseHttpResponse response,
-                                               BaseHttpRequest request, int rspCookie) {
-                            DictResponse dictResponse = (DictResponse) response;
-                            selectCurrWordTemp = dictResponse.word;
-                            if (selectCurrWordTemp != null) {
-                                if (selectCurrWordTemp.def != null
-                                        && selectCurrWordTemp.def.length() != 0) {
-                                    handler.sendEmptyMessage(0);
-                                } else {
-                                    handler.sendEmptyMessage(1);
-                                }
-                            }
-                        }
-
-
-                    }, null, null);
         } else {
             Toast.makeText(mContext, "请选择英文单词", Toast.LENGTH_SHORT).show();
         }
     }
 
-    //添加单词到生词本
-    public boolean saveNewWords(Word wordTemp) {
-        try {
-            WordOp wo = new WordOp(mContext);
-            Log.e("Mingyu ReadingFragment", wordTemp.key);
-            wo.saveData(wordTemp);
-            // Log.e("插入生词数据库", "完成");
-            Toast.makeText(mContext, R.string.play_ins_new_word_success, Toast.LENGTH_SHORT).show();
-            // 保存到网络
-            addNetwordWord(wordTemp.key);
-            return true;
-        } catch (Exception e) {
-            e.printStackTrace();
-            return false;
-        }
-    }
-
-    public void addNetwordWord(String wordTemp) {
-        ClientSession.Instace().asynGetResponse(
-                new WordUpdateRequest(AccountManager.Instace(mContext).userId,
-                        WordUpdateRequest.MODE_INSERT, wordTemp),
-                new IResponseReceiver() {
-                    @Override
-                    public void onResponse(BaseHttpResponse response, BaseHttpRequest request, int rspCookie) {
-                        WordUpdateResponse wur = (WordUpdateResponse) response;
-                        if (wur.result == 1) {
-                            // Log.e("添加网络生词本", wur.word+","+true);
-                        }
-                    }
-                }, null, null);
-    }
 
     Handler handler = new Handler() {
         @Override

@@ -10,6 +10,8 @@ import com.iyuba.CET4bible.R;
 import com.iyuba.CET4bible.listening.ListenCommentFragment;
 import com.iyuba.CET4bible.listening.ListenOriginalFragment;
 import com.iyuba.CET4bible.listening.ListenTestFragment;
+import com.iyuba.CET4bible.listening.RankFragment;
+import com.iyuba.CET4bible.listening.ReadEvaluateFragment;
 
 public class ListenFragmentAdapter extends FragmentStatePagerAdapter {
     protected static String[] CONTENT;
@@ -35,19 +37,24 @@ public class ListenFragmentAdapter extends FragmentStatePagerAdapter {
     public Fragment getItem(int position) {
         Fragment fragment;
         switch (position) {
-            case 0:
+            case 1:
                 fragment = new ListenOriginalFragment();
                 break;
-            case 1:
+            case 2:
+                fragment = new ReadEvaluateFragment();
+                break;
+            case 0:
                 fragment = new ListenTestFragment();
                 Bundle bundle = new Bundle();
                 bundle.putString("section", section);
                 bundle.putString("examtime", examYear);
-
                 fragment.setArguments(bundle);
                 break;
-            case 2:
-                fragment = new ListenCommentFragment();
+//            case 3:
+//                fragment = new ListenCommentFragment();
+//                break;
+            case 3:
+                fragment = new RankFragment();
                 break;
             default:
                 fragment = new ListenTestFragment();
@@ -62,11 +69,11 @@ public class ListenFragmentAdapter extends FragmentStatePagerAdapter {
     }
 
 
+
     @Override
     public CharSequence getPageTitle(int position) {
-        return title[position];
+        return CONTENT[position];
     }
 
-    String[] title = {"原文", "试题", "知识点"};
 }
 

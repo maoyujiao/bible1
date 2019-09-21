@@ -1,0 +1,146 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/bg_ability"
+    android:orientation="vertical">
+
+    <!--标题  只有测评的  雅思用-->
+    <LinearLayout
+        android:id="@+id/ll_titlebar_test"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:visibility="gone">
+
+        <include layout="@layout/layout_titlebar_sub" />
+    </LinearLayout>
+
+
+    <!--标题 既有测评 又有练习的 四六级用-->
+    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        android:id="@+id/ll_titlebar_test_prac"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+
+        <ImageButton
+            android:id="@+id/btn_nav_back"
+            android:layout_width="45dp"
+            android:layout_height="45dp"
+            android:layout_centerVertical="true"
+            android:layout_gravity="center_vertical"
+            android:background="@drawable/selector_btn_bg_front_trans"
+            android:src="@mipmap/btn_titlebar_back_blue" />
+
+        <!--练习模式-->
+        <TextView
+            android:id="@+id/tv_titlebar_ceping"
+            android:layout_width="0dp"
+            android:layout_height="35dp"
+            android:layout_gravity="bottom"
+            android:layout_marginLeft="60dp"
+            android:layout_weight="1"
+            android:background="@drawable/shape_btnbg_left_sel"
+            android:gravity="center"
+            android:text="测评图谱"
+            android:textColor="@color/white"
+            android:textSize="16sp" />
+        <!--测评模式-->
+        <TextView
+            android:id="@+id/tv_titlebar_test"
+            android:layout_width="0dp"
+            android:layout_height="35dp"
+            android:layout_gravity="bottom"
+            android:layout_marginRight="60dp"
+            android:layout_weight="1"
+            android:background="@drawable/shape_btnbg_right_nor"
+            android:gravity="center"
+            android:text="学习图谱"
+            android:textColor="@color/text_bluenor_color"
+            android:textSize="16sp" />
+
+        <ImageButton
+            android:id="@+id/ibtn_test_guide2"
+            android:layout_width="45dp"
+            android:layout_height="45dp"
+            android:background="@drawable/selector_btn_bg_front_trans"
+            android:src="@mipmap/help_guide" />
+
+    </LinearLayout>
+
+
+    <LinearLayout
+        android:id="@+id/root"
+        android:layout_width="wrap_content"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:orientation="vertical" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center_horizontal"
+        android:orientation="vertical">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="8dp"
+            android:layout_marginLeft="10dp"
+            android:gravity="center_horizontal"
+            android:orientation="horizontal">
+            <!--图片大小180*68 -->
+            <Button
+                android:id="@+id/btn_ability_words"
+                style="@style/AbilityTestButtonStyle"
+                android:background="@drawable/btn_bg_ability_word" />
+
+            <Button
+                android:id="@+id/btn_ability_grammar"
+                style="@style/AbilityTestButtonStyle"
+                android:background="@drawable/btn_bg_ability_grammar" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="8dp"
+            android:layout_marginLeft="10dp"
+            android:gravity="center_horizontal"
+            android:orientation="horizontal">
+
+            <Button
+                android:id="@+id/btn_ability_listen"
+                style="@style/AbilityTestButtonStyle"
+                android:background="@drawable/btn_bg_ability_listen" />
+
+            <Button
+                android:id="@+id/btn_ability_spoken"
+                style="@style/AbilityTestButtonStyle"
+                android:background="@drawable/btn_bg_ability_speak" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="20dp"
+            android:layout_marginLeft="10dp"
+            android:gravity="center_horizontal"
+            android:orientation="horizontal">
+
+            <Button
+                android:id="@+id/btn_ability_read"
+                style="@style/AbilityTestButtonStyle"
+                android:background="@drawable/btn_bg_ability_read" />
+
+            <Button
+                android:id="@+id/btn_ability_write"
+                style="@style/AbilityTestButtonStyle"
+                android:background="@drawable/btn_bg_ability_write" />
+
+        </LinearLayout>
+    </LinearLayout>
+</LinearLayout>

@@ -22,7 +22,7 @@ import okhttp3.Call;
  */
 public class ExamDataUtil {
     public static String getImageUrl(String name) {
-        return "http://m.iyuba.com/ncet/coverImg/" + name;
+        return "http://m.iyuba.cn/ncet/coverImg/" + name;
     }
     public static boolean isFirstRequestData(Context context) {
         return (boolean) SP.get(context, "sp_exam_list_first", true);
@@ -58,7 +58,7 @@ public class ExamDataUtil {
     }
 
     public static void requestList(String type, final ListCallback callback) {
-        String url = "http://m.iyuba.com/ncet/getCetTestList.jsp?level=" + type;
+        String url = "http://m.iyuba.cn/ncet/getCetTestList.jsp?level=" + type;
         Http.get(url, new HttpCallback() {
             @Override
             public void onSucceed(Call call, String response) {
@@ -83,7 +83,7 @@ public class ExamDataUtil {
     }
 
     public static void requestExamData(final Context mContext, String type, final String section, String id, final DataCallback callback) {
-        String url = String.format("http://m.iyuba.com/ncet/getCetTestDetailNew.jsp?level=%s&section=%s&id=%s", type, section, id);
+        String url = String.format("http://m.iyuba.cn/ncet/getCetTestDetailNew.jsp?level=%s&section=%s&id=%s", type, section, id);
         Log.d("diaodebug",url+"");
         Http.get(url, new HttpCallback() {
             @Override
@@ -92,7 +92,7 @@ public class ExamDataUtil {
                     ExamDataBean bean = new Gson().fromJson(response, ExamDataBean.class);
                     ExamDataUtil.writeExamData2DB(mContext, section, bean);
                     callback.onLoadData(true);
-                } catch (JsonSyntaxException e) {
+                } catch (Exception e) {
                     e.printStackTrace();
                     callback.onLoadData(false);
                 }
@@ -100,6 +100,7 @@ public class ExamDataUtil {
 
             @Override
             public void onError(Call call, Exception e) {
+                e.printStackTrace();
                 callback.onLoadData(false);
             }
         });

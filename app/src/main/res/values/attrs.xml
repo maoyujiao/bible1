@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="utf-8"?><!--
+   Copyright (C) 2011 Make Ramen, LLC
+
+   Licensed under the Apache License, Version 2.0 (the "License");
+   you may not use this file except in compliance with the License.
+   You may obtain a copy of the License at
+
+       http://www.apache.org/licenses/LICENSE-2.0
+
+   Unless required by applicable law or agreed to in writing, software
+   distributed under the License is distributed on an "AS IS" BASIS,
+   WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+   See the License for the specific language governing permissions and
+   limitations under the License.
+-->
+<resources>
+    <declare-styleable name="CompoundButton">
+        <attr name="android:button" />
+    </declare-styleable>
+
+    <attr name="image" format="reference"></attr>
+    <declare-styleable name="CustomBgView">
+        <attr name="image" />
+    </declare-styleable>
+
+    <declare-styleable name="myswiperefreshlayout">
+        <attr name="direction_live">
+            <enum name="top" value="0" />
+            <enum name="bottom" value="1" />
+            <enum name="both" value="2" />
+        </attr>
+    </declare-styleable>
+
+    <!--自定义MLImageView的属性 加上了自己的前缀，防止和其他自定义控件冲突-->
+    <declare-styleable name="SuperImageView">
+        <attr name="super_border_color" format="color" />
+        <attr name="super_border_width" format="dimension" />
+        <attr name="super_press_alpha" format="integer" />
+        <attr name="super_press_color" format="color" />
+        <attr name="super_radius" format="dimension" />
+        <attr name="super_shape_type" format="enum">
+            <enum name="none" value="0" />
+            <enum name="round" value="1" />
+            <enum name="rectangle" value="2" />
+        </attr>
+    </declare-styleable>
+
+    <declare-styleable name="roundedimageview">
+        <attr name="border_thickness_num" format="dimension" />
+        <attr name="border_inside_color_rd" format="color" />
+        <attr name="border_progress_color" format="color" />
+        <attr name="border_outside_color_rd" format="color" />
+        <attr name="show_image" format="boolean" />
+    </declare-styleable>
+</resources>

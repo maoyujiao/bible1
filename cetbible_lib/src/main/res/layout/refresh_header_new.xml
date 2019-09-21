@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="utf-8"?><!-- 的头部 -->
+
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="wrap_content">
+
+    <!-- 内容 -->
+
+    <RelativeLayout
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:paddingLeft="30dp">
+
+        <!-- 箭头图像、进度条 -->
+
+        <FrameLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:layout_centerVertical="true">
+
+            <!-- 箭头 -->
+
+            <ImageView
+                android:id="@+id/pull_to_refresh_image"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:src="@drawable/ic_pulltorefresh_arrow" />
+
+            <!-- 进度条 -->
+
+            <ProgressBar
+                android:id="@+id/pull_to_refresh_progress"
+                style="?android:attr/progressBarStyleSmall"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:visibility="gone" />
+        </FrameLayout>
+
+        <!-- 提示、最近更新 -->
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="8dp"
+            android:orientation="vertical">
+
+            <!-- 提示 -->
+
+            <TextView
+                android:id="@+id/pull_to_refresh_text"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:text="@string/pull_to_refresh_pull_label"
+                android:textColor="@color/black"
+                android:textSize="18sp" />
+        </LinearLayout>
+    </RelativeLayout>
+
+</LinearLayout>

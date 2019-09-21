@@ -1,0 +1,114 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:roundProgress="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/bg_ability"
+    android:orientation="vertical">
+    <!--标题-->
+    <include layout="@layout/layout_titlebar_sub" />
+
+    <include layout="@layout/layout_des" />
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="4">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+
+
+            <TextView
+                android:id="@+id/speak_ques_introduce"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="15dp"
+                android:layout_marginLeft="10dp"
+                android:layout_marginRight="10dp"
+                android:layout_marginTop="10dp"
+                android:gravity="center_vertical"
+                android:text="请选出与句中划线部分相符的单词或短语。 许多次我都想放弃，但我奋力坚持了下来。"
+                android:textColor="@color/black_opaque"
+                android:textSize="18sp" />
+
+            <TextView
+                android:id="@+id/speak_ques_content"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="15dp"
+                android:layout_marginLeft="10dp"
+                android:layout_marginRight="10dp"
+                android:layout_marginTop="10dp"
+                android:lineSpacingMultiplier="1.2"
+                android:text="This is question content.This  is notice.Depending on this you can do the Question below"
+                android:textColor="@color/black_opaque"
+                android:textSize="20sp" />
+
+        </LinearLayout>
+    </ScrollView>
+    <!--分割线-->
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/text_bluenor_color"
+        android:paddingLeft="10dp"
+        android:text="Question"
+        android:textColor="@color/white" />
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="4">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+            <!--单选题目-->
+            <LinearLayout
+                android:visibility="gone"
+                android:id="@+id/speak_ques_choices"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+                <include layout="@layout/layout_chose_single"/>
+
+            </LinearLayout>
+            <!--口语 语音评测-->
+            <RelativeLayout
+                android:id="@+id/speak_ques_speak"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginTop="20dp">
+
+                <com.iyuba.core.widget.RoundProgressBar
+                    android:id="@+id/sentence_read"
+                    android:layout_width="70dp"
+                    android:layout_height="70dp"
+                    android:layout_centerInParent="true"
+                    android:background="@mipmap/speak_ques_read"
+                    android:clickable="true"
+                    roundProgress:circleColor="@color/transparent"
+                    roundProgress:circleProgressColor="@color/blue"
+                    roundProgress:circleWidth="5dip"
+                    roundProgress:textColor="@color/transparent" />
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/sentence_read"
+                    android:layout_marginTop="50dp"
+                    android:gravity="center"
+                    android:text="轻触开始录音" />
+            </RelativeLayout>
+
+        </LinearLayout>
+
+    </ScrollView>
+
+    <include layout="@layout/layout_bottom_indicator_next" />
+</LinearLayout>

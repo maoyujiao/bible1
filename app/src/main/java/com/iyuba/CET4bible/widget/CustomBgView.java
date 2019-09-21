@@ -95,8 +95,8 @@ public class CustomBgView extends View {
         Rect rect = new Rect(paddingLeft, paddingTop,
                 mWidth, mHeight);
         canvas.drawBitmap(mImage, null, rect, mPaint);
-        canvas.drawText(mText, mContext.getResources().getDimension(R.dimen.marginX_title), mContext.getResources().getDimension(R.dimen.marginY_title), mPaint);
-        canvas.drawText(mSubText, mContext.getResources().getDimension(R.dimen.marginX_subTitle), mContext.getResources().getDimension(R.dimen.marginY_subTitle), mPaint);
+//        canvas.drawText(mText, mContext.getResources().getDimension(R.dimen.marginX_title), mContext.getResources().getDimension(R.dimen.marginY_title), mPaint);
+//        canvas.drawText(mSubText, mContext.getResources().getDimension(R.dimen.marginX_subTitle), mContext.getResources().getDimension(R.dimen.marginY_subTitle), mPaint);
 
     }
 

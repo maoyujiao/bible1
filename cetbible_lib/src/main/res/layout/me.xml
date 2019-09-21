@@ -1,0 +1,1033 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/background_color"
+    android:orientation="vertical">
+
+    <ListView
+        android:id="@android:id/list"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:visibility="gone" />
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:background="?attr/colorPrimary"
+        tools:background="@color/black">
+
+        <Button
+            android:id="@+id/button_back"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:layout_alignParentLeft="true"
+            android:layout_centerVertical="true"
+            android:background="@drawable/lib_back_button"
+            tools:visibility="invisible" />
+
+        <TextView
+            android:id="@+id/tv_sign"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_marginStart="10dp"
+            android:paddingBottom="5dp"
+            android:paddingEnd="12dp"
+            android:paddingStart="12dp"
+            android:paddingTop="5dp"
+            android:text="打卡"
+            android:textColor="@android:color/white" />
+
+        <TextView
+            android:id="@+id/title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:text="@string/me_title"
+            android:textColor="@color/base_white"
+            android:textSize="19sp" />
+
+        <Button
+            android:id="@+id/logout"
+            android:layout_width="wrap_content"
+            android:layout_height="40dp"
+            android:layout_alignParentEnd="true"
+            android:layout_centerVertical="true"
+            android:layout_gravity="center"
+            android:background="#00ffffff"
+            android:text="注册/登录"
+            android:textColor="@color/base_white" />
+    </RelativeLayout>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="0.5dp"
+        android:background="@color/divider_line" />
+
+    <RelativeLayout
+        android:id="@+id/noLogin"
+        android:layout_width="match_parent"
+        android:layout_height="250dp"
+        android:visibility="gone">
+
+        <Button
+            android:id="@+id/button_to_login"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:background="@drawable/shape_btn_bg_grey"
+            android:paddingEnd="16dp"
+            android:paddingStart="16dp"
+            android:text="@string/no_login" />
+    </RelativeLayout>
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <LinearLayout
+                android:id="@+id/login"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+                <include
+                    layout="@layout/me_top"
+                    android:id="@+id/me_top"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="10dp"
+                    android:layout_marginEnd="10dp"
+                    android:layout_marginStart="10dp"
+                    android:layout_marginTop="10dp" />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginRight="10dp"
+                    android:background="@drawable/shape_setting_panel_background"
+                    android:orientation="vertical">
+
+                    <LinearLayout
+                        android:id="@+id/me_state_change"
+                        android:layout_width="match_parent"
+                        android:layout_height="50dp"
+                        android:background="?attr/selectableItemBackground"
+                        android:gravity="center_vertical"
+                        android:orientation="horizontal">
+
+                        <ImageView
+                            android:layout_width="25dp"
+                            android:layout_height="25dp"
+                            android:layout_marginLeft="10dp"
+                            android:src="@drawable/p_state" />
+
+                        <TextView
+                            android:id="@+id/fix"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_margin="10dp"
+                            android:drawablePadding="5dp"
+                            android:gravity="center"
+                            android:text="@string/me_state_text"
+                            android:textColor="#000000"
+                            android:textSize="17sp" />
+
+                        <TextView
+                            android:id="@+id/me_state"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="3dp"
+                            android:layout_marginRight="3dp"
+                            android:layout_weight="1"
+                            android:ellipsize="end"
+                            android:gravity="center_vertical"
+                            android:singleLine="true"
+                            android:textColor="@color/gray"
+                            android:textSize="14sp" />
+
+                        <ImageView
+                            android:id="@+id/go"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginRight="10dp"
+                            android:src="@drawable/go" />
+                    </LinearLayout>
+
+                    <View
+                         android:layout_width="match_parent"
+                        android:layout_height="0.5dp"
+                        android:layout_marginLeft="10dp"
+                        android:layout_marginRight="10dp"
+                        android:background="#dcdcdc" />
+
+                    <RelativeLayout
+                        android:id="@+id/me_message"
+                        android:layout_width="match_parent"
+                        android:layout_height="50dp"
+                        android:background="?attr/selectableItemBackground">
+
+                        <ImageView
+                            android:id="@+id/iv_mess"
+                            android:layout_width="25dp"
+                            android:layout_height="25dp"
+                            android:layout_alignParentLeft="true"
+                            android:layout_centerVertical="true"
+                            android:layout_marginLeft="10dp"
+                            android:src="@drawable/p_mess" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_centerVertical="true"
+                            android:layout_margin="10dp"
+                            android:layout_toRightOf="@id/iv_mess"
+                            android:drawablePadding="5dp"
+                            android:gravity="center"
+                            android:text="@string/me_message_text"
+                            android:textColor="#000000"
+                            android:textSize="17sp" />
+
+                        <ImageView
+                            android:id="@+id/goletter"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_alignParentRight="true"
+                            android:layout_centerVertical="true"
+                            android:layout_marginRight="10dp"
+                            android:src="@drawable/go" />
+
+                        <ImageView
+                            android:id="@+id/newletter"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_centerVertical="true"
+                            android:layout_marginRight="10dp"
+                            android:layout_toLeftOf="@+id/goletter"
+                            android:src="@drawable/new_app"
+                            android:visibility="gone" />
+                    </RelativeLayout>
+
+                    <ImageView
+                        android:layout_width="match_parent"
+                        android:layout_height="0.5dp"
+                        android:background="#dcdcdc" />
+
+                    <RelativeLayout
+                        android:id="@+id/me_vip"
+                        android:layout_width="match_parent"
+                        android:layout_height="50dp"
+                        android:background="?attr/selectableItemBackground"
+                        android:gravity="center_vertical">
+
+                        <ImageView
+                            android:id="@+id/iv_vip"
+                            android:layout_width="25dp"
+                            android:layout_height="25dp"
+                            android:layout_alignParentLeft="true"
+                            android:layout_centerVertical="true"
+                            android:layout_marginLeft="10dp"
+                            android:src="@drawable/p_vip" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_centerVertical="true"
+                            android:layout_margin="10dp"
+                            android:layout_toRightOf="@id/iv_vip"
+                            android:drawablePadding="5dp"
+                            android:gravity="center"
+                            android:text="@string/me_vip_text"
+                            android:textColor="#000000"
+                            android:textSize="17sp" />
+
+                        <ImageView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_alignParentRight="true"
+                            android:layout_centerVertical="true"
+                            android:layout_marginRight="10dp"
+                            android:src="@drawable/go" />
+                    </RelativeLayout>
+
+                    <ImageView
+                        android:layout_width="match_parent"
+                        android:layout_height="0.5dp"
+                        android:background="#dcdcdc"
+                        android:visibility="gone" />
+
+                    <RelativeLayout
+                        android:id="@+id/me_privilege"
+                        android:layout_width="match_parent"
+                        android:layout_height="50dp"
+                        android:background="?attr/selectableItemBackground"
+                        android:gravity="bottom"
+                        android:visibility="gone">
+
+                        <ImageView
+                            android:id="@+id/iv_privilege"
+                            android:layout_width="25dp"
+                            android:layout_height="25dp"
+                            android:layout_alignParentLeft="true"
+                            android:layout_centerVertical="true"
+                            android:layout_marginLeft="10dp"
+                            android:src="@drawable/p_privilege" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_centerVertical="true"
+                            android:layout_margin="10dp"
+                            android:layout_toRightOf="@id/iv_privilege"
+                            android:drawablePadding="5dp"
+                            android:gravity="center"
+                            android:text="优惠券"
+                            android:textColor="#000000"
+                            android:textSize="17sp" />
+
+                        <ImageView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_alignParentRight="true"
+                            android:layout_centerVertical="true"
+                            android:layout_marginRight="10dp"
+                            android:src="@drawable/go" />
+                    </RelativeLayout>
+
+                    <ImageView
+                        android:layout_width="match_parent"
+                        android:layout_height="0.5dp"
+                        android:background="#dcdcdc" />
+
+                    <LinearLayout
+                        android:id="@+id/rl_favorite"
+                        android:layout_width="match_parent"
+                        android:layout_height="50dp"
+                        android:background="?attr/selectableItemBackground"
+                        android:gravity="center_vertical">
+
+                        <ImageView
+                            android:layout_width="35dp"
+                            android:layout_height="35dp"
+                            android:layout_marginStart="5dp"
+                            android:src="@drawable/ic_favorite_news" />
+
+                        <TextView
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="4dp"
+                            android:layout_weight="1"
+                            android:text="我的收藏"
+                            android:textColor="#000000"
+                            android:textSize="17sp" />
+
+                        <ImageView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginRight="10dp"
+                            android:src="@drawable/go" />
+                    </LinearLayout>
+
+                    <ImageView
+                        android:layout_width="match_parent"
+                        android:layout_height="0.5dp"
+                        android:background="#dcdcdc"
+                        android:visibility="gone" />
+
+                    <LinearLayout
+                        android:id="@+id/rl_download"
+                        android:layout_width="match_parent"
+                        android:layout_height="50dp"
+                        android:background="?attr/selectableItemBackground"
+                        android:gravity="center_vertical"
+                        android:visibility="gone">
+
+                        <ImageView
+                            android:layout_width="35dp"
+                            android:layout_height="35dp"
+                            android:layout_marginStart="5dp"
+                            android:src="@drawable/ic_news_download" />
+
+                        <TextView
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="4dp"
+                            android:layout_weight="1"
+                            android:text="我的下载"
+                            android:textColor="#000000"
+                            android:textSize="17sp" />
+
+                        <ImageView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginRight="10dp"
+                            android:src="@drawable/go" />
+                    </LinearLayout>
+
+                    <ImageView
+                        android:layout_width="match_parent"
+                        android:layout_height="0.5dp"
+                        android:background="#dcdcdc"
+                        android:visibility="visible" />
+
+                    <RelativeLayout
+                        android:id="@+id/me_discover"
+                        android:layout_width="match_parent"
+                        android:layout_height="50dp"
+                        android:background="?attr/selectableItemBackground"
+                        android:gravity="center_vertical">
+
+                        <ImageView
+                            android:id="@+id/iv_discover"
+                            android:layout_width="32dp"
+                            android:layout_height="32dp"
+                            android:layout_alignParentLeft="true"
+                            android:layout_centerVertical="true"
+                            android:layout_marginLeft="8dp"
+                            android:src="@drawable/ic_discover_me" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_centerVertical="true"
+                            android:layout_margin="6dp"
+                            android:layout_toRightOf="@id/iv_discover"
+                            android:drawablePadding="5dp"
+                            android:gravity="center"
+                            android:text="探索"
+                            android:textColor="#000000"
+                            android:textSize="17sp" />
+
+                        <ImageView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_alignParentRight="true"
+                            android:layout_centerVertical="true"
+                            android:layout_marginRight="10dp"
+                            android:src="@drawable/go" />
+                    </RelativeLayout>
+                </LinearLayout>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="8dp"
+                    android:text="@string/discover_question"
+                    android:textColor="#000000"
+                    android:textSize="16sp" />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginRight="10dp"
+                    android:background="@drawable/shape_setting_panel_background"
+                    android:orientation="vertical">
+
+                    <RelativeLayout
+                        android:id="@+id/discover_rqlist"
+                        android:layout_width="match_parent"
+                        android:layout_height="50dp"
+                        android:background="?attr/selectableItemBackground"
+                        android:visibility="gone">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_centerVertical="true"
+                            android:layout_margin="10dp"
+                            android:drawableLeft="@drawable/p_searchfriends"
+                            android:drawablePadding="5dp"
+                            android:gravity="center"
+                            android:text="@string/discover_qlist"
+                            android:textColor="#444444"
+                            android:textSize="17sp" />
+
+                        <ImageView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_alignParentRight="true"
+                            android:layout_centerVertical="true"
+                            android:layout_marginRight="10dp"
+                            android:src="@drawable/go" />
+                    </RelativeLayout>
+
+                    <ImageView
+                        android:layout_width="match_parent"
+                        android:layout_height="0.5dp"
+                        android:background="#dcdcdc"
+                        android:visibility="gone" />
+
+                    <LinearLayout
+                        android:id="@+id/rl_community"
+                        android:layout_width="match_parent"
+                        android:layout_height="50dp"
+                        android:background="?attr/selectableItemBackground"
+                        android:gravity="center_vertical"
+                        android:orientation="horizontal">
+
+                        <ImageView
+                            android:layout_width="40dp"
+                            android:layout_height="40dp"
+                            android:layout_marginLeft="5dp"
+                            android:src="@drawable/iv_my_ask" />
+
+                        <TextView
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:text="问 一 问"
+                            android:textColor="#444444"
+                            android:textSize="17sp" />
+
+                        <ImageView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginRight="10dp"
+                            android:src="@drawable/go" />
+                    </LinearLayout>
+
+                    <ImageView
+                        android:layout_width="match_parent"
+                        android:layout_height="0.5dp"
+                        android:background="#dcdcdc"
+                        android:visibility="visible" />
+
+                    <RelativeLayout
+                        android:id="@+id/discover_myq"
+                        android:layout_width="match_parent"
+                        android:layout_height="50dp"
+                        android:background="?attr/selectableItemBackground">
+
+                        <ImageView
+                            android:id="@+id/iv_mine_que_myque2"
+                            android:layout_width="25dp"
+                            android:layout_height="25dp"
+                            android:layout_alignParentLeft="true"
+                            android:layout_centerVertical="true"
+                            android:layout_marginLeft="10dp"
+                            android:src="@drawable/mine_que_myque" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_centerVertical="true"
+                            android:layout_margin="10dp"
+                            android:layout_toRightOf="@id/iv_mine_que_myque2"
+                            android:drawablePadding="5dp"
+                            android:gravity="center"
+                            android:text="@string/discover_myques"
+                            android:textColor="#444444"
+                            android:textSize="17sp" />
+
+                        <ImageView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_alignParentRight="true"
+                            android:layout_centerVertical="true"
+                            android:layout_marginRight="10dp"
+                            android:src="@drawable/go" />
+                    </RelativeLayout>
+
+                    <ImageView
+                        android:layout_width="match_parent"
+                        android:layout_height="0.5dp"
+                        android:background="#dcdcdc"
+                        android:visibility="gone" />
+
+                    <RelativeLayout
+                        android:id="@+id/discover_mysub"
+                        android:layout_width="match_parent"
+                        android:layout_height="50dp"
+                        android:background="?attr/selectableItemBackground"
+                        android:visibility="gone">
+
+                        <ImageView
+                            android:id="@+id/iv_mine_que_myque"
+                            android:layout_width="25dp"
+                            android:layout_height="25dp"
+                            android:layout_alignParentLeft="true"
+                            android:layout_centerVertical="true"
+                            android:layout_marginLeft="10dp"
+                            android:src="@drawable/mine_que_myque" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_centerVertical="true"
+                            android:layout_margin="10dp"
+                            android:layout_toRightOf="@id/iv_mine_que_myque"
+                            android:drawablePadding="5dp"
+                            android:gravity="center"
+                            android:text="@string/discover_mysubq"
+                            android:textColor="#444444"
+                            android:textSize="17sp" />
+
+                        <ImageView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_alignParentRight="true"
+                            android:layout_centerVertical="true"
+                            android:layout_marginRight="10dp"
+                            android:src="@drawable/go" />
+                    </RelativeLayout>
+
+                    <ImageView
+                        android:layout_width="match_parent"
+                        android:layout_height="0.5dp"
+                        android:background="#dcdcdc" />
+
+                    <RelativeLayout
+                        android:id="@+id/discover_qnotice"
+                        android:layout_width="match_parent"
+                        android:layout_height="50dp"
+                        android:background="?attr/selectableItemBackground">
+
+                        <ImageView
+                            android:id="@+id/iv_mine_que_notification"
+                            android:layout_width="25dp"
+                            android:layout_height="25dp"
+                            android:layout_alignParentLeft="true"
+                            android:layout_centerVertical="true"
+                            android:layout_marginLeft="10dp"
+                            android:src="@drawable/mine_que_notification" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_centerVertical="true"
+                            android:layout_margin="10dp"
+                            android:layout_toRightOf="@id/iv_mine_que_notification"
+                            android:drawablePadding="5dp"
+                            android:gravity="center"
+                            android:text="@string/discover_qnt"
+                            android:textColor="#444444"
+                            android:textSize="17sp" />
+
+                        <ImageView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_alignParentRight="true"
+                            android:layout_centerVertical="true"
+                            android:layout_marginRight="10dp"
+                            android:src="@drawable/go" />
+                    </RelativeLayout>
+
+
+                    <!--<ImageView-->
+                    <!--android:layout_width="match_parent"-->
+                    <!--android:layout_height="0.5dp"-->
+                    <!--android:background="#dcdcdc" />-->
+
+                </LinearLayout>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="8dp"
+                    android:text="我的智能化学习"
+                    android:textColor="#000000"
+                    android:textSize="16sp" />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginRight="10dp"
+                    android:background="@drawable/shape_setting_panel_background"
+                    android:orientation="vertical">
+
+                    <RelativeLayout
+                        android:id="@+id/study_ranking"
+                        android:layout_width="match_parent"
+                        android:layout_height="50dp"
+                        android:background="?attr/selectableItemBackground">
+
+                        <ImageView
+                            android:id="@+id/iv_mine_ranking"
+                            android:layout_width="25dp"
+                            android:layout_height="25dp"
+                            android:layout_alignParentLeft="true"
+                            android:layout_centerVertical="true"
+                            android:layout_marginLeft="10dp"
+                            android:src="@drawable/study_ranking" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_centerVertical="true"
+                            android:layout_margin="10dp"
+                            android:layout_toRightOf="@id/iv_mine_ranking"
+                            android:drawablePadding="5dp"
+                            android:gravity="center"
+                            android:text="排行榜"
+                            android:textColor="#444444"
+                            android:textSize="17sp" />
+
+                        <ImageView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_alignParentRight="true"
+                            android:layout_centerVertical="true"
+                            android:layout_marginRight="10dp"
+                            android:src="@drawable/go" />
+                    </RelativeLayout>
+                    <ImageView
+                        android:layout_width="match_parent"
+                        android:layout_height="0.5dp"
+                        android:background="#dcdcdc" />
+                    <RelativeLayout
+                        android:id="@+id/speak_circle"
+                        android:layout_width="match_parent"
+                        android:layout_height="50dp"
+                        android:background="?attr/selectableItemBackground">
+
+                        <ImageView
+                            android:id="@+id/iv_speak_circle"
+                            android:layout_width="25dp"
+                            android:layout_height="25dp"
+                            android:layout_alignParentLeft="true"
+                            android:layout_centerVertical="true"
+                            android:layout_marginLeft="10dp"
+                            android:src="@drawable/record" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_centerVertical="true"
+                            android:layout_margin="10dp"
+                            android:layout_toRightOf="@id/iv_speak_circle"
+                            android:drawablePadding="5dp"
+                            android:gravity="center"
+                            android:text="口语圈"
+                            android:textColor="#444444"
+                            android:textSize="17sp" />
+
+                        <ImageView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_alignParentRight="true"
+                            android:layout_centerVertical="true"
+                            android:layout_marginRight="10dp"
+                            android:src="@drawable/go" />
+                    </RelativeLayout>
+
+                    <ImageView
+                        android:layout_width="match_parent"
+                        android:layout_height="0.5dp"
+                        android:background="#dcdcdc" />
+
+                    <RelativeLayout
+                        android:id="@+id/intel_userinfo"
+                        android:layout_width="match_parent"
+                        android:layout_height="50dp"
+                        android:background="?attr/selectableItemBackground">
+
+                        <ImageView
+                            android:id="@+id/iv_mine_que_myque1"
+                            android:layout_width="25dp"
+                            android:layout_height="25dp"
+                            android:layout_alignParentLeft="true"
+                            android:layout_centerVertical="true"
+                            android:layout_marginLeft="10dp"
+                            android:src="@drawable/mine_intel_myinfo" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_centerVertical="true"
+                            android:layout_margin="10dp"
+                            android:layout_toRightOf="@id/iv_mine_que_myque1"
+                            android:drawablePadding="5dp"
+                            android:gravity="center"
+                            android:text="个人信息完善"
+                            android:textColor="#444444"
+                            android:textSize="17sp" />
+
+                        <ImageView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_alignParentRight="true"
+                            android:layout_centerVertical="true"
+                            android:layout_marginRight="10dp"
+                            android:src="@drawable/go" />
+                    </RelativeLayout>
+
+                    <ImageView
+                        android:layout_width="match_parent"
+                        android:layout_height="0.5dp"
+                        android:background="#dcdcdc" />
+
+                    <RelativeLayout
+                        android:id="@+id/intel_goal"
+                        android:layout_width="match_parent"
+                        android:layout_height="50dp"
+                        android:background="?attr/selectableItemBackground">
+
+                        <ImageView
+                            android:id="@+id/iv_mine_que_myque9"
+                            android:layout_width="25dp"
+                            android:layout_height="25dp"
+                            android:layout_alignParentLeft="true"
+                            android:layout_centerVertical="true"
+                            android:layout_marginLeft="10dp"
+                            android:src="@drawable/mine_intel_goal" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_centerVertical="true"
+                            android:layout_margin="10dp"
+                            android:layout_toRightOf="@id/iv_mine_que_myque9"
+                            android:drawablePadding="5dp"
+                            android:gravity="center"
+                            android:text="智能化学习目标"
+                            android:textColor="#444444"
+                            android:textSize="17sp" />
+
+                        <ImageView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_alignParentRight="true"
+                            android:layout_centerVertical="true"
+                            android:layout_marginRight="10dp"
+                            android:src="@drawable/go" />
+                    </RelativeLayout>
+
+                    <ImageView
+                        android:layout_width="match_parent"
+                        android:layout_height="0.5dp"
+                        android:background="#dcdcdc" />
+
+                    <RelativeLayout
+                        android:id="@+id/intel_result"
+                        android:layout_width="match_parent"
+                        android:layout_height="50dp"
+                        android:background="?attr/selectableItemBackground">
+
+                        <ImageView
+                            android:id="@+id/iv_mine_que_myque3"
+                            android:layout_width="25dp"
+                            android:layout_height="25dp"
+                            android:layout_alignParentLeft="true"
+                            android:layout_centerVertical="true"
+                            android:layout_marginLeft="10dp"
+                            android:src="@drawable/mine_intel_result" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_centerVertical="true"
+                            android:layout_margin="10dp"
+                            android:layout_toRightOf="@id/iv_mine_que_myque3"
+                            android:drawablePadding="5dp"
+                            android:gravity="center"
+                            android:text="智能化学习成果"
+                            android:textColor="#444444"
+                            android:textSize="17sp" />
+
+                        <ImageView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_alignParentRight="true"
+                            android:layout_centerVertical="true"
+                            android:layout_marginRight="10dp"
+                            android:src="@drawable/go" />
+                    </RelativeLayout>
+
+                    <ImageView
+                        android:layout_width="match_parent"
+                        android:layout_height="0.5dp"
+                        android:background="#dcdcdc" />
+
+                    <RelativeLayout
+                        android:id="@+id/intel_test_result"
+                        android:layout_width="match_parent"
+                        android:layout_height="50dp"
+                        android:background="?attr/selectableItemBackground">
+
+                        <ImageView
+                            android:id="@+id/iv_mine_que_myque4"
+                            android:layout_width="25dp"
+                            android:layout_height="25dp"
+                            android:layout_alignParentLeft="true"
+                            android:layout_centerVertical="true"
+                            android:layout_marginLeft="10dp"
+                            android:src="@drawable/mine_intel_test" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_centerVertical="true"
+                            android:layout_margin="10dp"
+                            android:layout_toRightOf="@id/iv_mine_que_myque4"
+                            android:drawablePadding="5dp"
+                            android:gravity="center"
+                            android:text="智能化测试成果"
+                            android:textColor="#444444"
+                            android:textSize="17sp" />
+
+                        <ImageView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_alignParentRight="true"
+                            android:layout_centerVertical="true"
+                            android:layout_marginRight="10dp"
+                            android:src="@drawable/go" />
+                    </RelativeLayout>
+
+                    <View
+                        android:layout_width="match_parent"
+                        android:layout_height="0.5dp"
+                        android:background="#dcdcdc" />
+
+                    <RelativeLayout
+                        android:id="@+id/intel_word_result"
+                        android:layout_width="match_parent"
+                        android:layout_height="50dp"
+                        android:background="?attr/selectableItemBackground">
+
+                        <ImageView
+                            android:id="@+id/iv_mine_que_myque5"
+                            android:layout_width="25dp"
+                            android:layout_height="25dp"
+                            android:layout_alignParentLeft="true"
+                            android:layout_centerVertical="true"
+                            android:layout_marginLeft="10dp"
+                            android:src="@drawable/mine_intel_word" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_centerVertical="true"
+                            android:layout_margin="10dp"
+                            android:layout_toRightOf="@id/iv_mine_que_myque5"
+                            android:drawablePadding="5dp"
+                            android:gravity="center"
+                            android:text="单词大数据"
+                            android:textColor="#444444"
+                            android:textSize="17sp" />
+
+                        <ImageView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_alignParentRight="true"
+                            android:layout_centerVertical="true"
+                            android:layout_marginRight="10dp"
+                            android:src="@drawable/go" />
+                    </RelativeLayout>
+                </LinearLayout>
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="20dp"
+                android:orientation="vertical">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="8dp"
+                    android:text="设置"
+                    android:textColor="#000000"
+                    android:textSize="16sp" />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="10dp"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginRight="10dp"
+                    android:background="@drawable/shape_setting_panel_background"
+                    android:orientation="vertical">
+
+                    <RelativeLayout
+                        android:id="@+id/discover_iyubaset"
+                        android:layout_width="match_parent"
+                        android:layout_height="50dp"
+                        android:background="?attr/selectableItemBackground">
+
+                        <ImageView
+                            android:id="@+id/iv_iyubaset"
+                            android:layout_width="25dp"
+                            android:layout_height="25dp"
+                            android:layout_alignParentLeft="true"
+                            android:layout_centerVertical="true"
+                            android:layout_marginLeft="10dp"
+                            android:src="@drawable/p_setting" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_centerVertical="true"
+                            android:layout_margin="10dp"
+                            android:layout_toRightOf="@id/iv_iyubaset"
+                            android:drawablePadding="5dp"
+                            android:gravity="center"
+                            android:text="设置"
+                            android:textColor="#444444"
+                            android:textSize="17sp" />
+
+                        <ImageView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_alignParentRight="true"
+                            android:layout_centerVertical="true"
+                            android:layout_marginRight="10dp"
+                            android:src="@drawable/go" />
+                    </RelativeLayout>
+
+                    <View
+                        android:layout_width="match_parent"
+                        android:layout_height="0.5dp"
+                        android:background="#dcdcdc" />
+
+                    <LinearLayout
+                        android:id="@+id/ll_about"
+                        android:layout_width="match_parent"
+                        android:layout_height="50dp"
+                        android:background="?attr/selectableItemBackground"
+                        android:gravity="center_vertical"
+                        android:orientation="horizontal">
+
+                        <ImageView
+                            android:layout_width="25dp"
+                            android:layout_height="25dp"
+                            android:layout_marginLeft="10dp"
+                            android:src="@drawable/p_about" />
+
+                        <TextView
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_margin="10dp"
+                            android:layout_weight="1"
+                            android:drawablePadding="5dp"
+                            android:text="关于"
+                            android:textColor="#444444"
+                            android:textSize="17sp" />
+
+                        <ImageView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginRight="10dp"
+                            android:src="@drawable/go" />
+                    </LinearLayout>
+
+
+                </LinearLayout>
+            </LinearLayout>
+
+
+        </LinearLayout>
+    </ScrollView>
+
+</LinearLayout>

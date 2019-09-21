@@ -14,7 +14,7 @@ import java.text.SimpleDateFormat;
 
 public class OrderGenerateWeiXinRequest extends BaseJsonObjectRequest {
     private static final String TAG = OrderGenerateWeiXinRequest.class.getSimpleName();
-    private static final String URL = "http://vip.iyuba.com/weixinPay.jsp?";
+    private static final String URL = "http://vip.iyuba.cn/weixinPay.jsp?";
     private static SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMdd");
     public int retcode = -233;
     public String retmsg = "";

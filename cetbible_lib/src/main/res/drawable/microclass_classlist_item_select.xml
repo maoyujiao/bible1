@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<selector xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item android:drawable="@color/light_red" android:state_focused="true" android:state_pressed="true"/>
+ <!-- 双条件 -->
+    <item android:drawable="@color/light_red" android:state_focused="false" android:state_pressed="true"/>
+    <item android:drawable="@color/light_red" android:state_selected="true"/>
+    <item android:drawable="@color/white"/>
+  <!--   <item android:drawable="@drawable/shape_listview_item_background"/> -->
+ <!-- default color 当对应状态下没有定义时使用此default -->
+
+</selector>

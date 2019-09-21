@@ -1,0 +1,297 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/backlayout"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:background="@color/background_color">
+
+    <ListView
+        android:id="@android:id/list"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:visibility="gone" />
+
+    <RelativeLayout
+        android:id="@+id/r1"
+        android:layout_width="fill_parent"
+        android:layout_height="50dp"
+        android:background="?attr/colorPrimary">
+
+        <ImageView
+            android:id="@+id/button_back"
+            style="@style/base_style_button_back_white"
+            android:background="?attr/selectableItemBackground" />
+
+        <TextView
+            android:id="@+id/play_title_info"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:text="@string/sort_set_title"
+            android:textAppearance="?android:attr/textAppearanceLarge"
+            android:textColor="@color/base_white" />
+    </RelativeLayout>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="0.5dp"
+        android:layout_below="@+id/r1"
+        android:background="@color/divider_line" />
+
+    <ScrollView
+        android:id="@+id/scrollview"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@+id/r1">
+
+        <LinearLayout
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="10dp"
+                android:text="@string/sort_set_order"
+                android:textColor="#000000"
+                android:textSize="16sp" />
+
+            <LinearLayout
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="10dp"
+                android:layout_marginRight="10dp"
+                android:background="@drawable/shape_setting_panel_background"
+                android:orientation="vertical">
+
+                <RelativeLayout
+                    android:id="@+id/basic"
+                    android:layout_width="fill_parent"
+                    android:layout_height="50dp">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_centerVertical="true"
+                        android:layout_margin="10dp"
+                        android:text="@string/sort_set_default"
+                        android:textColor="#000000"
+                        android:textSize="17sp" />
+
+                    <RadioButton
+                        android:id="@+id/default_radio"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentRight="true"
+                        android:layout_centerVertical="true"
+                        android:layout_marginRight="10dp" />
+                </RelativeLayout>
+
+                <ImageView
+                    android:layout_width="fill_parent"
+                    android:layout_height="1dp"
+                    android:background="#dcdcdc" />
+
+                <RelativeLayout
+                    android:id="@+id/random"
+                    android:layout_width="fill_parent"
+                    android:layout_height="50dp">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_centerVertical="true"
+                        android:layout_margin="10dp"
+                        android:text="@string/sort_set_random"
+                        android:textColor="#000000"
+                        android:textSize="17sp" />
+
+                    <RadioButton
+                        android:id="@+id/random_radio"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentRight="true"
+                        android:layout_centerVertical="true"
+                        android:layout_marginRight="10dp" />
+                </RelativeLayout>
+
+                <ImageView
+                    android:id="@+id/line_root"
+                    android:layout_width="fill_parent"
+                    android:layout_height="1dp"
+                    android:background="#dcdcdc" />
+
+                <RelativeLayout
+                    android:id="@+id/root"
+                    android:layout_width="fill_parent"
+                    android:layout_height="50dp">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_centerVertical="true"
+                        android:layout_margin="10dp"
+                        android:text="词根"
+                        android:textColor="#000000"
+                        android:textSize="17sp" />
+
+                    <RadioButton
+                        android:id="@+id/root_radio"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentRight="true"
+                        android:layout_centerVertical="true"
+                        android:layout_marginRight="10dp" />
+                </RelativeLayout>
+            </LinearLayout>
+
+            <!--<TextView-->
+            <!--android:layout_width="wrap_content"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:layout_margin="10dp"-->
+            <!--android:text="@string/sort_set_star"-->
+            <!--android:textColor="#000000"-->
+            <!--android:textSize="16sp" />-->
+
+            <LinearLayout
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="10dp"
+                android:layout_marginRight="10dp"
+                android:background="@drawable/shape_setting_panel_background"
+                android:orientation="vertical">
+
+                <!--<RelativeLayout-->
+                <!--android:id="@+id/zero_star"-->
+                <!--android:layout_width="fill_parent"-->
+                <!--android:layout_height="50dp" >-->
+
+                <!--<TextView-->
+                <!--android:layout_width="wrap_content"-->
+                <!--android:layout_height="wrap_content"-->
+                <!--android:layout_centerVertical="true"-->
+                <!--android:layout_margin="10dp"-->
+                <!--android:text="@string/sort_set_star0"-->
+                <!--android:textColor="#000000"-->
+                <!--android:textSize="17sp" />-->
+
+                <!--<RadioButton-->
+                <!--android:id="@+id/zero_star_radio"-->
+                <!--android:layout_width="wrap_content"-->
+                <!--android:layout_height="wrap_content"-->
+                <!--android:layout_alignParentRight="true"-->
+                <!--android:layout_centerVertical="true"-->
+                <!--android:layout_marginRight="10dp" />-->
+                <!--</RelativeLayout>-->
+
+                <!--<ImageView-->
+                <!--android:layout_width="fill_parent"-->
+                <!--android:layout_height="1dp"-->
+                <!--android:background="#dcdcdc" />-->
+
+                <!--<RelativeLayout-->
+                <!--android:id="@+id/one_star"-->
+                <!--android:layout_width="fill_parent"-->
+                <!--android:layout_height="50dp" >-->
+
+                <!--<TextView-->
+                <!--android:layout_width="wrap_content"-->
+                <!--android:layout_height="wrap_content"-->
+                <!--android:layout_centerVertical="true"-->
+                <!--android:layout_margin="10dp"-->
+                <!--android:text="@string/sort_set_star1"-->
+                <!--android:textColor="#000000"-->
+                <!--android:textSize="17sp" />-->
+
+                <!--<RadioButton-->
+                <!--android:id="@+id/one_star_radio"-->
+                <!--android:layout_width="wrap_content"-->
+                <!--android:layout_height="wrap_content"-->
+                <!--android:layout_alignParentRight="true"-->
+                <!--android:layout_centerVertical="true"-->
+                <!--android:layout_marginRight="10dp" />-->
+                <!--</RelativeLayout>-->
+
+                <!--<ImageView-->
+                <!--android:layout_width="fill_parent"-->
+                <!--android:layout_height="1dp"-->
+                <!--android:background="#dcdcdc" />-->
+
+                <!--<RelativeLayout-->
+                <!--android:id="@+id/two_star"-->
+                <!--android:layout_width="fill_parent"-->
+                <!--android:layout_height="50dp" >-->
+
+                <!--<TextView-->
+                <!--android:layout_width="wrap_content"-->
+                <!--android:layout_height="wrap_content"-->
+                <!--android:layout_centerVertical="true"-->
+                <!--android:layout_margin="10dp"-->
+                <!--android:text="@string/sort_set_star2"-->
+                <!--android:textColor="#000000"-->
+                <!--android:textSize="17sp" />-->
+
+                <!--<RadioButton-->
+                <!--android:id="@+id/two_star_radio"-->
+                <!--android:layout_width="wrap_content"-->
+                <!--android:layout_height="wrap_content"-->
+                <!--android:layout_alignParentRight="true"-->
+                <!--android:layout_centerVertical="true"-->
+                <!--android:layout_marginRight="10dp" />-->
+                <!--</RelativeLayout>-->
+
+                <!--<ImageView-->
+                <!--android:layout_width="fill_parent"-->
+                <!--android:layout_height="1dp"-->
+                <!--android:background="#dcdcdc" />-->
+
+                <!--<RelativeLayout-->
+                <!--android:id="@+id/three_star"-->
+                <!--android:layout_width="fill_parent"-->
+                <!--android:layout_height="50dp" >-->
+
+                <!--<TextView-->
+                <!--android:layout_width="wrap_content"-->
+                <!--android:layout_height="wrap_content"-->
+                <!--android:layout_centerVertical="true"-->
+                <!--android:layout_margin="10dp"-->
+                <!--android:text="@string/sort_set_star3"-->
+                <!--android:textColor="#000000"-->
+                <!--android:textSize="17sp" />-->
+
+                <!--<RadioButton-->
+                <!--android:id="@+id/three_star_radio"-->
+                <!--android:layout_width="wrap_content"-->
+                <!--android:layout_height="wrap_content"-->
+                <!--android:layout_alignParentRight="true"-->
+                <!--android:layout_centerVertical="true"-->
+                <!--android:layout_marginRight="10dp" />-->
+                <!--</RelativeLayout>-->
+
+            </LinearLayout>
+
+            <TextView
+                android:id="@+id/txt_letter"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="10dp"
+                android:text="@string/sort_set_initial"
+                android:textColor="#000000"
+                android:textSize="16sp" />
+
+            <com.iyuba.CET4bible.widget.ListViewForScrollView
+                android:id="@+id/initial"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="20dp"
+                android:layout_marginLeft="10dp"
+                android:layout_marginRight="10dp"
+                android:background="@drawable/shape_setting_panel_background"
+                android:cacheColorHint="#00000000"
+                android:divider="#dcdcdc"
+                android:dividerHeight="1dp" />
+        </LinearLayout>
+    </ScrollView>
+
+</RelativeLayout>

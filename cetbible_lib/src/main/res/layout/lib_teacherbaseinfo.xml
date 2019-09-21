@@ -1,0 +1,363 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:background="#ffffff">
+
+    <LinearLayout
+        android:id="@+id/backlayout"
+        android:layout_width="match_parent"
+        android:layout_height="fill_parent"
+        android:background="#f8f6f6"
+        android:orientation="vertical">
+
+        <RelativeLayout
+            android:layout_width="fill_parent"
+            android:layout_height="50dp"
+            android:background="?colorPrimary">
+
+            <Button
+                android:id="@+id/tbutton_back"
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:layout_alignParentLeft="true"
+                android:layout_centerVertical="true"
+                android:background="@drawable/lib_back_button" />
+
+            <TextView
+                android:id="@+id/title"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="#fff"
+                android:layout_centerInParent="true"
+                android:text="@string/teacher_info1"
+                android:textSize="18sp" />
+
+            <TextView
+                android:id="@+id/next2"
+                android:layout_width="wrap_content"
+                android:layout_height="50px"
+                android:layout_alignParentRight="true"
+                android:layout_centerVertical="true"
+                android:textColor="#fff"
+                android:layout_marginLeft="8dp"
+                android:layout_marginRight="5dp"
+                android:text="下一步"
+                android:textSize="15sp" />
+
+        </RelativeLayout>
+
+
+        <RelativeLayout
+            android:layout_width="fill_parent"
+            android:layout_height="80dp">
+
+            <ImageView
+                android:id="@+id/teaacherhead"
+                android:layout_width="60dp"
+                android:layout_height="60dp"
+                android:layout_centerInParent="true"
+                android:layout_marginLeft="15dp"
+                android:layout_marginRight="30dp"
+                android:background="@drawable/photo_pic" />
+
+        </RelativeLayout>
+
+
+        <LinearLayout
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:background="#ffffff">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="50dip"
+                android:gravity="center_vertical"
+                android:paddingLeft="2dip"
+                android:text="*"
+                android:textColor="@color/red" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="50dip"
+                android:gravity="center_vertical"
+                android:paddingLeft="1dip"
+                android:text="@string/teacher_info_name"
+                android:textColor="#000000" />
+
+            <EditText
+                android:id="@+id/editteachername"
+                android:layout_width="0dip"
+                android:layout_height="50dip"
+                android:layout_marginLeft="2dp"
+                android:layout_weight="1"
+                android:background="@null"
+                android:gravity="center_vertical"
+                android:text=""
+                android:textSize="14sp" />
+        </LinearLayout>
+
+        <ImageView
+            android:layout_width="fill_parent"
+            android:layout_height="1dp"
+            android:background="#dcdcdc" />
+
+        <LinearLayout
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:background="#ffffff">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="50dip"
+                android:gravity="center_vertical"
+                android:paddingLeft="2dip"
+                android:text="*"
+                android:textColor="@color/red" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="50dip"
+                android:gravity="center_vertical"
+                android:paddingLeft="1dip"
+                android:text="@string/teacher_info_sex"
+                android:textColor="#000000" />
+
+
+            <RadioGroup
+                android:layout_width="wrap_content"
+                android:layout_height="fill_parent"
+                android:gravity="center"
+                android:orientation="horizontal">
+
+                <RadioButton
+                    android:id="@+id/RadioButton1"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:checked="true"
+                    android:text="男" />
+
+                <RadioButton
+                    android:id="@+id/RadioButton2"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="女" />
+            </RadioGroup>
+
+
+        </LinearLayout>
+
+        <ImageView
+            android:layout_width="fill_parent"
+            android:layout_height="1dp"
+            android:background="#dcdcdc" />
+
+        <LinearLayout
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:background="#ffffff">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="50dip"
+                android:gravity="center_vertical"
+                android:paddingLeft="2dip"
+                android:text="*"
+                android:textColor="@color/red" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="50dip"
+                android:gravity="center_vertical"
+                android:paddingLeft="1dip"
+                android:text="@string/teacher_info_mobile"
+                android:textColor="#000000" />
+
+            <EditText
+                android:id="@+id/editteachermobile"
+                android:layout_width="0dip"
+                android:layout_height="50dip"
+                android:layout_marginLeft="2dp"
+                android:layout_weight="1"
+                android:background="@null"
+                android:gravity="center_vertical"
+                android:text=""
+                android:textSize="14sp" />
+        </LinearLayout>
+
+        <ImageView
+            android:layout_width="fill_parent"
+            android:layout_height="1dp"
+            android:background="#dcdcdc" />
+
+        <LinearLayout
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:background="#ffffff">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="50dip"
+                android:gravity="center_vertical"
+                android:paddingLeft="2dip"
+                android:text="*"
+                android:textColor="@color/red" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="50dip"
+                android:gravity="center_vertical"
+                android:paddingLeft="1dip"
+                android:text="@string/teacher_info_email"
+                android:textColor="#000000" />
+
+            <EditText
+                android:id="@+id/editteacheremail"
+                android:layout_width="0dip"
+                android:layout_height="50dip"
+                android:layout_marginLeft="2dp"
+                android:layout_weight="1"
+                android:background="@null"
+                android:gravity="center_vertical"
+                android:text=""
+                android:textSize="14sp" />
+        </LinearLayout>
+
+        <ImageView
+            android:layout_width="fill_parent"
+            android:layout_height="1dp"
+            android:background="#dcdcdc" />
+
+
+        <LinearLayout
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:background="#ffffff">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="50dip"
+                android:gravity="center_vertical"
+                android:paddingLeft="2dip"
+                android:text="*"
+                android:textColor="@color/red" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="50dip"
+                android:gravity="center_vertical"
+                android:paddingLeft="1dip"
+                android:text="@string/teacher_info_weeixin"
+                android:textColor="#000000" />
+
+            <EditText
+                android:id="@+id/editteacherweixin"
+                android:layout_width="0dip"
+                android:layout_height="50dip"
+                android:layout_marginLeft="2dp"
+                android:layout_weight="1"
+                android:background="@null"
+                android:gravity="center_vertical"
+                android:text=""
+                android:textSize="14sp" />
+        </LinearLayout>
+
+        <ImageView
+            android:layout_width="fill_parent"
+            android:layout_height="1dp"
+            android:background="#dcdcdc" />
+
+
+        <LinearLayout
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:background="#ffffff">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="50dip"
+                android:gravity="center_vertical"
+                android:paddingLeft="2dip"
+                android:text="*"
+                android:textColor="@color/red" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="50dip"
+                android:gravity="center_vertical"
+                android:paddingLeft="1dip"
+                android:text="@string/teacher_info_cert"
+                android:textColor="#000000" />
+
+
+            <Spinner
+                android:id="@+id/spteachercert"
+                style="@style/spinner_style"
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:layout_weight="1"
+                android:gravity="center|center_horizontal"
+                android:spinnerMode="dropdown"
+
+                />
+
+            <TextView
+                android:layout_width="15dp"
+                android:layout_height="fill_parent"
+                android:gravity="center|center_horizontal"
+                android:text="▼" />
+        </LinearLayout>
+
+        <ImageView
+            android:layout_width="fill_parent"
+            android:layout_height="1dp"
+            android:background="#dcdcdc" />
+
+
+        <LinearLayout
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:background="#ffffff">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="50dip"
+                android:gravity="center_vertical"
+                android:paddingLeft="2dip"
+                android:text="*"
+                android:textColor="@color/red" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="50dip"
+                android:gravity="center_vertical"
+                android:paddingLeft="1dip"
+                android:text="@string/teacher_info_desc"
+                android:textColor="#000000" />
+
+            <EditText
+                android:id="@+id/editteacherdesc"
+                android:layout_width="0dip"
+                android:layout_height="50dip"
+                android:layout_marginLeft="2dp"
+                android:layout_weight="1"
+                android:background="@null"
+                android:gravity="center_vertical"
+                android:text=""
+                android:textSize="14sp" />
+        </LinearLayout>
+
+        <ImageView
+            android:layout_width="fill_parent"
+            android:layout_height="1dp"
+            android:background="#dcdcdc" />
+
+
+    </LinearLayout>
+
+    <com.iyuba.core.widget.ContextMenu
+        android:id="@+id/context_menu1"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:visibility="gone" />
+</RelativeLayout>

@@ -15,8 +15,8 @@ import org.json.JSONObject;
 public class AdRequest extends BaseJSONRequest {
 
     public AdRequest() {
-//		setAbsoluteURI("http://app.iyuba.com/dev/getAdEntryAll.jsp?appId=201&flag=1");
-        setAbsoluteURI("http://dev.iyuba.com/getAdEntryAll.jsp?appId=" + Constant.APPID + "&flag=1");
+//		setAbsoluteURI("http://app.iyuba.cn/dev/getAdEntryAll.jsp?appId=201&flag=1");
+        setAbsoluteURI("http://dev.iyuba.cn/getAdEntryAll.jsp?appId=" + Constant.APPID + "&flag=1");
     }
 
     @Override

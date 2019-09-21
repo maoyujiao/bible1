@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <!-- 应用基调颜色 -->
+    <color name="app_color">#FA8C65</color>
+    <!-- 文字选中高亮颜色 本颜色为淡蓝色 -->
+    <color name="text_highlight">#2983c1</color>
+    <!-- 大段叙述文字颜色 本颜色为灰色 -->
+    <color name="text_gray_color">#808080</color>
+    <!-- 背景色 -->
+    <color name="item_select_color">#b2d3f4</color>
+    <!-- item选中色 -->
+    <color name="background_color">#ffffff</color>
+    <!-- layout 黑色 -->
+    <!-- 特殊用途 听歌主界面淡灰色 -->
+    <color name="text_light_gray_color">#999999</color>
+
+</resources>

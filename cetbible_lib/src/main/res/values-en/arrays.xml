@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string-array name="type">
+        <item>Original + analytical model</item>
+        <item>Original model</item>
+        <item>Analytical model</item>
+    </string-array>
+    <string-array name="mode">
+        <item>Single Loop</item>
+        <item>List Loop</item>
+        <item>Random</item>
+    </string-array>
+    <string-array name="gender">
+        <item>male</item>
+        <item>female</item>
+    </string-array>
+    <string-array name="level">
+        <item>书童</item>
+        <item>童生</item>
+        <item>秀才</item>
+        <item>举人</item>
+        <item>解元</item>
+        <item>贡士</item>
+        <item>进士</item>
+        <item>探花</item>
+        <item>榜眼</item>
+        <item>状元</item>
+    </string-array>
+
+</resources>

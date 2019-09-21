@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <color name="new_black">#000000</color>
+
+    <color name="title_bar_bg">#eff0f4</color>
+
+    <!-- title bar 下面的线的颜色 -->
+    <color name="line_hint_color">#b2b2b2</color>
+
+
+    <color name="griditems_bg">#ffe8ecef</color>
+    <color name="line">#ffd3dde6</color>
+    <color name="commo_text_color">#ff333333</color>
+    
+     <!-- cet 主题颜色 -->
+    <color name="theme_color">#FF9D34</color>
+     <!-- 微课中用到的部分颜色 -->
+
+    <color name="gray_white">#3cf4f2f2</color>
+    
+    <color name="light_red">#fd8b77</color>
+
+    <!-- 移动课堂课程标题颜色 -->
+
+    <!-- 筛选中的灰色 -->
+    <color name="selectgray">#ced3d3</color>
+    <!-- 深灰色 -->
+    <!-- 知乎蓝色 -->
+    <color name="zhihublue">#0077d5</color>
+    <!-- 个人空间黄色 -->
+    <color  name="dialog_btn_pressed_color">#d3d3d3</color>
+     <color name="dark">#aa000000</color>
+    <!-- 分割线 边框颜色 -->
+    <color name="stroke_color">#c8c8c8</color>
+    <!-- 字体的蓝绿色 -->
+    <color name="text_blue_color">#6BBDCE</color>
+    <color name="black_two">#666666</color>
+
+</resources>

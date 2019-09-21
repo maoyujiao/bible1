@@ -1,0 +1,133 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <RelativeLayout
+        android:id="@+id/rl_bar"
+        android:layout_width="match_parent"
+        android:layout_height="56dp"
+        android:background="@drawable/titlebar_lightgray_bg">
+
+        <TextView
+            android:id="@+id/tv_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:text="黄金会员"
+            android:textColor="@color/trainingcamp_white"
+            android:textSize="20dp" />
+
+        <com.iyuba.CET4bible.widget.button.Button
+            android:id="@+id/btn_back"
+            android:layout_width="25dp"
+            android:layout_height="30dp"
+            android:layout_alignParentLeft="true"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="15dp"
+            android:background="@drawable/title_btn_background"
+            android:textColor="@color/trainingcamp_white" />
+    </RelativeLayout>
+    <!-- <include
+         android:id="@+id/payorder_toolbar"
+         layout="@layout/partial_toolbar"/>-->
+
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="100dp"
+        android:background="@drawable/goldbuydes" />
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="15dp">
+
+        <TextView
+            android:id="@+id/payorder_username_hint_tv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/username_hint"
+            android:textColor="#a6a6a6" />
+
+        <TextView
+            android:id="@+id/payorder_username_tv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignTop="@id/payorder_username_hint_tv"
+            android:layout_toRightOf="@id/payorder_username_hint_tv"
+            android:textColor="#393939"
+            tools:text="iyuba" />
+
+        <TextView
+            android:id="@+id/payorder_rmb_amount_hint_tv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/payorder_username_tv"
+            android:layout_marginTop="15dp"
+            android:text="@string/rmb_amount_hint"
+            android:textColor="#a6a6a6" />
+
+        <TextView
+            android:id="@+id/payorder_rmb_amount_tv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignTop="@id/payorder_rmb_amount_hint_tv"
+            android:layout_toRightOf="@id/payorder_rmb_amount_hint_tv"
+            android:textColor="#F07203"
+            tools:text="19.9元" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/payorder_rmb_amount_tv"
+            android:layout_marginTop="10dp"
+            android:text="(提示： 若支付后状态未发生改变，请尝试重新登录后再进行查看)" />
+
+    </RelativeLayout>
+
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:src="#dedede" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="10dp"
+        android:layout_marginLeft="15dp"
+        android:layout_marginTop="20dp"
+        android:text="@string/choose_pay_method"
+        android:textColor="#818181" />
+
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:src="#dedede" />
+
+    <com.iyuba.CET4bible.activity.view.NoScrollListView
+        android:id="@+id/payorder_methods_lv"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:divider="#dedede"
+        android:dividerHeight="1dp" />
+
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:src="#dedede" />
+
+    <Button
+        android:id="@+id/payorder_submit_btn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginTop="20dp"
+        android:background="@drawable/pay_confirm_button"
+        android:minHeight="0dp"
+        android:minWidth="0dp"
+        android:text="@string/pay_confirm"
+        android:textColor="@color/trainingcamp_white"
+        android:textSize="18sp" />
+</LinearLayout>

@@ -4,7 +4,7 @@ public class IyubaADBean {
 
     /**
      * result : 1
-     * data : {"id":"676","adId":"VOA慢速英语华尔街banneriOSLearn-Word8-30","startuppic_StartDate":"2017-08-30","startuppic_EndDate":"2017-09-05","startuppic":"upload/1504064808441.jpg","type":"web","startuppic_Url":"http://dev.iyuba.com/ad.jsp?adId=676&uid=0&appId=104","classNum":"0"}
+     * data : {"id":"676","adId":"VOA慢速英语华尔街banneriOSLearn-Word8-30","startuppic_StartDate":"2017-08-30","startuppic_EndDate":"2017-09-05","startuppic":"upload/1504064808441.jpg","type":"web","startuppic_Url":"http://dev.iyuba.cn/ad.jsp?adId=676&uid=0&appId=104","classNum":"0"}
      */
 
     private String result;
@@ -34,7 +34,7 @@ public class IyubaADBean {
          * startuppic_EndDate : 2017-09-05
          * startuppic : upload/1504064808441.jpg
          * type : web
-         * startuppic_Url : http://dev.iyuba.com/ad.jsp?adId=676&uid=0&appId=104
+         * startuppic_Url : http://dev.iyuba.cn/ad.jsp?adId=676&uid=0&appId=104
          * classNum : 0
          */
 

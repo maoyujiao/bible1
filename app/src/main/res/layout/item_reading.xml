@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:dmy="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="?attr/selectableItemBackground">
+
+    <ImageView
+        android:id="@+id/iv_ad"
+        android:layout_width="120dp"
+        android:layout_height="80dp"
+        android:paddingLeft="9dp"
+        android:paddingRight="9dp"
+        android:paddingTop="11dp"
+        android:paddingBottom="11dp"
+        android:layout_marginBottom="5dp"
+        android:layout_marginStart="5dp"
+        android:scaleType="fitXY" />
+
+    <com.iyuba.CET4bible.widget.CustomBgView
+        android:id="@+id/bg_item_reading"
+        android:layout_width="120dp"
+        android:layout_height="80dp"
+        android:layout_marginBottom="5dp"
+        android:layout_marginStart="5dp"
+        android:padding="5dp"
+        dmy:image="@drawable/winter" />
+
+    <View
+
+        android:id="@+id/append"
+        android:layout_width="5dp"
+        android:layout_height="85dp"
+        android:background="@color/colorPrimary"
+        android:contentDescription="@string/pic"
+        android:visibility="invisible" />
+
+    <TextView
+        android:id="@+id/reading_title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textColor="#999999"
+        android:layout_centerVertical="true"
+        android:layout_marginStart="10dp"
+        android:layout_toEndOf="@id/bg_item_reading"
+        android:textSize="16sp"
+        tools:text="四级宝典 ，四级宝典 ，四级宝典 ，四级宝典，四级宝典 ，四级宝典" />
+</RelativeLayout>

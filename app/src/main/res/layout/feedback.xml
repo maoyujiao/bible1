@@ -1,0 +1,116 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/backlayout"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:background="@color/background_color">
+
+    <RelativeLayout
+        android:id="@+id/relativeLayout_title_and_back"
+        android:layout_width="fill_parent"
+        android:layout_height="50dp"
+        android:layout_alignParentLeft="true"
+        android:background="?attr/colorPrimary">
+
+        <Button
+            android:id="@+id/button_back"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:layout_alignParentLeft="true"
+            android:layout_centerVertical="true"
+            android:background="@drawable/lib_back_button" />
+
+        <TextView
+            android:id="@+id/play_title_info"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:text="@string/feedback_title"
+            android:textAppearance="?android:attr/textAppearanceLarge"
+            android:textColor="@color/base_white" />
+
+        <Button
+            android:id="@+id/developer"
+            android:layout_width="wrap_content"
+            android:layout_height="30dp"
+            android:layout_alignParentRight="true"
+            android:layout_gravity="center"
+            android:layout_marginRight="8dp"
+            android:layout_marginTop="10dp"
+            android:background="@drawable/title_button_background"
+            android:text="@string/feedback_developer"
+            android:textColor="#ffffff"
+            android:textSize="16sp" />
+    </RelativeLayout>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="0.5dp"
+        android:layout_below="@+id/relativeLayout_title_and_back"
+        android:background="@color/divider_line" />
+
+    <TextView
+        android:id="@+id/t1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/relativeLayout_title_and_back"
+        android:layout_marginLeft="20dp"
+        android:layout_marginTop="20dp"
+        android:text="@string/feedback_info_title"
+        android:textColor="@color/black"
+        android:textSize="18sp" />
+
+    <EditText
+        android:id="@+id/editText_info"
+        android:layout_width="fill_parent"
+        android:layout_height="150dp"
+        android:layout_below="@+id/t1"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp"
+        android:layout_marginTop="10dp"
+        android:background="@drawable/border"
+        android:hint="@string/feedback_info"
+        android:padding="10dp"
+        android:textColor="#000000"
+        android:textCursorDrawable="@null"
+        android:textSize="16sp" />
+
+    <TextView
+        android:id="@+id/t2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/editText_info"
+        android:layout_marginLeft="20dp"
+        android:layout_marginTop="10dp"
+        android:text="@string/feedback_contact_title"
+        android:textColor="@color/black"
+        android:textSize="18sp" />
+
+    <EditText
+        android:id="@+id/editText_Contact"
+        android:layout_width="fill_parent"
+        android:layout_height="40dp"
+        android:layout_below="@+id/t2"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp"
+        android:layout_marginTop="10dp"
+        android:background="@drawable/border"
+        android:hint="@string/feedback_contact"
+        android:padding="10dp"
+        android:textColor="#000000"
+        android:textCursorDrawable="@null"
+        android:textSize="16sp" />
+
+    <Button
+        android:id="@+id/ImageView_submit"
+        android:layout_width="100dp"
+        android:layout_height="40dp"
+        android:layout_below="@+id/editText_Contact"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="30dp"
+        android:background="@drawable/button_background"
+        android:text="@string/send"
+        android:textColor="#ffffff"
+        android:textSize="18sp" />
+
+</RelativeLayout>

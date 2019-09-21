@@ -1,0 +1,163 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:roundProgress="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@drawable/item_select"
+    android:orientation="vertical">
+
+    <LinearLayout
+        android:id="@+id/ll_touch"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center_vertical"
+        android:orientation="horizontal">
+
+        <ImageView
+            android:id="@+id/iv_year"
+            android:layout_width="110dp"
+            android:layout_height="80dp"
+            android:padding="5dp"
+            tools:src="@drawable/ic_2015061" />
+
+        <TextView
+            android:id="@+id/artical_title"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_marginStart="10dp"
+            android:layout_weight="1"
+            android:ellipsize="end"
+            android:gravity="center_vertical"
+            android:maxLines="2"
+            android:textColor="@color/black"
+            android:textSize="18sp"
+            tools:text="2017123432" />
+
+        <com.iyuba.core.widget.RoundProgressBar
+            android:id="@+id/roundProgressBar"
+            android:layout_width="30dip"
+            android:layout_height="30dip"
+            android:layout_marginRight="10dp"
+            android:visibility="gone"
+            roundProgress:circleColor="#D1D1D1"
+            roundProgress:circleProgressColor="@color/blue"
+            roundProgress:circleWidth="6dip"
+            roundProgress:textColor="@color/app_color"
+            roundProgress:textSize="12sp" />
+
+        <ImageView
+            android:id="@+id/image_downed"
+            android:layout_width="24dp"
+            android:layout_height="24dp"
+            android:layout_marginRight="10dp"
+            android:src="@drawable/downed"
+            android:visibility="gone" />
+
+        <ImageView
+            android:id="@+id/iv_audio_download"
+            android:layout_width="24dp"
+            android:layout_height="24dp"
+            android:layout_marginRight="10dp"
+            android:src="@drawable/ic_download_circle"
+            tools:visibility="visible"
+            android:visibility="gone" />
+
+        <LinearLayout
+            android:id="@+id/touch"
+            android:layout_width="35dp"
+            android:layout_height="match_parent"
+            android:orientation="horizontal">
+
+            <ImageView
+                android:id="@+id/go"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginRight="10dp"
+                android:background="@drawable/go" />
+        </LinearLayout>
+    </LinearLayout>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="0.5dp"
+        android:background="@color/divider_line" />
+
+    <LinearLayout
+        android:id="@+id/testlist_sub"
+        android:layout_width="match_parent"
+        android:layout_height="64dp"
+        android:background="#fafafa"
+        android:gravity="center">
+
+        <LinearLayout
+            android:id="@+id/section_a"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:background="?attr/selectableItemBackground"
+            android:gravity="center"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="5dp"
+                android:text="@string/section_a"
+                android:textStyle="bold"
+                android:textSize="18sp" />
+        </LinearLayout>
+
+        <View
+            android:layout_width="2dp"
+            android:layout_height="match_parent"
+            android:layout_marginBottom="16dp"
+            android:layout_marginTop="16dp"
+            android:background="@color/divider_line" />
+
+        <LinearLayout
+            android:id="@+id/section_b"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:background="?attr/selectableItemBackground"
+            android:gravity="center"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="5dp"
+                android:text="@string/section_b"
+                android:textStyle="bold"
+                android:textSize="18sp" />
+        </LinearLayout>
+
+        <View
+            android:layout_width="2dp"
+            android:layout_height="match_parent"
+            android:layout_marginBottom="16dp"
+            android:layout_marginTop="16dp"
+            android:background="@color/divider_line" />
+
+        <LinearLayout
+            android:id="@+id/section_c"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:background="?attr/selectableItemBackground"
+            android:gravity="center"
+            android:orientation="horizontal"
+            android:textSize="16sp">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="5dp"
+                android:text="Section C"
+                android:textStyle="bold"
+                android:textSize="18sp" />
+        </LinearLayout>
+    </LinearLayout>
+</LinearLayout>

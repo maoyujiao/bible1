@@ -60,7 +60,7 @@ public class ListenCBlankFragment extends Fragment implements
                     previous.setBackgroundResource(R.drawable.un_previous_question);
                     break;
                 case 3:
-                    next.setBackgroundResource(R.drawable.trainingcamp_un_next_question);
+                    next.setBackgroundResource(R.drawable.next_question);
                     break;
                 case 4:
                     next.setBackgroundResource(R.drawable.next_question);

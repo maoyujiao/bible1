@@ -48,9 +48,9 @@ public class BlogResponse extends BaseJSONResponse {
 //                        sb.append(jsonObjectData.getString("url"));
 //                        blog.url = sb.toString();
 
-//                        blog.url = "http://m.iyuba.com/news.html?id=" + blog.id + "&type=cet" + Constant.APP_CONSTANT.TYPE();
+//                        blog.url = "http://m.iyuba.cn/news.html?id=" + blog.id + "&type=cet" + Constant.APP_CONSTANT.TYPE();
 
-                        blog.url = "http://blog.iyuba.com/Blog_" + blog.id + ".html";
+                        blog.url = "http://blog.iyuba.cn/Blog_" + blog.id + ".html";
 
                         blog.createtime = jsonObjectData.getString("createtime");
                         blog.readcount = jsonObjectData.getString("readcount");
