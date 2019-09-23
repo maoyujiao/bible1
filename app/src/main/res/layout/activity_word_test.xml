@@ -1,0 +1,237 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:fitsSystemWindows="true"
+    android:orientation="vertical">
+    <android.support.v7.widget.Toolbar
+        android:id="@+id/toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/colorPrimary"
+        android:fitsSystemWindows="true"
+        android:minHeight="?attr/actionBarSize"
+        app:popupTheme="@style/ToolbarPopupTheme"
+        android:theme="@style/ToolbarTheme"
+        app:titleTextAppearance="@style/ToolbarTitle"
+        app:navigationIcon="?android:attr/homeAsUpIndicator"
+        >
+
+        <TextView
+            android:id="@+id/text_tiny_hint"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:textStyle="bold"
+            android:text="单词闯关"
+            android:textColor="@android:color/white"
+            android:textSize="20sp" />
+
+    </android.support.v7.widget.Toolbar>
+
+    <LinearLayout
+        android:id="@+id/ll"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@id/toolbar"
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/word"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginTop="25dp"
+            android:padding="10dp"
+            android:textSize="26sp"
+            android:textStyle="bold"
+            tools:text="English" />
+
+        <TextView
+            android:id="@+id/answera"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginLeft="30dp"
+            android:layout_marginTop="12dp"
+            android:layout_marginRight="30dp"
+            android:background="@drawable/wordtest_answer_wrong"
+            android:gravity="center"
+            android:padding="10dp"
+            android:textColor="@color/black"
+            android:textSize="16sp"
+            tools:text="选项A" />
+
+        <TextView
+            android:id="@+id/answerb"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginLeft="30dp"
+            android:layout_marginTop="15dp"
+            android:layout_marginRight="30dp"
+            android:background="@drawable/rect_default1"
+            android:gravity="center"
+            android:padding="10dp"
+            android:textColor="@color/black"
+            android:textSize="16sp"
+            tools:text="选项B" />
+
+        <TextView
+            android:id="@+id/answerc"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginLeft="30dp"
+            android:layout_marginTop="15dp"
+            android:layout_marginRight="30dp"
+            android:background="@drawable/rect_default1"
+            android:gravity="center"
+            android:padding="10dp"
+            android:textColor="@color/black"
+            android:textSize="16sp"
+            tools:text="选项C" />
+
+        <TextView
+            android:id="@+id/answerd"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginLeft="30dp"
+            android:layout_marginTop="15dp"
+            android:layout_marginRight="30dp"
+            android:background="@drawable/rect_default1"
+            android:gravity="center"
+            android:padding="10dp"
+            android:textColor="@color/black"
+            android:textSize="16sp"
+            tools:text="选项D" />
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginTop="25dp">
+
+            <TextView
+                android:id="@+id/jiexi"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginRight="32dp"
+                android:background="@drawable/text_selector"
+                tools:visibility="visible"
+
+                android:gravity="center"
+                android:paddingLeft="30dp"
+                android:paddingTop="10dp"
+                android:paddingRight="30dp"
+                android:paddingBottom="10dp"
+                android:textColor="@drawable/textcolor"
+                android:text="查看解析"
+                android:visibility="gone" />
+
+            <TextView
+                android:id="@+id/next_button"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="32dp"
+                android:background="@drawable/text_selector"
+                android:paddingLeft="30dp"
+                android:paddingTop="10dp"
+                android:paddingRight="30dp"
+                android:paddingBottom="10dp"
+                android:textColor="@drawable/textcolor"
+                android:text="下一题"
+                android:visibility="gone"
+                tools:visibility="visible" />
+        </LinearLayout>
+
+
+    </LinearLayout>
+
+    <!--<LinearLayout-->
+    <!--android:id="@+id/jiexi_ll"-->
+    <!--android:layout_width="match_parent"-->
+    <!--android:layout_height="wrap_content"-->
+    <!--android:padding="22dp">-->
+    <!--<TextView-->
+    <!--android:id=""-->
+    <!--android:layout_width="wrap_content"-->
+    <!--android:layout_height="wrap_content"-->
+    <!--/>-->
+
+    <!--</LinearLayout>-->
+
+    <RelativeLayout
+        android:id="@+id/jiexi_root"
+        android:background="@drawable/white_back_bg"
+        android:layout_width="match_parent"
+        android:minHeight="200dp"
+        android:visibility="gone"
+        tools:visibility="visible"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:padding="20dp">
+        <ImageView
+            android:id="@+id/close"
+            android:layout_marginTop="12dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/explain_close" />
+        <TextView
+            android:id="@+id/explain"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/close"
+            android:paddingLeft="20dp"
+            android:paddingRight="20dp"
+            android:layout_marginTop="15dp"
+            android:text="解释"
+            android:textColor="@color/white"
+            android:background="@drawable/selector_btn_bg"/>
+        <TextView
+            android:id="@+id/jiexi_word"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/explain"
+            android:textColor="@color/commont_txt"
+            tools:text="English"
+            android:layout_margin="5dp"
+            android:layout_centerHorizontal="true"
+            android:textSize="18sp"/>
+
+        <TextView
+            android:id="@+id/jiexi_pron"
+            android:layout_below="@id/jiexi_word"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            tools:text="English"
+            android:textColor="@color/commont_txt"
+
+            android:layout_centerHorizontal="true"
+            android:textSize="14sp"/>
+        <TextView
+            android:id="@+id/jiexi_def"
+            android:layout_below="@id/jiexi_pron"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="5dp"
+            android:textColor="@color/commont_txt"
+
+            tools:text="English"
+            android:layout_centerHorizontal="true"
+            android:textSize="16sp"/>
+        <CheckBox
+            android:layout_below="@id/close"
+            android:id="@+id/cb"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:buttonTint="@color/colorPrimary"
+            android:layout_margin="15dp"
+            android:button="@drawable/selector_collect"
+            android:layout_alignParentRight="true"/>
+    </RelativeLayout>
+
+</RelativeLayout>

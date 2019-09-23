@@ -1,0 +1,282 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:roundProgress="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/ll_touch"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@drawable/test_list_bg"
+    android:layout_marginTop="5dp"
+    android:layout_marginBottom="15dp"
+    android:layout_marginLeft="10dp"
+    android:layout_marginRight="15dp">
+
+
+    <TextView
+        android:id="@+id/exam_year"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="12dp"
+        android:layout_marginLeft="15dp"
+        android:layout_toRightOf="@id/src_img"
+        android:text="2018年12月第二套"
+        android:textColor="#ff333333"
+        android:textSize="15sp"
+        android:textStyle="bold" />
+    <TextView
+        android:id="@+id/rate"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        tools:text="正确比例:0/25"
+        android:gravity="center"
+        android:textSize="13sp"
+        android:paddingLeft="6dp"
+        android:paddingRight="6dp"
+        android:visibility="gone"
+        android:layout_below="@id/exam_year"
+        android:layout_marginTop="10dp"
+        tools:visibility="visible"
+        android:layout_alignLeft="@id/exam_year"
+        android:textColor="#FA863E"
+        android:background="@drawable/item_rate_bg"/>
+
+    <ImageView
+        android:id="@+id/dl_view"
+        android:layout_width="18dp"
+        android:layout_height="18dp"
+        android:layout_alignParentRight="true"
+        android:layout_marginTop="12dp"
+        android:layout_marginRight="10dp"
+        android:clickable="true"
+        android:src="@drawable/home_icon_download" />
+
+    <com.iyuba.core.widget.RoundProgressBar
+        android:id="@+id/roundProgressBar"
+        android:layout_width="18dp"
+        android:layout_height="18dp"
+        android:layout_alignParentRight="true"
+        android:layout_marginTop="12dp"
+        android:layout_marginRight="10dp"
+        android:clickable="true"
+        roundProgress:circleProgressColor="@color/colorPrimary"
+        roundProgress:circleWidth="0.5dp" />
+
+    <RelativeLayout
+        android:id="@+id/rr"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/rate"
+        android:layout_marginTop="12dp">
+
+        <GridLayout
+            android:id="@+id/icon_year"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginLeft="26dp"
+            android:alignmentMode="alignBounds"
+            android:columnCount="4">
+
+            <!--<LinearLayout-->
+            <!--android:id="@+id/ll1"-->
+            <!--android:layout_width="wrap_content"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:orientation="horizontal">-->
+
+
+            <ImageView
+                android:layout_width="55dp"
+                android:layout_height="50dp"
+                android:visibility="invisible" />
+
+            <ImageView
+                android:id="@+id/icon_a"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:layout_marginLeft="40dp"
+                android:layout_marginRight="17dp"
+                android:gravity="center"
+                android:src="@drawable/icon_sec_a"
+                android:text="A"
+                android:textSize="18sp"
+                android:textStyle="bold" />
+
+            <ImageView
+                android:id="@+id/icon_b"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:layout_marginLeft="17dp"
+                android:layout_marginRight="17dp"
+                android:gravity="center"
+                android:src="@drawable/icon_sec_b"
+                android:text="B"
+
+                android:textSize="18sp"
+                android:textStyle="bold" />
+
+            <ImageView
+                android:id="@+id/icon_c"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:layout_marginLeft="17dp"
+                android:layout_marginRight="17dp"
+                android:gravity="center"
+                android:src="@drawable/icon_sec_c"
+                android:text="C"
+
+                android:textSize="18sp"
+                android:textStyle="bold" />
+            <!--</LinearLayout>-->
+
+            <!--<LinearLayout-->
+            <!--android:id="@+id/ll2"-->
+            <!--android:layout_below="@id/ll1"-->
+            <!--android:layout_width="wrap_content"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:orientation="horizontal">-->
+
+            <!--<TextView-->
+            <!--android:id="@+id/rate"-->
+            <!--android:layout_width="85dp"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:layout_gravity="center_horizontal"-->
+            <!--android:layout_marginTop="10dp"-->
+            <!--android:textColor="#5A5A5A"-->
+            <!--android:gravity="center"-->
+            <!--android:textSize="11sp"-->
+            <!--android:text="正 确 率"-->
+            <!--android:textStyle="bold" />-->
+
+            <!--<TextView-->
+            <!--android:id="@+id/correct_a"-->
+            <!--android:layout_width="wrap_content"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:layout_gravity="center_horizontal"-->
+            <!--android:text="0%"-->
+            <!--android:textColor="#5A5A5A"-->
+            <!--android:textSize="12sp"-->
+
+            <!--android:textStyle="bold" />-->
+
+            <!--<TextView-->
+            <!--android:id="@+id/correct_b"-->
+            <!--android:layout_width="wrap_content"-->
+            <!--android:textColor="#5A5A5A"-->
+            <!--android:textSize="12sp"-->
+
+            <!--android:layout_height="wrap_content"-->
+            <!--android:layout_gravity="center_horizontal"-->
+            <!--android:text="0%"-->
+            <!--android:textStyle="bold" />-->
+
+            <!--<TextView-->
+            <!--android:id="@+id/correct_c"-->
+            <!--android:layout_width="wrap_content"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:layout_gravity="center_horizontal"-->
+            <!--android:text="0%"-->
+            <!--android:textColor="#5A5A5A"-->
+            <!--android:textSize="12sp"-->
+
+            <!--android:textStyle="bold" />-->
+            <!--&lt;!&ndash;</LinearLayout>&ndash;&gt;-->
+            <!--&lt;!&ndash;<LinearLayout&ndash;&gt;-->
+            <!--&lt;!&ndash;android:layout_below="@id/ll2"&ndash;&gt;-->
+            <!--&lt;!&ndash;android:layout_width="wrap_content"&ndash;&gt;-->
+            <!--&lt;!&ndash;android:layout_height="wrap_content"&ndash;&gt;-->
+            <!--&lt;!&ndash;android:orientation="horizontal">&ndash;&gt;-->
+
+            <!--<TextView-->
+            <!--android:id="@+id/process"-->
+            <!--android:layout_width="85dp"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:layout_gravity="center_horizontal"-->
+            <!--android:layout_marginTop="8dp"-->
+            <!--android:layout_marginBottom="8dp"-->
+            <!--android:gravity="center"-->
+            <!--android:textColor="#5A5A5A"-->
+            <!--android:textSize="11sp"-->
+
+            <!--android:text="评测进度"-->
+            <!--android:textStyle="bold" />-->
+
+            <!--<TextView-->
+            <!--android:id="@+id/process_a"-->
+            <!--android:layout_width="wrap_content"-->
+            <!--android:textColor="#5A5A5A"-->
+            <!--android:textSize="12sp"-->
+
+
+            <!--android:layout_height="wrap_content"-->
+            <!--android:layout_gravity="center_horizontal"-->
+            <!--android:text="0/0"-->
+            <!--android:textStyle="bold" />-->
+
+            <!--<TextView-->
+            <!--android:id="@+id/process_b"-->
+            <!--android:layout_width="wrap_content"-->
+            <!--android:textColor="#5A5A5A"-->
+            <!--android:textSize="12sp"-->
+
+
+            <!--android:layout_height="wrap_content"-->
+            <!--android:layout_gravity="center_horizontal"-->
+            <!--android:text="0/0"-->
+            <!--android:textStyle="bold" />-->
+
+            <!--<TextView-->
+            <!--android:id="@+id/process_c"-->
+            <!--android:layout_width="wrap_content"-->
+            <!--android:textColor="#5A5A5A"-->
+            <!--android:textSize="12sp"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:layout_gravity="center_horizontal"-->
+            <!--android:text="0/0"-->
+            <!--android:textStyle="bold" />-->
+            <!--</LinearLayout>-->
+        </GridLayout>
+    </RelativeLayout>
+
+
+    <ImageView
+        android:id="@+id/src_img"
+        android:layout_width="113dp"
+        android:layout_height="91dp"
+        android:layout_marginTop="5dp" />
+
+
+    <ImageView
+        android:id="@+id/ad_img"
+        android:layout_width="113dp"
+        android:layout_height="91dp"
+        android:paddingLeft="9dp"
+        android:paddingRight="9dp"
+        android:paddingTop="11dp"
+        android:paddingBottom="11dp"
+        android:scaleType="fitXY"/>
+
+    <TextView
+        android:id="@+id/ad_title"
+        android:layout_toRightOf="@id/ad_img"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:paddingLeft="9dp"
+        android:paddingRight="9dp"
+        android:paddingTop="11dp"
+        android:paddingBottom="11dp"
+        android:layout_marginTop="15dp"
+        android:scaleType="fitXY"/>
+
+    <TextView
+        android:id="@+id/ad_note"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="广告"
+        android:textSize="12sp"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentRight="true"
+        android:layout_marginLeft="12dp"
+        android:layout_marginRight="12dp"/>
+
+
+</RelativeLayout>

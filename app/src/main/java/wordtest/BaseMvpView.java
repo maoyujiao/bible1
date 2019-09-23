@@ -1,0 +1,4 @@
+package wordtest;
+
+interface BaseMvpView {
+}

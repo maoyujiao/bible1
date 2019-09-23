@@ -1,0 +1,392 @@
+apply plugin: 'com.android.application'
+//apply plugin: 'com.mob.sdk'
+
+
+dependencies {
+    final PERMISSION_DISPATCHER_VERSION = "$rootProject.ext.permissionDispatcherVersion"
+    final SUPPORT_LIBRARY_VERSION = "$rootProject.ext.supportLibraryVersion"
+    final RETROFIT_VERSION = "$rootProject.ext.retrofitVersion"
+    final OKHTTP_VERSION = "$rootProject.ext.okhttpVersion"
+    final MOB_TOOLS_VERSION = "2017.0608.1618"
+    implementation fileTree(include: '*.jar', dir: 'libs')
+    implementation('com.weigan:loopView:0.1.2') {
+        exclude group: 'com.android.support'
+    }
+    implementation('de.hdodenhof:circleimageview:2.0.0') {
+        exclude group: 'com.android.support'
+    }
+    implementation('com.bigkoo:convenientbanner:2.0.5') {
+        exclude group: 'com.android.support'
+    }
+    implementation(name: 'MediaPlayer-4.3.0.1', ext: 'aar') {
+        exclude group: 'com.android.support'
+    }
+
+    implementation(name: 'sonic-1.0.0', ext: 'aar') {
+        exclude group: 'com.android.support'
+    }
+    implementation('org.sufficientlysecure:html-textview:3.5') {
+        exclude group: 'com.android.support'
+    }
+    implementation "com.github.AnthonyFermin:DropDownView:$rootProject.ext.dropDownViewVersion"
+    implementation project(':abilitytest')
+    implementation project(':iyubaadsdk')
+    implementation project(':mob')
+    implementation(name: 'trainingcamp-debug', ext: 'aar')
+    implementation 'org.litepal.android:core:2.0.0'
+    implementation 'io.reactivex:rxandroid:1.1.0'
+    implementation "com.iyuba.ad:data-iyuba:$rootProject.ext.iyubaADVersion"
+    implementation "com.iyuba.ad:data-youdao:$rootProject.ext.iyubaADVersion"
+    implementation "com.iyuba.ad:sdk:$rootProject.ext.iyubaADVersion"
+    implementation "com.android.support:appcompat-v7:$SUPPORT_LIBRARY_VERSION"
+    implementation "com.android.support:design:$SUPPORT_LIBRARY_VERSION"
+    implementation "com.android.support:recyclerview-v7:$SUPPORT_LIBRARY_VERSION"
+    implementation "com.android.support:support-annotations:$SUPPORT_LIBRARY_VERSION"
+    implementation "com.android.support:cardview-v7:$SUPPORT_LIBRARY_VERSION"
+    implementation "com.iyuba.dlex:dlex:$rootProject.ext.dlexVersion"
+    implementation "com.iyuba.module:toolbox:$rootProject.ext.toolboxVersion"
+    implementation "com.iyuba.module:mvp:$rootProject.ext.mvpVersion"
+    implementation "com.iyuba.play:player:$rootProject.ext.playerVersion"
+//    implementation 'com.iyuba.module:commonres:1.0.0'
+    implementation 'com.iyuba.module:user:0.1.0-alpha6'
+    implementation 'com.iyuba.retrofit2:mixed_converter:1.0.0'
+
+//    implementation 'com.iyuba.module:imooclib:1.1.4'
+    implementation 'com.iyuba.module:user:0.1.0-alpha6'
+    implementation 'com.iyuba.retrofit2:mixed_converter:1.0.0'
+//    implementation 'com.iyuba.module:headlinelibrary:1.1.0'
+
+    implementation 'com.iyuba.module:intelligence:1.0.3'
+
+    implementation 'com.iyuba.module:iyubamovies:1.1.0'
+    implementation 'com.iyuba.module:basicdl:1.1.0'
+    implementation 'com.iyuba.module:basicfavor:1.1.0'
+    implementation 'com.holybible.widget:recycler:0.0.3'
+    implementation "tv.danmaku.ijk.media:ijkplayer-java:$rootProject.ext.ijkVersion"
+    implementation "tv.danmaku.ijk.media:ijkplayer-armv7a:$rootProject.ext.ijkVersion"
+    implementation "tv.danmaku.ijk.media:ijkplayer-arm64:$rootProject.ext.ijkVersion"
+    implementation "tv.danmaku.ijk.media:ijkplayer-x86:$rootProject.ext.ijkVersion"
+    implementation "tv.danmaku.ijk.media:ijkplayer-x86_64:$rootProject.ext.ijkVersion"
+    implementation 'com.iyuba.widget:textpage:1.0.0'
+    implementation 'com.iyuba.widget:progresswheel:1.0.0'
+    implementation "de.hdodenhof:circleimageview:$rootProject.ext.circleImageVersion"
+    implementation "com.scwang.smartrefresh:SmartRefreshLayout:$rootProject.ext.smartRefreshVersion"
+    implementation "com.jakewharton.timber:timber:$rootProject.ext.timberVersion"
+    implementation "com.youth.banner:banner:$rootProject.ext.bannerVersion"
+    implementation "com.iyuba.widget:subtitle:$rootProject.ext.subtitleVersion"
+    implementation "com.github.hotchemi:permissionsdispatcher:$PERMISSION_DISPATCHER_VERSION"
+    annotationProcessor "com.github.hotchemi:permissionsdispatcher-processor:$PERMISSION_DISPATCHER_VERSION"
+    implementation "com.jakewharton:butterknife:$rootProject.ext.butterKnifeVersion"
+    annotationProcessor "com.jakewharton:butterknife-compiler:$rootProject.ext.butterKnifeVersion"
+    implementation "com.youdao.sdk:youdaoadsdk:$rootProject.ext.youdaoSdkVersion"
+    implementation 'com.github.ctiao:DanmakuFlameMaster:0.5.3'
+
+    //retrofit2库的相关模块
+    implementation "com.squareup.retrofit2:retrofit:$RETROFIT_VERSION"
+    implementation "com.squareup.retrofit2:converter-gson:$RETROFIT_VERSION"
+    implementation "com.squareup.retrofit2:adapter-rxjava:$RETROFIT_VERSION"
+    implementation("com.squareup.retrofit2:converter-simplexml:$RETROFIT_VERSION") {
+        exclude group: 'xpp3', module: 'xpp3'
+        exclude group: 'stax', module: 'stax-api'
+        exclude group: 'stax', module: 'stax'
+    }
+    implementation 'io.reactivex.rxjava2:rxandroid:2.1.0'
+    implementation 'io.reactivex.rxjava2:rxjava:2.2.3'
+    implementation "com.squareup.retrofit2:adapter-rxjava2:$rootProject.ext.retrofitVersion"
+    implementation 'com.github.linger1216:labelview:v1.1.2'
+
+    //okhttp3的相关模块
+    implementation "com.squareup.okhttp3:okhttp:$OKHTTP_VERSION"
+    implementation "com.squareup.okhttp3:logging-interceptor:$OKHTTP_VERSION"
+    implementation "org.greenrobot:eventbus:$rootProject.ext.eventBusVersion"
+    implementation "com.github.bumptech.glide:glide:$rootProject.ext.glideVersion"
+    implementation 'tv.lycam:lycamplus-android-mqtt:0.1.5'
+    implementation 'org.apache.commons:commons-collections4:4.1'
+    implementation "com.google.code.gson:gson:$rootProject.ext.gsonVersion"
+    implementation 'com.blankj:utilcode:1.17.3'
+    implementation 'com.github.gittjy:LoadingDialog:1.0.2'
+    implementation "com.android.support:percent:$rootProject.ext.supportLibraryVersion"
+    implementation 'com.wang.avi:library:2.1.3'
+    implementation 'tyrantgit:explosionfield:1.0.1'
+    implementation 'com.blankj:utilcode:1.19.0'
+//    implementation 'com.iflytek:iseSdk:2.0.1018.1013'
+    implementation 'com.orhanobut:logger:2.2.0'
+    implementation 'com.xingliuhua:xlhratingbar_lib:1.0.1'
+    implementation 'com.kaopiz:kprogresshud:1.0.2'
+    implementation "com.jakewharton:butterknife:$rootProject.ext.butterKnifeVersion"
+    annotationProcessor "com.jakewharton:butterknife-compiler:$rootProject.ext.butterKnifeVersion"
+
+    // Glide图形转换工具
+    implementation 'jp.wasabeef:glide-transformations:2.0.1'
+    implementation 'jp.co.cyberagent.android.gpuimage:gpuimage-library:1.3.0'
+    implementation "com.iyuba.ad:data-iyuba:$rootProject.ext.iyubaADVersion"
+    implementation "com.iyuba.ad:data-youdao:$rootProject.ext.iyubaADVersion"
+    implementation "com.iyuba.ad:sdk:$rootProject.ext.iyubaADVersion"
+    implementation project(':colororange')
+
+    implementation 'android.arch.persistence.room:runtime:1.0.0'
+    annotationProcessor 'android.arch.persistence.room:compiler:1.0.0'
+
+//    implementation "com.github.hotchemi:permissionsdispatcher:$PERMISSION_DISPATCHER_VERSION"
+//    annotationProcessor "com.github.hotchemi:permissionsdispatcher-processor:$PERMISSION_DISPATCHER_VERSION"
+
+
+//    implementation 'com.alipay.sdk:alipay-sdk-java:3.7.110.ALL'
+}
+
+android {
+
+    signingConfigs {
+        iyuba {
+            storeFile file("iyuba_android.keystore")
+            storePassword 'buaaiyuba'
+            keyAlias 'android.keystore'
+            keyPassword 'buaaiyuba'
+        }
+    }
+
+    repositories {
+        flatDir {
+            dirs 'libs','../cetbible_lib/libs'
+        }
+    }
+
+    aaptOptions {
+        cruncherEnabled = false
+        useNewCruncher = false
+    }
+
+    dexOptions {
+        javaMaxHeapSize "4g"
+    }
+    packagingOptions {
+        exclude 'META-INF/DEPENDENCIES.txt'
+        exclude 'META-INF/LICENSE.txt'
+        exclude 'META-INF/NOTICE.txt'
+        exclude 'META-INF/NOTICE'
+        exclude 'META-INF/LICENSE'
+        exclude 'META-INF/DEPENDENCIES'
+        exclude 'META-INF/notice.txt'
+        exclude 'META-INF/license.txt'
+        exclude 'META-INF/dependencies.txt'
+        exclude 'META-INF/LGPL2.1'
+        exclude 'META-INF/pom.properties'
+    }
+
+    compileSdkVersion 28
+    buildToolsVersion '28.0.3'
+
+    lintOptions {
+        checkReleaseBuilds false
+        // Or, if you prefer, you can continue to check for errors in release builds,
+        // but continue the build even when errors are found:
+        abortOnError false
+    }
+
+    sourceSets {
+        main {
+            jniLibs.srcDirs = ['jniLibs']
+        }
+    }
+    defaultConfig {
+        minSdkVersion 19
+//        targetSdkVersion target_sdk_version
+//        applicationId "com.iyuba.CET4bible"
+        multiDexEnabled true
+        resConfigs "zh"
+        ndk {
+            abiFilters "armeabi-v7a"
+        }
+        targetSdkVersion 26
+    }
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard.cfg'
+        }
+    }
+
+    flavorDimensions "apk"
+
+    productFlavors {
+        cet4bible {
+            dimension "apk"
+            applicationId 'com.iyuba.CET4bible'
+//            applicationId 'com.iyuba.CET4bible_hw'
+            minSdkVersion min_sdk_version
+            targetSdkVersion 26
+            versionCode 631
+            versionName '6.3.1'
+            buildConfigField "boolean", "isEnglish", "true"
+            buildConfigField "boolean", "isCET4", "true"
+            buildConfigField "boolean", "isBible", "true"
+            buildConfigField "String", "APP_NAME", "\"英语四级宝典\""//宝典
+            buildConfigField "String", "MIAOZE_ADID", "\"s0022001\""
+            manifestPlaceholders = [
+                    UMENG_APPKEY_VALUE: "54057048fd98c5000c00bed1",
+                    PERMISSION_TYPE   : "cet4bible"
+            ]
+        }
+        cet6bible {
+            dimension "apk"
+            applicationId 'com.iyuba.CET6bible'
+            minSdkVersion min_sdk_version
+            targetSdkVersion 26
+            versionCode 631
+            versionName '6.3.1'
+            buildConfigField "boolean", "isEnglish", "true"
+            buildConfigField "boolean", "isCET4", "false"
+            buildConfigField "boolean", "isBible", "true"
+            buildConfigField "String", "APP_NAME", "\"英语六级宝典\""//宝典
+            buildConfigField "String", "MIAOZE_ADID", "\"s0023001\""
+            manifestPlaceholders = [
+                    UMENG_APPKEY_VALUE: "58b3d5c9aed1790133002651",
+                    PERMISSION_TYPE   : "cet6bible"
+            ]
+        }
+        sparkcet4bible {
+            dimension "apk"
+            applicationId 'com.iyuba.SparkCet4bible'
+            minSdkVersion min_sdk_version
+            targetSdkVersion 26
+            versionCode 601
+            versionName '6.0.1'
+            buildConfigField "boolean", "isEnglish", "true"
+            buildConfigField "boolean", "isCET4", "true"
+            buildConfigField "boolean", "isBible", "false"
+            buildConfigField "String", "APP_NAME", "\"四级考试官\""
+            buildConfigField "String", "MIAOZE_ADID", "\"s0022001\""
+            manifestPlaceholders = [
+                    UMENG_APPKEY_VALUE: "59ba44f5f29d984d3d000057",
+                    PERMISSION_TYPE   : "sparkcet4bible"
+            ]
+        }
+        biblecet4 {
+            dimension "apk"
+            applicationId 'com.iyuba.cet4.bible'
+            minSdkVersion min_sdk_version
+            targetSdkVersion 26
+            versionCode 601
+            versionName '6.0.1'
+            buildConfigField "boolean", "isEnglish", "true"
+            buildConfigField "boolean", "isCET4", "true"
+            buildConfigField "boolean", "isBible", "false"
+            buildConfigField "String", "APP_NAME", "\"英语四级\""
+            buildConfigField "String", "MIAOZE_ADID", "\"s0022001\""
+            manifestPlaceholders = [
+                    UMENG_APPKEY_VALUE: "5a290a21f43e4801b4000085",
+                    PERMISSION_TYPE   : "biblecet4"
+            ]
+        }
+        biblecet6 {
+            dimension "apk"
+            applicationId 'com.iyuba.cet6.bible'
+            minSdkVersion min_sdk_version
+            targetSdkVersion 26
+            versionCode 601
+            versionName '6.0.1'
+            buildConfigField "boolean", "isEnglish", "true"
+            buildConfigField "boolean", "isCET4", "false"
+            buildConfigField "boolean", "isBible", "false"
+            buildConfigField "String", "APP_NAME", "\"英语六级\""
+            buildConfigField "String", "MIAOZE_ADID", "\"s0022001\""
+            manifestPlaceholders = [
+                    UMENG_APPKEY_VALUE: "5a290a35f43e484ffc00020a",
+                    PERMISSION_TYPE   : "biblecet6"
+            ]
+        }
+        sparkcet6bible {
+            dimension "apk"
+            applicationId 'com.iyuba.SparkCet6bible'
+            minSdkVersion min_sdk_version
+            targetSdkVersion 26
+            versionCode 501
+            versionName '5.0.1'
+            buildConfigField "boolean", "isEnglish", "true"
+            buildConfigField "boolean", "isCET4", "false"
+            buildConfigField "boolean", "isBible", "false"
+            buildConfigField "String", "APP_NAME", "\"六级考试官\""
+            buildConfigField "String", "MIAOZE_ADID", "\"s0022001\""
+            manifestPlaceholders = [
+                    UMENG_APPKEY_VALUE: "5784d39ce0f55a0cf5001ede",
+                    PERMISSION_TYPE   : "sparkcet6bible"
+            ]
+        }
+        n1examiner {
+            dimension "apk"
+            applicationId 'com.iyuba.examiner.n1'
+            minSdkVersion min_sdk_version
+            targetSdkVersion 26
+            versionCode 4
+            versionName '1.5'
+            buildConfigField "boolean", "isEnglish", "false"
+            buildConfigField "boolean", "isCET4", "false"
+            buildConfigField "boolean", "isBible", "false"
+            buildConfigField "String", "APP_NAME", "\"日语N1考试官\""
+            buildConfigField "String", "MIAOZE_ADID", "\"s0022001\""
+            manifestPlaceholders = [
+                    UMENG_APPKEY_VALUE: "59ca20bb310c93728c0002b5",
+                    PERMISSION_TYPE   : "n1examiner"
+
+            ]
+        }
+        n2examiner {
+            dimension "apk"
+            applicationId 'com.iyuba.examiner.n2'
+            minSdkVersion min_sdk_version
+            targetSdkVersion 26
+            versionCode 4
+            versionName '1.5'
+            buildConfigField "boolean", "isEnglish", "false"
+            buildConfigField "boolean", "isCET4", "false"
+            buildConfigField "boolean", "isBible", "false"
+            buildConfigField "String", "APP_NAME", "\"日语N2考试官\""
+            buildConfigField "String", "MIAOZE_ADID", "\"s0022001\""
+            manifestPlaceholders = [
+                    UMENG_APPKEY_VALUE: "59ca20d799f0c72e80000768",
+                    PERMISSION_TYPE   : "n2examiner"
+            ]
+        }
+        n3examiner {
+            dimension "apk"
+            applicationId 'com.iyuba.examiner.n3'
+            minSdkVersion min_sdk_version
+            targetSdkVersion 26
+            versionCode 4
+            versionName '1.5'
+            buildConfigField "boolean", "isEnglish", "false"
+            buildConfigField "boolean", "isCET4", "false"
+            buildConfigField "boolean", "isBible", "false"
+            buildConfigField "String", "APP_NAME", "\"日语N3考试官\""
+            buildConfigField "String", "MIAOZE_ADID", "\"s0022001\""
+            manifestPlaceholders = [
+                    UMENG_APPKEY_VALUE: "59ca20eba40fa37ada00045c",
+                    PERMISSION_TYPE   : "n3examiner"
+            ]
+        }
+        n123examiner {
+            dimension "apk"
+            applicationId 'com.iyuba.examiner.n123'
+            minSdkVersion min_sdk_version
+            targetSdkVersion 26
+            versionCode 3
+            versionName '1.5'
+            buildConfigField "boolean", "isEnglish", "false"
+            buildConfigField "boolean", "isCET4", "false"
+            buildConfigField "boolean", "isBible", "false"
+            buildConfigField "String", "APP_NAME", "\"日语考试官\""
+            buildConfigField "String", "MIAOZE_ADID", "\"s0022001\""
+            manifestPlaceholders = [
+                    UMENG_APPKEY_VALUE: "5a1f956cf29d985254000370",
+                    PERMISSION_TYPE   : "n123examiner"
+            ]
+        }
+    }
+
+    android.applicationVariants.all { variant ->
+        variant.outputs.all {
+            def fileName = "${variant.flavorName}-${variant.versionName}.apk"
+            outputFileName = fileName
+        }
+    }
+}

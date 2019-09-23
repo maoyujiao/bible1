@@ -1,0 +1,422 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    tools:background="#dedede"
+    tools:layout_margin="16dp">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:paddingBottom="8dp"
+        android:paddingLeft="16dp"
+        android:paddingRight="16dp"
+        android:paddingTop="8dp">
+
+        <LinearLayout
+            android:id="@+id/linear_second_container"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:layout_weight="1"
+            android:gravity="center_horizontal">
+
+            <FrameLayout
+                android:layout_width="50dp"
+                android:layout_height="70dp">
+
+                <de.hdodenhof.circleimageview.CircleImageView
+                    android:id="@+id/image_second_user_head"
+                    android:layout_width="50dp"
+                    android:layout_height="50dp"
+                    android:layout_gravity="bottom|center_horizontal"
+                    tools:src="@drawable/defaultavatar"/>
+
+                <ImageView
+                    android:id="@+id/image_second_vip"
+                    android:layout_width="50dp"
+                    android:layout_height="10dp"
+                    android:layout_gravity="bottom|center_horizontal"
+                    android:src="@drawable/vip"
+                    android:scaleType="fitCenter"/>
+
+            </FrameLayout>
+
+            <android.support.v4.widget.Space
+                android:layout_width="0dp"
+                android:layout_height="4dp"/>
+
+            <FrameLayout
+                android:layout_width="wrap_content"
+                android:layout_height="10dp">
+
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:src="@drawable/second_hint"
+                    android:layout_gravity="bottom"/>
+
+            </FrameLayout>
+
+            <android.support.v4.widget.Space
+                android:layout_width="0dp"
+                android:layout_height="4dp"/>
+
+            <TextView
+                android:id="@+id/text_second_username"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center_horizontal"
+                android:maxLines="1"
+                android:ellipsize="end"
+                android:textColor="@android:color/black"
+                android:textStyle="bold"
+                tools:text="西西木木子"/>
+
+            <LinearLayout
+                android:layout_gravity="center_horizontal"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:id="@+id/text_second_sentence_count"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textColor="#505050"
+                    tools:text="20"/>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textColor="#505050"
+                    android:text="句"/>
+
+                <android.support.v4.widget.Space
+                    android:layout_width="8dp"
+                    android:layout_height="0dp"/>
+
+                <TextView
+                    android:id="@+id/text_second_average_score"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textColor="#505050"
+                    tools:text="88"/>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textColor="#505050"
+                    android:text="分"/>
+
+            </LinearLayout>
+
+            <android.support.v4.widget.Space
+                android:layout_width="0dp"
+                android:layout_height="6dp"/>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:gravity="center_horizontal">
+
+                <TextView
+                    android:id="@+id/text_second_total_score"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textColor="#2177D3"
+                    android:textStyle="bold"
+                    android:textSize="16sp"
+                    tools:text="1763"/>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textColor="#2177D3"
+                    android:textStyle="bold"
+                    android:textSize="16sp"
+                    android:text="分"/>
+
+            </LinearLayout>
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/linear_first_container"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:layout_weight="1"
+            android:gravity="center_horizontal">
+
+            <FrameLayout
+                android:layout_width="60dp"
+                android:layout_height="70dp">
+
+                <de.hdodenhof.circleimageview.CircleImageView
+                    android:id="@+id/image_first_user_head"
+                    android:layout_width="60dp"
+                    android:layout_height="60dp"
+                    android:layout_gravity="bottom"
+                    tools:src="@drawable/defaultavatar"/>
+
+                <ImageView
+                    android:layout_width="25dp"
+                    android:layout_height="25dp"
+                    android:layout_gravity="right|top"
+                    android:src="@drawable/throne"/>
+
+                <ImageView
+                    android:id="@+id/image_first_vip"
+                    android:layout_width="match_parent"
+                    android:layout_height="10dp"
+                    android:layout_gravity="bottom"
+                    android:src="@drawable/vip"
+                    android:scaleType="fitCenter"/>
+
+            </FrameLayout>
+
+            <android.support.v4.widget.Space
+                android:layout_width="0dp"
+                android:layout_height="4dp"/>
+
+            <FrameLayout
+                android:layout_width="wrap_content"
+                android:layout_height="10dp">
+
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:src="@drawable/first_hint"
+                    android:layout_gravity="bottom"/>
+
+            </FrameLayout>
+
+            <android.support.v4.widget.Space
+                android:layout_width="0dp"
+                android:layout_height="4dp"/>
+
+            <TextView
+                android:id="@+id/text_first_username"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center_horizontal"
+                android:maxLines="1"
+                android:ellipsize="end"
+                android:textColor="@android:color/black"
+                android:textStyle="bold"
+                tools:text="西西木木子"/>
+            
+            <LinearLayout
+                android:layout_gravity="center_horizontal"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+                
+                <TextView
+                    android:id="@+id/text_first_sentence_count"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textColor="#505050"
+                    tools:text="20"/>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textColor="#505050"
+                    android:text="句"/>
+                
+                <android.support.v4.widget.Space
+                    android:layout_width="8dp"
+                    android:layout_height="0dp"/>
+
+                <TextView
+                    android:id="@+id/text_first_average_score"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textColor="#505050"
+                    tools:text="88"/>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textColor="#505050"
+                    android:text="分"/>
+                
+            </LinearLayout>
+
+            <android.support.v4.widget.Space
+                android:layout_width="0dp"
+                android:layout_height="6dp"/>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:gravity="center_horizontal">
+
+                <TextView
+                    android:id="@+id/text_first_total_score"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textColor="#2177D3"
+                    android:textStyle="bold"
+                    android:textSize="16sp"
+                    tools:text="1763"/>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textColor="#2177D3"
+                    android:textStyle="bold"
+                    android:textSize="16sp"
+                    android:text="分"/>
+
+            </LinearLayout>
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/linear_third_container"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:layout_weight="1"
+            android:gravity="center_horizontal">
+
+            <FrameLayout
+                android:layout_width="50dp"
+                android:layout_height="70dp">
+
+                <de.hdodenhof.circleimageview.CircleImageView
+                    android:id="@+id/image_third_user_head"
+                    android:layout_width="50dp"
+                    android:layout_height="50dp"
+                    android:layout_gravity="bottom|center_horizontal"
+                    tools:src="@drawable/defaultavatar"/>
+
+                <ImageView
+                    android:id="@+id/image_third_vip"
+                    android:layout_width="50dp"
+                    android:layout_height="10dp"
+                    android:layout_gravity="bottom|center_horizontal"
+                    android:src="@drawable/vip"
+                    android:scaleType="fitCenter"/>
+
+            </FrameLayout>
+
+            <android.support.v4.widget.Space
+                android:layout_width="0dp"
+                android:layout_height="4dp"/>
+
+            <FrameLayout
+                android:layout_width="wrap_content"
+                android:layout_height="10dp">
+
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:src="@drawable/third_hint"
+                    android:layout_gravity="bottom"/>
+
+            </FrameLayout>
+
+            <android.support.v4.widget.Space
+                android:layout_width="0dp"
+                android:layout_height="4dp"/>
+
+            <TextView
+                android:id="@+id/text_third_username"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center_horizontal"
+                android:maxLines="1"
+                android:ellipsize="end"
+                android:textColor="@android:color/black"
+                android:textStyle="bold"
+                tools:text="西西木木子"/>
+
+            <LinearLayout
+                android:layout_gravity="center_horizontal"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:id="@+id/text_third_sentence_count"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textColor="#505050"
+                    tools:text="20"/>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textColor="#505050"
+                    android:text="句"/>
+
+                <android.support.v4.widget.Space
+                    android:layout_width="8dp"
+                    android:layout_height="0dp"/>
+
+                <TextView
+                    android:id="@+id/text_third_average_score"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textColor="#505050"
+                    tools:text="88"/>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textColor="#505050"
+                    android:text="分"/>
+
+            </LinearLayout>
+
+            <android.support.v4.widget.Space
+                android:layout_width="0dp"
+                android:layout_height="6dp"/>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:gravity="center_horizontal">
+
+                <TextView
+                    android:id="@+id/text_third_total_score"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textColor="#2177D3"
+                    android:textStyle="bold"
+                    android:textSize="16sp"
+                    tools:text="1763"/>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textColor="#2177D3"
+                    android:textStyle="bold"
+                    android:textSize="16sp"
+                    android:text="分"/>
+
+            </LinearLayout>
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:layout_marginLeft="16dp"
+        android:background="#bebebe"
+        tools:background="#000000"/>
+
+</LinearLayout>
