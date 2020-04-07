@@ -8,6 +8,7 @@ import com.iyuba.core.sqlite.db.DatabaseService;
 import com.iyuba.core.sqlite.mode.Word;
 
 import java.util.ArrayList;
+import java.util.List;
 
 /**
  * 获取单词表数据库
@@ -130,4 +131,5 @@ public class WordDBOp extends DatabaseService {
         }
 
     }
+
 }

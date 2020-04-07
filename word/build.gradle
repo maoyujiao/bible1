@@ -1,0 +1,83 @@
+apply plugin: 'com.android.library'
+apply plugin: 'com.jakewharton.butterknife'
+
+
+android {
+    compileSdkVersion 28
+    defaultConfig {
+        minSdkVersion min_sdk_version
+        minSdkVersion 19
+        targetSdkVersion 26
+        versionCode 1
+        versionName "1.0"
+        javaCompileOptions { annotationProcessorOptions { includeCompileClasspath = true } }
+
+    }
+    useLibrary 'org.apache.http.legacy'
+
+    dataBinding{
+        enabled  true
+    }
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+        }
+    }
+    buildToolsVersion '28.0.3'
+    repositories {
+        flatDir {
+            dirs '../cetbible_lib/libs'
+        }
+    }
+}
+
+
+
+dependencies {
+    compileOnly fileTree(include: ['*.jar'], dir: 'libs')
+    compileOnly "com.android.support:appcompat-v7:$rootProject.ext.supportLibraryVersion"
+    compileOnly "com.android.support:recyclerview-v7:$rootProject.ext.supportLibraryVersion"
+    compileOnly "com.squareup.okhttp3:okhttp:$rootProject.ext.okhttpVersion"
+    compileOnly "com.squareup.okhttp3:logging-interceptor:$rootProject.ext.okhttpVersion"
+    compileOnly "com.google.code.gson:gson:$rootProject.ext.gsonVersion"
+    api('com.jaeger.statusbarutil:library:1.4.0') {
+        exclude group: 'com.android.support'
+    }
+    api('cn.bingoogolapple:bga-swipebacklayout:1.2.0@aar') {
+        exclude group: 'com.android.support'
+    }
+
+    compileOnly "com.github.hotchemi:permissionsdispatcher:$rootProject.ext.permissionDispatcherVersion"
+    annotationProcessor "com.github.hotchemi:permissionsdispatcher-processor:$rootProject.ext.permissionDispatcherVersion"
+
+
+    implementation "com.jakewharton:butterknife:$rootProject.ext.butterKnifeVersion"
+    annotationProcessor "com.jakewharton:butterknife-compiler:$rootProject.ext.butterKnifeVersion"
+    compile project(path: ':mob')
+
+    compileOnly 'com.blankj:utilcode:1.19.0'
+    compileOnly 'com.github.bumptech.glide:glide:3.8.0'
+    implementation "com.squareup.retrofit2:retrofit:$rootProject.ext.retrofitVersion"
+    implementation "com.squareup.retrofit2:converter-gson:$rootProject.ext.retrofitVersion"
+//    implementation "com.squareup.retrofit2:adapter-rxjava2:$rootProject.ext.retrofitVersion"
+    implementation "com.squareup.retrofit2:adapter-rxjava2:$rootProject.ext.retrofitVersion"
+    implementation("com.squareup.retrofit2:converter-simplexml:$rootProject.ext.retrofitVersion") {
+        exclude group: 'xpp3', module: 'xpp3'
+        exclude group: 'stax', module: 'stax-api'
+        exclude group: 'stax', module: 'stax'
+    }
+    compileOnly 'de.hdodenhof:circleimageview:2.2.0'
+
+    compileOnly 'android.arch.persistence.room:runtime:1.0.0'
+    annotationProcessor 'android.arch.persistence.room:compiler:1.0.0'
+
+    api(name: 'mvp-1.0.0', ext: 'aar')
+
+    implementation "com.android.support:support-v4:$rootProject.ext.supportLibraryVersion"
+    implementation 'com.android.support.constraint:constraint-layout:1.0.2'
+    implementation 'com.android.support:multidex:1.0.2'
+    implementation "com.android.support:support-core-utils:$rootProject.ext.supportLibraryVersion"
+    implementation "io.reactivex.rxjava2:rxandroid:$rootProject.ext.rxAndroidVersion"
+//    compileOnly "io.reactivex.rxjava2:rxjava:$rootProject.ext.rxJavaVersion"
+}

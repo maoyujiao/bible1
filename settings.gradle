@@ -5,6 +5,7 @@ include ':colorred'
 include ':colororange'
 include ':colorblue'
 include ':base'
+include ':word'
 
 include ':iyubaadsdk'
 

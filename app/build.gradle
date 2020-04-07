@@ -2,6 +2,10 @@ apply plugin: 'com.android.application'
 //apply plugin: 'com.mob.sdk'
 
 
+//configurations {
+//////    df/
+////    all*.exclude group: 'com.github.hotchemi'
+////}
 dependencies {
     final PERMISSION_DISPATCHER_VERSION = "$rootProject.ext.permissionDispatcherVersion"
     final SUPPORT_LIBRARY_VERSION = "$rootProject.ext.supportLibraryVersion"
@@ -32,54 +36,34 @@ dependencies {
     implementation project(':abilitytest')
     implementation project(':iyubaadsdk')
     implementation project(':mob')
+    implementation project(':word')
     implementation(name: 'trainingcamp-debug', ext: 'aar')
     implementation 'org.litepal.android:core:2.0.0'
-    implementation 'io.reactivex:rxandroid:1.1.0'
-    implementation "com.iyuba.ad:data-iyuba:$rootProject.ext.iyubaADVersion"
-    implementation "com.iyuba.ad:data-youdao:$rootProject.ext.iyubaADVersion"
-    implementation "com.iyuba.ad:sdk:$rootProject.ext.iyubaADVersion"
+    implementation "io.reactivex:rxandroid:1.1.0"
     implementation "com.android.support:appcompat-v7:$SUPPORT_LIBRARY_VERSION"
     implementation "com.android.support:design:$SUPPORT_LIBRARY_VERSION"
     implementation "com.android.support:recyclerview-v7:$SUPPORT_LIBRARY_VERSION"
     implementation "com.android.support:support-annotations:$SUPPORT_LIBRARY_VERSION"
     implementation "com.android.support:cardview-v7:$SUPPORT_LIBRARY_VERSION"
-    implementation "com.iyuba.dlex:dlex:$rootProject.ext.dlexVersion"
-    implementation "com.iyuba.module:toolbox:$rootProject.ext.toolboxVersion"
-    implementation "com.iyuba.module:mvp:$rootProject.ext.mvpVersion"
-    implementation "com.iyuba.play:player:$rootProject.ext.playerVersion"
-//    implementation 'com.iyuba.module:commonres:1.0.0'
-    implementation 'com.iyuba.module:user:0.1.0-alpha6'
-    implementation 'com.iyuba.retrofit2:mixed_converter:1.0.0'
-
-//    implementation 'com.iyuba.module:imooclib:1.1.4'
-    implementation 'com.iyuba.module:user:0.1.0-alpha6'
-    implementation 'com.iyuba.retrofit2:mixed_converter:1.0.0'
-//    implementation 'com.iyuba.module:headlinelibrary:1.1.0'
-
-    implementation 'com.iyuba.module:intelligence:1.0.3'
-
-    implementation 'com.iyuba.module:iyubamovies:1.1.0'
-    implementation 'com.iyuba.module:basicdl:1.1.0'
-    implementation 'com.iyuba.module:basicfavor:1.1.0'
-    implementation 'com.holybible.widget:recycler:0.0.3'
     implementation "tv.danmaku.ijk.media:ijkplayer-java:$rootProject.ext.ijkVersion"
     implementation "tv.danmaku.ijk.media:ijkplayer-armv7a:$rootProject.ext.ijkVersion"
     implementation "tv.danmaku.ijk.media:ijkplayer-arm64:$rootProject.ext.ijkVersion"
     implementation "tv.danmaku.ijk.media:ijkplayer-x86:$rootProject.ext.ijkVersion"
     implementation "tv.danmaku.ijk.media:ijkplayer-x86_64:$rootProject.ext.ijkVersion"
-    implementation 'com.iyuba.widget:textpage:1.0.0'
-    implementation 'com.iyuba.widget:progresswheel:1.0.0'
+//    implementation 'com.iyuba.widget:textpage:1.0.0'
+//    implementation 'com.iyuba.widget:progresswheel:1.0.0'
     implementation "de.hdodenhof:circleimageview:$rootProject.ext.circleImageVersion"
     implementation "com.scwang.smartrefresh:SmartRefreshLayout:$rootProject.ext.smartRefreshVersion"
     implementation "com.jakewharton.timber:timber:$rootProject.ext.timberVersion"
     implementation "com.youth.banner:banner:$rootProject.ext.bannerVersion"
-    implementation "com.iyuba.widget:subtitle:$rootProject.ext.subtitleVersion"
+//    implementation "com.iyuba.widget:subtitle:$rootProject.ext.subtitleVersion"
     implementation "com.github.hotchemi:permissionsdispatcher:$PERMISSION_DISPATCHER_VERSION"
     annotationProcessor "com.github.hotchemi:permissionsdispatcher-processor:$PERMISSION_DISPATCHER_VERSION"
+
     implementation "com.jakewharton:butterknife:$rootProject.ext.butterKnifeVersion"
     annotationProcessor "com.jakewharton:butterknife-compiler:$rootProject.ext.butterKnifeVersion"
-    implementation "com.youdao.sdk:youdaoadsdk:$rootProject.ext.youdaoSdkVersion"
-    implementation 'com.github.ctiao:DanmakuFlameMaster:0.5.3'
+//    implementation "com.youdao.sdk:youdaoadsdk:$rootProject.ext.youdaoSdkVersion"
+//    implementation 'com.github.ctiao:DanmakuFlameMaster:0.5.3'
 
     //retrofit2库的相关模块
     implementation "com.squareup.retrofit2:retrofit:$RETROFIT_VERSION"
@@ -90,8 +74,8 @@ dependencies {
         exclude group: 'stax', module: 'stax-api'
         exclude group: 'stax', module: 'stax'
     }
-    implementation 'io.reactivex.rxjava2:rxandroid:2.1.0'
-    implementation 'io.reactivex.rxjava2:rxjava:2.2.3'
+    implementation 'io.reactivex.rxjava2:rxandroid:2.1.1'
+    implementation "io.reactivex.rxjava2:rxjava:$rootProject.ext.rxJavaVersion"
     implementation "com.squareup.retrofit2:adapter-rxjava2:$rootProject.ext.retrofitVersion"
     implementation 'com.github.linger1216:labelview:v1.1.2'
 
@@ -103,7 +87,7 @@ dependencies {
     implementation 'tv.lycam:lycamplus-android-mqtt:0.1.5'
     implementation 'org.apache.commons:commons-collections4:4.1'
     implementation "com.google.code.gson:gson:$rootProject.ext.gsonVersion"
-    implementation 'com.blankj:utilcode:1.17.3'
+    implementation 'com.blankj:utilcode:1.19.0'
     implementation 'com.github.gittjy:LoadingDialog:1.0.2'
     implementation "com.android.support:percent:$rootProject.ext.supportLibraryVersion"
     implementation 'com.wang.avi:library:2.1.3'
@@ -119,23 +103,26 @@ dependencies {
     // Glide图形转换工具
     implementation 'jp.wasabeef:glide-transformations:2.0.1'
     implementation 'jp.co.cyberagent.android.gpuimage:gpuimage-library:1.3.0'
-    implementation "com.iyuba.ad:data-iyuba:$rootProject.ext.iyubaADVersion"
-    implementation "com.iyuba.ad:data-youdao:$rootProject.ext.iyubaADVersion"
-    implementation "com.iyuba.ad:sdk:$rootProject.ext.iyubaADVersion"
+//    implementation "com.iyuba.ad:data-iyuba:$rootProject.ext.iyubaADVersion"
+//    implementation "com.iyuba.ad:data-youdao:$rootProject.ext.iyubaADVersion"
+//    implementation "com.iyuba.ad:sdk:$rootProject.ext.iyubaADVersion"
     implementation project(':colororange')
 
     implementation 'android.arch.persistence.room:runtime:1.0.0'
     annotationProcessor 'android.arch.persistence.room:compiler:1.0.0'
+    implementation 'com.github.xuexiangjys.XPush:xpush-huawei:1.0.1'
 
-//    implementation "com.github.hotchemi:permissionsdispatcher:$PERMISSION_DISPATCHER_VERSION"
-//    annotationProcessor "com.github.hotchemi:permissionsdispatcher-processor:$PERMISSION_DISPATCHER_VERSION"
+//    api(name: 'personalhomelibrary-debug', ext: 'aar')
 
 
 //    implementation 'com.alipay.sdk:alipay-sdk-java:3.7.110.ALL'
 }
 
 android {
-
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
     signingConfigs {
         iyuba {
             storeFile file("iyuba_android.keystore")
@@ -144,7 +131,11 @@ android {
             keyPassword 'buaaiyuba'
         }
     }
+    useLibrary 'org.apache.http.legacy'
 
+    dataBinding{
+        enabled = true
+    }
     repositories {
         flatDir {
             dirs 'libs','../cetbible_lib/libs'
@@ -198,6 +189,11 @@ android {
             abiFilters "armeabi-v7a"
         }
         targetSdkVersion 26
+        javaCompileOptions {
+            annotationProcessorOptions {
+                includeCompileClasspath = true
+            }
+        }
     }
     buildTypes {
         release {
@@ -215,8 +211,8 @@ android {
 //            applicationId 'com.iyuba.CET4bible_hw'
             minSdkVersion min_sdk_version
             targetSdkVersion 26
-            versionCode 631
-            versionName '6.3.1'
+            versionCode 633
+            versionName '6.3.3'
             buildConfigField "boolean", "isEnglish", "true"
             buildConfigField "boolean", "isCET4", "true"
             buildConfigField "boolean", "isBible", "true"
@@ -224,7 +220,8 @@ android {
             buildConfigField "String", "MIAOZE_ADID", "\"s0022001\""
             manifestPlaceholders = [
                     UMENG_APPKEY_VALUE: "54057048fd98c5000c00bed1",
-                    PERMISSION_TYPE   : "cet4bible"
+                    PERMISSION_TYPE   : "cet4bible",
+                    MAP_VALUE: "3bb9b946ddabe8d567c43aec2cb8d5c9"
             ]
         }
         cet6bible {
@@ -232,8 +229,8 @@ android {
             applicationId 'com.iyuba.CET6bible'
             minSdkVersion min_sdk_version
             targetSdkVersion 26
-            versionCode 631
-            versionName '6.3.1'
+            versionCode 633
+            versionName '6.3.3'
             buildConfigField "boolean", "isEnglish", "true"
             buildConfigField "boolean", "isCET4", "false"
             buildConfigField "boolean", "isBible", "true"
@@ -241,7 +238,9 @@ android {
             buildConfigField "String", "MIAOZE_ADID", "\"s0023001\""
             manifestPlaceholders = [
                     UMENG_APPKEY_VALUE: "58b3d5c9aed1790133002651",
-                    PERMISSION_TYPE   : "cet6bible"
+                    PERMISSION_TYPE   : "cet6bible",
+                    MAP_VALUE: "ce89fcc685e7825358348543334d0274"
+
             ]
         }
         sparkcet4bible {
@@ -258,7 +257,9 @@ android {
             buildConfigField "String", "MIAOZE_ADID", "\"s0022001\""
             manifestPlaceholders = [
                     UMENG_APPKEY_VALUE: "59ba44f5f29d984d3d000057",
-                    PERMISSION_TYPE   : "sparkcet4bible"
+                    PERMISSION_TYPE   : "sparkcet4bible",
+                    MAP_VALUE: "7b18c75974a4354456f73578c0f09f51"
+
             ]
         }
         biblecet4 {
@@ -266,8 +267,8 @@ android {
             applicationId 'com.iyuba.cet4.bible'
             minSdkVersion min_sdk_version
             targetSdkVersion 26
-            versionCode 601
-            versionName '6.0.1'
+            versionCode 602
+            versionName '6.0.2'
             buildConfigField "boolean", "isEnglish", "true"
             buildConfigField "boolean", "isCET4", "true"
             buildConfigField "boolean", "isBible", "false"
@@ -275,7 +276,9 @@ android {
             buildConfigField "String", "MIAOZE_ADID", "\"s0022001\""
             manifestPlaceholders = [
                     UMENG_APPKEY_VALUE: "5a290a21f43e4801b4000085",
-                    PERMISSION_TYPE   : "biblecet4"
+                    PERMISSION_TYPE   : "biblecet4",
+                    MAP_VALUE: "76e9bb9ffc936bc203740126a403fa06"
+
             ]
         }
         biblecet6 {
@@ -283,8 +286,8 @@ android {
             applicationId 'com.iyuba.cet6.bible'
             minSdkVersion min_sdk_version
             targetSdkVersion 26
-            versionCode 601
-            versionName '6.0.1'
+            versionCode 602
+            versionName '6.0.2'
             buildConfigField "boolean", "isEnglish", "true"
             buildConfigField "boolean", "isCET4", "false"
             buildConfigField "boolean", "isBible", "false"
@@ -292,7 +295,9 @@ android {
             buildConfigField "String", "MIAOZE_ADID", "\"s0022001\""
             manifestPlaceholders = [
                     UMENG_APPKEY_VALUE: "5a290a35f43e484ffc00020a",
-                    PERMISSION_TYPE   : "biblecet6"
+                    PERMISSION_TYPE   : "biblecet6",
+                    MAP_VALUE: "228c5a317fec8f168f979eee8b2d5ce1"
+
             ]
         }
         sparkcet6bible {

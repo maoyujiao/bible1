@@ -2,6 +2,7 @@ package com.iyuba.CET4bible.fragment;
 
 import android.content.DialogInterface;
 import android.os.Bundle;
+import android.os.Handler;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v7.app.AlertDialog;
@@ -27,12 +28,23 @@ import com.iyuba.CET4bible.sqlite.op.ParagraphMatchingOp;
 import com.iyuba.CET4bible.sqlite.op.ReadingInfoOp;
 import com.iyuba.CET4bible.sqlite.op.TranslateOp;
 import com.iyuba.CET4bible.sqlite.op.WriteOp;
+import com.iyuba.CET4bible.strategy.ContentMixStrategy;
+import com.iyuba.CET4bible.strategy.ContentNonVipStrategy;
+import com.iyuba.CET4bible.strategy.ContentStrategy;
+import com.iyuba.CET4bible.strategy.ContentVipStrategy;
+import com.iyuba.CET4bible.strategy.HolderType;
 import com.iyuba.CET4bible.util.AdInfoFlowUtil;
 import com.iyuba.CET4bible.util.FavoriteUtil;
+import com.iyuba.ad.adblocker.AdBlocker;
 import com.iyuba.base.BaseFragment;
 import com.iyuba.base.BaseRecyclerViewAdapter;
 import com.iyuba.base.util.SimpleLineDividerDecoration;
+import com.iyuba.configation.Constant;
 import com.iyuba.core.manager.AccountManager;
+import com.iyuba.headlinelibrary.data.model.StreamType;
+import com.iyuba.headlinelibrary.data.model.StreamTypeInfo;
+import com.iyuba.module.toolbox.RxUtil;
+import com.iyuba.module.user.IyuUserManager;
 import com.youdao.sdk.nativeads.NativeResponse;
 
 import java.util.ArrayList;
@@ -40,6 +52,9 @@ import java.util.Collections;
 import java.util.Comparator;
 import java.util.HashSet;
 import java.util.List;
+
+import io.reactivex.disposables.Disposable;
+import io.reactivex.functions.Consumer;
 
 /**
  * FavoriteFragment
@@ -64,6 +79,13 @@ public class FavoriteFragment extends BaseFragment {
 
     private List<PackInfo> packInfoList;
 
+    private Disposable mTypeDisposable;
+
+    ContentStrategy mContentStrategy;
+    private RecyclerView.Adapter mWorkAdapter;
+    int[] mStreamTypes;
+    private int mStrategyCode;
+
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
@@ -74,6 +96,7 @@ public class FavoriteFragment extends BaseFragment {
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         type = getArguments().getInt("type");
+        getStreamType();
 
         recyclerView = view.findViewById(R.id.recyclerView);
         recyclerView.setLayoutManager(new LinearLayoutManager(mContext));
@@ -337,4 +360,80 @@ public class FavoriteFragment extends BaseFragment {
         fragment.setArguments(bundle);
         return fragment;
     }
+    private void checkContentStrategy(@Nullable Runnable noChangeAction) {
+
+        new Handler().postDelayed(new Runnable() {
+            @Override
+            public void run() {
+
+                if (!isAdded()) {
+                    return;
+                }
+                int code = getStrategyCode();
+//        if (mStrategyCode != code) {
+                mStrategyCode = code;
+                mContentStrategy = switchStrategy(mStrategyCode);
+
+                mWorkAdapter = mContentStrategy.buildWorkAdapter(getActivity(), mAdapter);
+                mContentStrategy.init(recyclerView, mWorkAdapter);
+                if (mContentStrategy instanceof ContentNonVipStrategy) {
+                    ((ContentNonVipStrategy) mContentStrategy).loadAd(mWorkAdapter);
+                }
+            }
+        }, 500);
+
+    }
+
+    private int getStrategyCode() {
+        if (IyuUserManager.getInstance().isVip()) {
+            return ContentStrategy.Strategy.VIP;
+        } else {
+            if (mStreamTypes != null) {
+                return AdBlocker.getInstance().shouldBlockAd() ? ContentStrategy.Strategy.VIP : ContentStrategy.Strategy.MIX;
+            } else {
+                return ContentStrategy.Strategy.VIP;
+            }
+        }
+    }
+
+    private ContentStrategy switchStrategy(int strategyCode) {
+        switch (strategyCode) {
+            case ContentStrategy.Strategy.VIP: {
+                return new ContentVipStrategy();
+            }
+            case ContentStrategy.Strategy.MIX:
+            default: {
+                return new ContentMixStrategy(2, 6, mStreamTypes, HolderType.HOME);
+            }
+        }
+    }
+
+    private void getStreamType() {
+        RxUtil.dispose(mTypeDisposable);
+        mTypeDisposable = com.iyuba.headlinelibrary.data.DataManager.getInstance().getStreamType(Constant.APPID)
+                .compose(RxUtil.<StreamTypeInfo>applySingleIoScheduler())
+                .subscribe(new Consumer<StreamTypeInfo>() {
+                    @Override
+                    public void accept(StreamTypeInfo streamTypeInfo) throws Exception {
+                        mStreamTypes = streamTypeInfo.getTypes();
+                        checkContentStrategy(new Runnable() {
+                            @Override
+                            public void run() {
+                                mAdapter.notifyDataSetChanged();
+                            }
+                        });
+
+                    }
+                }, new Consumer<Throwable>() {
+                    @Override
+                    public void accept(Throwable throwable) throws Exception {
+                        throwable.printStackTrace();
+                        mStreamTypes = new int[]{StreamType.YOUDAO, StreamType.YOUDAO, StreamType.YOUDAO};
+                        checkContentStrategy(null);
+
+                    }
+                });
+
+    }
+
 }

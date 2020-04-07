@@ -61,7 +61,7 @@ public class WordListActivity extends BaseActivity {
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_word_list);
+        setContentView(R.layout.activity_word_list_main);
         StatusBarUtil.setColor(this,getResources().getColor(R.color.colorPrimary) , 0);
         context = this;
         ButterKnife.bind(this);

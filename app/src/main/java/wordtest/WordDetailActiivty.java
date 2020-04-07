@@ -162,7 +162,7 @@ public class WordDetailActiivty extends BaseActivity implements MediaPlayer.OnPr
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_word_detail);
+        setContentView(R.layout.activity_word_detail_main);
         StatusBarUtil.setColor(this, getResources().getColor(R.color.colorPrimary), 0);
         ButterKnife.bind(this);
         setSupportActionBar(toolbar);

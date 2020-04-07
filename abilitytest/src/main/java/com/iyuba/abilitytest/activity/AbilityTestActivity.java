@@ -16,6 +16,7 @@ import android.support.v7.widget.RecyclerView;
 import android.text.TextUtils;
 import android.text.method.ScrollingMovementMethod;
 import android.util.DisplayMetrics;
+import android.util.Log;
 import android.util.TypedValue;
 import android.view.Gravity;
 import android.view.View;
@@ -160,7 +161,6 @@ public class AbilityTestActivity extends AppBaseActivity {
     private final int FLAG_TEST = 1;//测评模式
     private final int FLAG_PRACTICE = 2;//练习模式
     private String mTestCategory;
-    private RadioGroup rg_judge;
     private SeekBar sb_player;
     private Player mPlayer;
     private LinearLayout ll_play_controller;
@@ -277,7 +277,6 @@ public class AbilityTestActivity extends AppBaseActivity {
         mCheckBox_D = findView(R.id.checkBoxD);
         mCheckBox_E = findView(R.id.checkBoxE);
         virtualKey = findViewById(R.id.virtual_keyboard);
-        rg_judge = findView(R.id.rg_judge);
         //单选
         tv_jude_detail = findView(R.id.tv_ability_listen_judge_ques);//判断题目的 题目要求线面的问题详情
         wordImage = findViewById(R.id.word_img);
@@ -788,16 +787,19 @@ public class AbilityTestActivity extends AppBaseActivity {
                     @Override
                     public void onClick(View view) {
                         final AbilityQuestion.TestListBean bean = mQuesList.get(index) ;
+                        File file = new File(Constant.envir);
+                        if(!file.exists()){
+                            file.mkdirs();
+                        }
                         mRecordFile = new File(Constant.getsimRecordAddr()+index+Constant.getrecordTag());
-
-                        mRecorder = new RecordManager(mRecordFile);
-
                         if (isRecording){
                             timer.cancel();
                             mRecorder.stopRecord();
-                            uploadVoiceRecorToNet(bean.getQuestion(),bean.getId()+"",bean.getLessonId()+"",index+"",Constant.mListen,
+                            isRecording =false ;
+                            uploadVoiceRecorToNet(bean.getAnswer(),bean.getId()+"",bean.getLessonId()+"",index+"",Constant.mListen,
                                     AccountManager.Instace(mContext).userId,mRecordFile);
                         }else {
+                            mRecorder = new RecordManager(mRecordFile);
                             mTestRecord.TestTime = deviceInfo.getCurrentTime();
                             if (!NetWorkState.isConnectingToInternet()) {
                                 CustomToast.showToast(mContext, R.string.alert_net_content, 1000);//网络未连接
@@ -808,10 +810,11 @@ public class AbilityTestActivity extends AppBaseActivity {
                                     @Override
                                     public void run() {
                                         mRecorder.stopRecord();
-                                        uploadVoiceRecorToNet(bean.getQuestion(),bean.getId()+"",bean.getLessonId()+"",index+"",Constant.mListen,
+                                        isRecording =false ;
+                                        uploadVoiceRecorToNet(bean.getAnswer(),bean.getId()+"",bean.getLessonId()+"",index+"",Constant.mListen,
                                                 AccountManager.Instace(mContext).userId,mRecordFile);
                                     }
-                                },bean.getQuestion().length()*120+2000);
+                                },bean.getQuestion().length()*80+1500);
                                 isRecording = true ;
                                 mRoundProgressBar.setBackgroundResource(R.mipmap.speak_ques_stop);
                             }
@@ -1491,11 +1494,6 @@ public class AbilityTestActivity extends AppBaseActivity {
                     if (null == response.body().getData()){
                         return;
                     }
-//                    for (SendEvaluateResponse.DataBean.WordsBean bean : response.body().getData().getWords()) {
-//                        if (bean.getScore() < 2) {
-//                            list.add(bean.getIndex());
-//                        }
-//                    }
                     Message message = Message.obtain();
                     message.arg1 = (int) (Float.parseFloat(response.body().getData().getTotal_score()) * 20);
                     message.arg2 = Integer.parseInt(idIndex);
@@ -1507,7 +1505,13 @@ public class AbilityTestActivity extends AppBaseActivity {
 
             @Override
             public void onFailure(Call<SendEvaluateResponse> call, Throwable t) {
-
+                Log.d(TAG, "onFailure: ");
+                Message message = Message.obtain();
+                message.arg1 =  0;
+                message.arg2 = Integer.parseInt(idIndex);
+                message.obj = false;
+                message.what = 6;
+                handler.sendMessage(message);
             }
         });
     }

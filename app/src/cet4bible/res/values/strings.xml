@@ -1,5 +1,17 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="app_name">英语四级宝典</string>
+    <string name="app_name">英语四级</string>
     <string name="tencent_app_id">tencent1103460601</string>
+
+    <string name="push_huawei_id" >10205012</string>
+    <string name="push_huawei_secret">nrdqh1mrdyqet90oz3y5p04hx83sb36q</string>
+    <string name="push_mi_id" >2882303761517270761</string>
+    <string name="push_mi_key"  >5341727088761</string>
+    <string name="push_mi_secret"  >7AqkyZSD6lhfu6FfN9ScPg==</string>
+    <string name="push_oppo_id"  >581103</string>
+    <string name="push_oppo_key"  >2qyS3Gpl8ge80kk4cws4wOWo0</string>
+    <string name="push_oppo_secret"  >C1b81343494c73ab27df97Ad4dCb9683</string>
+    <string name="push_oppo_master_secret" >F9F3e21408aA4BaB22dfB8533cB6fDc9</string>
+
+    <string name="file_provider_name_personal">com.iyuba.CET4bible</string>
 </resources>

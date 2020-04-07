@@ -96,7 +96,7 @@ public class SelectPicUtils {
 
 		Uri uritempFile ;
 		if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
-			uritempFile = FileProvider.getUriForFile(activity, Constant.PACKAGE_NAME + ".fileprovider",file);
+			uritempFile = FileProvider.getUriForFile(activity, Constant.PACKAGE_NAME ,file);
 		}else {
 			uritempFile = Uri.fromFile(file);
 		}

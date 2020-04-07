@@ -68,7 +68,7 @@ public class FavoriteReadingAdapter extends BaseRecyclerViewAdapter<FavoriteRead
                     .placeholder(R.drawable.nearby_no_icon2)
                     .into(holder.ivAd);
             holder.bg_item_reading.setVisibility(View.INVISIBLE);
-            holder.reading_title.setText(response.getTitle() + "（广告）");
+            holder.reading_title.setText(response.getTitle() + "（推广）");
             return;
         }
         holder.ivAd.setVisibility(View.GONE);

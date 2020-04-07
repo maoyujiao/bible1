@@ -6,7 +6,6 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.media.AudioManager;
-import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
@@ -22,7 +21,6 @@ import android.widget.TextView;
 import com.iyuba.CET4bible.R;
 import com.iyuba.CET4bible.event.JPLevelChangeEvent;
 import com.iyuba.CET4bible.sqlite.op.BlogOp;
-import com.iyuba.CET4bible.util.ClearBuffer;
 import com.iyuba.CET4bible.util.Share;
 import com.iyuba.CET4bible.widget.SleepDialog;
 import com.iyuba.configation.ConfigManager;
@@ -38,7 +36,6 @@ import com.iyuba.core.thread.GitHubImageLoader;
 import com.iyuba.core.util.FileSize;
 import com.iyuba.core.util.TouristUtil;
 import com.iyuba.core.widget.dialog.CustomToast;
-import com.iyuba.imooclib.IMooc;
 import com.umeng.analytics.MobclickAgent;
 import com.umeng.message.PushAgent;
 
@@ -89,7 +86,7 @@ public class SetActivity extends BasisActivity {
         }
 
     };
-    private CheckBox checkBox_Download, checkBox_Push, checkBox_night;
+    private CheckBox checkBox_Download, checkBox_Push,checkBox_night;
     private View aboutBtn, btn_download, btn_push, btn_night, btn_clear_pic,
             btn_help_use, btn_clear_video, recommendButton, sleepButton,
             language, savePathBtn;
@@ -216,7 +213,6 @@ public class SetActivity extends BasisActivity {
     private TextView picSize, soundSize, savePath;
     private int appLanguage;
     private TextView languageText;
-    private String strDirSize = "";
     private Button button_back;
     Handler handler = new Handler() {
 
@@ -383,7 +379,6 @@ public class SetActivity extends BasisActivity {
      */
     private void initListener() {
         button_back.setOnClickListener(ocl);
-        //btn_play_set.setOnClickListener(ocl);
         btn_download.setOnClickListener(ocl);
         btn_push.setOnClickListener(ocl);
 //		btn_night.setOnClickListener(ocl);
@@ -397,9 +392,6 @@ public class SetActivity extends BasisActivity {
         savePathBtn.setOnClickListener(ocl);
     }
 
-    /**
-     *
-     */
     private void initSleep() {
         if (!isSleep) {
             ((TextView) findViewById(R.id.sleep_state))
@@ -411,7 +403,6 @@ public class SetActivity extends BasisActivity {
     }
 
     private void initLanguage() {
-
         language = findViewById(R.id.set_language);
         language.setOnClickListener(new OnClickListener() {
             @Override
@@ -508,31 +499,6 @@ public class SetActivity extends BasisActivity {
         MobclickAgent.onResume(mContext);
     }
 
-    private void prepareMessage() {
-        String text = getResources().getString(R.string.setting_share1)
-                + Constant.APPName
-                + getResources().getString(R.string.setting_share2)
-                + "：http://app.iyuba.cn/android/androidDetail.jsp?id="
-                + Constant.APPID;
-        Intent shareInt = new Intent(Intent.ACTION_SEND);
-        shareInt.setType("text/*");
-        shareInt.putExtra(Intent.EXTRA_TEXT, text);
-        shareInt.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-        shareInt.putExtra("sms_body", text);
-        startActivity(Intent.createChooser(shareInt,
-                getResources().getString(R.string.setting_share_ways)));
-    }
-
-//	private void setNight() {
-//		if (checkBox_night.isChecked()) {
-//			SettingConfig.Instance().setNight(true);
-//			((BasisActivity) mContext).night();
-//		} else {
-//			SettingConfig.Instance().setNight(false);
-//			((BasisActivity) mContext).day();
-//		}
-//	}
-
     private String getSize(int type) {
         if (type == 0) {
             return FileSize.getInstance().getFormatFolderSize(
@@ -592,78 +558,6 @@ public class SetActivity extends BasisActivity {
         }
     }
 
-    /*********************************************************************************/
-
-    /*
-     * 文件夹大小
-     */
-    private long GetDirSize(File dir) {
-        if (null == dir) {
-            return 0;
-        }
-
-        if (!dir.isDirectory()) {
-            return 0;
-        }
-
-        long dirsize = 0;
-
-        File[] files = dir.listFiles();
-        for (File file : files) {
-
-            if (file.isFile()) {
-                dirsize += file.length();
-            } else if (file.isDirectory()) {
-                dirsize += file.length();
-                dirsize += GetDirSize(file);
-            }
-        }
-        return dirsize;
-    }
-
-    private double GetDirSizeDouble(File dir) {
-        if (null == dir) {
-            return 0;
-        }
-
-        if (!dir.isDirectory()) {
-            return 0;
-        }
-
-        long dirsize = 0;
-
-        File[] files = dir.listFiles();
-        for (File file : files) {
-
-            if (file.isFile()) {
-                dirsize += file.length();
-            } else if (file.isDirectory()) {
-                dirsize += file.length();
-                dirsize += GetDirSize(file);
-            }
-        }
-
-        double size = 0;
-        size = (dirsize + 0.0) / (1024 * 1024);
-        return size;
-    }
-
-    class CleanBufferAsyncTask extends AsyncTask<Void, Void, Void> {
-        @Override
-        protected Void doInBackground(Void... params) {
-            ClearBuffer clear = new ClearBuffer(mContext);
-            if (clear.Delete()) {
-                clear.updateDB();
-                soundSize.post(new Runnable() {
-                    @Override
-                    public void run() {
-                        soundSize.setText(getSize(0));
-                    }
-                });
-            }
-            return null;
-        }
-    }
 
     /**
      * 修改日语N123

@@ -2,6 +2,7 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:background="@color/bg_ability"
     android:orientation="vertical">
 
@@ -57,7 +58,7 @@
             android:background="@drawable/shape_btnbg_right_nor"
             android:gravity="center"
             android:text="学习图谱"
-            android:textColor="@color/text_bluenor_color"
+            android:textColor="@color/colorPrimary"
             android:textSize="16sp" />
 
         <ImageButton
@@ -76,6 +77,11 @@
         android:layout_height="0dp"
         android:layout_weight="1"
         android:orientation="vertical" />
+    <!--<com.iyuba.abilitytest.widget.BarView-->
+        <!--android:id="@+id/barView"-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="300dp"-->
+        <!--/>-->
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -87,19 +93,33 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginBottom="8dp"
-            android:layout_marginLeft="10dp"
             android:gravity="center_horizontal"
             android:orientation="horizontal">
             <!--图片大小180*68 -->
-            <Button
+            <TextView
                 android:id="@+id/btn_ability_words"
-                style="@style/AbilityTestButtonStyle"
-                android:background="@drawable/btn_bg_ability_word" />
+                android:layout_width="130dp"
+                android:layout_height="65dp"
+                android:textColor="@color/white"
+                android:gravity="center_vertical"
+                android:textSize="20sp"
+                android:paddingLeft="17dp"
+                android:text="单词"
+                android:drawableRight="@mipmap/ic_word"
+                android:background="@drawable/bg_round_corner_blue" />
 
             <Button
                 android:id="@+id/btn_ability_grammar"
-                style="@style/AbilityTestButtonStyle"
-                android:background="@drawable/btn_bg_ability_grammar" />
+                android:layout_width="130dp"
+                android:layout_height="65dp"
+                android:textColor="@color/white"
+                android:gravity="center_vertical"
+                android:textSize="20sp"
+                android:paddingLeft="17dp"
+                android:layout_marginLeft="20dp"
+                android:text="语法"
+                android:drawableRight="@mipmap/ic_grammer"
+                android:background="@drawable/bg_round_corner_blue" />
 
         </LinearLayout>
 
@@ -107,39 +127,67 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginBottom="8dp"
-            android:layout_marginLeft="10dp"
             android:gravity="center_horizontal"
             android:orientation="horizontal">
 
             <Button
                 android:id="@+id/btn_ability_listen"
-                style="@style/AbilityTestButtonStyle"
-                android:background="@drawable/btn_bg_ability_listen" />
+                android:layout_width="130dp"
+                android:layout_height="65dp"
+                android:textColor="@color/white"
+                android:gravity="center_vertical"
+                android:textSize="20sp"
+                android:paddingLeft="17dp"
+                android:text="听力"
+                android:drawableRight="@mipmap/ic_listen"
+                android:background="@drawable/bg_round_corner_blue" />
 
             <Button
-                android:id="@+id/btn_ability_spoken"
-                style="@style/AbilityTestButtonStyle"
-                android:background="@drawable/btn_bg_ability_speak" />
+                android:id="@+id/btn_ability_read"
+                android:layout_width="130dp"
+                android:layout_height="65dp"
+                android:textColor="@color/white"
+                android:gravity="center_vertical"
+                android:textSize="20sp"
+                android:paddingLeft="17dp"
+                android:layout_marginLeft="20dp"
+                android:text="阅读"
+                android:drawableRight="@mipmap/ic_read"
+                android:background="@drawable/bg_round_corner_blue" />
 
         </LinearLayout>
 
         <LinearLayout
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginBottom="20dp"
-            android:layout_marginLeft="10dp"
             android:gravity="center_horizontal"
             android:orientation="horizontal">
 
             <Button
-                android:id="@+id/btn_ability_read"
-                style="@style/AbilityTestButtonStyle"
-                android:background="@drawable/btn_bg_ability_read" />
+                android:id="@+id/btn_ability_spoken"
+                android:layout_width="130dp"
+                android:layout_height="65dp"
+                android:textColor="@color/white"
+                android:gravity="center_vertical"
+                android:textSize="20sp"
+                android:paddingLeft="17dp"
+                android:text="口语"
+                android:drawableRight="@mipmap/ic_spoken"
+                android:background="@drawable/bg_round_corner_blue" />
 
             <Button
                 android:id="@+id/btn_ability_write"
-                style="@style/AbilityTestButtonStyle"
-                android:background="@drawable/btn_bg_ability_write" />
+                android:layout_width="130dp"
+                android:layout_height="65dp"
+                android:textColor="@color/white"
+                android:gravity="center_vertical"
+                android:textSize="20sp"
+                android:paddingLeft="17dp"
+                android:layout_marginLeft="20dp"
+                android:text="写作"
+                android:drawableRight="@mipmap/ic_write"
+                android:background="@drawable/bg_round_corner_blue" />
 
         </LinearLayout>
     </LinearLayout>

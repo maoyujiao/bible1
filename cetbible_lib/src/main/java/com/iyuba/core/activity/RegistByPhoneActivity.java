@@ -11,8 +11,12 @@ import android.os.Handler;
 import android.os.Message;
 import android.text.Editable;
 import android.text.Html;
+import android.text.Spannable;
+import android.text.SpannableStringBuilder;
+import android.text.TextPaint;
 import android.text.TextWatcher;
 import android.text.method.LinkMovementMethod;
+import android.text.style.ClickableSpan;
 import android.util.Log;
 import android.view.View;
 import android.view.inputmethod.InputMethodManager;
@@ -207,10 +211,22 @@ public class RegistByPhoneActivity extends BasisActivity {
         };
         SMSSDK.registerEventHandler(eh);
         smsContent = new SmsContent(RegistByPhoneActivity.this, handler_verify);
+        String remindString ="我已阅读并同意使用条款和隐私政策";
+
         protocol = findViewById(R.id.protocol);
-        protocol.setText(Html
-                .fromHtml("我已阅读并同意<a href=\"https://ai.iyuba.cn/api/protocol.jsp?apptype="+
-                        Constant.APP_CONSTANT.APPName()+"\">使用条款和隐私政策</a>"));
+        SpannableStringBuilder spannableStringBuilder  = new SpannableStringBuilder(remindString);
+        ClickableSpan clickableSpan = new ClickableSpan() {
+            @Override
+            public void onClick(View widget) {
+                Web.start(mContext, Constant.PROTOCOL_URL_HEADER+Constant.APPName,"用户隐私协议");
+            }
+            @Override
+            public void updateDrawState(TextPaint ds) {
+                ds.setUnderlineText(true);
+            }
+        } ;
+        spannableStringBuilder.setSpan(clickableSpan, remindString.indexOf("使用条款"), remindString.indexOf("使用条款")+9, Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
+        protocol.setText(spannableStringBuilder);
         protocol.setMovementMethod(LinkMovementMethod.getInstance());
         findViewById(R.id.button_back).setOnClickListener(new View.OnClickListener() {
             @Override

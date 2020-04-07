@@ -16,6 +16,7 @@ import android.support.v4.view.ViewPager;
 import android.support.v7.app.AlertDialog;
 import android.text.SpannableStringBuilder;
 import android.text.Spanned;
+import android.text.TextUtils;
 import android.text.format.DateFormat;
 import android.text.style.AbsoluteSizeSpan;
 import android.text.style.ForegroundColorSpan;
@@ -34,6 +35,7 @@ import android.widget.PopupMenu;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
+import com.blankj.utilcode.util.ToastUtils;
 import com.google.gson.Gson;
 import com.iyuba.CET4bible.BuildConfig;
 import com.iyuba.CET4bible.R;
@@ -71,6 +73,7 @@ import com.iyuba.core.discover.activity.WordCollection;
 import com.iyuba.core.http.Http;
 import com.iyuba.core.http.HttpCallback;
 import com.iyuba.core.listener.ProtocolResponse;
+import com.iyuba.core.manager.AccountManager;
 import com.iyuba.core.manager.DataManager;
 import com.iyuba.core.protocol.BaseHttpResponse;
 import com.iyuba.core.sqlite.mode.Sayings;
@@ -83,6 +86,9 @@ import com.iyuba.core.util.NetWorkState;
 import com.iyuba.core.widget.PullToRefreshView_New;
 import com.iyuba.core.widget.SuperListView;
 import com.iyuba.imooclib.ui.mobclass.MobClassActivity;
+import com.iyuba.wordtest.WordStepActivity;
+import com.iyuba.wordtest.manager.WordConfigManager;
+import com.iyuba.wordtest.manager.WordManager;
 import com.umeng.analytics.MobclickAgent;
 import com.youdao.sdk.nativeads.RequestParameters;
 import com.youdao.sdk.nativeads.ViewBinder;
@@ -104,7 +110,6 @@ import butterknife.ButterKnife;
 import butterknife.OnClick;
 import butterknife.Unbinder;
 import okhttp3.Call;
-import wordtest.WordStepActivity;
 
 /**
  * 类名
@@ -714,6 +719,7 @@ public class HomeFragment extends Fragment implements OnClickListener, PullToRef
                 AbilityMapActivity.actionStart(mContext, 1, -1);
                 break;
             case R.id.ll_vocabulary:
+//                Util.startQQGroup(getActivity(),"");
                 intent = new Intent(mContext, Cet4WordList.class);
                 startActivity(intent);
                 break;
@@ -821,7 +827,7 @@ public class HomeFragment extends Fragment implements OnClickListener, PullToRef
 
     private void showAlert() {
         final String[] wpd = {"30", "50", "70", "100"};
-        final String select = String.valueOf(ConfigManager.Instance().loadInt("wpd", 30));
+        final String select = String.valueOf(WordConfigManager.Instance(getActivity()).loadInt("wpd", 30));
         for (int i = 0; i < wpd.length; i++) {
             if (wpd[i].equals(select)) {
                 checkedItem = i;
@@ -839,13 +845,13 @@ public class HomeFragment extends Fragment implements OnClickListener, PullToRef
                 .setPositiveButton("确定", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
-                        ConfigManager.Instance().putInt("wpd", WORD_COUNT);
+                        WordConfigManager.Instance(getActivity()).putInt("wpd", WORD_COUNT);
                         dialog.dismiss();
                         startActivity(new Intent(mContext, WordStepActivity.class));
                     }
                 }).create().show();
-        ConfigManager.Instance().putBoolean("isWordNumberSelected", true);
-        ConfigManager.Instance().putBoolean("dbChange", true);
+        WordConfigManager.Instance(getActivity()).putBoolean("isWordNumberSelected", true);
+        WordConfigManager.Instance(getActivity()).putBoolean("dbChange", true);
 
     }
 
@@ -863,7 +869,17 @@ public class HomeFragment extends Fragment implements OnClickListener, PullToRef
 
     @OnClick(R.id.go_words)
     public void onGoWordsClicked() {
-        if (ConfigManager.Instance().loadBoolean("isWordNumberSelected", false)) {
+        String username = AccountManager.Instace(getActivity()).userName;
+
+        if (TextUtils.isEmpty(username)){
+            ToastUtils.showShort("此功能需要登录后使用");
+            return ;
+        }
+        String id = AccountManager.Instace(getActivity()).userId;
+        int  vip = AccountManager.Instace(getActivity()).getVipStatus();
+        WordManager.init(username,id,Constant.APP,Constant.mListen,vip);
+
+        if (WordConfigManager.Instance(getActivity()).loadBoolean("isWordNumberSelected", false)) {
             startActivity(new Intent(mContext, WordStepActivity.class));
         } else {
             showAlert();

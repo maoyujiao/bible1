@@ -8,6 +8,7 @@ package com.iyuba.core.activity;
  * @para 传入"url" 网址；"title"标题显示
  */
 
+import android.content.Context;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
@@ -115,23 +116,30 @@ public class Web extends AppCompatActivity {
             }
         });
     }
+    public static void start(Context context , String url , String title ){
+        Intent intent  = new Intent(context , Web.class);
+        intent.putExtra("url",url);
+        intent.putExtra("title",title);
+        context.startActivity(intent);
+    }
 
     @Override
     public void onBackPressed() {
-        urlList.add(web.getUrl());
-        if (urlList.size()>1&&web.getUrl().equals(urlList.get(urlList.size()-1))){
-            swipeBackHelper.onBackPressed();
-            return;
-        }
-        if (web.canGoBack()) {
-            web.goBack(); // goBack()表示返回webView的上一页面
-        } else if (!web.canGoBack()) {
-            if (swipeBackHelper != null) {
-                swipeBackHelper.onBackPressed();
-            } else {
-                super.onBackPressed();
-            }
-        }
+        super.onBackPressed();
+//        urlList.add(web.getUrl());
+//        if (urlList.size()>1&&web.getUrl().equals(urlList.get(urlList.size()-1))){
+//            swipeBackHelper.onBackPressed();
+//            return;
+//        }
+//        if (web.canGoBack()) {
+//            web.goBack(); // goBack()表示返回webView的上一页面
+//        } else if (!web.canGoBack()) {
+//            if (swipeBackHelper != null) {
+//                swipeBackHelper.onBackPressed();
+//            } else {
+//                super.onBackPressed();
+//            }
+//        }
     }
 
     @Override

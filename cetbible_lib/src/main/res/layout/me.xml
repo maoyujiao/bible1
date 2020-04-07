@@ -128,7 +128,7 @@
                             android:layout_width="25dp"
                             android:layout_height="25dp"
                             android:layout_marginLeft="10dp"
-                            android:src="@drawable/p_state" />
+                            android:src="@drawable/meicon_groupchat" />
 
                         <TextView
                             android:id="@+id/fix"
@@ -137,11 +137,12 @@
                             android:layout_margin="10dp"
                             android:drawablePadding="5dp"
                             android:gravity="center"
-                            android:text="@string/me_state_text"
+                            android:text="四六级官方群"
                             android:textColor="#000000"
                             android:textSize="17sp" />
 
                         <TextView
+                            android:visibility="invisible"
                             android:id="@+id/me_state"
                             android:layout_width="0dp"
                             android:layout_height="wrap_content"

@@ -9,9 +9,9 @@ dependencies {
     api fileTree(include: '*.jar', dir: 'libs')
     api project(':MultiThreadDownloader')
     api project(':configation')
-    implementation project(':mob')
+    api project(':mob')
     implementation project(':http233')
-    implementation "com.iyuba.dlex:dlex:$rootProject.ext.dlexVersion"
+//    implementation "com.iyuba.dlex:dlex:$rootProject.ext.dlexVersion"
     implementation 'com.android.support:multidex:1.0.2'
 
     //noinspection GradleCompatible
@@ -42,58 +42,82 @@ dependencies {
     implementation "org.greenrobot:eventbus:$rootProject.ext.eventBusVersion"
     implementation "com.github.AnthonyFermin:DropDownView:$rootProject.ext.dropDownViewVersion"
     implementation "com.squareup.okhttp3:logging-interceptor:$rootProject.ext.okhttpVersion"
-    implementation "com.iyuba.dlex:dlex:$rootProject.ext.dlexVersion"
-    implementation "com.iyuba.module:toolbox:$rootProject.ext.toolboxVersion"
-    implementation "com.iyuba.module:mvp:$rootProject.ext.mvpVersion"
-    implementation "com.iyuba.play:player:$rootProject.ext.playerVersion"
+//    implementation "com.iyuba.dlex:dlex:$rootProject.ext.dlexVersion"
+//    implementation "com.iyuba.module:toolbox:$rootProject.ext.toolboxVersion"
+//    implementation "com.iyuba.module:mvp:$rootProject.ext.mvpVersion"
+//    implementation "com.iyuba.play:player:$rootProject.ext.playerVersion"
 //    implementation 'com.iyuba.module:commonres:1.0.0'  机器坏了依赖放在本地目录了
     api(name: 'headlinelib', ext: 'aar')
-    api(name: 'imooclib', ext: 'aar')
+    api(name: 'imooclib-debug', ext: 'aar')
     api(name: 'lib_tcsuperplayer-debug', ext: 'aar')
     api(name: 'LiteAVSDK_Player', ext: 'aar')
+    api(name: 'commonres-1.0.1', ext: 'aar')
+    api(name: 'dlex-1.0.2', ext: 'aar')
+    api(name: 'mvp-1.0.0', ext: 'aar')
+    api(name: 'player-1.2.5', ext: 'aar')
+    api(name: 'progresswheel-1.0.0', ext: 'aar')
+    api(name: 'recycler-0.0.3', ext: 'aar')
+    api(name: 'sonic-1.0.0', ext: 'aar')
+    api(name: 'data-iyuba-0.1.3', ext: 'aar')
+    api(name: 'subtitle-1.0.7', ext: 'aar')
+    api(name: 'toolbox-1.0.2', ext: 'aar')
+    api(name: 'user-0.1.0-alpha6', ext: 'aar')
+    api(name: 'personalhomelibrary-debug1', ext: 'aar')
+//    api(name: 'youdaoadsdk-3.10.3', ext: 'aar')
+    api(name: 'youdaosdk_3.10.9', ext: 'aar')
+    api(name: 'pushlib-1.1.3', ext: 'aar')
+    api(name: 'iyubamovies-1.1.0', ext: 'aar')
+    api(name: 'basicdl-1.1.0', ext: 'aar')
+    api(name: 'basicfavor-1.1.0', ext: 'aar')
+    api(name: 'intelligence-1.0.3', ext: 'aar')
+    api(name: 'textpage-1.0.0', ext: 'aar')
 
 
 //    implementation 'com.iyuba.module:imooclib:1.1.4'
-    implementation 'com.iyuba.module:user:0.1.0-alpha6'
-    implementation 'com.iyuba.retrofit2:mixed_converter:1.0.0'
+//    implementation 'com.iyuba.module:user:0.1.0-alpha6'
+//    implementation 'com.iyuba.retrofit2:mixed_converter:1.0.0'
 //    implementation 'com.iyuba.module:headlinelibrary:1.1.0'
 
-    implementation 'com.iyuba.module:intelligence:1.0.3'
-    implementation 'com.iyuba.module:user:0.1.0-alpha6'
-    implementation 'com.iyuba.retrofit2:mixed_converter:1.0.0'
+//    implementation 'com.iyuba.module:intelligence:1.0.3'
+//    implementation 'com.iyuba.module:user:0.1.0-alpha6'
+//    implementation 'com.iyuba.retrofit2:mixed_converter:1.0.0'
 
 
-    implementation 'com.iyuba.module:iyubamovies:1.1.0'
-    implementation 'com.iyuba.module:basicdl:1.1.0'
-    implementation 'com.iyuba.module:basicfavor:1.1.0'
-    implementation 'com.holybible.widget:recycler:0.0.3'
+//    implementation 'com.iyuba.module:iyubamovies:1.1.0'
+//    implementation 'com.iyuba.module:basicdl:1.1.0'
+//    implementation 'com.iyuba.module:basicfavor:1.1.0'
+//    implementation 'com.holybible.widget:recycler:0.0.3'
     implementation "tv.danmaku.ijk.media:ijkplayer-java:$rootProject.ext.ijkVersion"
     implementation "tv.danmaku.ijk.media:ijkplayer-armv7a:$rootProject.ext.ijkVersion"
     implementation "tv.danmaku.ijk.media:ijkplayer-arm64:$rootProject.ext.ijkVersion"
     implementation "tv.danmaku.ijk.media:ijkplayer-x86:$rootProject.ext.ijkVersion"
     implementation "tv.danmaku.ijk.media:ijkplayer-x86_64:$rootProject.ext.ijkVersion"
-    implementation 'com.iyuba.widget:textpage:1.0.0'
-    implementation 'com.iyuba.widget:progresswheel:1.0.0'
+//    implementation 'com.iyuba.widget:textpage:1.0.0'
+//    implementation 'com.iyuba.widget:progresswheel:1.0.0'
     api "com.scwang.smartrefresh:SmartRefreshLayout:$rootProject.ext.smartRefreshVersion"
-    api "com.youdao.sdk:youdaoadsdk:$rootProject.ext.youdaoSdkVersion"
+//    api "com.youdao.sdk:youdaoadsdk:$rootProject.ext.youdaoSdkVersion"
     api "com.google.code.gson:gson:$rootProject.ext.gsonVersion"
     api "com.squareup.retrofit2:adapter-rxjava2:$rootProject.ext.retrofitVersion"
-    api 'io.reactivex.rxjava2:rxandroid:2.1.0'
-    api 'io.reactivex.rxjava2:rxjava:2.2.3'
+    implementation "io.reactivex.rxjava2:rxandroid:$rootProject.ext.rxAndroidVersion"
+    implementation "io.reactivex.rxjava2:rxjava:$rootProject.ext.rxJavaVersion"
     api "com.squareup.retrofit2:retrofit:$RETROFIT_VERSION"
     api "com.squareup.retrofit2:converter-gson:$RETROFIT_VERSION"
     api "com.squareup.retrofit2:adapter-rxjava:$RETROFIT_VERSION"
     api('com.android.volley:volley:1.0.0') {
         exclude group: 'com.android.support'
     }
-    api 'com.github.ctiao:DanmakuFlameMaster:0.5.3'
-    compileOnly 'de.hdodenhof:circleimageview:2.2.0'
 
-//        compile("com.squareup.retrofit2:converter-simplexml:$RETROFIT_VERSION") {
-//            exclude group: 'xpp3', module: 'xpp3'
-//            exclude group: 'stax', module: 'stax-api'
-//            exclude group: 'stax', module: 'stax'
-//        }
+    api 'com.github.xuexiangjys.XUtil:xutil-core:1.1.6'
+    api 'com.github.xuexiangjys.XUtil:xutil-sub:1.1.6'
+//推送核心库
+    api 'com.github.xuexiangjys.XPush:xpush-core:1.0.1'
+//推送保活库
+    api 'com.github.xuexiangjys.XPush:keeplive:1.0.1'
+    implementation 'com.github.xuexiangjys.XPush:xpush-huawei:1.0.1'
+    api 'com.github.xuexiangjys.XPush:xpush-xiaomi:1.0.1'
+    implementation 'com.github.chrisbanes:PhotoView:2.0.0'
+
+    compileOnly 'de.hdodenhof:circleimageview:2.2.0'
 }
 
 
@@ -113,6 +137,7 @@ android {
     }
 
     repositories {
+
         flatDir {
             dirs 'libs'
         }

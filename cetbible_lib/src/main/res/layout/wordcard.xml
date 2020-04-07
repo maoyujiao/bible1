@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/word"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
@@ -26,19 +27,21 @@
 
             <TextView
                 android:id="@+id/word_key"
+                tools:text = "hello_world"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_centerVertical="true"
                 android:textColor="@color/app_color"
                 android:textSize="18sp" />
 
             <TextView
                 android:id="@+id/word_pron"
+                tools:text = "【hello_world】"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_centerVertical="true"
+                android:layout_below="@id/word_key"
+                android:layout_marginTop="10dp"
                 android:layout_marginLeft="15dp"
-                android:layout_toRightOf="@+id/word_key"
+                android:layout_toRightOf="@+id/word_speaker"
                 android:textColor="@color/royalblue"
                 android:textSize="16sp" />
 
@@ -46,21 +49,25 @@
                 android:id="@+id/word_collect"
                 android:layout_width="30dp"
                 android:layout_height="30dp"
-                android:layout_toLeftOf="@id/word_speaker"
+                android:layout_alignParentRight="true"
                 android:layout_marginRight="12dp"
                 android:tint="@color/colorPrimary"
                 android:src="@drawable/collect_false" />
 
             <ImageView
                 android:id="@+id/word_speaker"
-                android:layout_width="30dp"
-                android:layout_height="30dp"
-                android:layout_alignParentRight="true"
+                android:layout_marginTop="10dp"
+                android:layout_marginLeft="5dp"
+                android:layout_width="25dp"
+                android:layout_height="25dp"
+                android:layout_below="@id/word_key"
                 android:src="@drawable/speaker" />
         </RelativeLayout>
 
         <TextView
             android:id="@+id/word_def"
+            tools:text = "【hello_world】【hello_world】【hello_world】【hello_world】【hello_world】【hello_world】【hello_world】【hello_world】【hello_world】【hello_world】
+            【hello_world】【hello_world】"
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="5dp"

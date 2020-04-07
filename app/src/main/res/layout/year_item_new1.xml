@@ -271,7 +271,7 @@
         android:id="@+id/ad_note"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="广告"
+        android:text="推广"
         android:textSize="12sp"
         android:layout_alignParentBottom="true"
         android:layout_alignParentRight="true"

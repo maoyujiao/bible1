@@ -49,6 +49,8 @@ import com.iyuba.core.widget.dialog.WaittingDialog;
 import java.util.ArrayList;
 import java.util.Collections;
 
+import personal.iyuba.personalhomelibrary.ui.home.PersonalHomeActivity;
+
 /**
  * 私信内容界面
  *
@@ -288,9 +290,11 @@ public class Chatting extends BasisActivity {
             @Override
             public void onClick(View arg0) {
 
-                Intent intent = new Intent(mContext, PersonalHome.class);
                 SocialDataManager.Instance().userid = friendid;
-                startActivity(intent);
+                String name = currentname ;
+                mContext.startActivity(PersonalHomeActivity.buildIntent(mContext,
+                        Integer.parseInt(friendid),
+                        name, 0));
             }
         });
         rlShow = findViewById(R.id.rl_show);

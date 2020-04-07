@@ -68,12 +68,12 @@ public class AbilityMapActivity extends AppBaseActivity {
 
     private TextView tv_mode_test, tv_mode_practice;
     private TestRecordHelper helper;// 单词能力测试
-    private Button mBtn_words;// 语法
-    private Button mBtn_grammar; //听力能力测试
-    private Button mBtn_listen;// 口语
-    private Button mBtn_speak;//阅读
-    private Button mBtn_read;// 写作
-    private Button mBtn_write;
+    private TextView mBtn_words;// 语法
+    private TextView mBtn_grammar; //听力能力测试
+    private TextView mBtn_listen;// 口语
+    private TextView mBtn_speak;//阅读
+    private TextView mBtn_read;// 写作
+    private TextView mBtn_write;
     private ImageButton mIbtn_guide;
     private ImageButton mIbtn_guide2;
     private int mLessonId;//高职英语中使用  作为unitid使用
@@ -233,6 +233,7 @@ public class AbilityMapActivity extends AppBaseActivity {
             }
         }
         ImageButton selector_btn_bg = findView(R.id.btn_nav_sub);
+        selector_btn_bg.setColorFilter(getResources().getColor(R.color.white));
         if (selector_btn_bg != null) {
             selector_btn_bg.setOnClickListener(new View.OnClickListener() {
                 @Override
@@ -415,10 +416,6 @@ public class AbilityMapActivity extends AppBaseActivity {
         return new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if (!Constant.APP_CONSTANT.isEnglish()) {
-                    CustomToast.showToast(mContext, "暂未开放");
-                    return;
-                }
                 gotoTargetClass(AbilityMapSubActivity.class, mSpeakTestResults, Constant.ABILITY_SPEAK);
             }
         };

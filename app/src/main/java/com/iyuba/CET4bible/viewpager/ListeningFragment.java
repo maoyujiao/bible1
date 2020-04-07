@@ -1,6 +1,7 @@
 package com.iyuba.CET4bible.viewpager;
 
 import android.os.Bundle;
+import android.os.Handler;
 import android.support.annotation.Nullable;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.LinearLayoutManager;
@@ -13,21 +14,29 @@ import com.iyuba.CET4bible.R;
 import com.iyuba.CET4bible.activity.MainActivity;
 import com.iyuba.CET4bible.adapter.ListeningTestListAdapter;
 import com.iyuba.CET4bible.manager.ListenDataManager;
-import com.iyuba.CET4bible.util.AdInfoFlowUtil;
+import com.iyuba.CET4bible.strategy.ContentMixStrategy;
+import com.iyuba.CET4bible.strategy.ContentNonVipStrategy;
+import com.iyuba.CET4bible.strategy.ContentStrategy;
+import com.iyuba.CET4bible.strategy.ContentVipStrategy;
+import com.iyuba.CET4bible.strategy.HolderType;
 import com.iyuba.CET4bible.util.exam.DbExamListBean;
 import com.iyuba.CET4bible.util.exam.ExamDataUtil;
-import com.iyuba.CET4bible.util.exam.ExamListBean;
 import com.iyuba.CET4bible.util.exam.ExamListOp;
+import com.iyuba.ad.adblocker.AdBlocker;
 import com.iyuba.base.BaseFragment;
-import com.iyuba.base.util.SimpleLineDividerDecoration;
 import com.iyuba.configation.Constant;
-import com.iyuba.core.manager.AccountManager;
+import com.iyuba.headlinelibrary.data.model.StreamType;
+import com.iyuba.headlinelibrary.data.model.StreamTypeInfo;
+import com.iyuba.module.toolbox.RxUtil;
+import com.iyuba.module.user.IyuUserManager;
 
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+
+import io.reactivex.disposables.Disposable;
 
 /**
  * ListeningFragment
@@ -40,8 +49,15 @@ public class ListeningFragment extends BaseFragment {
     ListeningTestListAdapter adapter;
     ArrayList mList;
 
-    AdInfoFlowUtil adInfoFlowUtil;
+//    AdInfoFlowUtil adInfoFlowUtil;
     SwipeRefreshLayout swipeRefreshLayout;
+
+    private Disposable mTypeDisposable;
+
+    ContentStrategy mContentStrategy;
+    private RecyclerView.Adapter mWorkAdapter;
+    int[] mStreamTypes;
+    private int mStrategyCode;
 
     @Nullable
     @Override
@@ -50,6 +66,8 @@ public class ListeningFragment extends BaseFragment {
         if (containerVp != null) {
             containerVp.setObjectForPosition(view, 0);
         }
+        getStreamType();
+
         return view;
     }
 
@@ -60,26 +78,21 @@ public class ListeningFragment extends BaseFragment {
         recyclerView.setLayoutManager(new LinearLayoutManager(mContext));
 
         swipeRefreshLayout = view.findViewById(R.id.swipe_refresh_layout);
-        swipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
-            @Override
-            public void onRefresh() {
-                refreshExamList();
-            }
-        });
+        swipeRefreshLayout.setOnRefreshListener(() -> refreshExamList());
 
         mList = new ArrayList<>();
         adapter = new ListeningTestListAdapter(mContext, getActivity() instanceof MainActivity);
         adapter.setList(mList);
         recyclerView.setAdapter(adapter);
 
-        adInfoFlowUtil = new AdInfoFlowUtil(mContext, AccountManager.isVip(), new AdInfoFlowUtil.Callback() {
-            @Override
-            public void onADLoad(List ads) {
-                AdInfoFlowUtil.insertAD(mList, ads, adInfoFlowUtil);
-                adapter.notifyDataSetChanged();
-            }
-        });
-        adInfoFlowUtil.setSupportVideo(true);
+//        adInfoFlowUtil = new AdInfoFlowUtil(mContext, AccountManager.isVip(), new AdInfoFlowUtil.Callback() {
+//            @Override
+//            public void onADLoad(List ads) {
+//                AdInfoFlowUtil.insertAD(mList, ads, adInfoFlowUtil);
+//                adapter.notifyDataSetChanged();
+//            }
+//        });
+//        adInfoFlowUtil.setSupportVideo(true);
 
         refreshListAdapter();
 
@@ -90,22 +103,19 @@ public class ListeningFragment extends BaseFragment {
     }
 
     private void refreshExamList() {
-        ExamDataUtil.requestList(Constant.APP_CONSTANT.TYPE(), new ExamDataUtil.ListCallback() {
-            @Override
-            public void onLoadData(List<ExamListBean.DataBean> list) {
-                swipeRefreshLayout.setRefreshing(false);
-                if (list != null && list.size() > 0) {
-                    try {
-                        ExamDataUtil.writeListData2DB(mContext, list);
-                        ExamDataUtil.setFirstRequestData(mContext, false);
-                        refreshListAdapter();
-                    } catch (Exception e) {
-                        e.printStackTrace();
-                        showLong("题库加载失败...");
-                    }
-                } else {
-                    showLong("题目加载失败");
+        ExamDataUtil.requestList(Constant.APP_CONSTANT.TYPE(), list -> {
+            swipeRefreshLayout.setRefreshing(false);
+            if (list != null && list.size() > 0) {
+                try {
+                    ExamDataUtil.writeListData2DB(mContext, list);
+                    ExamDataUtil.setFirstRequestData(mContext, false);
+                    refreshListAdapter();
+                } catch (Exception e) {
+                    e.printStackTrace();
+                    showLong("题库加载失败...");
                 }
+            } else {
+                showLong("题目加载失败");
             }
         });
     }
@@ -128,12 +138,74 @@ public class ListeningFragment extends BaseFragment {
 
         adapter.notifyDataSetChanged();
 
-        adInfoFlowUtil.setAdRequestSize(5).resetLastPosition().refreshAd();
+//        adInfoFlowUtil.setAdRequestSize(5).resetLastPosition().refreshAd();
     }
 
     @Override
     public void onDestroyView() {
         super.onDestroyView();
-        adInfoFlowUtil.destroy();
+//        adInfoFlowUtil.destroy();
+    }
+
+    private void checkContentStrategy(@Nullable Runnable noChangeAction) {
+
+        new Handler().postDelayed(() -> {
+
+            if (!isAdded()) {
+                return;
+            }
+            int code = getStrategyCode();
+//        if (mStrategyCode != code) {
+            mStrategyCode = code;
+            mContentStrategy = switchStrategy(mStrategyCode);
+
+            mWorkAdapter = mContentStrategy.buildWorkAdapter(getActivity(), adapter);
+            mContentStrategy.init(recyclerView, mWorkAdapter);
+            if (mContentStrategy instanceof ContentNonVipStrategy) {
+                ((ContentNonVipStrategy) mContentStrategy).loadAd(mWorkAdapter);
+            }
+        }, 500);
+
+    }
+
+    private int getStrategyCode() {
+        if (IyuUserManager.getInstance().isVip()) {
+            return ContentStrategy.Strategy.VIP;
+        } else {
+            if (mStreamTypes != null) {
+                return AdBlocker.getInstance().shouldBlockAd() ? ContentStrategy.Strategy.VIP : ContentStrategy.Strategy.MIX;
+            } else {
+                return ContentStrategy.Strategy.VIP;
+            }
+        }
+    }
+
+    private ContentStrategy switchStrategy(int strategyCode) {
+        switch (strategyCode) {
+            case ContentStrategy.Strategy.VIP: {
+                return new ContentVipStrategy();
+            }
+            case ContentStrategy.Strategy.MIX:
+            default: {
+                return new ContentMixStrategy(2, 6, mStreamTypes, HolderType.HOME);
+            }
+        }
+    }
+
+    private void getStreamType() {
+        RxUtil.dispose(mTypeDisposable);
+        mTypeDisposable = com.iyuba.headlinelibrary.data.DataManager.getInstance().getStreamType(Constant.APPID)
+                .compose(RxUtil.<StreamTypeInfo>applySingleIoScheduler())
+                .subscribe(streamTypeInfo -> {
+                    mStreamTypes = streamTypeInfo.getTypes();
+                    checkContentStrategy(() -> adapter.notifyDataSetChanged());
+
+                }, throwable -> {
+                    throwable.printStackTrace();
+                    mStreamTypes = new int[]{StreamType.YOUDAO, StreamType.YOUDAO, StreamType.YOUDAO};
+                    checkContentStrategy(null);
+
+                });
+
     }
 }

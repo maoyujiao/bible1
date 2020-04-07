@@ -79,7 +79,7 @@ public class SimpleWordListAdapter extends RecyclerView.Adapter<RecyclerView.Vie
             view = LayoutInflater.from(viewGroup.getContext()).inflate(R.layout.simple_word_header, viewGroup, false);
             return new HeaderView(view);
         } else {
-            view = LayoutInflater.from(viewGroup.getContext()).inflate(R.layout.simple_word_item, viewGroup, false);
+            view = LayoutInflater.from(viewGroup.getContext()).inflate(R.layout.wordtest_simple_word_item, viewGroup, false);
             return new ViewHolder(view);
         }
     }

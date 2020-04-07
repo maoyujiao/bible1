@@ -40,6 +40,8 @@ import com.iyuba.core.widget.pulltorefresh.PullToRefreshView;
 
 import java.util.ArrayList;
 
+import personal.iyuba.personalhomelibrary.ui.home.PersonalHomeActivity;
+
 
 public class AttentionCenter extends BasisActivity implements
         PullToRefreshView.OnHeaderRefreshListener, PullToRefreshView.OnFooterRefreshListener {
@@ -184,12 +186,11 @@ public class AttentionCenter extends BasisActivity implements
                                     int position, long arg3) {
                 SocialDataManager.Instance().attention = attentionArrayList
                         .get(position);
-                Intent intent = new Intent();
-                intent.setClass(mContext, PersonalHome.class);
-                SocialDataManager.Instance().userid = attentionArrayList
-                        .get(position).followuid;
-                intent.addFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
-                startActivity(intent);
+                Attention attention = attentionArrayList.get(position);
+                String username = attention.fusername;
+                String uid = attention.followuid;
+                startActivity(PersonalHomeActivity.buildIntent (getContext(), Integer.parseInt(uid), username, 0));
+
             }
         });
     }

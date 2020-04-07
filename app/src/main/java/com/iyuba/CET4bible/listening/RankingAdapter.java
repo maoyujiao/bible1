@@ -299,8 +299,8 @@ public class RankingAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder
                     .load(rank.imgSrc)
                     .asBitmap()
                     .signature(new StringSignature(System.currentTimeMillis()+""))
-                    .placeholder(R.drawable.defaultavatar)
-                    .error(R.drawable.defaultavatar)
+                    .placeholder(R.drawable.defaultavatar_personal)
+                    .error(R.drawable.defaultavatar_personal)
                     .into(head);
         }
 
@@ -361,8 +361,8 @@ public class RankingAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder
                     .load(rank.imgSrc)
                     .asBitmap()
                     .signature(new StringSignature(System.currentTimeMillis()+""))
-                    .placeholder(R.drawable.defaultavatar)
-                    .error(R.drawable.defaultavatar)
+                    .placeholder(R.drawable.defaultavatar_personal)
+                    .error(R.drawable.defaultavatar_personal)
                     .into(mUserHeadIv);
         }
 

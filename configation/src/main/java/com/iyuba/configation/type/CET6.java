@@ -4,6 +4,7 @@ package com.iyuba.configation.type;
  * 英语六级
  */
 public class CET6 implements IAPP {
+
     @Override
     public boolean isEnglish() {
         return true;

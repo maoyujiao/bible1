@@ -43,6 +43,8 @@ import com.umeng.analytics.MobclickAgent;
 
 import java.util.ArrayList;
 
+import personal.iyuba.personalhomelibrary.ui.home.PersonalHomeActivity;
+
 public class NoticeCenter extends BasisActivity implements
         OnHeaderRefreshListener, OnFooterRefreshListener {
     private String currUserid;
@@ -173,7 +175,11 @@ public class NoticeCenter extends BasisActivity implements
                 Intent intent = new Intent();
                 SocialDataManager.Instance().userid = fansArrayList
                         .get(position).uid;
-                intent.setClass(mContext, PersonalHome.class);
+                String uid = fansArrayList.get(position).uid;
+                String username = fansArrayList.get(position).username;
+                mContext.startActivity(PersonalHomeActivity.buildIntent(mContext,
+                        Integer.parseInt(uid),
+                        username,0));
                 startActivity(intent);
             }
         });

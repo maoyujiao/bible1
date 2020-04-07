@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <CheckBox
+        android:id="@+id/cb_answer_a"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:drawablePadding="15dp"
+        android:padding="10dp"
+        android:text="A.Answer A"
+        android:textSize="20sp" />
+
+    <CheckBox
+        android:id="@+id/cb_answer_b"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:drawablePadding="15dp"
+        android:padding="10dp"
+        android:text="B.Answer B"
+        android:textSize="20sp" />
+
+    <CheckBox
+        android:id="@+id/cb_answer_c"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:drawablePadding="15dp"
+        android:padding="10dp"
+        android:text="C.Answer C"
+        android:textSize="20sp" />
+
+    <CheckBox
+        android:id="@+id/cb_answer_d"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:drawablePadding="15dp"
+        android:padding="10dp"
+        android:text="D.Answer D"
+        android:textSize="20sp" />
+
+    <CheckBox
+        android:id="@+id/cb_answer_e"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:drawablePadding="15dp"
+        android:padding="10dp"
+        android:text="E.Answer E"
+        android:textSize="20sp" />
+
+</LinearLayout>

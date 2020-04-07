@@ -68,7 +68,7 @@ public class FavoriteFillInBlankAdapter extends BaseRecyclerViewAdapter<Favorite
                     .into(curViewHolder.ivAd);
             curViewHolder.bg_item_reading.setVisibility(View.INVISIBLE);
 
-            curViewHolder.title.setText(response.getTitle() + "（广告）");
+            curViewHolder.title.setText(response.getTitle() + "（推广）");
             return;
         }
 

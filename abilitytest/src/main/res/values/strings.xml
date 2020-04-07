@@ -1,6 +1,12 @@
 <resources>
     <string name="app_name">Ability Test</string>
+    <string name="Complete">开始</string>
+    <string name="Error">错误</string>
+    <string name="Upload">提交</string>
 
+    <string name="remind">提示</string>
     <string name="clock_over">测试时间已到,继续答题影响真实水平,立刻查看结果?</string>
+    <string name="got_it">确定</string>
+    <string name="is_last">已经是最后一题了</string>
     <string name="warn_wormly">温馨提示</string>
 </resources>

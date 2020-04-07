@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="colorPrimary"></color>
+    <color name="white" />
+    <color name="green" />
+    <color name="red" />
+    <color name="app_color">#1ba0e1</color>
+    <color name="commont_txt">#999999</color>
+    <color name="bg_gray_color">#efeff4</color>
+
+</resources>

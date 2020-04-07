@@ -23,7 +23,7 @@ public class UriParseUtils {
     public static Uri getUri(File file, Context mContext){
         Uri uri ;
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
-            uri = FileProvider.getUriForFile(mContext, Constant.PACKAGE_NAME + ".fileprovider",
+            uri = FileProvider.getUriForFile(mContext, Constant.PACKAGE_NAME ,
                     file);
         } else {
             uri =   Uri.fromFile(file);

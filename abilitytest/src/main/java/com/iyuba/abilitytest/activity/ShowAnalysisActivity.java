@@ -176,6 +176,9 @@ public class ShowAnalysisActivity extends AppBaseActivity {
                 duration = player.getDuration();
                 position = player.mediaPlayer.getCurrentPosition();
                 rpb_sound_play.setCricleProgressColor(0xfffea523);
+                if (duration < 0) {
+                    duration = 0;
+                }
                 rpb_sound_play.setMax(duration);
                 rpb_sound_play.setProgress(position);
             }

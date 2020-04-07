@@ -6,7 +6,7 @@
 
 
 
-    <application android:allowBackup="true" >
+    <application >
         <activity android:name="com.iyuba.configation.MainActivity" >
             <!--<intent-filter>-->
                 <!--<action android:name="android.intent.action.MAIN" />-->

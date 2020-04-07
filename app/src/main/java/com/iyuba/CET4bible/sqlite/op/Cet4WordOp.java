@@ -2,20 +2,19 @@ package com.iyuba.CET4bible.sqlite.op;
 
 import android.content.Context;
 import android.database.Cursor;
-import android.database.sqlite.SQLiteDatabase;
 
 import com.iyuba.CET4bible.BuildConfig;
 import com.iyuba.CET4bible.sqlite.db.DatabaseService;
 import com.iyuba.CET4bible.sqlite.mode.Cet4RootWord;
 import com.iyuba.CET4bible.sqlite.mode.Cet4Word;
-import com.iyuba.configation.ConfigManager;
 import com.iyuba.configation.Constant;
+import com.iyuba.wordtest.db.CetDataBase;
+import com.iyuba.wordtest.entity.CetRootWord;
+import com.iyuba.wordtest.manager.WordConfigManager;
 
 import java.util.ArrayList;
 import java.util.List;
 
-import newDB.CetDataBase;
-import newDB.CetRootWord;
 
 /**
  * 获取单词表数据库
@@ -249,7 +248,8 @@ public class Cet4WordOp extends DatabaseService {
             words.add(word);
         }
         CetDataBase.getInstance(context.getApplicationContext()).getUserDao().insertWord(words);
-        ConfigManager.Instance().putBoolean("wordloaded",true);
+
+        WordConfigManager.Instance(context).putBoolean("wordloaded",true);
         c.close();
     }
 }

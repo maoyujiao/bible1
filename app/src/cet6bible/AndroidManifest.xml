@@ -11,6 +11,15 @@
             android:name="com.iyuba.CET6bible.wxapi.WXPayEntryActivity"
             android:exported="true"
             android:launchMode="singleTop" />
+        <meta-data
+            android:name="com.huawei.hms.client.appid"
+            android:value="10539977" />
+        <meta-data
+            android:name="MIPUSH_APPID"
+            android:value="\ 2882303761517475134" />
+        <meta-data
+            android:name="MIPUSH_APPKEY"
+            android:value="\ 5361747588134" />
     </application>
 
 </manifest>

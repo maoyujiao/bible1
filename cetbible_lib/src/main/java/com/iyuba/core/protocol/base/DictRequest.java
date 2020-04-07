@@ -5,8 +5,6 @@ import com.iyuba.core.protocol.BaseHttpResponse;
 import com.iyuba.core.protocol.BaseXMLRequest;
 import com.iyuba.core.util.TextAttr;
 
-import java.io.IOException;
-
 /**
  * 获取网页单词本
  *
@@ -22,12 +20,10 @@ public class DictRequest extends BaseXMLRequest {
     @Override
     protected void fillBody(XmlSerializer serializer) {
 
-
     }
 
     @Override
     public BaseHttpResponse createResponse() {
-
         return new DictResponse();
     }
 

@@ -1,6 +1,8 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
           xmlns:tools="http://schemas.android.com/tools"
-          package="com.iyuba.CET4bible">
+          package="com.iyuba.CET4bible"
+
+    tools:ignore="LockedOrientationActivity">
 
     <!--<supports-screens-->
         <!--android:anyDensity="true"-->
@@ -15,7 +17,6 @@
     <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION"/>
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION"/>
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>
-    <uses-permission android:name="android.permission.MOUNT_UNMOUNT_FILESYSTEMS"/>
     <uses-permission android:name="android.permission.CHANGE_NETWORK_STATE"/>
     <uses-permission android:name="android.permission.CHANGE_WIFI_STATE"/>
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE"/>
@@ -23,7 +24,6 @@
     <uses-permission android:name="android.permission.GET_TASKS"/>
     <uses-permission android:name="android.permission.WRITE_SETTINGS"/>
     <uses-permission android:name="android.permission.VIBRATE"/>
-    <uses-permission android:name="android.permission.READ_LOGS"/>
     <uses-permission android:name="android.permission.DISABLE_KEYGUARD"/>
     <!--<uses-permission android:name="android.permission.BAIDU_LOCATION_SERVICE" />-->
     <uses-permission android:name="android.permission.ACCESS_GPS"/>
@@ -38,6 +38,14 @@
     <uses-permission android:name="com.android.launcher.permission.UNINSTALL_SHORTCUT"/>
     <uses-feature android:glEsVersion="0x00020000" android:required="true" />
 
+
+    <uses-sdk tools:overrideLibrary="
+    tv.danmaku.ijk.media.player_x86_64,
+    tv.danmaku.ijk.media.player,
+    tv.danmaku.ijk.media.player_x86,
+    tv.danmaku.ijk.media.player_armv5,
+    tv.danmaku.ijk.media.player_arm64,
+    tv.danmaku.ijk.media.player_armv7a" />
     <!-- 微课下载需要的权限 -->
 
     <permission
@@ -70,9 +78,32 @@
         android:icon="@drawable/icon"
         android:label="@string/app_name"
         android:theme="@style/ThemeDefault"
-        tools:replace="android:theme,android:name"
+        android:allowBackup="true"
+        tools:replace="android:theme,android:allowBackup"
         android:resizeableActivity="true">
+        <receiver
+            android:name="com.iyuba.pushlib.HuaweiReceiver"
+            android:permission="com.huawei.hmsagentsamplexsj.permission.PROCESS_PUSH_MSG">
+            <intent-filter>
 
+                <!-- 必须,用于接收token -->
+                <action android:name="com.huawei.android.push.intent.REGISTRATION" />
+                <!-- 必须, 用于接收透传消息 -->
+                <action android:name="com.huawei.android.push.intent.RECEIVE" />
+                <!-- 必须, 用于接收通知栏消息点击事件 此事件不需要开发者处理，只需注册就可以 -->
+                <action android:name="com.huawei.intent.action.PUSH_DELAY_NOTIFY" />
+            </intent-filter>
+        </receiver> <!-- 声明 SDK 所需要的组件 -->
+        <meta-data
+            android:name="XPush_MIPush_1003"
+            android:value="com.xuexiang.xpush.xiaomi.XiaoMiPushClient" />
+        <meta-data
+            android:name="XPush_HuaweiPush_1002"
+            android:value="com.xuexiang.xpush.huawei.HuaweiPushClient" />
+        <meta-data
+            android:name="com.amap.api.v2.apikey"
+            tools:replace="android:value"
+            android:value="${MAP_VALUE}"/>
         <!--android:theme="@style/Theme.AppCompat.Light.NoActionBar"-->
         <activity
             android:name="com.iyuba.CET4bible.activity.Welcome"
@@ -89,13 +120,9 @@
         <service
             android:name="com.iyuba.core.service.Background"
             android:enabled="true"/>
-        <!-- =============  淼泽广告  ========== -->
-        <activity
-            android:name="com.miaoze.sdk.AppActivity"
-            android:configChanges="keyboard|keyboardHidden|orientation"
-            android:screenOrientation="portrait"/>
+        <!-- =============  淼泽推广  ========== -->
 
-        <!-- =============  嗒萌广告  ========== -->
+        <!-- =============  嗒萌推广  ========== -->
         <!--<provider-->
             <!--android:name="android.support.v4.content.FileProvider"-->
             <!--android:authorities="${applicationId}.addam.apkdn.fileprovider"-->
@@ -108,26 +135,26 @@
 
         <provider
             android:name="android.support.v4.content.FileProvider"
-            android:authorities="${applicationId}.fileprovider"
+            android:authorities="${applicationId}"
             android:exported="false"
             android:grantUriPermissions="true">
             <meta-data
                 android:name="android.support.FILE_PROVIDER_PATHS"
                 android:resource="@xml/file_paths"/>
         </provider>
-        <!--插屏广告-->
-        <activity
-            android:name="com.addam.library.external.InterstitialActivity"
-            android:theme="@android:style/Theme.Holo.Dialog.NoActionBar"/>
-        <!--开屏广告-->
-        <activity
-            android:name="com.addam.library.external.InterstitialFullActivity"
-            android:theme="@android:style/Theme.Holo.NoActionBar"/>
-        <!--广告页面-->
-        <activity
-            android:name="com.addam.library.external.AdInfoActivity"
-            android:theme="@android:style/Theme.Holo.NoActionBar"/>
-        <!-- =============  嗒萌广告  ========== -->
+        <!--插屏推广-->
+<!--        <activity-->
+<!--            android:name="com.addam.library.external.InterstitialActivity"-->
+<!--            android:theme="@android:style/Theme.Holo.Dialog.NoActionBar"/>-->
+        <!--开屏推广-->
+<!--        <activity-->
+<!--            android:name="com.addam.library.external.InterstitialFullActivity"-->
+<!--            android:theme="@android:style/Theme.Holo.NoActionBar"/>-->
+        <!--推广页面-->
+<!--        <activity-->
+<!--            android:name="com.addam.library.external.AdInfoActivity"-->
+<!--            android:theme="@android:style/Theme.Holo.NoActionBar"/>-->
+        <!-- =============  嗒萌推广  ========== -->
 
         <!--能力图谱-->
         <activity
@@ -151,25 +178,6 @@
 
 
         <activity
-            android:name="com.iyuba.abilitytest.activity.GrammarAbilityTestActivity"
-            android:configChanges="keyboardHidden|orientation|locale"
-            android:label="语法测试界面"
-            android:screenOrientation="portrait"/>
-        <activity
-            android:name="com.iyuba.abilitytest.activity.ListenAbilityTestActivity"
-            android:configChanges="keyboardHidden|orientation|locale"
-            android:label="听力测试界面"
-            android:launchMode="singleTask"
-            android:screenOrientation="portrait"/>
-
-        <activity
-            android:name="com.iyuba.abilitytest.activity.ReadAbilityTestActivity"
-            android:configChanges="keyboardHidden|orientation|locale"
-            android:label="阅读测试界面"
-            android:launchMode="singleTask"
-            android:screenOrientation="portrait"/>
-
-        <activity
             android:name="com.iyuba.abilitytest.activity.SpeakAbilityTestActivity"
             android:configChanges="keyboardHidden|orientation|locale"
             android:label="口语测试界面"
@@ -177,27 +185,11 @@
             android:screenOrientation="portrait"
             android:theme="@style/Theme.AppCompat.Light.NoActionBar"/>
         <activity
-            android:name="com.iyuba.abilitytest.activity.WordAbilityTestActivity"
-            android:configChanges="keyboardHidden|orientation|locale"
-            android:label="单词评测"
-            android:launchMode="singleTask"
-            android:screenOrientation="portrait"/>
-
-        <activity
-            android:name="com.iyuba.abilitytest.activity.WriteAbilityTestActivity"
-            android:configChanges="keyboardHidden|orientation|locale"
-            android:label="写作测试界面"
-            android:launchMode="singleTask"
-            android:screenOrientation="portrait"/>
-        <activity
             android:name="com.iyuba.abilitytest.activity.WebActivity"
             android:configChanges="keyboardHidden|orientation|locale"
             android:screenOrientation="portrait"
             android:theme="@style/Theme.AppCompat.Light.NoActionBar"/>
 
-        <activity
-            android:name="com.iyuba.CET4bible.goldvip.BuyGoldVipActivity"
-            android:screenOrientation="portrait"/>
         <activity
             android:name="com.iyuba.CET4bible.goldvip.PayOrderActivity"
             android:screenOrientation="portrait"/>
@@ -297,7 +289,7 @@
         <activity
             android:name="com.iyuba.CET4bible.vocabulary.WordSortSet"
             android:configChanges="keyboardHidden|orientation|locale"
-            android:screenOrientation="portrait"/>
+            android:screenOrientation="portrait" />
         <activity
             android:name="com.iyuba.CET4bible.write.WriteListActivity"
             android:configChanges="keyboardHidden|orientation|locale"
@@ -316,15 +308,7 @@
             android:screenOrientation="portrait"
             android:theme="@style/MyDialogStyle"/>
         <activity
-            android:name="com.iyuba.core.activity.me.WriteState"
-            android:configChanges="keyboardHidden|orientation|locale"
-            android:screenOrientation="portrait"/>
-        <activity
             android:name="com.iyuba.core.activity.me.EditUserInfoActivity"
-            android:configChanges="keyboardHidden|orientation|locale"
-            android:screenOrientation="portrait"/>
-        <activity
-            android:name="com.iyuba.core.activity.me.UserDetailInfo"
             android:configChanges="keyboardHidden|orientation|locale"
             android:screenOrientation="portrait"/>
         <activity
@@ -475,10 +459,7 @@
             android:name="com.iyuba.core.teacher.activity.TeacherQuesListActivity"
             android:configChanges="keyboardHidden|orientation|locale"
             android:screenOrientation="portrait"/>
-        <activity
-            android:name="com.iyuba.core.me.activity.MeForAt"
-            android:configChanges="keyboardHidden|orientation|locale"
-            android:screenOrientation="portrait"/>
+
         <activity
             android:name="com.iyuba.core.me.activity.WriteState"
             android:configChanges="keyboardHidden|orientation|locale"
@@ -506,10 +487,6 @@
             android:screenOrientation="portrait"/>
         <activity
             android:name="com.iyuba.core.me.activity.AttentionCenter"
-            android:configChanges="keyboardHidden|orientation|locale"
-            android:screenOrientation="portrait"/>
-        <activity
-            android:name="com.iyuba.core.me.activity.BuyVip"
             android:configChanges="keyboardHidden|orientation|locale"
             android:screenOrientation="portrait"/>
         <activity
@@ -635,18 +612,18 @@
             </intent-filter>
         </activity>
         <!-- YouDaoNativeBrowser用于应用详情页，为必选配置 -->
-        <!-- YouDaoBrowser用于所有的native广告，为必选配置 -->
+        <!-- YouDaoBrowser用于所有的native推广，为必选配置 -->
         <activity
             android:name="com.youdao.sdk.common.YouDaoBrowser"
             android:configChanges="keyboardHidden|orientation|screenSize"
             android:launchMode="singleTask"
-            tools:replace="android:configChanges"/>
+            />
         <activity
             android:name="com.youdao.sdk.extra.common.YouDaoBrowser"
             android:configChanges="keyboardHidden|orientation|screenSize"
             android:launchMode="singleTask"
             tools:replace="android:configChanges"/>
-        <!-- YouDaoInterstitialActivity用于开屏和插屏广告，若不使用开屏和插屏广告，可不配置此Activity， -->
+        <!-- YouDaoInterstitialActivity用于开屏和插屏推广，若不使用开屏和插屏推广，可不配置此Activity， -->
         <activity
             android:name="com.youdao.sdk.nativeads.YouDaoInterstitialActivity"
             android:configChanges="keyboardHidden|orientation|screenSize"
@@ -654,7 +631,7 @@
             android:theme="@android:style/Theme.Translucent"
             tools:replace="android:configChanges"/>
 
-        <!-- 信息流视频广告Activity配置，若不使用信息流视频，可不配置这个Activity -->
+        <!-- 信息流视频推广Activity配置，若不使用信息流视频，可不配置这个Activity -->
         <activity
             android:name="com.youdao.sdk.listvideo.YouDaoListVideoActivity"
             android:configChanges="keyboardHidden|orientation"
@@ -680,7 +657,6 @@
                 <action android:name="android.net.conn.CONNECTIVITY_CHANGE"/>
             </intent-filter>
         </receiver>
-
         <!-- QQ客户端回调 -->
         <activity
             android:name="cn.sharesdk.tencent.qq.ReceiveActivity"
@@ -722,10 +698,6 @@
             android:screenOrientation="portrait"/>
 
         <activity
-            android:name="com.iyuba.trainingcamp.activity.GoldActivity"
-            android:screenOrientation="portrait">
-        </activity>
-        <activity
             android:name="com.iyuba.trainingcamp.activity.WordListActvity"
             android:screenOrientation="portrait">
         </activity>
@@ -747,10 +719,6 @@
         </activity>
         <activity
             android:name="com.iyuba.trainingcamp.activity.LearnResultActivity"
-            android:screenOrientation="portrait">
-        </activity>
-        <activity
-            android:name="com.iyuba.trainingcamp.activity.SentencListActivity"
             android:screenOrientation="portrait">
         </activity>
         <activity

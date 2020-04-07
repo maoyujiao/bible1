@@ -22,8 +22,6 @@ import com.iyuba.core.adapter.discover.FindFriendsListAdapter;
 import com.iyuba.core.discover.protocol.RequestSendLocation;
 import com.iyuba.core.listener.ProtocolResponse;
 import com.iyuba.core.manager.AccountManager;
-import com.iyuba.core.manager.SocialDataManager;
-import com.iyuba.core.me.activity.PersonalHome;
 import com.iyuba.core.protocol.BaseHttpResponse;
 import com.iyuba.core.protocol.friends.RequestGuessFriendsList;
 import com.iyuba.core.protocol.friends.RequestNearFriendsList;
@@ -45,6 +43,8 @@ import com.iyuba.core.widget.pulltorefresh.PullToRefreshView.OnFooterRefreshList
 import com.iyuba.core.widget.pulltorefresh.PullToRefreshView.OnHeaderRefreshListener;
 
 import java.util.ArrayList;
+
+import personal.iyuba.personalhomelibrary.ui.home.PersonalHomeActivity;
 
 /**
  * 找朋友 4种模式推送朋友
@@ -87,11 +87,7 @@ public class SearchFriend extends BasisActivity implements
                 case 4:
                     CustomToast.showToast(mContext, R.string.action_fail);
                     break;
-                case 5:
-                    Intent intent = new Intent();
-                    intent.setClass(mContext, PersonalHome.class);
-                    startActivity(intent);
-                    break;
+
                 case 6:
                     CustomToast.showToast(mContext, R.string.social_add_all);
                     break;
@@ -441,9 +437,13 @@ public class SearchFriend extends BasisActivity implements
             @Override
             public void onItemClick(AdapterView<?> arg0, View arg1, int arg2,
                                     long arg3) {
+                String username = findFriendsList.get(arg2).userName;
+                String userid = findFriendsList.get(arg2).userid;
 
-                SocialDataManager.Instance().userid = findFriendsList.get(arg2).userid;
-                handler.sendEmptyMessage(5);// 进入个人空间
+
+                startActivity(PersonalHomeActivity.buildIntent (getContext(), Integer.parseInt(userid), username, 0));
+//                SocialDataManager.Instance().userid = findFriendsList.get(arg2).userid;
+//                handler.sendEmptyMessage(5);// 进入个人空间
             }
         });
     }

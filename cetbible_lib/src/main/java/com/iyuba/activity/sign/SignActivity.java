@@ -37,6 +37,7 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.text.DecimalFormat;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
@@ -365,7 +366,10 @@ public class SignActivity extends Activity {
                             MobclickAgent.onEvent(mContext, "dailybonus");
                             if (moneyThisTime > 0) {
                                 float moneyTotal = Float.parseFloat(totalCredit);
-                                Toast.makeText(mContext, "打卡成功," + "您已连续打卡" + days + "天,  获得" + moneyThisTime * 0.01 + "元,总计: " + moneyTotal * 0.01 + "元," + "满10元可在\"爱语课吧\"公众号提现", Toast.LENGTH_LONG).show();
+                                DecimalFormat format = new DecimalFormat("##0.00");
+                                String money = format.format(((moneyThisTime) * 0.01));
+                                String moneyTotalS = format.format(((moneyTotal) * 0.01));
+                                Toast.makeText(mContext, "打卡成功," + "您已连续打卡" + days + "天,  获得" + money + "元,总计: " + moneyTotalS  + "元," + "满10元可在\"爱语课吧\"公众号提现", Toast.LENGTH_SHORT).show();
                                 finish();
                             } else {
                                 Toast.makeText(mContext, "打卡成功，连续打卡" + days + "天,获得" + addCredit + "积分，总积分: " + totalCredit, Toast.LENGTH_LONG).show();

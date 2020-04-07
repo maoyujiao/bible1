@@ -376,7 +376,7 @@ public class QuezActivity extends BaseActivity {
                         intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
                         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
                             intent.setFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION);
-                            Uri contentUri = FileProvider.getUriForFile(mContext, Constant.PACKAGE_NAME + ".fileprovider",photoFile);
+                            Uri contentUri = FileProvider.getUriForFile(mContext, Constant.PACKAGE_NAME ,photoFile);
                             intent.putExtra(MediaStore.EXTRA_OUTPUT, contentUri);
                         } else {
                             intent.putExtra(MediaStore.EXTRA_OUTPUT,
@@ -408,7 +408,7 @@ public class QuezActivity extends BaseActivity {
         switch (requestCode) {
             case PHOTO_REQUEST_TAKEPHOTO:
                 if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
-                    contentUri = FileProvider.getUriForFile(mContext, Constant.PACKAGE_NAME + ".fileprovider", photoFile);
+                    contentUri = FileProvider.getUriForFile(mContext, Constant.PACKAGE_NAME , photoFile);
                 } else {
                     contentUri = Uri.fromFile(photoFile);
                 }
@@ -417,7 +417,7 @@ public class QuezActivity extends BaseActivity {
             case PHOTO_REQUEST_GALLERY:
                 String path = SelectPicUtils.getPath(this, data.getData());
                 if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
-                    contentUri = FileProvider.getUriForFile(mContext, Constant.PACKAGE_NAME + ".fileprovider", new File(path));
+                    contentUri = FileProvider.getUriForFile(mContext, Constant.PACKAGE_NAME , new File(path));
                 } else {
                     contentUri = Uri.fromFile(new File(path));
                 }

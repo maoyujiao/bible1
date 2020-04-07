@@ -31,7 +31,7 @@
             android:background="#77000000"
             android:gravity="center_vertical"
             android:padding="1dp"
-            android:text=" 广告 "
+            android:text=" 推广 "
             android:textColor="#ededed"
             android:textSize="9sp" />
 
@@ -118,7 +118,7 @@
             android:background="#77000000"
             android:gravity="center_vertical"
             android:padding="1dp"
-            android:text=" 广告 "
+            android:text=" 推广 "
             android:textColor="#ededed"
             android:textSize="9sp" />
     </RelativeLayout>

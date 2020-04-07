@@ -11,8 +11,8 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.iyuba.biblelib.R;
+import com.iyuba.core.manager.AccountManager;
 import com.iyuba.core.manager.SocialDataManager;
-import com.iyuba.core.me.activity.PersonalHome;
 import com.iyuba.core.me.sqlite.mode.LearnRankUser;
 import com.iyuba.core.thread.GitHubImageLoader;
 import com.iyuba.core.util.StudyTimeTransformUtil;
@@ -21,6 +21,8 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
+
+import personal.iyuba.personalhomelibrary.ui.home.PersonalHomeActivity;
 
 /**
  * Created by Administrator on 2017/1/4.
@@ -88,26 +90,24 @@ public class LearnRankListAdapter extends BaseAdapter {
         TextView myRankTime = findview(convertView, R.id.tv_learn_ranking_total_time);
         TextView myRankEssay = findview(convertView, R.id.tv_learn_ranking_total_essay);
         TextView myRankWord = findview(convertView, R.id.tv_learn_ranking_total_words);
+        final String uid  = rankUserList.get(position).getUid();
+        final String name  = rankUserList.get(position).getUid();
         userImage.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                String uid  = rankUserList.get(position).getUid();
-                Intent intent = new Intent();
-                SocialDataManager.Instance().userid = uid;
-                intent.setClass(mContext, PersonalHome.class);
-                intent.addFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
-                mContext.startActivity(intent);
+
+                mContext.startActivity(PersonalHomeActivity.buildIntent(mContext,
+                        Integer.parseInt(uid),
+                        name, 0));
+
             }
         });
         userImageText.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                String uid  = rankUserList.get(position).getUid();
-                Intent intent = new Intent();
-                SocialDataManager.Instance().userid = uid;
-                intent.setClass(mContext, PersonalHome.class);
-                intent.addFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
-                mContext.startActivity(intent);
+                mContext.startActivity(PersonalHomeActivity.buildIntent(mContext,
+                    Integer.parseInt(uid),
+                    name, 0));
             }
         });
         firstChar = getFirstChar(ru.getName());

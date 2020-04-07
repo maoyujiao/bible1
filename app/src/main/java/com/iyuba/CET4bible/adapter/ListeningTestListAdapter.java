@@ -273,7 +273,6 @@ public class ListeningTestListAdapter extends BaseRecyclerViewAdapter {
         curViewHolder.download.setVisibility(View.VISIBLE);
 
 
-        final int curPosition = position;
         L.e("==== list size :::  " + mList.size());
         final String curYear = (String) mList.get(position);
         final String test;
@@ -407,6 +406,16 @@ public class ListeningTestListAdapter extends BaseRecyclerViewAdapter {
     private void startListeningActivity00(final int type, final String test, final String section, final boolean isNewType, final String title, int position) {
         waitingDialog.show();
         String year = ((String) mList.get(position)).replace("_", "");
+        if ("A".equals(section)){
+            ExamDataUtil.requestExamData(mContext, Constant.APP_CONSTANT.TYPE(), "B", year,null);
+            ExamDataUtil.requestExamData(mContext, Constant.APP_CONSTANT.TYPE(), "C", year,null);
+        }else if ("B".equals(section)){
+            ExamDataUtil.requestExamData(mContext, Constant.APP_CONSTANT.TYPE(), "A", year,null);
+            ExamDataUtil.requestExamData(mContext, Constant.APP_CONSTANT.TYPE(), "C", year,null);
+        }else {
+            ExamDataUtil.requestExamData(mContext, Constant.APP_CONSTANT.TYPE(), "A", year,null);
+            ExamDataUtil.requestExamData(mContext, Constant.APP_CONSTANT.TYPE(), "B", year,null);
+        }
         ExamDataUtil.requestExamData(mContext, Constant.APP_CONSTANT.TYPE(), section, year, new ExamDataUtil.DataCallback() {
             @Override
             public void onLoadData(boolean success) {

@@ -42,6 +42,8 @@ import com.iyuba.core.widget.pulltorefresh.PullToRefreshView.OnHeaderRefreshList
 
 import java.util.ArrayList;
 
+import personal.iyuba.personalhomelibrary.ui.home.PersonalHomeActivity;
+
 public class FansCenter extends BasisActivity implements
         OnHeaderRefreshListener, OnFooterRefreshListener {
     private String currUserid;
@@ -170,12 +172,13 @@ public class FansCenter extends BasisActivity implements
                                     int position, long arg3) {
                 SocialDataManager.Instance().fans = fansArrayList.get(position);
                 handler.sendEmptyMessage(3);
-                Intent intent = new Intent();
                 SocialDataManager.Instance().userid = fansArrayList
                         .get(position).uid;
-                intent.setClass(mContext, PersonalHome.class);
-                intent.addFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
-                startActivity(intent);
+                int uid = Integer.parseInt(fansArrayList
+                        .get(position).uid);
+                String name = fansArrayList.get(position).username;
+                mContext.startActivity(PersonalHomeActivity.buildIntent(mContext,
+                        uid, name, 0));
             }
         });
     }

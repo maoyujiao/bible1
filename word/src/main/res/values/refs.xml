@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <drawable name="noavatar_small" />
+    <drawable name="wordtest_switch_choose" />
+    <drawable name="word_test_next_selector" />
+</resources>

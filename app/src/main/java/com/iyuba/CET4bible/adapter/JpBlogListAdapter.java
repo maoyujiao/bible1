@@ -92,7 +92,7 @@ public class JpBlogListAdapter extends BaseAdapter {
                     curViewHolder.title.setText(bean.getTitle());
                     curViewHolder.title.getPaint().setFakeBoldText(true);
                     curViewHolder.desc.setVisibility(View.GONE);
-                    curViewHolder.time.setText("广告:  ");
+                    curViewHolder.time.setText("推广:  ");
                     curViewHolder.seetimes.setText("浏览 " + new Random().nextInt(999) + " 次 ");
                     curViewHolder.append.setBackgroundColor(colorful[position % colorful.length]);
                     if (Constant.APP_CONSTANT.isEnglish()) {

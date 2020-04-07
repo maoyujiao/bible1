@@ -91,7 +91,7 @@ public class Login extends BasisActivity {
 
             @Override
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-                SettingConfig.Instance().setAutoLogin(isChecked);
+                SettingConfig.Instance().setAutoLogin(true);
             }
         });
         if (!autoLogin.isChecked()) {
@@ -200,7 +200,7 @@ public class Login extends BasisActivity {
         super.onPause();
         if (AccountManager.Instace(mContext).userName == null
                 || AccountManager.Instace(mContext).userName.equals("")) {
-            SettingConfig.Instance().setAutoLogin(false);
+            SettingConfig.Instance().setAutoLogin(true);
         }
     }
 

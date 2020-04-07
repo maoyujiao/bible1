@@ -269,12 +269,6 @@ public class PersonalHome extends BasisActivity implements OnScrollListener {
                 case 10:
                     doingsListAdapter.notifyDataSetChanged();
                     break;
-                case 11:
-                    AccountManager.Instace(mContext).loginOut();
-                    CustomToast.showToast(mContext, R.string.loginout_success);
-                    SettingConfig.Instance().setHighSpeed(false);
-                    finish();
-                    break;
                 case 12:
                     CustomToast.showToast(mContext, R.string.action_no_more);
                     break;

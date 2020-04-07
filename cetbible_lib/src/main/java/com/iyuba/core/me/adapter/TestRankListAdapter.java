@@ -11,8 +11,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.iyuba.biblelib.R;
-import com.iyuba.core.manager.SocialDataManager;
-import com.iyuba.core.me.activity.PersonalHome;
+import com.iyuba.core.manager.AccountManager;
 import com.iyuba.core.me.pay.ViewHolder;
 import com.iyuba.core.me.sqlite.mode.TestRankUser;
 import com.iyuba.core.thread.GitHubImageLoader;
@@ -21,6 +20,8 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
+
+import personal.iyuba.personalhomelibrary.ui.home.PersonalHomeActivity;
 
 /**
  * Created by Administrator on 2017/1/4.
@@ -92,22 +93,24 @@ public class TestRankListAdapter extends BaseAdapter {
             @Override
             public void onClick(View v) {
                 String uid  = rankUserList.get(position).getUid();
-                Intent intent = new Intent();
-                SocialDataManager.Instance().userid = uid;
-                intent.setClass(mContext, PersonalHome.class);
-                intent.addFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
-                mContext.startActivity(intent);
+                String name  = rankUserList.get(position).getName();
+                if (AccountManager.Instace(mContext).checkUserLogin()) {
+                    mContext.startActivity(PersonalHomeActivity.buildIntent(mContext,
+                            Integer.parseInt(uid),
+                            name, 0));
+                }
             }
         });
         userImageText.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 String uid  = rankUserList.get(position).getUid();
-                Intent intent = new Intent();
-                SocialDataManager.Instance().userid = uid;
-                intent.setClass(mContext, PersonalHome.class);
-                intent.addFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
-                mContext.startActivity(intent);
+                String name  = rankUserList.get(position).getName();
+                if (AccountManager.Instace(mContext).checkUserLogin()) {
+                    mContext.startActivity(PersonalHomeActivity.buildIntent(mContext,
+                            Integer.parseInt(uid),
+                            name, 0));
+                }
             }
         });
         switch (ru.getRanking()) {

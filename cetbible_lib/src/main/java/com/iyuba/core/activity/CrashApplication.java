@@ -23,16 +23,14 @@ import com.iyuba.configation.ConstantManager;
 import com.iyuba.configation.RuntimeManager;
 import com.iyuba.core.util.LogUtils;
 import com.iyuba.dlex.bizs.DLManager;
-import com.iyuba.headlinelibrary.IHeadline;
 import com.iyuba.headlinelibrary.data.local.HLDBManager;
-import com.iyuba.imooclib.IMooc;
 import com.iyuba.imooclib.data.local.IMoocDBManager;
 import com.iyuba.module.dl.BasicDLDBManager;
 import com.iyuba.module.favor.data.local.BasicFavorDBManager;
 import com.iyuba.module.favor.data.local.BasicFavorInfoHelper;
-import com.iyuba.module.movies.IMovies;
 import com.iyuba.module.movies.data.local.InfoHelper;
 import com.iyuba.module.movies.data.local.db.DBManager;
+import com.iyuba.pushlib.PushApplication;
 import com.mob.MobSDK;
 import com.nostra13.universalimageloader.cache.disc.impl.UnlimitedDiskCache;
 import com.nostra13.universalimageloader.cache.disc.naming.Md5FileNameGenerator;
@@ -61,6 +59,7 @@ import java.util.LinkedList;
 import java.util.List;
 
 import cn.bingoogolapple.swipebacklayout.BGASwipeBackHelper;
+import personal.iyuba.personalhomelibrary.PersonalHome;
 
 //import android.net.http.RequestQueue;
 
@@ -110,9 +109,8 @@ public class CrashApplication extends LitePalApplication {
         RuntimeManager.setApplication(this);
         mInstance = this;
         LitePal.initialize(this);
-
+        PushApplication.initPush(this);//推送初始化
         YoudaoSDK.init(getApplicationContext());
-
         SmartRefreshLayout.setDefaultRefreshHeaderCreater(new DefaultRefreshHeaderCreater() {
             @Override
             public RefreshHeader createRefreshHeader(Context context, RefreshLayout layout) {
@@ -146,7 +144,7 @@ public class CrashApplication extends LitePalApplication {
         IMoocDBManager.init(this);
         BasicFavorInfoHelper.init(this);
         BasicDLDBManager.init(this);
-
+        PersonalHome.init(getApplicationContext());
 
         MobSDK.init(this, Constant.SMSAPPID, Constant.SMSAPPSECRET);
 

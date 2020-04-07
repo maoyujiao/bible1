@@ -5,7 +5,6 @@ import android.content.Context;
 import android.os.Handler;
 import android.os.Message;
 import android.text.TextUtils;
-import android.util.Log;
 
 import com.iyuba.biblelib.R;
 import com.iyuba.configation.ConfigManager;
@@ -22,16 +21,17 @@ import com.iyuba.core.util.ExeProtocol;
 import com.iyuba.core.util.GetLocation;
 import com.iyuba.core.util.TouristUtil;
 import com.iyuba.core.widget.dialog.CustomToast;
-import com.iyuba.headlinelibrary.IHeadlineManager;
-import com.iyuba.headlinelibrary.data.model.Headline;
-import com.iyuba.imooclib.IMooc;
-import com.iyuba.imooclib.ImoocManager;
-import com.iyuba.module.movies.IMoviesManager;
+import com.iyuba.module.user.IyuUserManager;
+import com.iyuba.module.user.User;
+
+import org.greenrobot.eventbus.EventBus;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.Locale;
+
+import personal.iyuba.personalhomelibrary.manager.account.PersonalManager;
 
 /**
  * 用户管理 用于用户信息的保存及权限判断
@@ -100,6 +100,7 @@ public class AccountManager {
      * @return
      */
     public boolean checkUserLogin() {
+
         if (userInfo == null || userId == null) {
             return false;
         }
@@ -182,6 +183,8 @@ public class AccountManager {
      * @return
      */
     public boolean loginOut() {
+        EventBus.getDefault().post(new LogoutEvent(Integer.parseInt(userId)));
+
         new UserInfoOp(mContext).delete(userId);
         loginStatus = LOGIN_STATUS_UNLOGIN;
         userId = null; // 用户ID
@@ -194,10 +197,22 @@ public class AccountManager {
         ConfigManager.Instance().putInt("isvip", 0);
         ConfigManager.Instance().putString("userId", null);
         TouristUtil.setTouristLogout(true);
-
+        initCommonConstants();
         return true;
     }
 
+    private void initCommonConstants() {
+        User user = new User();
+        user.vipStatus = getVipStatus() + "";
+        user.uid = (AccountManager.Instace(mContext).userId) == null ? 0 : Integer.parseInt(AccountManager.Instace(mContext).userId);
+        user.name = AccountManager.Instace(mContext).userName;
+        IyuUserManager.getInstance().setCurrentUser(user);
+        PersonalManager.getInstance().AppId = Constant.APPID;
+        PersonalManager.getInstance().categoryType = Constant.APPName;
+        PersonalManager.getInstance().setUserId(user.uid);
+
+
+    }
     /**
      * 更换用户
      *

@@ -43,13 +43,10 @@ import com.iyuba.core.activity.Web;
 import com.iyuba.core.discover.activity.DiscoverForAt;
 import com.iyuba.core.listener.ProtocolResponse;
 import com.iyuba.core.manager.AccountManager;
-import com.iyuba.core.manager.SocialDataManager;
 import com.iyuba.core.me.activity.AttentionCenter;
 import com.iyuba.core.me.activity.FansCenter;
 import com.iyuba.core.me.activity.InfoFullFillActivity;
-import com.iyuba.core.me.activity.MessageCenter;
 import com.iyuba.core.me.activity.NoticeCenter;
-import com.iyuba.core.me.activity.PersonalHome;
 import com.iyuba.core.me.activity.StudyRankingActivity;
 import com.iyuba.core.me.activity.VipCenter;
 import com.iyuba.core.me.activity.WriteState;
@@ -77,7 +74,6 @@ import com.iyuba.core.thread.GitHubImageLoader;
 import com.iyuba.core.util.CheckGrade;
 import com.iyuba.core.util.ExeProtocol;
 import com.iyuba.core.util.Expression;
-import com.iyuba.core.util.ToastUtil;
 import com.iyuba.core.util.TouristUtil;
 import com.iyuba.core.widget.dialog.CustomToast;
 
@@ -94,6 +90,11 @@ import com.umeng.analytics.MobclickAgent;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.Locale;
+
+import personal.iyuba.personalhomelibrary.ui.groupChat.GroupChatManageActivity;
+import personal.iyuba.personalhomelibrary.ui.home.PersonalHomeActivity;
+import personal.iyuba.personalhomelibrary.ui.list.SimpleListActivity;
+import personal.iyuba.personalhomelibrary.ui.message.MessageActivity;
 
 /**
  * 类名
@@ -185,7 +186,6 @@ public class MeFragment extends Fragment {
     private void resetLogoutStatus() {
         ImoocManager.appId = Constant.APPID;
         User user = new User();
-
         user.vipStatus = "0";
         user.name = "";
         user.uid = 0;
@@ -199,16 +199,18 @@ public class MeFragment extends Fragment {
             Intent intent;
             int id = arg0.getId();
             if (id == R.id.personalhome) {
-                if (AccountManager.Instace(mContext).checkUserLogin()) {
-                    intent = new Intent(mContext, PersonalHome.class);
-                    SocialDataManager.Instance().userid = AccountManager
-                            .Instace(mContext).userId;
-                    startActivity(intent);
+                if (AccountManager.Instace(mContext).checkUserLogin()
+                        &&!TouristUtil.isTourist()) {
+                        startActivity(PersonalHomeActivity.buildIntent(getContext(),
+                                Integer.parseInt(AccountManager.Instace(mContext).userId),
+                                AccountManager.Instace(mContext).userName, 0));
                 }
             } else if (id == R.id.me_state_change) {
-                if (AccountManager.Instace(mContext).checkUserLogin()) {
-                    intent = new Intent(mContext, WriteState.class);
-                    startActivity(intent);
+                if (AccountManager.Instace(mContext).checkUserLogin() &&!TouristUtil.isTourist()) {
+//                    GroupChatManageActivity.start(mContext,10016,"VOA慢速英语",true);
+                    GroupChatManageActivity.start(mContext,10106,"CET官方群",true);
+                }else {
+                    startActivity(new Intent(mContext, Login.class));
                 }
             } else if (id == R.id.me_vip) {
                 intent = new Intent(mContext, VipCenter.class);
@@ -243,8 +245,9 @@ public class MeFragment extends Fragment {
                 }
 
             } else if (id == R.id.me_message) {
-                if (AccountManager.Instace(mContext).checkUserLogin()) {
-                    intent = new Intent(mContext, MessageCenter.class);
+                if (AccountManager.Instace(mContext).checkUserLogin()
+                        &&!TouristUtil.isTourist()) {
+                    intent = new Intent(mContext, MessageActivity.class);
                     startActivity(intent);
                 } else {
                     ToastUtils.showShort("请登录正式账号");
@@ -252,18 +255,16 @@ public class MeFragment extends Fragment {
 
             } else if (id == R.id.attention_area) {
                 if (AccountManager.Instace(mContext).checkUserLogin()) {
-                    intent = new Intent(mContext, AttentionCenter.class);
-                    intent.putExtra("userid",
-                            AccountManager.Instace(mContext).userId);
-                    startActivity(intent);
+                    startActivity(SimpleListActivity.buildIntent(mContext,1, Integer.parseInt(AccountManager.Instace(mContext).userId)));
                 } else {
                     ToastUtils.showShort("请登录正式账号");
                 }
             } else if (id == R.id.fans_area) {
-                intent = new Intent(mContext, FansCenter.class);
-                intent.putExtra("userid",
-                        AccountManager.Instace(mContext).userId);
-                startActivity(intent);
+                if (AccountManager.Instace(mContext).checkUserLogin()) {
+                    startActivity(SimpleListActivity.buildIntent(mContext,0, Integer.parseInt(AccountManager.Instace(mContext).userId)));
+                } else {
+                    ToastUtils.showShort("请登录正式账号");
+                }
             } else if (id == R.id.notification_area) {
                 intent = new Intent(mContext, NoticeCenter.class);
                 intent.putExtra("userid",

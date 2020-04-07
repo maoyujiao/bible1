@@ -19,7 +19,6 @@ import com.iyuba.core.bean.QuestionListBean;
 import com.iyuba.core.listener.ProtocolResponse;
 import com.iyuba.core.manager.AccountManager;
 import com.iyuba.core.manager.SocialDataManager;
-import com.iyuba.core.me.activity.PersonalHome;
 import com.iyuba.core.sqlite.op.CommentAgreeOp;
 import com.iyuba.core.teacher.activity.ShowLargePicActivity;
 import com.iyuba.core.teacher.protocol.AgreeAgainstRequest;
@@ -35,6 +34,8 @@ import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.HashMap;
+
+import personal.iyuba.personalhomelibrary.ui.home.PersonalHomeActivity;
 
 public class QuestionListAdapter extends BaseAdapter {
     public HashMap<String, String> abilityTypeCatalog = new HashMap<String, String>();
@@ -239,9 +240,9 @@ public class QuestionListAdapter extends BaseAdapter {
 
                 Intent intent = new Intent();
                 SocialDataManager.Instance().userid = ques.getUid();
-                intent.setClass(mContext, PersonalHome.class);
-                intent.addFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
-                mContext.startActivity(intent);
+                String username  = ques.getUsername();
+                String userid = ques.getUid();
+                mContext.startActivity(PersonalHomeActivity.buildIntent (mContext, Integer.parseInt(userid), username, 0));
             }
         });
 

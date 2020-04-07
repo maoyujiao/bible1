@@ -287,7 +287,7 @@ public class TeacherBaseInfo extends BaseActivity {
                         intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
                         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
                             intent.setFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION);
-                            Uri contentUri = FileProvider.getUriForFile(mContext, Constant.PACKAGE_NAME + ".fileprovider",
+                            Uri contentUri = FileProvider.getUriForFile(mContext, Constant.PACKAGE_NAME ,
                                     tempFile);
                             intent.putExtra(MediaStore.EXTRA_OUTPUT, contentUri);
                         } else {
@@ -320,7 +320,7 @@ public class TeacherBaseInfo extends BaseActivity {
         switch (requestCode) {
             case PHOTO_REQUEST_TAKEPHOTO:
                 if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
-                    contentUri = FileProvider.getUriForFile(mContext, Constant.PACKAGE_NAME + ".fileprovider", new File(tempFilePath));
+                    contentUri = FileProvider.getUriForFile(mContext, Constant.PACKAGE_NAME, new File(tempFilePath));
                 } else {
                     contentUri = Uri.fromFile(new File(tempFilePath));
                 }
@@ -332,7 +332,7 @@ public class TeacherBaseInfo extends BaseActivity {
                 String path = SelectPicUtils.getPath(this, data.getData());
 
                 if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
-                    contentUri = FileProvider.getUriForFile(mContext, Constant.PACKAGE_NAME + ".fileprovider", new File(path));
+                    contentUri = FileProvider.getUriForFile(mContext, Constant.PACKAGE_NAME , new File(path));
                 } else {
                     contentUri = Uri.fromFile(new File(path));
                 }

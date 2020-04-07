@@ -1,0 +1,204 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<layout xmlns:android="http://schemas.android.com/apk/res/android">
+    <data>
+        <variable
+            name="userinfo"
+            type="com.iyuba.wordtest.viewmodel.UserSignViewModel" />
+    </data>
+<RelativeLayout
+    android:id="@+id/root"
+    android:layout_width="match_parent"
+    android:background="@drawable/sign_bg_dark"
+    android:layout_height="match_parent">
+
+    <RelativeLayout
+        android:id="@+id/rr"
+        android:layout_width="wrap_content"
+        android:layout_height="450dp"
+        android:layout_marginTop="-45dp"
+        android:layout_marginLeft="30dp"
+        android:layout_marginRight="30dp"
+        android:background="@drawable/sign_info_bg_bright"
+        android:gravity="center"
+        android:layout_centerHorizontal="true"
+        android:layout_alignParentBottom="true"
+        android:layout_marginBottom="30dp">
+
+        <LinearLayout
+            android:id="@+id/ll"
+            android:layout_centerHorizontal="true"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:layout_marginLeft="20dp"
+            android:layout_marginTop="35dp">
+
+        <TextView
+            android:layout_toEndOf="@id/userimage"
+            android:textSize="20sp"
+            android:layout_gravity="center_horizontal"
+            android:textColor="#fff"
+            android:id="@+id/username"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@{userinfo.username}"/>
+        <TextView
+            android:id="@+id/sign_des"
+            android:layout_below="@id/userimage"
+            android:textColor="#fff"
+            android:layout_toRightOf="@id/userimage"
+            android:layout_marginTop="16dp"
+            android:textSize="19sp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="刚刚在英语四级听力上打了卡"/>
+        </LinearLayout>
+        <GridLayout
+            android:id="@+id/gridview"
+            android:layout_marginTop="30dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/ll"
+            android:alignmentMode="alignBounds"
+            android:columnCount="3"
+            android:layout_gravity ="fill_horizontal"
+            android:rowCount="2">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="18sp"
+                android:textColor="#fff"
+                android:textStyle="bold"
+                android:layout_columnWeight="1"
+                android:layout_rowWeight="1"
+                android:layout_gravity="center"
+
+                android:text="闯关数"/>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="18sp"
+                android:textColor="#fff"
+                android:textStyle="bold"
+
+                android:layout_columnWeight="1"
+                android:layout_rowWeight="1"
+                android:layout_gravity="center"
+                android:text="单词数"/>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="18sp"
+                android:textColor="#fff"
+                android:textStyle="bold"
+
+                android:layout_columnWeight="1"
+                android:layout_rowWeight="1"
+                android:layout_gravity="center"
+                android:text="正确率"/>
+            <TextView
+                android:id="@+id/stage"
+                android:layout_gravity="center"
+                android:textSize="18sp"
+                android:textColor="#fff"
+                android:textStyle="bold"
+                android:text="@{userinfo.stage}"/>
+            <TextView
+                android:id="@+id/total_words"
+
+                android:layout_gravity="center"
+                android:textSize="18sp"
+                android:textColor="#fff"
+                android:textStyle="bold"
+                android:text="@{userinfo.totalWords}"/>
+            <TextView
+                android:id="@+id/rate"
+                android:layout_gravity="center"
+                android:textColor="#fff"
+                android:textStyle="bold"
+                android:textSize="18sp"
+                android:text="@{userinfo.rate}"/>
+        </GridLayout>
+
+
+        <TextView
+            android:id="@+id/app_name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="#fff"
+            android:textSize="19sp"
+            android:layout_marginRight="20dp"
+            android:layout_marginLeft="30dp"
+            android:layout_marginTop="50dp"
+            android:layout_below="@id/gridview"
+            android:text="@string/app_name"/>
+        
+        <TextView
+            android:id="@+id/desc"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/app_name"
+            android:textSize="19sp"
+            android:textColor="#fff"
+            android:layout_alignParentRight="true"
+            android:layout_marginTop="10dp"
+            android:layout_marginRight="20dp"
+            android:text="----英语考试必备"/>
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="15dp"
+            android:id="@+id/txtll"
+            android:layout_below="@id/desc"
+            android:orientation="vertical">
+        <TextView
+            android:id="@+id/share_wechat"
+            android:layout_width="140dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="15dp"
+            android:text="分享到朋友圈"
+            android:textSize="16sp"
+            android:layout_centerHorizontal="true"
+
+            android:gravity="center"
+            android:textColor="#fff"
+            android:paddingTop="5dp"
+            android:paddingBottom="5dp"
+            android:paddingLeft="10dp"
+            android:paddingRight="10dp"
+            android:background="@drawable/sign_btn_bg"/>
+
+        <TextView
+            android:id="@+id/cancel"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="10dp"
+            android:layout_marginTop="5dp"
+            android:text="取消"
+            android:textSize="14sp"
+            android:layout_centerHorizontal="true"
+            android:layout_below="@id/share_wechat"
+            android:layout_gravity="center"
+            android:textColor="#fff"
+            android:padding="5dp"/>
+        </LinearLayout>
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/desc"
+            android:layout_alignParentEnd="true"
+            android:layout_marginTop="20dp"
+            android:layout_toRightOf="@id/txtll"
+            android:src="@drawable/qrcode" />
+    </RelativeLayout>
+    <de.hdodenhof.circleimageview.CircleImageView
+        android:id="@+id/userimage"
+        android:layout_width="80dp"
+        android:layout_height="80dp"
+        android:layout_above="@id/rr"
+        android:src="@drawable/defaultavatar"
+        android:layout_centerHorizontal="true"/>
+</RelativeLayout>
+</layout>

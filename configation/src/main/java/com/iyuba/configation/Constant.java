@@ -39,6 +39,7 @@ public class Constant {
     public static String appUpdateUrl;// 升级地址
     public static String feedBackUrl;// 反馈
 
+    public static final String PROTOCOL_URL_HEADER = "https://ai.iyuba.cn/api/protocol.jsp?apptype=";
 
     public final static String basicReadInfoUrl = "http://cms.iyuba.cn/newsApi/getUserInfo.jsp?";
     public final static String recentInfoUrl = "http://cms.iyuba.cn/newsApi/getRecentRV.jsp?";

@@ -22,8 +22,6 @@ import com.iyuba.core.listener.OnPlayStateChangedListener;
 import com.iyuba.core.listener.ProtocolResponse;
 import com.iyuba.core.manager.AccountManager;
 import com.iyuba.core.manager.QuestionManager;
-import com.iyuba.core.manager.SocialDataManager;
-import com.iyuba.core.me.activity.PersonalHome;
 import com.iyuba.core.protocol.BaseHttpResponse;
 import com.iyuba.core.sqlite.op.CommentAgreeOp;
 import com.iyuba.core.teacher.activity.QuezActivity;
@@ -37,6 +35,8 @@ import com.iyuba.core.widget.Player;
 import com.iyuba.core.widget.dialog.CustomToast;
 
 import java.util.List;
+
+import personal.iyuba.personalhomelibrary.ui.home.PersonalHomeActivity;
 
 /**
  * expandableListView
@@ -371,11 +371,9 @@ public class ChatAdapter extends BaseExpandableListAdapter {
 
             @Override
             public void onClick(View arg0) {
-                Intent intent = new Intent();
-                SocialDataManager.Instance().userid = info.uid + "";
-                intent.setClass(mContext, PersonalHome.class);
-                intent.addFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
-                mContext.startActivity(intent);
+                mContext.startActivity(PersonalHomeActivity.buildIntent (mContext,
+                        Integer.parseInt(String.valueOf( info.uid)),
+                       info.username, 0));
             }
         });
 

@@ -1,8 +1,8 @@
 package com.iyuba.CET4bible.activity;
 
+import android.Manifest;
 import android.annotation.SuppressLint;
 import android.app.AlertDialog;
-import android.arch.persistence.room.Transaction;
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.DialogInterface;
@@ -20,18 +20,28 @@ import android.os.Looper;
 import android.os.Message;
 import android.os.MessageQueue;
 import android.os.Parcelable;
+import android.support.annotation.RequiresApi;
 import android.support.v4.app.FragmentTransaction;
-import android.support.v4.content.FileProvider;
+import android.text.Spannable;
+import android.text.SpannableStringBuilder;
+import android.text.TextPaint;
 import android.text.TextUtils;
+import android.text.method.LinkMovementMethod;
+import android.text.style.ClickableSpan;
 import android.util.DisplayMetrics;
 import android.util.Log;
 import android.view.KeyEvent;
+import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.blankj.utilcode.util.ToastUtils;
+import com.bumptech.glide.Glide;
+import com.bumptech.glide.load.resource.drawable.GlideDrawable;
+import com.bumptech.glide.request.RequestListener;
+import com.bumptech.glide.request.target.Target;
 import com.google.gson.Gson;
 import com.iyuba.CET4bible.BuildConfig;
 import com.iyuba.CET4bible.R;
@@ -55,6 +65,7 @@ import com.iyuba.CET4bible.thread.DownLoadAd;
 import com.iyuba.CET4bible.util.exam.ExamDataUtil;
 import com.iyuba.CET4bible.util.exam.ExamListBean;
 import com.iyuba.abilitytest.activity.AbilityTestListActivity;
+import com.iyuba.abilitytest.event.StartMicroClassEvent;
 import com.iyuba.base.BaseActivity;
 import com.iyuba.base.util.L;
 import com.iyuba.base.util.T;
@@ -62,13 +73,14 @@ import com.iyuba.configation.ConfigManager;
 import com.iyuba.configation.Constant;
 import com.iyuba.configation.RuntimeManager;
 import com.iyuba.core.activity.CrashApplication;
+import com.iyuba.core.activity.Login;
 import com.iyuba.core.discover.activity.GoPracticeEvent;
 import com.iyuba.core.listener.ProtocolResponse;
 import com.iyuba.core.listener.ResultIntCallBack;
 import com.iyuba.core.manager.AccountManager;
 import com.iyuba.core.manager.BackgroundManager;
+import com.iyuba.core.manager.LogoutEvent;
 import com.iyuba.core.manager.SocialDataManager;
-import com.iyuba.core.me.activity.PersonalHome;
 import com.iyuba.core.me.activity.VipCenter;
 import com.iyuba.core.me.pay.PayOrderActivity;
 import com.iyuba.core.protocol.BaseHttpResponse;
@@ -78,7 +90,6 @@ import com.iyuba.core.sqlite.ImportLibDatabase;
 import com.iyuba.core.sqlite.op.UserInfoOp;
 import com.iyuba.core.thread.GitHubImageLoader;
 import com.iyuba.core.util.ExeProtocol;
-import com.iyuba.core.util.LogUtils;
 import com.iyuba.core.util.TouristUtil;
 import com.iyuba.core.widget.ContextMenu;
 import com.iyuba.core.widget.dialog.CustomToast;
@@ -95,14 +106,19 @@ import com.iyuba.imooclib.ImoocManager;
 import com.iyuba.imooclib.event.ImoocBuyVIPEvent;
 import com.iyuba.imooclib.ui.mobclass.MobClassActivity;
 import com.iyuba.imooclib.ui.mobclass.MobClassFragment;
+import com.iyuba.imooclib.ui.web.Web;
 import com.iyuba.module.dl.BasicDLPart;
 import com.iyuba.module.dl.DLItemEvent;
 import com.iyuba.module.favor.data.model.BasicFavorPart;
 import com.iyuba.module.favor.event.FavorItemEvent;
 import com.iyuba.module.movies.event.IMovieGoVipCenterEvent;
 import com.iyuba.module.movies.ui.series.SeriesActivity;
+import com.iyuba.module.toolbox.RxUtil;
 import com.iyuba.module.user.IyuUserManager;
 import com.iyuba.module.user.User;
+import com.iyuba.pushlib.InitPush;
+import com.iyuba.pushlib.PushConfig;
+import com.iyuba.sdk.data.iyu.IyuAdClickEvent;
 import com.iyuba.trainingcamp.activity.GoldNewFragment;
 import com.iyuba.trainingcamp.activity.GoldShareActivity;
 import com.iyuba.trainingcamp.app.TrainingManager;
@@ -114,6 +130,7 @@ import com.iyuba.trainingcamp.http.Http;
 import com.iyuba.trainingcamp.http.HttpCallback;
 import com.iyuba.trainingcamp.utils.FilePath;
 import com.iyuba.trainingcamp.utils.ToastUtil;
+import com.iyuba.wordtest.manager.WordManager;
 import com.umeng.analytics.MobclickAgent;
 import com.umeng.message.PushAgent;
 
@@ -135,7 +152,21 @@ import cn.sharesdk.framework.Platform;
 import cn.sharesdk.framework.PlatformActionListener;
 import cn.sharesdk.onekeyshare.OnekeyShare;
 import cn.sharesdk.wechat.moments.WechatMoments;
+import io.reactivex.Observable;
+import io.reactivex.ObservableSource;
+import io.reactivex.ObservableTransformer;
+import io.reactivex.disposables.Disposable;
+import io.reactivex.functions.Consumer;
 import okhttp3.Call;
+import permissions.dispatcher.NeedsPermission;
+import permissions.dispatcher.RuntimePermissions;
+import personal.iyuba.personalhomelibrary.PersonalType;
+import personal.iyuba.personalhomelibrary.data.model.HeadlineTopCategory;
+import personal.iyuba.personalhomelibrary.data.model.Voa;
+import personal.iyuba.personalhomelibrary.event.ArtDataSkipEvent;
+import personal.iyuba.personalhomelibrary.manager.account.PersonalManager;
+import personal.iyuba.personalhomelibrary.ui.home.PersonalHomeActivity;
+import timber.log.Timber;
 
 /**
  * 类名
@@ -143,6 +174,7 @@ import okhttp3.Call;
  * @author 作者 <br/>
  * 实现的主要功能。 创建日期 修改者，修改日期，修改内容。
  */
+@RuntimePermissions
 public class MainActivity extends BaseActivity implements OnClickListener,
         AppUpdateCallBack {
 
@@ -199,7 +231,51 @@ public class MainActivity extends BaseActivity implements OnClickListener,
             }
         }
     };
+    private InitPush mInitPush;
 
+    private void showFirstDialog() {
+        if(getIntent().getExtras()!=null){
+            Log.d("MainActivity", "showFirstDialog: ");
+            ClickableSpan clickableSpan = new ClickableSpan() {
+                @Override
+                public void onClick(View widget) {
+                    com.iyuba.core.activity.Web.start(mContext, Constant.PROTOCOL_URL_HEADER+Constant.APPName,"用户隐私协议");
+                }
+                @Override
+                public void updateDrawState(TextPaint ds) {
+                    ds.setUnderlineText(true);
+                }
+            } ;
+            if (getIntent().getExtras().getBoolean("showDialog",false)){
+                View view = LayoutInflater.from(mContext).inflate(R.layout.alert_text,null);
+                TextView remindText = view.findViewById(R.id.remindText);
+                String remindString = getResources().getString(R.string.user_protocol);
+                SpannableStringBuilder spannableStringBuilder  = new SpannableStringBuilder(remindString);
+                spannableStringBuilder.setSpan(clickableSpan, remindString.indexOf("用户协议"), remindString.indexOf("用户协议")+9, Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
+                remindText.setText(spannableStringBuilder);
+                remindText.setMovementMethod(LinkMovementMethod.getInstance());
+                AlertDialog.Builder builder = new AlertDialog.Builder(mContext);
+                builder.setTitle("个人信息保护政策")
+                        .setView(view)
+                        .setPositiveButton("同意", new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialog, int which) {
+                                dialog.dismiss();
+                                startActivity(new Intent(mContext, Login.class));
+                            }
+                        })
+                        .setNegativeButton("不同意", new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialog, int which) {
+                                dialog.dismiss();
+                            }
+                        })
+                        .setCancelable(false)
+                        .create()
+                        .show();
+            }
+        }
+    }
 
     @Subscribe
     public void onPayEvent(PayEvent event) {
@@ -219,6 +295,11 @@ public class MainActivity extends BaseActivity implements OnClickListener,
         mContext.startActivity(intent);
     }
 
+    @Subscribe
+    public void onEvent(LogoutEvent event){
+
+        InitPush.getInstance().unRegisterToken(this,event.getUid());
+    }
 
     @Subscribe
     public void onShareEvent(ShareEvent event) {
@@ -244,6 +325,7 @@ public class MainActivity extends BaseActivity implements OnClickListener,
         RuntimeManager.setDisplayMetrics(this);
         MobclickAgent.updateOnlineConfig(mContext);
         initViews();
+        initPush();
         gold_vip = findView(R.id.gold_vip);
         if (Constant.APP_CONSTANT.isEnglish()) {
             gold_vip.setVisibility(View.VISIBLE);
@@ -259,6 +341,7 @@ public class MainActivity extends BaseActivity implements OnClickListener,
 
         setTabSelection(0);
         requestPermission();
+        gold_vip.postDelayed(() -> showFirstDialog(),100);
         Looper.getMainLooper().myQueue().addIdleHandler(new MessageQueue.IdleHandler() {
             @Override
             public boolean queueIdle() {
@@ -325,6 +408,7 @@ public class MainActivity extends BaseActivity implements OnClickListener,
     protected void onResume() {
         super.onResume();
         MobclickAgent.onResume(this);
+        initCommonConstants();
         intTraingCamp();
         if (microClassListFragment != null && mExtraFragment != null) {
             microClassListFragment.refreshContent();
@@ -590,29 +674,42 @@ public class MainActivity extends BaseActivity implements OnClickListener,
         transaction.commitAllowingStateLoss();
     }
 
-    private void AutoLogin() {
-        //未登录
+
+    private void autoLogin() {
         int size = new UserInfoOp(mContext).getAccountSize();
-        LogUtils.e("Account Size : " + size);
-        if (size == 0 && !TouristUtil.isTouristLogout()) {
-            if (!TouristUtil.isTourist()) {
-                new TouristUtil(mContext).getUID();
-            } else {
-                TouristUtil.loadUserInfo(mContext);
-            }
-            return;
-        }
-
-        if (SettingConfig.Instance().isAutoLogin()) { // 自动登录
-            String[] nameAndPwd = AccountManager.Instace(mContext).getUserNameAndPwd();
-            String userName = nameAndPwd[0];
-            if (userName != null && !userName.equals("")) {
+        if (size > 0) {
+            if (SettingConfig.Instance().isAutoLogin()) {
+                Timber.d("onCreate: 正式用户");
+                String[] nameAndPwd = AccountManager.Instace(mContext)
+                        .getUserNameAndPwd();
+                String userName = nameAndPwd[0];
+                String userPwd = nameAndPwd[1];
+                AccountManager.Instace(mContext).login(userName, userPwd, null);
                 AccountManager.Instace(mContext).setLoginState(1);
-                setImoocStatus();
-
             }
+        } else if (!TouristUtil.isTouristLogout()) {
+            if (TouristUtil.isTourist()) {
+                TouristUtil.loadUserInfo(mContext);
+            } else {
+                TouristUtil t = new TouristUtil(mContext);
+                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O){
+                    MainActivityPermissionsDispatcher.doNextWithPermissionCheck(this,t);
+                }else {
+                    t.getUID(Build.SERIAL);
+                }
+            }
+        } else {
+            TouristUtil.setTourist(false);
         }
     }
+
+    @RequiresApi(api = Build.VERSION_CODES.O)
+    @SuppressLint("MissingPermission")
+    @NeedsPermission(Manifest.permission.READ_PHONE_STATE)
+    void doNext(TouristUtil t) {
+        t.getUID(Build.getSerial());
+    }
+
 
     private void initSet() {
         // 改变语言
@@ -823,7 +920,7 @@ public class MainActivity extends BaseActivity implements OnClickListener,
                 checkAppUpdate();
             }
             Looper.prepare();
-            AutoLogin();
+            autoLogin();
             changeWelcome();
             Looper.loop();
         }
@@ -1046,6 +1143,12 @@ public class MainActivity extends BaseActivity implements OnClickListener,
     }
 
     @Subscribe
+    public void onEvent(StartMicroClassEvent event) {
+        Intent intent = MobClassActivity.buildIntent(mContext, Integer.parseInt(Constant.APP_CONSTANT.courseTypeId()), true, getEnglishFilter());
+        startActivity(intent);
+    }
+
+    @Subscribe
     public void onEvent(ImoocBuyVIPEvent event) {
         VipCenter.start(this, true);
     }
@@ -1064,7 +1167,10 @@ public class MainActivity extends BaseActivity implements OnClickListener,
             case SpeakCircleEvent.PERSONAL_FLAG:
                 Intent intent = new Intent();
                 SocialDataManager.Instance().userid = event.userId;
-                intent.setClass(mContext, PersonalHome.class);
+                intent = (PersonalHomeActivity.buildIntent(this,
+                            Integer.parseInt(AccountManager.Instace(mContext).userId),
+                            AccountManager.Instace(mContext).userName, 0));
+
                 intent.addFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
                 mContext.startActivity(intent);
                 break;
@@ -1101,6 +1207,15 @@ public class MainActivity extends BaseActivity implements OnClickListener,
         }
     }
 
+    public static <T> ObservableTransformer<T, T> applyObservableIoSchedulerWith(final Consumer<? super Disposable> action) {
+        return new ObservableTransformer<T,T>() {
+            public ObservableSource<T> apply(Observable<T> upstream) {
+                return upstream.compose(RxUtil.applyObservableIoScheduler()).doOnSubscribe(action);
+            }
+        };
+    }
+
+
 
     private void startListeningActivity00(String year ,final int type, final String test, final String section ) {
 
@@ -1115,6 +1230,17 @@ public class MainActivity extends BaseActivity implements OnClickListener,
                     mContext.startActivity(intent);
                 } else {
                     T.showShort(mContext, "题库加载失败");
+                    Glide.with(mContext).load(R.drawable.ic_chat_file_personal).listener(new RequestListener<Integer, GlideDrawable>() {
+                        @Override
+                        public boolean onException(Exception e, Integer model, Target<GlideDrawable> target, boolean isFirstResource) {
+                            return false;
+                        }
+
+                        @Override
+                        public boolean onResourceReady(GlideDrawable resource, Integer model, Target<GlideDrawable> target, boolean isFromMemoryCache, boolean isFirstResource) {
+                            return false;
+                        }
+                    });
                 }
             }
         });
@@ -1145,9 +1271,91 @@ public class MainActivity extends BaseActivity implements OnClickListener,
     private void initCommonConstants() {
         User user = new User();
         user.vipStatus = AccountManager.Instace(this).getVipStatus() + "";
-        user.uid = (AccountManager.Instace(mContext).userId) == null ? 0 : Integer.parseInt(AccountManager.Instace(mContext).userId);
+        if (TextUtils.isEmpty(AccountManager.Instace(mContext).userId)){
+            user.uid = 0 ;
+        }else {
+            user.uid = Integer.parseInt(AccountManager.Instace(mContext).userId);
+        }
         user.name = AccountManager.Instace(mContext).userName;
         IyuUserManager.getInstance().setCurrentUser(user);
+        PersonalManager.getInstance().AppId = Constant.APPID;
+        PersonalManager.getInstance().categoryType = Constant.APPName;
+        PersonalManager.getInstance().setUserId(user.uid);
+        PersonalManager.getInstance().setUsername(user.name);
+        PersonalManager.getInstance().vipState=user.vipStatus;//新增
+        InitPush.getInstance().registerToken(this,user.uid);
+    }
+
+    private void initPush() {
+        mInitPush= InitPush.getInstance();//初始化改变
+        PushConfig config = new PushConfig();
+        config.HUAWEI_ID=mContext.getString(R.string.push_huawei_id);
+        config.HUAWEI_SECRET=mContext.getString(R.string.push_huawei_secret);
+        config.MI_ID=mContext.getString(R.string.push_mi_id);
+        config.MI_KEY=mContext.getString(R.string.push_mi_key);
+        config.MI_SECRET=mContext.getString(R.string.push_mi_secret);
+        config.OPPO_ID=mContext.getString(R.string.push_oppo_id);
+        config.OPPO_KEY=mContext.getString(R.string.push_oppo_key);
+        config.OPPO_SECRET=mContext.getString(R.string.push_oppo_secret);
+        config.OPPO_MASTER_SECRET=mContext.getString(R.string.push_oppo_master_secret);//新增
+        mInitPush.setInitPush(mContext,config);//包含了OPPO获取Token
+        PersonalManager.getInstance().setMainPath(MainActivity.class.getName());//新的修改！！！
+//        mInitPush.isShowToast=true;//是否开启推送模块的toast,默认关闭
+//        String token=mInitPush.getToken(this).token;//获取token的方法 可能为空!!!
+//        mInitPush.setSignPushCallback(getSignPush);//非必要，返回token
+        if (mInitPush.isOtherPush()){//小米，华为，OPPO 之外的手机需要重新注册 ，需要请求权限
+            MainActivityPermissionsDispatcher.requestPushWithPermissionCheck(MainActivity.this);
+        }
+    }
+
+    @NeedsPermission({android.Manifest.permission.READ_PHONE_STATE, android.Manifest.permission.WRITE_EXTERNAL_STORAGE})
+    public void requestPush() {
+        mInitPush.resetPush(getApplication());
+    }
+
+
+    @Subscribe
+    public void onEvent(IyuAdClickEvent event){
+        startActivity(Web.buildIntent(this,event.info.linkUrl,event.info.title));
+    }
+
+    @Subscribe
+    public void getVoadId(ArtDataSkipEvent event) {
+        if (event.voa != null) {
+            Voa voa = event.voa;
+            switch (event.voa.categoryString) {
+                case PersonalType.BBC:
+                case PersonalType.VOA:
+                case PersonalType.CSVOA:
+                    startActivity(AudioContentActivityNew.getIntent2Me(
+                            this, voa.categoryString,
+                            voa.title, voa.title_cn, voa.pic, voa.playType
+                            , voa.voaid + "",voa.sound
+                    ));
+                    break;
+                case PersonalType.BBCWORDVIDEO:
+                case PersonalType.MEIYU:
+                case PersonalType.TED:
+                case PersonalType.TOPVIDEOS:
+                case PersonalType.VOAVIDEO:
+                case PersonalType.JAPANVIDEOS:
+                    startActivity(VideoContentActivityNew.getIntent2Me(mContext, voa.categoryString,
+                            voa.title, voa.title_cn, voa.pic, voa.categoryString
+                            , voa.voaid + "", voa.sound));
+                    break;
+            }
+        } else if (event.headline!=null){
+            HeadlineTopCategory headline = event.headline;
+            switch (event.type) {
+                case PersonalType.NEWS:
+                    startActivity(TextContentActivity.getIntent2Me(
+                            this,  headline.id + "",headline.Title,
+                            headline.TitleCn,event.type,event.type,
+                            headline.CreatTime,headline.getPic(),headline.Source));
+            }
+        }else {
+            startListeningActivity(event.exam.topicId,event.exam.paraId,"0");
+        }
     }
 
 }

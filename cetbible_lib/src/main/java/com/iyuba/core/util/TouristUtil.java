@@ -98,12 +98,11 @@ public class TouristUtil {
         setTourist(false);
     }
 
-    public void getUID() {
+    public void getUID(String deviceId) {
         //东八区的天数
         long unixTimestamp = new Date().getTime() / 1000 + 3600 * 8; //东八区;
         long days = unixTimestamp / 86400;
 
-        String deviceId = Build.SERIAL;
         String sign = MD5.getMD5ofStr(deviceId + Constant.APPID + HttpConstant.ANDROID + days + "iyubaV2");
 
         String url = HttpConstant.BASE_URL + "?protocol=11003" +

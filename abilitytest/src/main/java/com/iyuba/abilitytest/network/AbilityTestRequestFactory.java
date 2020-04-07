@@ -110,7 +110,7 @@ public class AbilityTestRequestFactory {
                     .client(okHttpClient)
                     .addConverterFactory(gsonConverterFactory)
                     .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
-                    .baseUrl("http://ai.iyuba.cn/test/")
+                    .baseUrl("https://ai.iyuba.cn/test/")
                     .build();
             evaluateApi = retrofit.create(EvaluateApi.class);
         }

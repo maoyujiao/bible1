@@ -366,5 +366,4 @@ public class Welcome extends BasisActivity {
         super.onDestroy();
     }
 
-
 }

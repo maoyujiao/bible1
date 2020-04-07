@@ -2,13 +2,18 @@
 
     <!--透明效果-->
     <color name="transparent">#00000000</color>
+    <color name="colorPrimary">#79B5FC</color>
+    <color name="colorPrimaryDark">#aa79B5FC</color>
+    <color name="ability_bar_text">#979797</color>
+    <color name="colorPrimary_ab">#79B5FC</color>
+
 
     <!-- 界面背景浅灰色 -->
     <color name="bg_gray_color">#efeff4</color>
     <color name="text_bluenor_color">#6DC5D9</color>
     <color name="text_bluenor_color_press">#aa6DC5D9</color>
     <color name="black_opaque">#AA000000</color>
-    <color name="text_purple_color">#b362be</color>
+    <color name="text_purple_color">#5834BF</color>
 
     <!--雅思能力测试背景颜色-->
     <color name="bg_ability">#F3F9F9</color>

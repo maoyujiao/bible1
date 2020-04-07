@@ -93,14 +93,8 @@ public class RecordManager {
      */
     public long stopRecord() {
         mHandler.removeCallbacks(mUpdateMicStatusTimer);
-        if (mMediaRecorder == null)
-            return 0L;
-        if (startTime == 0 || (startTime < endTime)) {
-            return 0L;
-        } else {
-            mMediaRecorder.stop();
-            mMediaRecorder.reset();
-        }
+        mMediaRecorder.stop();
+        mMediaRecorder.reset();
         endTime = System.currentTimeMillis();
         return endTime - startTime;
     }

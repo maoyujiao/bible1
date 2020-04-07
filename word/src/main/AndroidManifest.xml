@@ -1,0 +1,11 @@
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="com.iyuba.wordtest" >
+
+    <application>
+        <activity android:name="com.iyuba.wordtest.WordTestActivity" />
+        <activity android:name="com.iyuba.wordtest.WordStepActivity" />
+        <activity android:name="com.iyuba.wordtest.WordListActivity" />
+        <activity android:name="com.iyuba.wordtest.WordDetailActiivty" />
+        <activity android:name="com.iyuba.wordtest.sign.WordSignActivity" />
+    </application>
+</manifest>

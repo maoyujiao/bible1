@@ -67,6 +67,7 @@ public class HelpUse extends BasisActivity {
                 if (source.equals("welcome")) {
                     Intent intent = new Intent();
                     intent.setClass(HelpUse.this, MainActivity.class);
+                    intent.putExtra("showDialog",true);
                     startActivity(intent);
                     finish();
                 } else {
@@ -113,6 +114,7 @@ public class HelpUse extends BasisActivity {
         if (source.equals("welcome")) {
             Intent intent = new Intent();
             intent.setClass(HelpUse.this, MainActivity.class);
+            intent.putExtra("showDialog",true);
             startActivity(intent);
             finish();
         } else {

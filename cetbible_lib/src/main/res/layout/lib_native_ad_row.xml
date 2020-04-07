@@ -52,7 +52,7 @@
                 android:ellipsize="end"
                 android:maxLines="1"
                 android:textColor="@color/black"
-                android:text="有道广告的标题"
+                android:text="有道推广的标题"
                 android:textSize="18sp" />
             <RelativeLayout 
                 android:id="@+id/RL_courseNum"
@@ -96,7 +96,7 @@
                 android:ellipsize="end"
                 android:maxLines="3"
                 android:textColor="@color/gray"
-                tools:text="有道广告内容描述有道广告内容描述有道广告内容描述有道广告内容描述有道广告内容描述有道广告内容描述"
+                tools:text="有道推广内容描述有道推广内容描述有道推广内容描述有道推广内容描述有道推广内容描述有道推广内容描述"
                 android:lineSpacingMultiplier="1.2"
                 android:textSize="13sp" />
             

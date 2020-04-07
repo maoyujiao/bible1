@@ -709,10 +709,6 @@ public class VipCenter extends BasisActivity {
                 amount = 12;
                 break;
         }
-//        if (TouristUtil.isTourist()) {
-//            ToastUtil.showLongToast(this, "请注册正式账号后操作");
-//            return;
-//        }
         intent = new Intent();
         body = Constant.APP + "-" + "花费" + price + "元购买" + Constant.APP + "黄金会员";
         intent.setClass(mContext, PayOrderActivity.class);

@@ -21,13 +21,14 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.iyuba.biblelib.R;
-import com.iyuba.core.me.activity.PersonalHome;
 import com.iyuba.core.me.sqlite.mode.DoingsCommentInfo;
 import com.iyuba.core.me.sqlite.mode.Emotion;
 import com.iyuba.core.thread.GitHubImageLoader;
 import com.iyuba.core.util.Expression;
 
 import java.util.ArrayList;
+
+import personal.iyuba.personalhomelibrary.ui.home.PersonalHomeActivity;
 
 public class DoingsCommentAdapter extends BaseAdapter {
     public ArrayList<DoingsCommentInfo> mList = new ArrayList<DoingsCommentInfo>();
@@ -154,9 +155,10 @@ public class DoingsCommentAdapter extends BaseAdapter {
             @Override
             public void onClick(View v) {
 
-                Intent intent = new Intent(mContext, PersonalHome.class);
-                intent.putExtra("fanuid", mList.get(position).uid);
-                mContext.startActivity(intent);
+                int uid = Integer.parseInt(mList.get(position).uid);
+                String name = mList.get(position).username;
+                mContext.startActivity(PersonalHomeActivity.buildIntent (mContext,
+                        uid, name, 0));
             }
 
         });

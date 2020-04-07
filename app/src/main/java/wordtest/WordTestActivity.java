@@ -111,7 +111,7 @@ public class WordTestActivity extends BaseActivity implements WordTestMvpView{
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_word_test);
+        setContentView(R.layout.activity_word_test_main);
         ButterKnife.bind(this);
 
         getDatas();

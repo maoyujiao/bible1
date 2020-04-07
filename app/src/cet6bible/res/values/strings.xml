@@ -1,5 +1,19 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="app_name">英语六级宝典</string>
+    <!--原来的英语六级宝典-->
+    <string name="app_name">英语六级</string>
     <string name="tencent_app_id">tencent1105358481</string>
+
+
+    <string name="push_huawei_id" >10539977</string>
+    <string name="push_huawei_secret">2dfc3d5071dd152ab60c83ef70a71d9a</string>
+    <string name="push_mi_id" >2882303761517475134</string>
+    <string name="push_mi_key"  >5361747588134</string>
+    <string name="push_mi_secret"  >hdqnS1k58H6HwkarBBcMRg==</string>
+    <string name="push_oppo_id"  >3356168</string>
+    <string name="push_oppo_key"  >EB9Cy9Ldx40K8wCkSosS4Sc0O</string>
+    <string name="push_oppo_secret"  >2bee8fc8F97fff578a2Beb71457447Be</string>
+    <string name="push_oppo_master_secret" >5F213697Cd1F8e859dB95F0F7b3f0ddb</string>
+
+    <string name="file_provider_name_personal">com.iyuba.CET6bible</string>
 </resources>

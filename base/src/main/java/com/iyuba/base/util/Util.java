@@ -10,6 +10,7 @@ import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
 import android.graphics.drawable.Drawable;
 import android.net.Uri;
+import android.util.Log;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.Toast;
 
@@ -45,8 +46,19 @@ public class Util {
         }
     }
 
+    /****************
+     *
+     * 发起添加群流程。群号：爱语吧四六级考试交流(762360104) 的 key 为： j37fBtqRuABpHv3VQqLjRqxU_uY89b4G
+     * 调用 joinQQGroup(j37fBtqRuABpHv3VQqLjRqxU_uY89b4G) 即可发起手Q客户端申请加群 爱语吧四六级考试交流(762360104)
+     *
+     * @param key 由官网生成的key
+     * @return 返回true表示呼起手Q成功，返回fals表示呼起失败
+     ******************/
+
+
     public static void startQQGroup(Context context, String key) {
         Intent intent = new Intent();
+        key = "gnwET1rDzp7gsWxVjoOSse-ako_p1Yth";
         intent.setData(Uri.parse("mqqopensdkapi://bizAgent/qm/qr?" +
                 "url=http%3A%2F%2Fqm.qq.com%2Fcgi-bin%2Fqm%2Fqr%3Ffrom%3Dapp%26p%3Dandroid%26k%3D" + key));
         // 此Flag可根据具体产品需要自定义，如设置，则在加群界面按返回，返回手Q主界面，不设置，按返回会返回到呼起产品界面    //intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
@@ -58,6 +70,7 @@ public class Util {
             e.printStackTrace();
         }
     }
+
 
 
     private String getAppInfo(Context context) {

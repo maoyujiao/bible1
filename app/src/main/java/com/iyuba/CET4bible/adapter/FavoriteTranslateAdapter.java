@@ -196,12 +196,12 @@ public class FavoriteTranslateAdapter extends BaseRecyclerViewAdapter {
 
     @Override
     public int getItemViewType(int position) {
-        if (mList.get(position) instanceof NativeResponse) {
-            NativeResponse nativeResponse = (NativeResponse) mList.get(position);
-            if (nativeResponse.getVideoAd() != null) {
-                return 1;
-            }
-        }
+//        if (mList.get(position) instanceof NativeResponse) {
+//            NativeResponse nativeResponse = (NativeResponse) mList.get(position);
+//            if (nativeResponse.getVideoAd() != null) {
+//                return 1;
+//            }
+//        }
         return 0;
     }
 }

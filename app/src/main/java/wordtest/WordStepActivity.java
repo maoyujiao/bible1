@@ -48,7 +48,7 @@ public class WordStepActivity extends BaseActivity {
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_word_step);
+        setContentView(R.layout.activity_word_step_main);
         StatusBarUtil.setColor(this,getResources().getColor(R.color.colorPrimary) , 0);
         ButterKnife.bind(this);
         setSupportActionBar(toolbar);

@@ -87,7 +87,7 @@
                 android:layout_gravity="end"
                 android:layout_marginEnd="10dp"
                 android:padding="2dp"
-                android:text="广告"
+                android:text="推广"
                 android:textSize="9dp" />
 
         </LinearLayout>
