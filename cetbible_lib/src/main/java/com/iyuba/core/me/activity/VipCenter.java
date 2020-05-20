@@ -69,15 +69,15 @@ public class VipCenter extends BasisActivity {
     private CheckBox year;
     private CheckBox threeyear;
     //    private RelativeLayout lifelong;
-    private ImageView iv_back;
 
-    private double price;
     private CheckBox detail;
     private CheckBox detail2;
     private CheckBox detail3;
     private CheckBox detail4;
     private CheckBox detail5;
     private CheckBox detail6;
+    private CheckBox detail16;
+    private CheckBox detail17;
     private TabHost th;
     private TextView localVip;
     private TextView goldVip;
@@ -85,24 +85,27 @@ public class VipCenter extends BasisActivity {
     private TextView date;
     private TextView userName;
     private CircleImageView userIcon;
+    private ImageView iv_back;
 
+    private double price;
     private Button go_buy;
 
     TextView state;
     TextView deadline;
     TextView tv_vip_detail;
 
-    RelativeLayout rl2, rl3, rl4, rl5, rl6; // 全站会员
+    RelativeLayout rl2, rl4, rl5, rl6; // 全站会员
     RelativeLayout rl7, rl8, rl9, rl10; // 黄金会员
-    RelativeLayout rl11, rl12; // 本应用会员
-    TextView priceGold1, priceGold3,priceGold6,priceGold12 ;
-    TextView allVip1, allVip3,allVip6,allVip12,allVip36 ;
-    TextView thisVip1, thisVip2 ;
+    RelativeLayout rl11, rl12, rl13, rl14; // 本应用会员
+    TextView priceGold1, priceGold3, priceGold6, priceGold12;
+    TextView allVip1, allVip3, allVip6, allVip12, allVip36;
+    TextView thisVip1, thisVip2, thisVip3, thisVip4;
     Intent intent;
 
-    public static void start(Context context ,boolean toGold){
-        Intent intent = new Intent(context,VipCenter.class);
-        intent.putExtra("toGold",toGold );
+
+    public static void start(Context context, boolean toGold) {
+        Intent intent = new Intent(context, VipCenter.class);
+        intent.putExtra("toGold", toGold);
         context.startActivity(intent);
     }
 
@@ -123,7 +126,6 @@ public class VipCenter extends BasisActivity {
         userName = findViewById(R.id.user_name);
         date = findViewById(R.id.expiredate);
         rl2 = findViewById(R.id.rl2);
-        rl3 = findViewById(R.id.rl3);
         rl4 = findViewById(R.id.rl4);
         rl5 = findViewById(R.id.rl5);
         rl6 = findViewById(R.id.rl6);
@@ -133,6 +135,8 @@ public class VipCenter extends BasisActivity {
         rl10 = findViewById(R.id.rl10);
         rl11 = findViewById(R.id.rl11);
         rl12 = findViewById(R.id.rl12);
+        rl13 = findViewById(R.id.rl16);
+        rl14 = findViewById(R.id.rl17);
         allVip1 = findViewById(R.id.tv3_price);
         allVip3 = findViewById(R.id.tv4_price);
         allVip6 = findViewById(R.id.tv5_price);
@@ -141,7 +145,6 @@ public class VipCenter extends BasisActivity {
         thisVip1 = findViewById(R.id.tv3_price);
         thisVip2 = findViewById(R.id.tv3_price);
         rl2.setOnClickListener(ocl);
-        rl3.setOnClickListener(ocl);
         rl4.setOnClickListener(ocl);
         rl5.setOnClickListener(ocl);
         rl6.setOnClickListener(ocl);
@@ -151,16 +154,18 @@ public class VipCenter extends BasisActivity {
         rl10.setOnClickListener(ocl);
         rl11.setOnClickListener(ocl);
         rl12.setOnClickListener(ocl);
+        rl13.setOnClickListener(ocl);
+        rl14.setOnClickListener(ocl);
 
 
         username = AccountManager.Instace(mContext).userName;
-        if (AccountManager.Instace(mContext).userInfo!=null){
+        if (AccountManager.Instace(mContext).userInfo != null) {
             iyubi = AccountManager.Instace(mContext).userInfo.iyubi;
-        }else {
+        } else {
             iyubi = "0";
         }
         initView();
-        if (getIntent().getBooleanExtra("toGold", false)){
+        if (getIntent().getBooleanExtra("toGold", false)) {
             th.getTabWidget().getChildAt(0).setBackgroundColor(0x00FFFFFF);
             th.getTabWidget().getChildAt(1).setBackgroundColor(0x00FFFFFF);
             th.getTabWidget().getChildAt(2).setBackgroundColor(0xFFFDDA94);
@@ -173,13 +178,13 @@ public class VipCenter extends BasisActivity {
             @Override
             public void onClick(View v) {
                 if (intent != null) {
-                    if (!AccountManager.Instace(mContext).checkUserLogin()){
-                        ToastUtil.showLongToast(mContext,"请注册正式账号后操作");
-                        return ;
+                    if (!AccountManager.Instace(mContext).checkUserLogin()) {
+                        ToastUtil.showLongToast(mContext, "请注册正式账号后操作");
+                        return;
                     }
-                    if (TouristUtil.isTourist()){
-                        ToastUtil.showLongToast(mContext,"请注册正式账号后操作");
-                    }else{
+                    if (TouristUtil.isTourist()) {
+                        ToastUtil.showLongToast(mContext, "请注册正式账号后操作");
+                    } else {
                         startActivity(intent);
                     }
                 }
@@ -209,8 +214,8 @@ public class VipCenter extends BasisActivity {
             date.setText(R.string.person_not_vip);
         }
         tv_iyucoin.setText(iyubi);
-        tv_username.setText(AccountManager.Instace(mContext).getUserName().equals("0")?"未登录":AccountManager.Instace(mContext).getUserName());
-        userName.setText(AccountManager.Instace(mContext).getUserName().equals("0")?"未登录":AccountManager.Instace(mContext).getUserName());
+        tv_username.setText(AccountManager.Instace(mContext).getUserName().equals("0") ? "未登录" : AccountManager.Instace(mContext).getUserName());
+        userName.setText(AccountManager.Instace(mContext).getUserName().equals("0") ? "未登录" : AccountManager.Instace(mContext).getUserName());
         String userid = AccountManager.Instace(mContext).userId;
         Glide.with(mContext).load("http://api.iyuba.com.cn/v2/api.iyuba?protocol=10005&uid="
                 + userid + "&size=middle").asBitmap().placeholder(R.drawable.defaultavatar)
@@ -258,6 +263,8 @@ public class VipCenter extends BasisActivity {
         detail4 = findViewById(R.id.btn_detail4);
         detail5 = findViewById(R.id.btn_detail5);
         detail6 = findViewById(R.id.btn_detail6);
+        detail16 = findViewById(R.id.btn_detail16);
+        detail17 = findViewById(R.id.btn_detail17);
         th = findViewById(R.id.tabhost);
         gv_tequan = findViewById(R.id.gv_tequan);
         localVip = findViewById(R.id.view2);
@@ -268,8 +275,12 @@ public class VipCenter extends BasisActivity {
         TextView tv12 = findViewById(R.id.tv12);
         TextView tv13 = findViewById(R.id.tv13);
         TextView tv14 = findViewById(R.id.tv14);
+        TextView tv16 = findViewById(R.id.tv16);
+        TextView tv17 = findViewById(R.id.tv17);
         TextView tv13_price = findViewById(R.id.tv13_price);
         TextView tv14_price = findViewById(R.id.tv14_price);
+        TextView tv16_price = findViewById(R.id.tv16_price);
+        TextView tv17_price = findViewById(R.id.tv17_price);
 
         priceGold1 = findViewById(R.id.tv9_price);
         priceGold3 = findViewById(R.id.tv10_price);
@@ -281,18 +292,20 @@ public class VipCenter extends BasisActivity {
             tv10.setText("四级黄金会员3个月");
             tv11.setText("四级黄金会员6个月");
             tv12.setText("四级黄金会员12个月");
-            tv13.setText("本应用会员12个月");
-            tv14.setText("本应用永久会员");
         } else {
             tv9.setText("六级黄金会员1个月");
             tv10.setText("六级黄金会员3个月");
             tv11.setText("六级黄金会员6个月");
             tv12.setText("六级黄金会员12个月");
-            tv13.setText("本应用会员12个月");
-            tv14.setText("本应用永久会员");
         }
-        tv13_price.setText(String.format("¥%s",getResources().getStringArray(R.array.benyingyong_vip_price)[0]));
-        tv14_price.setText(String.format("¥%s",getResources().getStringArray(R.array.benyingyong_vip_price)[1]));
+        tv13.setText("本应用会员1个月");
+        tv14.setText("本应用会员6个月");
+        tv16.setText("本应用会员12个月");
+        tv17.setText("本应用会员36个月");
+        tv13_price.setText(String.format("¥%s", getResources().getStringArray(R.array.benyingyong_vip_price)[0]));
+        tv14_price.setText(String.format("¥%s", getResources().getStringArray(R.array.benyingyong_vip_price)[1]));
+        tv16_price.setText(String.format("¥%s", getResources().getStringArray(R.array.benyingyong_vip_price)[2]));
+        tv17_price.setText(String.format("¥%s", getResources().getStringArray(R.array.benyingyong_vip_price)[3]));
 
         month.setOnClickListener(ocl);
         quarter.setOnClickListener(ocl);
@@ -337,17 +350,17 @@ public class VipCenter extends BasisActivity {
                         "4. 享受高速通道、无限下载\n" +
                         "5. 可进行智慧化评测,查看不同试题解析\n" +
                         "6. 解锁单词闯关全部关卡\n" +
-                        "7. 真题新闻PDF智能导出\n"+
-                        "8. 新闻语音评测全部开放(非会员只能评测5句)\n"+
+                        "7. 真题新闻PDF智能导出\n" +
+                        "8. 新闻语音评测全部开放(非会员只能评测5句)\n" +
                         "本应用VIP仅限Android端本应用使用(不含微课)");
-        if (Constant.APP_CONSTANT.TYPE() .equals("4") ) {
+        if (Constant.APP_CONSTANT.TYPE().equals("4")) {
             goldVip.setText(
                     "1. 免费送四级真题+英语四级词根词汇速记(电子书)\n" +
                             "2. 微课：四六级名师陈苏灵、李尚龙、石雷鹏、尹延、章敏等；VOA英语Lisa博士、Rachel美语发音；" +
                             "Alex博士BBC英式发音；新概念英语全4册、托福、雅思、考研、学位英语、中职英语等名师讲解所有课程全部免费学习；\n" +
                             "3. 尊享个性化学习：历年真题详解一键解锁\n" +
                             "4. 智慧化学习系统：评测系统+学习刷题系统开放\n" +
-                            "5. 黄金会员训练营全开通\n"+
+                            "5. 黄金会员训练营全开通\n" +
                             "6. 享受爱语吧全站VIP特权。");
         } else {
             goldVip.setText(
@@ -356,7 +369,7 @@ public class VipCenter extends BasisActivity {
                             "Alex博士BBC英式发音；新概念英语全4册、托福、雅思、考研、学位英语、中职英语等名师讲解所有课程全部免费学习；\n" +
                             "3. 尊享个性化学习：历年真题详解一键解锁\n" +
                             "4. 智慧化学习系统：评测系统+学习刷题系统开放\n" +
-                            "5. 黄金会员训练营全开通\n"+
+                            "5. 黄金会员训练营全开通\n" +
                             "6. 享受爱语吧全站VIP特权。");
         }
         setVisibleGroup(1);
@@ -421,17 +434,16 @@ public class VipCenter extends BasisActivity {
     }
 
     private void setGoldPrice() {
-        priceGold1.setText(String.format("¥%s",getResources().getStringArray(R.array.gold_vip_price)[0]));
-        priceGold3.setText(String.format("¥%s",getResources().getStringArray(R.array.gold_vip_price)[1]));
-        priceGold6.setText(String.format("¥%s",getResources().getStringArray(R.array.gold_vip_price)[2]));
-        priceGold12.setText(String.format("¥%s",getResources().getStringArray(R.array.gold_vip_price)[3]));
+        priceGold1.setText(String.format("¥%s", getResources().getStringArray(R.array.gold_vip_price)[0]));
+        priceGold3.setText(String.format("¥%s", getResources().getStringArray(R.array.gold_vip_price)[1]));
+        priceGold6.setText(String.format("¥%s", getResources().getStringArray(R.array.gold_vip_price)[2]));
+        priceGold12.setText(String.format("¥%s", getResources().getStringArray(R.array.gold_vip_price)[3]));
     }
 
 
     private void setVisibleGroup(int i) {
         clearCheckBox();
         rl2.setVisibility(View.GONE);
-        rl3.setVisibility(View.GONE);
         rl4.setVisibility(View.GONE);
         rl5.setVisibility(View.GONE);
         rl6.setVisibility(View.GONE);
@@ -441,24 +453,25 @@ public class VipCenter extends BasisActivity {
         rl10.setVisibility(View.GONE);
         rl11.setVisibility(View.GONE);
         rl12.setVisibility(View.GONE);
+        rl13.setVisibility(View.GONE);
+        rl14.setVisibility(View.GONE);
         switch (i) {
             case 1:
                 rl2.setVisibility(View.VISIBLE);
-                rl3.setVisibility(View.VISIBLE);
                 rl4.setVisibility(View.VISIBLE);
                 rl5.setVisibility(View.VISIBLE);
                 rl6.setVisibility(View.VISIBLE);
                 handler.obtainMessage(0, 1, 0).sendToTarget();
                 month.setChecked(true);
                 break;
-
             case 2:
                 rl11.setVisibility(View.VISIBLE);
                 rl12.setVisibility(View.VISIBLE);
-                buyVip(99);
+                rl13.setVisibility(View.VISIBLE);
+                rl14.setVisibility(View.VISIBLE);
+                goBuyBenyingyong(1);
                 detail5.setChecked(true);
                 break;
-
             case 3:
                 rl7.setVisibility(View.VISIBLE);
                 rl8.setVisibility(View.VISIBLE);
@@ -509,20 +522,27 @@ public class VipCenter extends BasisActivity {
         price = getSpend(month);
         intent.putExtra("type", month);
         intent.putExtra("out_trade_no", getOutTradeNo());
-        if (month == 0) { //本应用永久vip
-            price = Double.parseDouble(getResources().getStringArray(R.array.benyingyong_vip_price)[1]);
-            intent.putExtra("body", "花费" + price + "元购买永久vip");
-            intent.putExtra("subject", "永久vip");
-        } else if (month == 99) { //本应用12个月vip
-            price = Double.parseDouble(getResources().getStringArray(R.array.benyingyong_vip_price)[0]);
-            intent.putExtra("body", "花费" + 99 + "元购买本应用vip12个月");
-            intent.putExtra("subject", "本应用vip");
-            intent.putExtra("type", 12);
-        } else {
-            intent.putExtra("body", "花费" + price + "元购买全站vip");
-            intent.putExtra("subject", "全站vip");
-        }
+        intent.putExtra("body", "花费" + price + "元购买全站vip");
+        intent.putExtra("subject", "全站vip");
         intent.putExtra("price", price + "");  //价格
+    }
+
+    private void goBuyBenyingyong(int month) {
+        intent.putExtra("type", month);
+        intent.putExtra("out_trade_no", getOutTradeNo());
+        if (month == 36) { //本应用永久vip
+            price = Double.parseDouble(getResources().getStringArray(R.array.benyingyong_vip_price)[3]);
+        } else if (month == 12) { //本应用12个月vip
+            price = Double.parseDouble(getResources().getStringArray(R.array.benyingyong_vip_price)[2]);
+        } else if (month == 6) {
+            price = Double.parseDouble(getResources().getStringArray(R.array.benyingyong_vip_price)[1]);
+        } else if (month == 1) {
+            price = Double.parseDouble(getResources().getStringArray(R.array.benyingyong_vip_price)[0]);
+        }
+        intent.putExtra("body", "花费" + price + "元购买本应用vip" + month + "个月");
+        intent.putExtra("subject", "本应用vip");
+        intent.putExtra("price", price+"");
+        intent.putExtra("type", month);
     }
 
 
@@ -618,31 +638,31 @@ public class VipCenter extends BasisActivity {
             if (v == month || v == rl2) {
                 handler.obtainMessage(0, 1, 0).sendToTarget();
                 month.setChecked(true);
-            } else if (v == quarter || v == rl3 ) {
+            } else if (v == quarter ) {
                 handler.obtainMessage(0, 3, 0).sendToTarget();
                 quarter.setChecked(true);
 
-            } else if (v == half_year || v == rl4 ) {
+            } else if (v == half_year || v == rl4) {
                 handler.obtainMessage(0, 6, 0).sendToTarget();
                 half_year.setChecked(true);
 
-            } else if (v == year || v == rl5 ) {
+            } else if (v == year || v == rl5) {
                 handler.obtainMessage(0, 12, 0).sendToTarget();
                 year.setChecked(true);
 
-            } else if (v == threeyear || v == rl6 ) {
+            } else if (v == threeyear || v == rl6) {
                 handler.obtainMessage(0, 36, 0).sendToTarget();
                 threeyear.setChecked(true);
 
-            } else if (v == detail || v == rl7  ) {
+            } else if (v == detail || v == rl7) {
                 buySprintOrGoldVip(1);
                 detail.setChecked(true);
 
-            } else if (v == detail2 || v == rl8 ) {
+            } else if (v == detail2 || v == rl8) {
                 buySprintOrGoldVip(3);
                 detail2.setChecked(true);
 
-            } else if (v == detail3 || v == rl9 ) {
+            } else if (v == detail3 || v == rl9) {
                 buySprintOrGoldVip(6);
                 detail3.setChecked(true);
 
@@ -650,13 +670,23 @@ public class VipCenter extends BasisActivity {
                 buySprintOrGoldVip(12);
                 detail4.setChecked(true);
 
-            } else if (v == detail5 || v == rl11 ) {
-                buyVip(99);
+            } else if (v == detail5 || v == rl11) {
+                goBuyBenyingyong(1);
                 detail5.setChecked(true);
 
-            } else if (v == detail6 || v == rl12 ) {
-                handler.obtainMessage(0, 0, 0).sendToTarget();
+            } else if (v == detail6 || v == rl12) {
+                goBuyBenyingyong(6);
                 detail6.setChecked(true);
+
+            } else if (v == detail16 || v == rl13) {
+                goBuyBenyingyong(12);
+
+                detail16.setChecked(true);
+
+            } else if (v == detail17 || v == rl14) {
+                goBuyBenyingyong(36);
+
+                detail17.setChecked(true);
 
             } else if (v == btn_buyiyubi && !TouristUtil.isTourist()) {
                 buyIyubi();
@@ -675,13 +705,14 @@ public class VipCenter extends BasisActivity {
         half_year.setChecked(false);
         year.setChecked(false);
         threeyear.setChecked(false);
-
         detail.setChecked(false);
         detail2.setChecked(false);
         detail3.setChecked(false);
         detail4.setChecked(false);
         detail5.setChecked(false);
         detail6.setChecked(false);
+        detail16.setChecked(false);
+        detail17.setChecked(false);
     }
 
     private void buySprintOrGoldVip(int month) {

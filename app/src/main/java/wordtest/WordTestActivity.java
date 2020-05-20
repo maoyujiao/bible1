@@ -199,7 +199,7 @@ public class WordTestActivity extends BaseActivity implements WordTestMvpView{
             textView.setTextColor(Color.parseColor("#333333"));
         }
         int random = new Random().nextInt(100) % 4;
-        Log.d("diao", random + "");
+        Log.d("bible", random + "");
         switch (random) {
             case 0:
                 fillinAnswers(answera, words.def);

@@ -284,28 +284,28 @@ public class ReadingQuesFragment extends Fragment implements OnClickListener {
 
         switch (curReadAnswer.Answer) {
             case 1:
-                answeraImage.setBackgroundResource(R.drawable.answer_right);
+                answeraImage.setBackgroundResource(R.drawable.ans_right);
                 rl_answera.setBackgroundResource(R.drawable.answer_bg);
                 rl_answerb.setBackgroundResource(0);
                 rl_answerc.setBackgroundResource(0);
                 rl_answerd.setBackgroundResource(0);
                 break;
             case 2:
-                answerbImage.setBackgroundResource(R.drawable.answer_right);
+                answerbImage.setBackgroundResource(R.drawable.ans_right);
                 rl_answera.setBackgroundResource(0);
                 rl_answerb.setBackgroundResource(R.drawable.answer_bg);
                 rl_answerc.setBackgroundResource(0);
                 rl_answerd.setBackgroundResource(0);
                 break;
             case 3:
-                answercImage.setBackgroundResource(R.drawable.answer_right);
+                answercImage.setBackgroundResource(R.drawable.ans_right);
                 rl_answera.setBackgroundResource(0);
                 rl_answerb.setBackgroundResource(0);
                 rl_answerc.setBackgroundResource(R.drawable.answer_bg);
                 rl_answerd.setBackgroundResource(0);
                 break;
             case 4:
-                answerdImage.setBackgroundResource(R.drawable.answer_right);
+                answerdImage.setBackgroundResource(R.drawable.ans_right);
                 rl_answera.setBackgroundResource(0);
                 rl_answerb.setBackgroundResource(0);
                 rl_answerc.setBackgroundResource(0);

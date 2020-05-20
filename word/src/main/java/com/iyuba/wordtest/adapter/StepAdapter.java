@@ -77,7 +77,7 @@ public class StepAdapter extends BaseAdapter {
         tv.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (position>5&&WordManager.vip == 0){
+                if (position>5&&WordManager.get().vip == 0){
                     ToastUtils.showShort("请开通会员学习后面的内容");
                     return;
                 }
@@ -109,7 +109,7 @@ public class StepAdapter extends BaseAdapter {
 
     private void loadUserIcon(String url, ImageView imageView) {
         String userIconUrl = "http://api.iyuba.com.cn/v2/api.iyuba?protocol=10005&uid="
-                + WordManager.userid + "&size=middle";
+                + WordManager.get().userid + "&size=middle";
         Glide.with(context)
                 .load(userIconUrl)
                 .asBitmap()

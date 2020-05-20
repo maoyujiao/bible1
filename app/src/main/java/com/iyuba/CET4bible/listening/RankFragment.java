@@ -179,7 +179,7 @@ public class RankFragment extends Fragment {
                 public void onResponse(Call<GetSpeakRank> call, Response<GetSpeakRank> response) {
                     if (response.body()!=null){
                         ranks= response.body().data;
-                        Log.d("diao",ranks.size()+"");
+                        Log.d("bible",ranks.size()+"");
 
                         rank= getMyRank(response.body());
                         mAdapter.setData(ranks,rank);

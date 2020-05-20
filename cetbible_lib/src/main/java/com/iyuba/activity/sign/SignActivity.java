@@ -273,7 +273,7 @@ public class SignActivity extends Activity {
         String userIconUrl = "http://api.iyuba.com.cn/v2/api.iyuba?protocol=10005&uid="
                 + AccountManager.Instace(mContext).userId + "&size=middle";
         Glide.with(mContext).load(userIconUrl).placeholder(R.drawable.noavatar_small).dontAnimate().transform(new CircleTransform(mContext)).into(userIcon);
-//        Log.d("diao", "initBackGround: " + AccountManager.Instance(mContext).userId + ":" + AccountManager.Instance(mContext).userName);
+//        Log.d("bible", "initBackGround: " + AccountManager.Instance(mContext).userId + ":" + AccountManager.Instance(mContext).userName);
         if (TextUtils.isEmpty(AccountManager.Instace(mContext).userName)) {
             tvUserName.setText(AccountManager.Instace(mContext).userId);
         } else {
@@ -301,10 +301,10 @@ public class SignActivity extends Activity {
         Bitmap bitmap = view.getDrawingCache();
 
         if (bitmap == null) {
-//             Log.d("diao", "writeBitmapToFile: ");
+//             Log.d("bible", "writeBitmapToFile: ");
             return;
         }
-        Log.d("diao", "writeBitmapToFile: ");
+        Log.d("bible", "writeBitmapToFile: ");
 
 
         bitmap.setHasAlpha(false);

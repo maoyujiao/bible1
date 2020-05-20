@@ -117,9 +117,9 @@ public class NewTypeSectionAAnswerOp extends DatabaseService {
     }
 
     public void saveUserAnswers(String year, String questionId, String answer) {
-        Log.d("diao", year);
-        Log.d("diao", questionId);
-        Log.d("diao", answer);
+        Log.d("bible", year);
+        Log.d("bible", questionId);
+        Log.d("bible", answer);
         SQLiteDatabase database = importDatabase.openDatabase();
         String sqlA = "UPDATE  " + TABLEA_NAME
                 + " SET " + YANSWER + " =  ?" + " where " + TESTTIME + " = ?" +
@@ -136,9 +136,9 @@ public class NewTypeSectionAAnswerOp extends DatabaseService {
         String sqlC = "UPDATE  " + TABLEC_NAME
                 + " SET " + YANSWER + " =  ?" + " where " + TESTTIME + " = ?" +
                 " and " + NUMBER + " = ?";
-        Log.d("diao", "saveUserAnswers: "+sqlA);
-        Log.d("diao", "saveUserAnswers: "+sqlB);
-        Log.d("diao", "saveUserAnswers: "+sqlC);
+        Log.d("bible", "saveUserAnswers: "+sqlA);
+        Log.d("bible", "saveUserAnswers: "+sqlB);
+        Log.d("bible", "saveUserAnswers: "+sqlC);
         database.execSQL(sqlC, new String[]{answer, year, questionId});
     }
 

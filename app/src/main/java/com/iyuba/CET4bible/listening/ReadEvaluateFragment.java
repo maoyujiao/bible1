@@ -404,7 +404,7 @@ public class ReadEvaluateFragment extends Fragment {
         if (mAdapter != null){
             mAdapter.stopRunningJob();
 
-            Log.d("diao", "mAdapter.stopRunningJob();");
+            Log.d("bible", "mAdapter.stopRunningJob();");
         }
     }
 

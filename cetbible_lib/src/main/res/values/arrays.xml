@@ -71,14 +71,16 @@
     </string-array>
 
     <string-array name="all_vip_price">
-        <item>30</item>
+        <item>50</item>
         <item>88</item>
-        <item>158</item>
+        <item>199</item>
         <item>298</item>
         <item>588</item>
     </string-array>
 
     <string-array name="benyingyong_vip_price">
+        <item>25</item>
+        <item>69</item>
         <item>99</item>
         <item>199</item>
     </string-array>

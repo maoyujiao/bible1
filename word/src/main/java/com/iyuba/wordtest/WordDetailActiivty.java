@@ -403,9 +403,10 @@ public class WordDetailActiivty extends AppCompatActivity implements MediaPlayer
     @NeedsPermission(Manifest.permission.RECORD_AUDIO)
     public void startRecord(String word) {
         txtClickHint.setText("点击停止");
-        file = new File(Environment.getExternalStorageDirectory() + "/iyuba/" + WordManager.type
-                + "/audio/"
+        file = new File(Environment.getExternalStorageDirectory() + "/iyuba/" + WordManager.get().type+ "/audio/"
                 + word + ".amr");
+        File fileFolder = new File(Environment.getExternalStorageDirectory() + "/iyuba/" + WordManager.get().type + "/audio/");
+        if (!fileFolder.exists()) fileFolder.mkdirs() ;
         Log.d("http", file.getAbsolutePath());
         if (!file.exists()) {
             try {
@@ -426,8 +427,8 @@ public class WordDetailActiivty extends AppCompatActivity implements MediaPlayer
         map.put(EvaluateApi.GetVoa.Param.Key.IDINDEX, HttpManager.fromString(position + ""));
         map.put(EvaluateApi.GetVoa.Param.Key.NEWSID, HttpManager.fromString(position + ""));
         map.put(EvaluateApi.GetVoa.Param.Key.PARAID, HttpManager.fromString(position + ""));
-        map.put(EvaluateApi.GetVoa.Param.Key.TYPE, HttpManager.fromString(WordManager.type));
-        map.put(EvaluateApi.GetVoa.Param.Key.USERID, HttpManager.fromString(WordManager.userid));
+        map.put(EvaluateApi.GetVoa.Param.Key.TYPE, HttpManager.fromString(WordManager.get().type));
+        map.put(EvaluateApi.GetVoa.Param.Key.USERID, HttpManager.fromString(WordManager.get().userid));
         return map;
     }
 
@@ -472,12 +473,12 @@ public class WordDetailActiivty extends AppCompatActivity implements MediaPlayer
 
     private void deleteNetWord(String word) {
         HttpManager.getWordApi().operateWord(word,"delete",
-                "Iyuba",WordManager.userid);
+                "Iyuba",WordManager.get().userid);
     }
 
     private void addNetwordWord(String wordTemp) {
         HttpManager.getWordApi().operateWord(wordTemp,"insert",
-                "Iyuba", WordManager.userid);
+                "Iyuba", WordManager.get().userid);
     }
 
 

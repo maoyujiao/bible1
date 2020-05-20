@@ -325,7 +325,7 @@ public class MeFragment extends Fragment {
                 if (AccountManager.Instace(mContext).checkUserLogin()) {
 
                     SpeakCircleActivity.instance(mContext, Constant.APP_CONSTANT.mListen());
-                    Log.d("diao",Constant.APP_CONSTANT.mListen());
+                    Log.d("bible",Constant.APP_CONSTANT.mListen());
                 }else {
                     ToastUtils.showShort("请登录正式账号");
                 }

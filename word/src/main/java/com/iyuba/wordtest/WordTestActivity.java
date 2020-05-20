@@ -198,7 +198,7 @@ public class WordTestActivity extends AppCompatActivity {
             textView.setTextColor(Color.parseColor("#333333"));
         }
         int random = new Random().nextInt(100) % 4;
-        Log.d("diao", random + "");
+        Log.d("bible", random + "");
         switch (random) {
             case 0:
                 fillinAnswers(answera, words.def);
@@ -339,7 +339,7 @@ public class WordTestActivity extends AppCompatActivity {
     private void showSuccessDialog() {
 
         String rate = 100 - wrong * 100 / (words.size())+"%";
-        String username = WordManager.username;
+        String username = WordManager.get().username;
         WordSignDialog wordSignDialog  =  new WordSignDialog(this,new UserSignViewModel(
                 level+"",words.size()+"",rate,username,""
         ));
@@ -384,12 +384,12 @@ public class WordTestActivity extends AppCompatActivity {
 
     private void deleteNetWord(String word) {
         HttpManager.getWordApi().operateWord(word,"delete",
-                "Iyuba", WordManager.userid);
+                "Iyuba", WordManager.get().userid);
     }
 
     private void addNetwordWord(String wordTemp) {
         HttpManager.getWordApi().operateWord(wordTemp,"insert",
-                "Iyuba", WordManager.userid);
+                "Iyuba", WordManager.get().userid);
     }
 
 

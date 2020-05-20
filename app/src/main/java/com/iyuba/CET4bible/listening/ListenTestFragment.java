@@ -39,6 +39,7 @@ import com.umeng.analytics.MobclickAgent;
 
 import java.io.File;
 import java.util.ArrayList;
+import java.util.Collections;
 
 public class ListenTestFragment extends Fragment implements
         OnPlayStateChangedListener, OnClickListener {
@@ -310,8 +311,8 @@ public class ListenTestFragment extends Fragment implements
                     int curPos = ListenDataManager.Instance().curPos + Integer.parseInt(ListenDataManager.Instance().answerList.get(0).id) - 1;
                     StringBuffer sb = new StringBuffer();
                     try {
-                        CetExplain explain = ListenDataManager.Instance().explainList
-                                .get(curPos);
+                        Collections.sort(ListenDataManager.Instance().explainList);
+                        CetExplain explain = ListenDataManager.Instance().explainList.get(curPos);
                         sb.append("&nbsp;&nbsp;&nbsp;<font color='")
                                 .append(getResources().getColor(R.color.app_color))
                                 .append("'>");

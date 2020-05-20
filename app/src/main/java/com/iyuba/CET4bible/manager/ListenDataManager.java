@@ -7,6 +7,7 @@ import com.iyuba.core.sqlite.mode.test.CetFillInBlank;
 import com.iyuba.core.sqlite.mode.test.CetText;
 
 import java.util.ArrayList;
+import java.util.List;
 
 /**
  * 类名
@@ -39,7 +40,7 @@ public class ListenDataManager {
     public String year = "";
     public String rowString ="";
     public ArrayList<CetAnswer> answerList = new ArrayList<>();
-    public ArrayList<CetExplain> explainList = new ArrayList<>();
+    public List<CetExplain> explainList = new ArrayList<>();
     public ArrayList<CetText> textList = new ArrayList<>();
     public ArrayList<CetFillInBlank> blankList = new ArrayList<>();
     public String section = "A";

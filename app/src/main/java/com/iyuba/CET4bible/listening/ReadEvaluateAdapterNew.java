@@ -313,7 +313,7 @@ public class ReadEvaluateAdapterNew extends RecyclerView.Adapter<ReadEvaluateAda
                 readPlayImageView.setVisibility(View.VISIBLE);
                 mPlayerRecord.pause();
                 isPlaying = false;
-                Timber.tag("diao").d("1234");
+                Timber.tag("bible").d("1234");
                 return;
             }
         }
@@ -369,14 +369,14 @@ public class ReadEvaluateAdapterNew extends RecyclerView.Adapter<ReadEvaluateAda
         @OnClick(R.id.sen_read_play)
         public void onClickrecordPlayProgressBar() {
             stopRunningJob();
-            Timber.tag("diao").d(isPlaying + "");
+            Timber.tag("bible").d(isPlaying + "");
 
 
             File file = new File(Environment.getExternalStorageDirectory() + "/iyuba/" + com.iyuba.configation.Constant.mListen + "/"
                     + "audio/"
                     + examTime + "-" + paraId + "-"
                     + item.NumberIndex + ".amr");
-            Timber.tag("diao").d(file.getAbsolutePath());
+            Timber.tag("bible").d(file.getAbsolutePath());
             if (file.exists()) {
                 try {
                     mPlayerRecord.reset();
@@ -408,7 +408,7 @@ public class ReadEvaluateAdapterNew extends RecyclerView.Adapter<ReadEvaluateAda
             }
 
             Timber.e("playOri");
-            Timber.tag("diao").e(String.valueOf(item.pointInTime));
+            Timber.tag("bible").e(String.valueOf(item.pointInTime));
             playProgressBar.setMax(100);
             if (s2 != null) {
                 s2.unsubscribe();
@@ -417,7 +417,7 @@ public class ReadEvaluateAdapterNew extends RecyclerView.Adapter<ReadEvaluateAda
             isPlaying = true;
             playingIndex = mActivePosition;
             mPlayerOrigin.seekTo(item.pointInTime * 1000);
-            Log.d("diao", item.pointInTime * 1000 + "");
+            Log.d("bible", item.pointInTime * 1000 + "");
             mPlayerOrigin.setOnSeekCompleteListener(new MediaPlayer.OnSeekCompleteListener() {
                 @Override
                 public void onSeekComplete(MediaPlayer mp) {
@@ -427,7 +427,7 @@ public class ReadEvaluateAdapterNew extends RecyclerView.Adapter<ReadEvaluateAda
                         s = Observable.interval(100, TimeUnit.MILLISECONDS).observeOn(AndroidSchedulers.mainThread()).subscribe(new Action1<Long>() {
                             @Override
                             public void call(Long aLong) {
-                                Timber.tag("diao").d(mPlayerOrigin.getCurrentPosition() + ":" + item.pointInTime * 1000 + ":" + item.endTiming * 1000);
+                                Timber.tag("bible").d(mPlayerOrigin.getCurrentPosition() + ":" + item.pointInTime * 1000 + ":" + item.endTiming * 1000);
                                 if (mActivePosition == mItems.size() - 1) {
                                     playProgressBar.setProgress((inteval) * 10 / 20);
                                 } else {

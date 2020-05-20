@@ -135,7 +135,7 @@ public class CrashApplication extends LitePalApplication {
 
         ConstantManager.init();
 
-        LogUtils.e("diao","Crash!!!!!!!!!");
+        LogUtils.e("bible","Crash!!!!!!!!!");
         BasicFavorDBManager.init(this);
         InfoHelper.init(this);
         DLManager.init(this,5);

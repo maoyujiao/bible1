@@ -291,7 +291,7 @@ public class AbilityMapActivity extends AppBaseActivity {
                 mBtn_speak.setOnClickListener(speakAblityButtonClickListener());
                 mBtn_write.setOnClickListener(writeAbilityButtonClickListener());
             } else {
-                mBtn_speak.setBackgroundResource(R.mipmap.ability_speak_disable);
+//                mBtn_speak.setBackgroundResource(R.mipmap.ability_speak_disable);
                 mBtn_speak.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
@@ -299,7 +299,7 @@ public class AbilityMapActivity extends AppBaseActivity {
 //                gotoTargetClass(AbilityMapSubActivity.class, mSpeakTestResults, Constant.ABILITY_SPEAK);
                     }
                 });
-                mBtn_write.setBackgroundResource(R.mipmap.ability_write_disable);
+//                mBtn_write.setBackgroundResource(R.mipmap.ability_write_disable);
                 mBtn_write.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {

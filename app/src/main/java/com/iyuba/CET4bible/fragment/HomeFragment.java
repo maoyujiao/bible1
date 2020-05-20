@@ -747,7 +747,7 @@ public class HomeFragment extends Fragment implements OnClickListener, PullToRef
         popupMenu.getMenu().getItem(0).setTitle(
                 isEnglish ? String.format("%s用户群: %s", "四六级", BrandUtil.getQQGroupNumber(mContext)) : "安卓用户群: 913356384");
         popupMenu.getMenu().getItem(1).setTitle(isEnglish ? "客服QQ: 2326344291" : "内容QQ: 3274422495");
-        popupMenu.getMenu().getItem(2).setTitle("技术QQ: 1549330086");
+        popupMenu.getMenu().getItem(2).setTitle("技术QQ: 2357614872");
         popupMenu.setOnMenuItemClickListener(new PopupMenu.OnMenuItemClickListener() {
             @Override
             public boolean onMenuItemClick(MenuItem item) {
@@ -760,7 +760,7 @@ public class HomeFragment extends Fragment implements OnClickListener, PullToRef
                         Util.startQQ(mContext, isEnglish ? "2326344291" : "3274422495");
                         return true;
                     case R.id.qq_tech:
-                        Util.startQQ(mContext, "1549330086");
+                        Util.startQQ(mContext, "2357614872");
                         return true;
                     default:
                         return false;
@@ -877,7 +877,7 @@ public class HomeFragment extends Fragment implements OnClickListener, PullToRef
         }
         String id = AccountManager.Instace(getActivity()).userId;
         int  vip = AccountManager.Instace(getActivity()).getVipStatus();
-        WordManager.init(username,id,Constant.APP,Constant.mListen,vip);
+        WordManager.get().init(username,id,Constant.APP,Constant.mListen,vip);
 
         if (WordConfigManager.Instance(getActivity()).loadBoolean("isWordNumberSelected", false)) {
             startActivity(new Intent(mContext, WordStepActivity.class));

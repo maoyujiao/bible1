@@ -67,7 +67,7 @@ public class JpBlogActivity extends BaseActivity {
                         @Override
                         public void finish(BaseHttpResponse bhr) {
                             JpBlogContentResponse response = (JpBlogContentResponse) bhr;
-                            Log.d("diao",response.bean.getMessage());
+                            Log.d("bible",response.bean.getMessage());
                             message = response.bean.getMessage();
                             blog.essay = message;
                             blogOp.saveData(blog);

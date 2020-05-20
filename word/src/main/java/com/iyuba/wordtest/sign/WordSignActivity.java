@@ -45,7 +45,7 @@ public class WordSignActivity extends BaseSignActivity implements SignMVPView {
     @Override
     protected void initView() {
         String userIconUrl = "http://api.iyuba.com.cn/v2/api.iyuba?protocol=10005&uid="
-                + WordManager.userid + "&size=middle";
+                + WordManager.get().userid + "&size=middle";
         ImageView view = findViewById(R.id.userimage);
         Glide.with(this).load(userIconUrl).into(view);
         TextView share = findViewById(R.id.share_wechat);
@@ -88,9 +88,9 @@ public class WordSignActivity extends BaseSignActivity implements SignMVPView {
 
     @Override
     public void saveImageFinished(String imagePath  ) {
-        String userid = WordManager.userid;
+        String userid = WordManager.get().userid;
         finish();
-        presenter.showShareOnMoment(this,userid, WordManager.appid,imagePath, model.getStage());
+        presenter.showShareOnMoment(this,userid, WordManager.get().appid,imagePath, model.getStage());
     }
 
 

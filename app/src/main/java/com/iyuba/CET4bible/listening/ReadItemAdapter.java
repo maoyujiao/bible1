@@ -82,7 +82,7 @@ public class ReadItemAdapter extends RecyclerView.Adapter<ReadItemAdapter.ViewHo
     @SuppressLint("SetTextI18n")
     @Override
     public void onBindViewHolder(@NonNull final ViewHolder holder, int i) {
-        Timber.tag("diao").d("onBindViewHolder: %s", currentWorks.get(i).imgsrc);
+        Timber.tag("bible").d("onBindViewHolder: %s", currentWorks.get(i).imgsrc);
         Glide.with(context).load(userImage).asBitmap().into(new SimpleTarget<Bitmap>() {
             @Override
             public void onResourceReady(Bitmap resource, GlideAnimation<? super Bitmap> glideAnimation) {
@@ -260,11 +260,11 @@ public class ReadItemAdapter extends RecyclerView.Adapter<ReadItemAdapter.ViewHo
     }
 
     private void playUrl(String url) {
-        Timber.tag("diao").d(url);
+        Timber.tag("bible").d(url);
 
         mPlayer.reset();
         try {
-            Timber.tag("diao").d(url);
+            Timber.tag("bible").d(url);
             mPlayer.setDataSource(url.replace("iyuba.com", "iyuba.cn"));
             mPlayer.prepareAsync();
             mPlayer.setOnPreparedListener(new MediaPlayer.OnPreparedListener() {

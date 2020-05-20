@@ -63,11 +63,11 @@ public class MyViewPager extends ViewPager {
     @Override
     protected void onMeasure(int widthMeasureSpec, int heightMeasureSpec) {
         if (mChildrenViews.size() > current) {
-            Log.d("diao", current+"");
+            Log.d("bible", current+"");
             View child = mChildrenViews.get(current);
             child.measure(widthMeasureSpec, MeasureSpec.makeMeasureSpec(0, MeasureSpec.UNSPECIFIED));
             height = child.getMeasuredHeight();
-            Log.d("diao", current+":"+height);
+            Log.d("bible", current+":"+height);
             if (height == 0){
                 height = DisplayUtil.dip2px(getContext(), 455);
             }

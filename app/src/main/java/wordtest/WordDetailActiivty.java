@@ -411,10 +411,10 @@ public class WordDetailActiivty extends BaseActivity implements MediaPlayer.OnPr
     @NeedsPermission(Manifest.permission.RECORD_AUDIO)
     public void startRecord(String word) {
         txtClickHint.setText("点击停止");
-        file = new File(Environment.getExternalStorageDirectory() + "/iyuba/" + Constant.mListen
-                + "/audio/"
+        file = new File(Environment.getExternalStorageDirectory() + "/iyuba/" + Constant.mListen + "/audio/"
                 + word + ".amr");
-        Log.d("http", file.getAbsolutePath());
+        File fileFolder = new File(Environment.getExternalStorageDirectory() + "/iyuba/" + Constant.mListen + "/audio/");
+        if (!fileFolder.exists()) fileFolder.mkdirs() ;
         if (!file.exists()) {
             try {
                 file.createNewFile();

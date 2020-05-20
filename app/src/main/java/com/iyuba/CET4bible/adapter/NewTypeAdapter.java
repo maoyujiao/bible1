@@ -206,7 +206,7 @@ public class NewTypeAdapter extends BaseAdapter {
             DownloadFile file;
             for (int i = 0; i < size; i++) {
                 file = DownloadManager.Instance().fileList.get(i);
-                Log.d("diao", file.downLoadAddress);
+                Log.d("bible", file.downLoadAddress);
                 if (file.id.equals(test)) {
                     progresses.put(file.id, curViewHolder.progressBar);
                     Message message = new Message();

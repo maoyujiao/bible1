@@ -198,6 +198,7 @@ android {
     buildTypes {
         release {
             minifyEnabled false
+            signingConfig signingConfigs.iyuba
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard.cfg'
         }
     }
@@ -211,8 +212,8 @@ android {
 //            applicationId 'com.iyuba.CET4bible_hw'
             minSdkVersion min_sdk_version
             targetSdkVersion 26
-            versionCode 633
-            versionName '6.3.3'
+            versionCode 634
+            versionName '6.3.4'
             buildConfigField "boolean", "isEnglish", "true"
             buildConfigField "boolean", "isCET4", "true"
             buildConfigField "boolean", "isBible", "true"
@@ -229,8 +230,8 @@ android {
             applicationId 'com.iyuba.CET6bible'
             minSdkVersion min_sdk_version
             targetSdkVersion 26
-            versionCode 633
-            versionName '6.3.3'
+            versionCode 634
+            versionName '6.3.4'
             buildConfigField "boolean", "isEnglish", "true"
             buildConfigField "boolean", "isCET4", "false"
             buildConfigField "boolean", "isBible", "true"

@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="app_name">英语四级</string>
+    <string name="app_name">英语四级宝典</string>
     <string name="tencent_app_id">tencent1103460601</string>
 
     <string name="push_huawei_id" >10205012</string>

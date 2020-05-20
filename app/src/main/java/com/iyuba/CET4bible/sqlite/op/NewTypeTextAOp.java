@@ -183,7 +183,7 @@ public class NewTypeTextAOp extends DatabaseService {
                 " WHERE " + NUMBER + " = " + subTextAB.Number +
                 " AND " + TESTTIME + " = " + subTextAB.testTime +
                 " AND " + NUMBERINDEX + " = " + subTextAB.NumberIndex;
-        Log.d("diao", sql);
+        Log.d("bible", sql);
         mDB.execSQL(sql);
 
     }
@@ -211,7 +211,7 @@ public class NewTypeTextAOp extends DatabaseService {
         String sql = "select *  from " + tb + " where TestTime = "
                 + year + " and Number = " + paraid + " and NumberIndex = " + idIndex + " order by "
                 + NUMBER + " asc";
-        Log.d("diao",sql);
+        Log.d("bible",sql);
 
         try {
             cur = mDB.rawQuery(sql, null);

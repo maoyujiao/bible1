@@ -114,9 +114,9 @@ public class SignPresenter extends BasePresenter {
 
         String url = "http://api.iyuba.cn/credits/updateScore.jsp?srid=82&mobile=1&flag=" + time + "&uid=" + userID
                 + "&appid=" + appid+"&idindex="+level;
-        Log.d("diao",url);
+        Log.d("bible",url);
         HttpManager.getSignApi().getSign("82","1",
-                time, WordManager.userid,WordManager.appid,level)
+                time, WordManager.get().userid,WordManager.get().appid,level)
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribeOn(Schedulers.io())
                 .subscribe(new Consumer<SignBean>() {

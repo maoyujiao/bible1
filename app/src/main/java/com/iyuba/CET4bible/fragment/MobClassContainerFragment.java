@@ -38,7 +38,7 @@ public class MobClassContainerFragment extends Fragment {
     @Override
     public void setUserVisibleHint(boolean isVisibleToUser) {
         visible = isVisibleToUser;
-        Log.d("diao", visible + "");
+        Log.d("bible", visible + "");
         if (visible) {
             if(!isLoaded){
                 getChildFragmentManager().beginTransaction().add(R.id.frame_container, fragment).commit();

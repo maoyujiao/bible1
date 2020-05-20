@@ -1181,9 +1181,9 @@ public class MainActivity extends BaseActivity implements OnClickListener,
     }
 
     private void startListeningActivity(String year , String section , String idIndex) {
-        Log.d("diao", year+":"+section+":"+idIndex);
+        Log.d("bible", year+":"+section+":"+idIndex);
         int type = Integer.parseInt(section)-1;
-        Log.d("diao", section+"sec");
+        Log.d("bible", section+"sec");
         String sec ;
         if (type == 0){
             sec = "A";

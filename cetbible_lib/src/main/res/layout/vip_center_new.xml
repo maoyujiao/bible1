@@ -306,7 +306,7 @@
                         android:layout_alignParentRight="true"
                         android:layout_centerVertical="true"
                         android:layout_marginRight="30dp"
-                        android:text="¥30"
+                        android:text="¥50"
                         android:textColor="#FFE69F2D"
                         android:textSize="14sp"
                         android:textStyle="bold" />
@@ -334,7 +334,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="54dp"
                     android:layout_below="@id/rl2"
-                    android:visibility="visible">
+                    android:visibility="gone">
 
                     <TextView
                         android:id="@+id/tv4"
@@ -398,7 +398,7 @@
                         android:layout_alignParentRight="true"
                         android:layout_centerVertical="true"
                         android:layout_marginRight="30dp"
-                        android:text="¥158"
+                        android:text="¥199"
 
                         android:textColor="#FFE69F2D"
                         android:textSize="14sp"
@@ -797,6 +797,101 @@
                         android:textSize="14sp"
                         android:textStyle="bold" />
                 </RelativeLayout>
+                <RelativeLayout
+                    android:id="@+id/rl16"
+                    android:layout_width="match_parent"
+                    android:layout_height="54dp"
+                    android:layout_below="@id/rl12">
+
+                    <CheckBox
+                        android:id="@+id/btn_detail16"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentLeft="true"
+                        android:layout_centerVertical="true"
+                        android:layout_marginLeft="15dp"
+                        android:button="@drawable/check_style"
+                        android:textColor="@color/white"
+                        android:textSize="12dp" />
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="0.01dp"
+                        android:layout_alignParentBottom="true"
+                        android:background="#E0E0E0" />
+
+                    <TextView
+                        android:id="@+id/tv16"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentStart="true"
+                        android:layout_alignParentLeft="true"
+                        android:layout_centerVertical="true"
+                        android:layout_marginLeft="45dp"
+                        android:text="本应用12个月"
+                        android:textColor="@color/gray"
+                        android:textSize="14sp" />
+
+                    <TextView
+                        android:id="@+id/tv16_price"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentRight="true"
+                        android:layout_centerVertical="true"
+                        android:layout_marginRight="30dp"
+                        android:text="¥30"
+                        android:textColor="#FFE69F2D"
+                        android:textSize="14sp"
+                        android:textStyle="bold" />
+                </RelativeLayout>
+                <RelativeLayout
+                    android:id="@+id/rl17"
+                    android:layout_width="match_parent"
+                    android:layout_height="54dp"
+                    android:layout_below="@id/rl16">
+
+                    <CheckBox
+                        android:id="@+id/btn_detail17"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentLeft="true"
+                        android:layout_centerVertical="true"
+                        android:layout_marginLeft="15dp"
+                        android:button="@drawable/check_style"
+                        android:textColor="@color/white"
+                        android:textSize="12dp" />
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="0.01dp"
+                        android:layout_alignParentBottom="true"
+                        android:background="#E0E0E0" />
+
+                    <TextView
+                        android:id="@+id/tv17"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentStart="true"
+                        android:layout_alignParentLeft="true"
+                        android:layout_centerVertical="true"
+                        android:layout_marginLeft="45dp"
+                        android:text="本应用会员36个月"
+                        android:textColor="@color/gray"
+                        android:textSize="14sp" />
+
+                    <TextView
+                        android:id="@+id/tv17_price"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentRight="true"
+                        android:layout_centerVertical="true"
+                        android:layout_marginRight="30dp"
+                        android:text="¥30"
+                        android:textColor="#FFE69F2D"
+                        android:textSize="14sp"
+                        android:textStyle="bold" />
+                </RelativeLayout>
+
             </RelativeLayout>
 
 
