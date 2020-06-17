@@ -83,7 +83,7 @@ public class AccountManager {
     }
 
     public static synchronized AccountManager Instace(Context context) {
-        mContext = context;
+        mContext = context.getApplicationContext();
         if (instance == null) {
             instance = new AccountManager();
         }

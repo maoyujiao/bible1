@@ -1,18 +1,20 @@
 package com.iyuba.wordtest.manager;
 
 public class WordManager {
-
-
-    public static WordManager wordManager ;
+    private static WordManager wordManager ;
     public  String username ;
     public  String userid ;
     public  String appid ;
     public  String type ;
     public  int vip ;
 
-    public static WordManager get(){
+    private WordManager (){
+
+    }
+
+    public static synchronized WordManager get(){
         if (wordManager == null){
-            return new WordManager();
+            wordManager =  new WordManager();
         }
         return wordManager;
     }
