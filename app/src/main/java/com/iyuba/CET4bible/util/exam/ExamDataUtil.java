@@ -101,7 +101,9 @@ public class ExamDataUtil {
             @Override
             public void onError(Call call, Exception e) {
                 e.printStackTrace();
-                callback.onLoadData(false);
+                if(callback != null){
+                    callback.onLoadData(false);
+                }
             }
         });
     }

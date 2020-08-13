@@ -25,7 +25,7 @@ public class HttpManager {
     public static EvaluateApi getEvaluateApi(){
         buildOkHttpClent();
         retrofit = new Retrofit.Builder()
-                .baseUrl("")
+                .baseUrl("https://ai.iyuba.cn/test/")
                 .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
                 .addConverterFactory(GsonConverterFactory.create())
                 .build();

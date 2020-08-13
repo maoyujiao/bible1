@@ -200,7 +200,11 @@ public class Cet4WordContent extends BasisActivity implements
                 example.scrollTo(0, 0);
             }
             StringBuffer sb = new StringBuffer();
-            sb.append('[').append(cet4Word.pron).append(']');
+            if(cet4Word.pron.startsWith("[")){
+                sb.append(cet4Word.pron);
+            }else {
+                sb.append('[').append(cet4Word.pron).append(']');
+            }
             pron.setText(TextAttr.decode(sb.toString()));
             def.setText(cet4Word.def);
             if (fromTestDifficult) {
@@ -338,21 +342,29 @@ public class Cet4WordContent extends BasisActivity implements
                 break;
             case R.id.so_easy:
                 vv.pause();
-                grade = Integer.parseInt(cet4Word.star);
-                grade += 3;
-                cet4Word.star = String.valueOf(grade);
-                op = new Cet4WordOp(mContext);
-                op.updateStar(cet4Word);
+                try {
+                    grade = Integer.parseInt(cet4Word.star);
+                    grade += 3;
+                    cet4Word.star = String.valueOf(grade);
+                    op = new Cet4WordOp(mContext);
+                    op.updateStar(cet4Word);
+                } catch (NumberFormatException e) {
+                    e.printStackTrace();
+                }
                 toNextOne();
                 break;
             case R.id.difficult:
                 vv.pause();
-                grade = Integer.parseInt(cet4Word.star);
-                grade -= 3;
-                cet4Word.star = String.valueOf(grade);
-                op = new Cet4WordOp(mContext);
-                op.updateStar(cet4Word);
-                fromTestDifficult = true;
+                try {
+                    grade = Integer.parseInt(cet4Word.star);
+                    grade -= 3;
+                    cet4Word.star = String.valueOf(grade);
+                    op = new Cet4WordOp(mContext);
+                    op.updateStar(cet4Word);
+                    fromTestDifficult = true;
+                } catch (NumberFormatException e) {
+                    e.printStackTrace();
+                }
                 checkStudy();
                 setContent();
                 break;

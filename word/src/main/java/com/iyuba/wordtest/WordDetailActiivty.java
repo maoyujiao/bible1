@@ -60,8 +60,10 @@ import butterknife.OnClick;
 import io.reactivex.Observer;
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.disposables.Disposable;
+import io.reactivex.functions.Consumer;
 import io.reactivex.schedulers.Schedulers;
 import okhttp3.RequestBody;
+import okhttp3.ResponseBody;
 import permissions.dispatcher.NeedsPermission;
 import permissions.dispatcher.RuntimePermissions;
 import retrofit2.Call;
@@ -209,6 +211,7 @@ public class WordDetailActiivty extends AppCompatActivity implements MediaPlayer
             }
             stopPlayer();
         } else if (id == R.id.cb_collect) {
+
         } else if (id == R.id.img_original) {
             if (isRecording) {
                 ToastUtils.showShort("评测中...");
@@ -336,6 +339,11 @@ public class WordDetailActiivty extends AppCompatActivity implements MediaPlayer
                             rootWord.sentenceCN = searchVoaResult.getTextData().get(0).getSentence_cn();
                             rootWord.sentencePron = searchVoaResult.getTextData().get(0).getSoundText();
                             db.getCetRootWordDao().updateSingleWord(rootWord);
+                            setSentenceTxt();
+                        }else{
+                            rootWord.sentence = "No Examples" ;
+                            rootWord.sentenceCN = "暂无" ;
+                            rootWord.sentencePron = "";
                             setSentenceTxt();
                         }
 
@@ -473,12 +481,28 @@ public class WordDetailActiivty extends AppCompatActivity implements MediaPlayer
 
     private void deleteNetWord(String word) {
         HttpManager.getWordApi().operateWord(word,"delete",
-                "Iyuba",WordManager.get().userid);
+                "Iyuba",WordManager.get().userid,"json")
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribeOn(Schedulers.io()).
+                subscribe(new Consumer<ResponseBody>() {
+                    @Override
+                    public void accept(ResponseBody responseBody) throws Exception {
+
+                    }
+                });
     }
 
     private void addNetwordWord(String wordTemp) {
         HttpManager.getWordApi().operateWord(wordTemp,"insert",
-                "Iyuba", WordManager.get().userid);
+                "Iyuba", WordManager.get().userid,"json")
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribeOn(Schedulers.io()).subscribe(new Consumer<ResponseBody>() {
+            @Override
+            public void accept(ResponseBody responseBody) throws Exception {
+
+            }
+        });
+
     }
 
 

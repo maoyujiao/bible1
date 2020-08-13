@@ -77,7 +77,7 @@ public class StepAdapter extends BaseAdapter {
         tv.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (position>5&&WordManager.get().vip == 0){
+                if (position>1&&WordManager.get().vip == 0){
                     ToastUtils.showShort("请开通会员学习后面的内容");
                     return;
                 }

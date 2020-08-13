@@ -95,6 +95,8 @@ import com.iyuba.core.widget.ContextMenu;
 import com.iyuba.core.widget.dialog.CustomToast;
 import com.iyuba.headlinelibrary.HeadlineType;
 import com.iyuba.headlinelibrary.IHeadlineManager;
+import com.iyuba.headlinelibrary.data.model.Headline;
+import com.iyuba.headlinelibrary.event.HeadlineSearchItemEvent;
 import com.iyuba.headlinelibrary.ui.circle.SpeakCircleEvent;
 import com.iyuba.headlinelibrary.ui.content.AudioContentActivity;
 import com.iyuba.headlinelibrary.ui.content.AudioContentActivityNew;
@@ -104,6 +106,7 @@ import com.iyuba.headlinelibrary.ui.title.DropdownTitleFragmentNew;
 import com.iyuba.headlinelibrary.ui.title.HolderType;
 import com.iyuba.imooclib.ImoocManager;
 import com.iyuba.imooclib.event.ImoocBuyVIPEvent;
+import com.iyuba.imooclib.ui.content.ContentActivity;
 import com.iyuba.imooclib.ui.mobclass.MobClassActivity;
 import com.iyuba.imooclib.ui.mobclass.MobClassFragment;
 import com.iyuba.imooclib.ui.web.Web;
@@ -961,6 +964,37 @@ public class MainActivity extends BaseActivity implements OnClickListener,
         //收藏页面点击
         BasicFavorPart fPart = fEvent.items.get(fEvent.position);
         goFavorItem(fPart);
+    }
+
+    @Subscribe(threadMode = ThreadMode.MAIN)
+    public void onEvent(HeadlineSearchItemEvent event) {
+        Headline headline = event.headline;
+        initCommonConstants();
+        switch (headline.type) {
+            case "news":
+                startActivity(TextContentActivity.getIntent2Me(mContext, headline));
+                break;
+            case "voa":
+            case "csvoa":
+            case "bbc":
+                startActivity(AudioContentActivityNew.getIntent2Me(mContext, headline));
+                break;
+            case "voavideo":
+            case "meiyu":
+            case "ted":
+                startActivity(VideoContentActivityNew.getIntent2Me(mContext, headline));
+                break;
+            case "bbcwordvideo":
+            case "topvideos":
+                startActivity(VideoContentActivityNew.getIntent2Me(mContext, headline));
+                break;
+            case "class": {
+                int packId = Integer.parseInt(headline.id);
+                Intent intent = ContentActivity.buildIntent(mContext, packId);
+                startActivity(intent);
+                break;
+            }
+        }
     }
 
 

@@ -49,6 +49,10 @@ import java.util.Random;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
+import io.reactivex.android.schedulers.AndroidSchedulers;
+import io.reactivex.functions.Consumer;
+import io.reactivex.schedulers.Schedulers;
+import okhttp3.ResponseBody;
 
 public class WordTestActivity extends AppCompatActivity {
 
@@ -384,12 +388,28 @@ public class WordTestActivity extends AppCompatActivity {
 
     private void deleteNetWord(String word) {
         HttpManager.getWordApi().operateWord(word,"delete",
-                "Iyuba", WordManager.get().userid);
+                "Iyuba", WordManager.get().userid,"json").
+                observeOn(AndroidSchedulers.mainThread())
+                .subscribeOn(Schedulers.io()).
+                subscribe(new Consumer<ResponseBody>() {
+                    @Override
+                    public void accept(ResponseBody responseBody) throws Exception {
+
+                    }
+                });;
     }
 
     private void addNetwordWord(String wordTemp) {
         HttpManager.getWordApi().operateWord(wordTemp,"insert",
-                "Iyuba", WordManager.get().userid);
+                "Iyuba", WordManager.get().userid,"json").
+                observeOn(AndroidSchedulers.mainThread())
+                .subscribeOn(Schedulers.io()).
+                        subscribe(new Consumer<ResponseBody>() {
+                            @Override
+                            public void accept(ResponseBody responseBody) throws Exception {
+
+                            }
+                        });;
     }
 
 

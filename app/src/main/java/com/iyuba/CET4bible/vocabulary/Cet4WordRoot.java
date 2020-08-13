@@ -7,12 +7,14 @@ import android.support.annotation.Nullable;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.BaseAdapter;
 import android.widget.Button;
 import android.widget.ListView;
 import android.widget.TextView;
 
 import com.iyuba.CET4bible.R;
+import com.iyuba.CET4bible.manager.WordDataManager;
 import com.iyuba.CET4bible.sqlite.mode.Cet4Word;
 import com.iyuba.CET4bible.sqlite.op.Cet4WordOp;
 import com.iyuba.base.BaseActivity;
@@ -50,6 +52,15 @@ public class Cet4WordRoot extends BaseActivity {
         adapter = new Cet4RootListAdapter();
         adapter.setList(rootWords);
         listView.setAdapter(adapter);
+        listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                Intent intent = new Intent(mContext, Cet4WordContent.class);
+                WordDataManager.Instance().pos = position;
+                WordDataManager.Instance().words = rootWords;
+                startActivity(intent);
+            }
+        });
 
     }
 
